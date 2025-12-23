@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0.0",
+  "nodes": [
+    {
+      "id": "company_1",
+      "type": "Company",
+      "name": "Reliance Industries Limited"
+    },
+    {
+      "id": "risk_1",
+      "type": "RiskFactor",
+      "name": "regulatory compliance challenges"
+    },
+    {
+      "id": "risk_2",
+      "type": "RiskFactor",
+      "name": "foreign exchange volatility"
+    },
+    {
+      "id": "risk_3",
+      "type": "RiskFactor",
+      "name": "market competition"
+    },
+    {
+      "id": "amount_1",
+      "type": "DollarAmount",
+      "name": "$119.9 billion"
+    },
+    {
+      "id": "amount_2",
+      "type": "DollarAmount",
+      "name": "$9.5 billion"
+    },
+    {
+      "id": "company_2",
+      "type": "Company",
+      "name": "Reliance Retail Ventures Limited"
+    },
+    {
+      "id": "company_3",
+      "type": "Company",
+      "name": "Jio Platforms Limited"
+    },
+    {
+      "id": "company_4",
+      "type": "Company",
+      "name": "Hamleys India Private Limited"
+    }
+  ],
+  "relationships": [
+    {
+      "source": "company_1",
+      "target": "risk_1",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "risk_2",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "risk_3",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_1",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_2",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_4",
+      "relation": "OWNS",
+      "confidence": null
+    }
+  ]
+}
