@@ -146,6 +146,8 @@ Each module has a single responsibility:
 | Module | Input | Output | Side Effects |
 |--------|-------|--------|--------------|
 | `input_loader.py` | File path | Raw string | None |
+| `chunker.py` | Raw string | List of chunks | None |
+| `graph_merger.py` | List of KnowledgeGraphs | Single KnowledgeGraph | None |
 | `extractor/` | Raw string | KnowledgeGraph | LLM API call (provider-dependent) |
 | `validator.py` | KnowledgeGraph | None (or raises) | None |
 | `visualizer.py` | KnowledgeGraph | None | Writes PNG file (optional on Python 3.14) |
@@ -377,7 +379,86 @@ This design choice ensures that extraction quality is entirely attributable to t
 
 ---
 
-## 7. Validation & Reliability
+## 7. Large Document Chunking
+
+The system supports automatic chunking for documents that exceed LLM context windows.
+
+### Architecture
+
+When chunking is enabled and text exceeds the configured chunk size:
+
+```
+┌─────────────┐
+│  Raw Text   │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                         chunker.py                               │
+│  • estimate_tokens(text) — chars/4 approximation                │
+│  • split_text(text, chunk_size, overlap)                        │
+│  • Paragraph-aware splitting with sentence fallback             │
+└──────────────────────────────┬──────────────────────────────────┘
+                               │
+              ┌────────────────┼────────────────┐
+              ▼                ▼                ▼
+        ┌──────────┐     ┌──────────┐     ┌──────────┐
+        │ Chunk 1  │     │ Chunk 2  │     │ Chunk N  │
+        └────┬─────┘     └────┬─────┘     └────┬─────┘
+             │                │                │
+             ▼                ▼                ▼
+        ┌──────────┐     ┌──────────┐     ┌──────────┐
+        │ Extract  │     │ Extract  │     │ Extract  │
+        │ Graph 1  │     │ Graph 2  │     │ Graph N  │
+        └────┬─────┘     └────┬─────┘     └────┬─────┘
+             │                │                │
+             └────────────────┼────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                       graph_merger.py                            │
+│  • merge_graphs(graphs) — concatenate nodes/relationships       │
+│  • Preserve schema_version from first graph                     │
+│  • No deduplication or entity resolution                        │
+└──────────────────────────────┬──────────────────────────────────┘
+                               │
+                               ▼
+                      ┌───────────────────┐
+                      │  KnowledgeGraph   │
+                      │   (Unified)       │
+                      └───────────────────┘
+```
+
+### Configuration
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `CHUNK_ENABLED` | Enable/disable chunking | `true` |
+| `CHUNK_SIZE_TOKENS` | Target tokens per chunk | `4000` |
+| `CHUNK_OVERLAP_TOKENS` | Overlap between chunks | `200` |
+
+### Design Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| **Token estimation via chars/4** | Avoids external tokenizer dependency; sufficient for chunking purposes |
+| **Paragraph-aware splitting** | Preserves semantic coherence within chunks |
+| **Configurable overlap** | Preserves context for entities spanning chunk boundaries |
+| **Simple concatenation merge** | No cross-chunk inference per architectural constraints |
+| **Fail-fast on any chunk error** | Maintains reliability guarantees |
+
+### Constraints
+
+The chunking implementation adheres to strict constraints:
+
+1. **No schema changes** — KnowledgeGraph model unchanged
+2. **No cross-chunk inference** — Chunks processed independently
+3. **No entity resolution** — Duplicate entities may exist in merged graph
+4. **Backward compatible** — `CHUNK_ENABLED=false` preserves original behavior
+
+---
+
+## 8. Validation & Reliability
 
 ### Two-Layer Validation
 
@@ -428,7 +509,7 @@ This enables rapid debugging without inspecting intermediate state.
 
 ---
 
-## 8. Visualization Strategy
+## 9. Visualization Strategy
 
 The system produces two visualization outputs: NetworkX PNG (optional) and Mermaid diagrams (always available).
 
@@ -481,7 +562,7 @@ The visualizations are not intended for interactive exploration; they are static
 
 ---
 
-## 9. Testing Strategy
+## 10. Testing Strategy
 
 ### Coverage Overview
 
@@ -535,7 +616,7 @@ This ensures tests do not pollute the working directory and are isolated from ea
 
 ---
 
-## 10. Error Handling & Edge Cases
+## 11. Error Handling & Edge Cases
 
 ### Error Categories
 
@@ -561,7 +642,7 @@ This design ensures that errors are detected during development and testing, not
 
 ---
 
-## 11. Limitations & Assumptions
+## 12. Limitations & Assumptions
 
 ### Assumptions
 
@@ -578,7 +659,7 @@ This design ensures that errors are detected during development and testing, not
 | Limitation | Impact | Mitigation Path |
 |------------|--------|-----------------|
 | **LLM Variability** | Minor output differences across API versions | Pin API version; monitor for drift |
-| **Token Limits** | Documents exceeding context limits will fail | Chunking strategy required for large documents; Gemini offers 1M+ tokens |
+| **Token Limits** | Documents exceeding context limits are automatically chunked | Chunking enabled by default; configurable via environment variables |
 | **No Entity Resolution** | Similar entity names with slight variations may be separate nodes | Post-processing entity resolution layer |
 | **Cost per Cloud Extraction** | Each cloud run incurs API cost | Use Ollama for development; caching layer for repeated extractions |
 | **No Incremental Updates** | Full re-extraction required for document changes | Delta extraction for document versions |
@@ -596,7 +677,7 @@ These are future enhancement candidates, not current requirements.
 
 ---
 
-## 12. Future Enhancements
+## 13. Future Enhancements
 
 The following enhancements are candidates for subsequent iterations:
 
@@ -607,7 +688,7 @@ The following enhancements are candidates for subsequent iterations:
 | **Mermaid → PNG Export** | Low | Generate PNG from Mermaid diagrams for non-GitHub environments |
 | **Provider Benchmarking** | Low | Compare extraction quality across OpenAI, Gemini, and Ollama |
 | **Confidence-Based Filtering** | Low | Filter relationships by confidence threshold in output |
-| **Chunking for Large Documents** | Medium | Support documents exceeding context limits |
+| **Smart Chunk Deduplication** | Medium | Deduplicate entities extracted across multiple chunks |
 | **Caching Layer** | Low | Reduce API costs for repeated extractions |
 
 ### Medium-Term
@@ -636,14 +717,22 @@ main.py
     ├── src/input_loader.py
     │
     ├── src/extractor/                    # LLM extractor package
-    │       ├── __init__.py               # Package entry point
+    │       ├── __init__.py               # Package entry point (with chunking orchestration)
+    │       │       ├── src/chunker.py    # Text chunking
+    │       │       ├── src/graph_merger.py  # Graph merging
+    │       │       └── src/config.py     # Configuration management
     │       ├── base.py                   # Abstract LLMExtractor interface
     │       ├── factory.py                # Environment-driven provider selection
-    │       │       └── src/config.py     # Configuration management
+    │       │       └── src/config.py
     │       ├── openai_llm.py             # OpenAI GPT-4o implementation
     │       ├── gemini_llm.py             # Google Gemini implementation
     │       └── ollama_llm.py             # Ollama local implementation
     │               └── src/schema.py
+    │
+    ├── src/chunker.py                    # Text chunking utilities
+    │
+    ├── src/graph_merger.py               # KnowledgeGraph merging
+    │       └── src/schema.py
     │
     ├── src/validator.py
     │       └── src/schema.py
@@ -655,7 +744,7 @@ main.py
             └── src/schema.py
 ```
 
-All modules depend on `schema.py` as the single source of truth for data structures. Provider selection is driven by `config.py` which reads environment variables.
+All modules depend on `schema.py` as the single source of truth for data structures. Provider selection is driven by `config.py` which reads environment variables. Chunking is orchestrated in `extractor/__init__.py` and is transparent to callers.
 
 ---
 
@@ -687,3 +776,5 @@ All modules depend on `schema.py` as the single source of truth for data structu
 | 1.0 | December 2024 | Architecture Team | Initial release |
 | 1.1 | December 2024 | Architecture Team | Multi-provider LLM support (OpenAI, Gemini, Ollama); Mermaid visualization; optional confidence scores |
 | 1.2 | December 2024 | Architecture Team | Removed company-specific references; made documentation generic |
+| 1.3 | December 2024 | Architecture Team | Added automatic document chunking for large documents; simple merge strategy |
+| 1.3 | December 2024 | Architecture Team | Added large document chunking support with configurable chunk size and overlap |

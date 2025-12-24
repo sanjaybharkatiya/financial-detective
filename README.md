@@ -34,6 +34,7 @@ Manually extracting this information is time-consuming and error-prone. Traditio
 
 - **Provider-Agnostic LLM Architecture** — Swap between OpenAI, Google Gemini, and Ollama via environment variables with no code changes
 - **Factory Pattern for Extractor Selection** — Clean separation between configuration and implementation
+- **Automatic Document Chunking** — Large documents automatically split into manageable chunks with intelligent merging
 - **Strict Schema Enforcement** — Pydantic v2 models with `extra="forbid"` reject unexpected fields
 - **No-Regex, LLM-Only Extraction** — All entity and relationship extraction performed through LLM reasoning
 - **Fail-Fast Validation** — Errors surface immediately with descriptive messages; no silent failures
@@ -116,6 +117,8 @@ Manually extracting this information is time-consuming and error-prone. Traditio
 | `src/schema.py` | Pydantic models for Node, Relationship, KnowledgeGraph |
 | `src/input_loader.py` | Load raw text from file (no parsing) |
 | `src/config.py` | Configuration management via environment variables |
+| `src/chunker.py` | Text chunking for large documents |
+| `src/graph_merger.py` | Merge multiple KnowledgeGraph instances |
 | `src/extractor/` | LLM extractor package (factory, base interface, OpenAI & Ollama implementations) |
 | `src/validator.py` | Schema validation and integrity checks |
 | `src/visualizer.py` | NetworkX graph construction and PNG rendering (optional) |
@@ -146,6 +149,9 @@ The Financial Detective supports multiple LLM providers, allowing you to choose 
 | `GEMINI_MODEL` | Gemini model name | `gemini-2.0-flash` |
 | `OLLAMA_MODEL` | Ollama model name | `llama3:latest` |
 | `OLLAMA_BASE_URL` | Ollama API endpoint | `http://localhost:11434` |
+| `CHUNK_ENABLED` | Enable document chunking for large texts | `true` |
+| `CHUNK_SIZE_TOKENS` | Target number of tokens per chunk | `4000` |
+| `CHUNK_OVERLAP_TOKENS` | Overlap tokens between chunks | `200` |
 
 ### Usage Examples
 
@@ -200,6 +206,52 @@ This provider-agnostic design enables:
 - **Model Experimentation** — Swap models without code changes to compare extraction quality
 - **Privacy** — Keep sensitive financial documents on-premises with local inference
 - **Large Context Windows** — Gemini offers strong reasoning and large context windows; models like `gemini-2.0-flash` or `gemini-1.5-flash` can be swapped via `GEMINI_MODEL`
+
+---
+
+## Document Chunking
+
+The Financial Detective automatically handles large documents that exceed LLM context windows through intelligent chunking.
+
+### How It Works
+
+When chunking is enabled and a document exceeds the configured size:
+
+1. **Text Splitting** — Document is split into overlapping chunks at natural boundaries (paragraphs, sentences)
+2. **Parallel Extraction** — Each chunk is processed independently by the LLM
+3. **Graph Merging** — All extracted graphs are combined into a single unified Knowledge Graph
+
+### Configuration
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `CHUNK_ENABLED` | Enable/disable automatic chunking | `true` |
+| `CHUNK_SIZE_TOKENS` | Target tokens per chunk (approximate) | `4000` |
+| `CHUNK_OVERLAP_TOKENS` | Tokens to overlap between chunks | `200` |
+
+**Recommended Settings:**
+
+- **Ollama (local):** `CHUNK_SIZE_TOKENS=4000` — Conservative limit for local models
+- **OpenAI GPT-4o:** `CHUNK_SIZE_TOKENS=32000` — Utilize larger context window
+- **Google Gemini:** `CHUNK_SIZE_TOKENS=50000` — Take advantage of massive context window
+
+### Example: Processing Large Documents
+
+```bash
+export LLM_PROVIDER=ollama
+export CHUNK_ENABLED=true
+export CHUNK_SIZE_TOKENS=4000
+export CHUNK_OVERLAP_TOKENS=200
+
+python main.py
+```
+
+### Design Decisions
+
+- **Simple Merge Strategy** — All nodes and relationships from chunks are concatenated (no deduplication)
+- **Semantic Boundaries** — Text is split at paragraph/sentence boundaries to preserve context
+- **Overlap Preservation** — Chunks overlap to maintain continuity across boundaries
+- **Fail-Fast** — If any chunk extraction fails, the entire process fails immediately
 
 ---
 
@@ -395,7 +447,7 @@ pytest tests/ --cov=src --cov-report=term-missing
 
 1. **LLM Variability** — Despite temperature=0, minor output variations may occur across API versions.
 
-2. **Token Limits** — Very large documents may exceed context limits (~128K tokens for GPT-4o; up to 1M+ for Gemini).
+2. **Token Limits** — Very large documents may exceed context limits (~128K tokens for GPT-4o; up to 1M+ for Gemini). Chunking is enabled by default to handle large documents.
 
 3. **No Incremental Updates** — Each run extracts a fresh graph; no merge with previous extractions.
 
@@ -427,10 +479,12 @@ financial-detective/
 │   ├── schema.py             # Pydantic data models
 │   ├── input_loader.py       # Raw text loading
 │   ├── config.py             # Environment-based configuration
+│   ├── chunker.py            # Text chunking for large documents
+│   ├── graph_merger.py       # Merge multiple KnowledgeGraphs
 │   ├── validator.py          # Graph validation
 │   ├── visualizer.py         # Graph rendering
 │   └── extractor/            # LLM extractor package
-│       ├── __init__.py       # Package entry point
+│       ├── __init__.py       # Package entry point (with chunking orchestration)
 │       ├── base.py           # Abstract LLMExtractor interface
 │       ├── factory.py        # Provider selection factory
 │       ├── openai_llm.py     # OpenAI GPT-4o implementation
@@ -440,6 +494,8 @@ financial-detective/
 │   ├── test_validator.py     # Validator unit tests
 │   ├── test_extractor.py     # Extractor unit tests
 │   ├── test_factory.py       # Factory unit tests
+│   ├── test_chunker.py       # Chunker unit tests
+│   ├── test_graph_merger.py  # Graph merger unit tests
 │   └── test_visualizer.py    # Visualizer unit tests
 ├── visuals/
 │   ├── graph.png             # NetworkX visualization (if available)
