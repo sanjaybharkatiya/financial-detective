@@ -123,6 +123,65 @@ OPTIONAL CONFIDENCE SCORE:
 Respond with ONLY the JSON object."""
 
 
+def _strip_markdown_fences(content: str) -> str:
+    """Remove markdown code fences from LLM response.
+
+    Args:
+        content: Raw LLM response that may contain markdown fences.
+
+    Returns:
+        Content with markdown fences removed.
+    """
+    content = content.strip()
+
+    if not content.startswith("```"):
+        return content
+
+    lines = content.split("\n")
+
+    # Remove opening fence (```json or ```)
+    if lines and lines[0].strip().startswith("```"):
+        lines = lines[1:]
+
+    # Remove closing fence (```)
+    if lines and lines[-1].strip() == "```":
+        lines = lines[:-1]
+
+    return "\n".join(lines).strip()
+
+
+def _extract_response_content(response_data: dict) -> str:
+    """Extract LLM content from Ollama response.
+
+    Args:
+        response_data: Parsed JSON response from Ollama API.
+
+    Returns:
+        The extracted content string.
+
+    Raises:
+        ValueError: If content cannot be extracted from response.
+    """
+    # Try response_data["response"] first (standard generate endpoint)
+    content = response_data.get("response")
+    if content:
+        return content
+
+    # Try response_data["message"]["content"] (chat endpoint format)
+    message = response_data.get("message")
+    if isinstance(message, dict):
+        content = message.get("content")
+        if content:
+            return content
+
+    # Neither format found - raise with full payload for debugging
+    raise ValueError(
+        f"Unable to extract content from Ollama response. "
+        f"Expected 'response' or 'message.content' key. "
+        f"Full response: {json.dumps(response_data)[:1000]}"
+    )
+
+
 class OllamaExtractor(LLMExtractor):
     """Ollama-based Knowledge Graph extractor.
 
@@ -183,7 +242,6 @@ class OllamaExtractor(LLMExtractor):
                     "model": self.model,
                     "prompt": prompt,
                     "stream": False,
-                    "format": "json",
                     "options": {
                         "temperature": 0,
                     },
@@ -206,18 +264,13 @@ class OllamaExtractor(LLMExtractor):
         except json.JSONDecodeError as e:
             raise ValueError(f"Ollama returned invalid JSON response: {e}") from e
 
-        content = response_data.get("response")
+        content = _extract_response_content(response_data)
 
-        if not content:
+        if not content.strip():
             raise ValueError("Ollama returned empty response")
 
-        # Strip any markdown code blocks if present
-        content = content.strip()
-        if content.startswith("```"):
-            lines = content.split("\n")
-            # Remove first line (```json) and last line (```)
-            lines = [l for l in lines if not l.strip().startswith("```")]
-            content = "\n".join(lines)
+        # Strip markdown code fences if present
+        content = _strip_markdown_fences(content)
 
         try:
             parsed = json.loads(content)

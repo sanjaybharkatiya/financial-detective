@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary
 
-The Financial Detective is an LLM-powered extraction pipeline that transforms unstructured financial text—specifically excerpts from Reliance Industries Annual Reports—into a validated, structured Knowledge Graph. The system addresses the fundamental challenge of extracting entities (companies, risk factors, monetary amounts) and their relationships from natural language financial disclosures without relying on brittle regex or rule-based pattern matching.
+The Financial Detective is an LLM-powered extraction pipeline that transforms unstructured financial text—such as excerpts from public company annual reports and enterprise financial disclosures—into a validated, structured Knowledge Graph. The system addresses the fundamental challenge of extracting entities (companies, risk factors, monetary amounts) and their relationships from natural language financial disclosures without relying on brittle regex or rule-based pattern matching.
 
 The solution leverages pluggable LLM providers (OpenAI GPT-4o, Google Gemini, and local Ollama models) with a carefully designed prompt that enforces JSON-only output conforming to a strict Pydantic schema. Provider selection is driven by environment variables and implemented via a factory pattern, enabling seamless switching between cloud and local inference without code changes. All extraction is performed through LLM reasoning; no post-processing, cleanup, or pattern matching is applied. The output is a validated JSON Knowledge Graph accompanied by visual graph representations (NetworkX PNG and Mermaid diagrams) for human verification.
 
@@ -44,10 +44,10 @@ Rule-based extraction using regular expressions is fundamentally unsuitable for 
 
 | Challenge | Regex Limitation |
 |-----------|------------------|
-| **Phrasing Variation** | "$1.2 billion," "1,200 million dollars," "revenue of ₹9,500 crore" require separate patterns |
+| **Phrasing Variation** | "$1.2 billion," "1,200 million dollars," "revenue of $9.5 billion" require separate patterns |
 | **Contextual Meaning** | "The company" requires coreference resolution to identify the referent |
 | **Negation Handling** | "No material risk was identified" creates false positives for naive patterns |
-| **Relationship Extraction** | Multi-sentence relationships ("Acme owns Beta. Beta reported...") cannot be captured |
+| **Relationship Extraction** | Multi-sentence relationships ("Parent owns Subsidiary. Subsidiary reported...") cannot be captured |
 | **Maintenance Burden** | Each new document format requires pattern updates |
 
 Regex approaches exhibit O(n) maintenance cost where n is the number of document variations encountered. This is unsustainable for production financial analysis.
@@ -187,17 +187,17 @@ The domain model captures three entity types and three relationship types, chose
 
 | Type | Description | Examples |
 |------|-------------|----------|
-| **Company** | Corporate entities, subsidiaries, or business units | "Reliance Industries," "Jio Platforms," "Retail Ventures" |
+| **Company** | Corporate entities, subsidiaries, or business units | "Parent Corporation," "Subsidiary Holdings," "Retail Division" |
 | **RiskFactor** | Disclosed risks, uncertainties, or adverse conditions | "Currency fluctuation risk," "Regulatory compliance risk" |
-| **DollarAmount** | Monetary values with implicit or explicit currency | "$1.2 billion," "₹45,000 crore," "USD 500 million" |
+| **DollarAmount** | Monetary values with implicit or explicit currency | "$1.2 billion," "€45 million," "USD 500 million" |
 
 ### Relationship Types
 
 | Relationship | Semantics | Example |
 |--------------|-----------|---------|
-| **OWNS** | Parent-subsidiary or equity ownership | Reliance Industries → OWNS → Jio Platforms |
-| **HAS_RISK** | Entity exposed to a risk factor | Jio Platforms → HAS_RISK → Regulatory compliance risk |
-| **REPORTS_AMOUNT** | Entity associated with a monetary figure | Reliance Industries → REPORTS_AMOUNT → $1.2 billion |
+| **OWNS** | Parent-subsidiary or equity ownership | Parent Corp → OWNS → Subsidiary Holdings |
+| **HAS_RISK** | Entity exposed to a risk factor | Tech Division → HAS_RISK → Regulatory compliance risk |
+| **REPORTS_AMOUNT** | Entity associated with a monetary figure | Parent Corp → REPORTS_AMOUNT → $1.2 billion |
 
 ### Rationale for Schema Simplicity
 
@@ -579,7 +579,7 @@ This design ensures that errors are detected during development and testing, not
 |------------|--------|-----------------|
 | **LLM Variability** | Minor output differences across API versions | Pin API version; monitor for drift |
 | **Token Limits** | Documents exceeding context limits will fail | Chunking strategy required for large documents; Gemini offers 1M+ tokens |
-| **No Entity Resolution** | "Reliance" and "Reliance Industries Limited" may be separate nodes | Post-processing entity resolution layer |
+| **No Entity Resolution** | Similar entity names with slight variations may be separate nodes | Post-processing entity resolution layer |
 | **Cost per Cloud Extraction** | Each cloud run incurs API cost | Use Ollama for development; caching layer for repeated extractions |
 | **No Incremental Updates** | Full re-extraction required for document changes | Delta extraction for document versions |
 
@@ -686,4 +686,4 @@ All modules depend on `schema.py` as the single source of truth for data structu
 |---------|------|--------|---------|
 | 1.0 | December 2024 | Architecture Team | Initial release |
 | 1.1 | December 2024 | Architecture Team | Multi-provider LLM support (OpenAI, Gemini, Ollama); Mermaid visualization; optional confidence scores |
-
+| 1.2 | December 2024 | Architecture Team | Removed company-specific references; made documentation generic |

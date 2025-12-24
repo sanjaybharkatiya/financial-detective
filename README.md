@@ -69,44 +69,44 @@ Manually extracting this information is time-consuming and error-prone. Traditio
    │    .txt      │     │              │     │   (str)      │
    │              │     │              │     │              │
    └──────────────┘     └──────────────┘     └──────┬───────┘
-                                                    │
-                                                    ▼
-                        ┌──────────────────────────────────────┐
-                        │         extractor package            │
-                        │  ┌────────────────────────────────┐  │
-                        │  │  extractor factory + providers │  │
-                        │  │   (temperature=0, JSON mode)   │  │
-                        │  └────────────────────────────────┘  │
-                        └──────────────────┬───────────────────┘
-                                           │
-                                           ▼
-                                  ┌─────────────────┐
-                                  │ KnowledgeGraph  │
-                                  │   (Pydantic)    │
-                                  └────────┬────────┘
-                                           │
-                                           ▼
-                        ┌──────────────────────────────────────┐
-                        │           validator.py               │
-                        │  • Unique node IDs                   │
-                        │  • Valid relationship references     │
-                        │  • At least one node                 │
-                        └──────────────────┬───────────────────┘
-                                           │
-                         ┌─────────────────┴─────────────────┐
-                         │                                   │
-                         ▼                                   ▼
-               ┌─────────────────┐                 ┌─────────────────┐
-               │  graph_output   │                 │   visualizer    │
-               │     .json       │                 │    (NetworkX)   │
-               │                 │                 │                 │
-               └─────────────────┘                 └────────┬────────┘
-                                                           │
-                                                           ▼
-                                                  ┌─────────────────┐
-                                                  │   graph.png     │
-                                                  │  (matplotlib)   │
-                                                  └─────────────────┘
+                                                   │
+                                                   ▼
+                       ┌──────────────────────────────────────┐
+                       │         extractor package            │
+                       │  ┌────────────────────────────────┐  │
+                       │  │  extractor factory + providers │  │
+                       │  │   (temperature=0, JSON mode)   │  │
+                       │  └────────────────────────────────┘  │
+                       └──────────────────┬───────────────────┘
+                                          │
+                                          ▼
+                                 ┌─────────────────┐
+                                 │ KnowledgeGraph  │
+                                 │   (Pydantic)    │
+                                 └────────┬────────┘
+                                          │
+                                          ▼
+                       ┌──────────────────────────────────────┐
+                       │           validator.py               │
+                       │  • Unique node IDs                   │
+                       │  • Valid relationship references     │
+                       │  • At least one node                 │
+                       └──────────────────┬───────────────────┘
+                                          │
+                        ┌─────────────────┴─────────────────┐
+                        │                                   │
+                        ▼                                   ▼
+              ┌─────────────────┐                 ┌─────────────────┐
+              │  graph_output   │                 │   visualizer    │
+              │     .json       │                 │    (NetworkX)   │
+              │                 │                 │                 │
+              └─────────────────┘                 └────────┬────────┘
+                                                          │
+                                                          ▼
+                                                 ┌─────────────────┐
+                                                 │   graph.png     │
+                                                 │  (matplotlib)   │
+                                                 └─────────────────┘
 ```
 
 ### Module Responsibilities
@@ -278,7 +278,7 @@ python main.py
 Place your financial document in `data/raw_report.txt`:
 
 ```bash
-echo "Acme Corp reported revenue of \$1.2 billion..." > data/raw_report.txt
+echo "Sample Corp reported revenue of \$1.2 billion..." > data/raw_report.txt
 ```
 
 ### Run the Pipeline
@@ -331,10 +331,10 @@ The pipeline generates a Mermaid flowchart diagram (`visuals/graph.mmd`) in addi
 
 ```mermaid
 flowchart TD
-    company_1["Reliance Industries Limited"]
-    company_2["Jio Platforms"]
+    company_1["Parent Corporation"]
+    company_2["Subsidiary Holdings"]
     risk_1("Regulatory compliance challenges")
-    amount_1[/"₹9,500 crore"/]
+    amount_1[/"$9.5 billion"/]
 
     company_1 -->|OWNS| company_2
     company_1 -->|HAS_RISK| risk_1
@@ -399,7 +399,7 @@ pytest tests/ --cov=src --cov-report=term-missing
 
 3. **No Incremental Updates** — Each run extracts a fresh graph; no merge with previous extractions.
 
-4. **No Entity Resolution** — "Acme Corp" and "Acme Corporation" may be treated as separate entities.
+4. **No Entity Resolution** — Similar entity names with slight variations may be treated as separate entities.
 
 5. **Cost** — Cloud providers (OpenAI, Gemini) incur API costs proportional to document length. Ollama runs locally without API cost.
 
@@ -454,4 +454,3 @@ financial-detective/
 ## License
 
 MIT License — See LICENSE file for details.
-
