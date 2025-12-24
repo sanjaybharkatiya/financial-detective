@@ -15,7 +15,28 @@ from src.extractor.base import LLMExtractor
 from src.schema import KnowledgeGraph
 
 # System prompt that enforces strict extraction rules (same as OpenAI/Ollama)
-SYSTEM_PROMPT: Final[str] = """You are a financial document analyst that extracts structured knowledge graphs.
+SYSTEM_PROMPT: Final[str] = """Extract a Knowledge Graph from the financial text.
+
+OUTPUT FORMAT - COPY THIS EXACT STRUCTURE:
+{
+  "schema_version": "1.0.0",
+  "nodes": [
+    {"id": "company_1", "type": "Company", "name": "..."},
+    {"id": "risk_1", "type": "RiskFactor", "name": "..."},
+    {"id": "amount_1", "type": "DollarAmount", "name": "..."}
+  ],
+  "relationships": [
+    {"source": "company_1", "target": "...", "relation": "..."}
+  ]
+}
+
+CRITICAL RULES:
+1. Output ONLY the JSON above - no wrapper, no nesting
+2. Top-level keys must be EXACTLY: schema_version, nodes, relationships
+3. Do NOT wrap in "knowledge_graph", "data", "result", or any other key
+4. Do NOT add "financials", "boardOfDirectors", "auditors", "entities"
+5. All nodes go in ONE flat "nodes" array
+6. All relationships go in ONE flat "relationships" array
 
 STRICT EXTRACTION RULES (MANDATORY):
 
