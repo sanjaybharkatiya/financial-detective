@@ -1,20 +1,16 @@
 flowchart TD
 
     %% Node definitions
-    company_1["Reliance Industries Limited"]
-    risk_1("regulatory compliance challenges")
-    risk_2("foreign exchange volatility")
-    risk_3("market competition")
-    amount_1[/"$119.9 billion"/]
-    amount_2[/"$9.5 billion"/]
-    company_2["Reliance Retail Ventures Limited"]
-    company_3["Jio Platforms Limited"]
-    company_4["Hamleys India Private Limited"]
+    company_1["Acme Corporation"]
+    risk_1("Market volatility in emerging economies")
+    risk_2("Regulatory compliance challenges")
+    risk_3("Supply chain disruptions")
+    amount_1[/"$5.2 billion"/]
+    company_2["Beta Technologies"]
 
     %% Relationships
     company_1 -->|HAS_RISK| risk_1
     company_1 -->|HAS_RISK| risk_2
     company_1 -->|HAS_RISK| risk_3
     company_1 -->|REPORTS_AMOUNT| amount_1
-    company_1 -->|REPORTS_AMOUNT| amount_2
-    company_2 -->|OWNS| company_4
+    company_1 -->|OWNS| company_2

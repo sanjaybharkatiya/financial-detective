@@ -4,47 +4,32 @@
     {
       "id": "company_1",
       "type": "Company",
-      "name": "Reliance Industries Limited"
+      "name": "Acme Corporation"
     },
     {
       "id": "risk_1",
       "type": "RiskFactor",
-      "name": "regulatory compliance challenges"
+      "name": "Market volatility in emerging economies"
     },
     {
       "id": "risk_2",
       "type": "RiskFactor",
-      "name": "foreign exchange volatility"
+      "name": "Regulatory compliance challenges"
     },
     {
       "id": "risk_3",
       "type": "RiskFactor",
-      "name": "market competition"
+      "name": "Supply chain disruptions"
     },
     {
       "id": "amount_1",
       "type": "DollarAmount",
-      "name": "$119.9 billion"
-    },
-    {
-      "id": "amount_2",
-      "type": "DollarAmount",
-      "name": "$9.5 billion"
+      "name": "$5.2 billion"
     },
     {
       "id": "company_2",
       "type": "Company",
-      "name": "Reliance Retail Ventures Limited"
-    },
-    {
-      "id": "company_3",
-      "type": "Company",
-      "name": "Jio Platforms Limited"
-    },
-    {
-      "id": "company_4",
-      "type": "Company",
-      "name": "Hamleys India Private Limited"
+      "name": "Beta Technologies"
     }
   ],
   "relationships": [
@@ -74,13 +59,7 @@
     },
     {
       "source": "company_1",
-      "target": "amount_2",
-      "relation": "REPORTS_AMOUNT",
-      "confidence": null
-    },
-    {
-      "source": "company_2",
-      "target": "company_4",
+      "target": "company_2",
       "relation": "OWNS",
       "confidence": null
     }
