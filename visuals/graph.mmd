@@ -1,16 +1,15 @@
 flowchart TD
 
     %% Node definitions
-    company_1["Acme Corporation"]
-    risk_1("Market volatility in emerging economies")
-    risk_2("Regulatory compliance challenges")
-    risk_3("Supply chain disruptions")
-    amount_1[/"$5.2 billion"/]
-    company_2["Beta Technologies"]
+    company_1["Google Inc"]
+    risk_1("cybersecurity risks")
+    amount_1[/"$300 billion"/]
+    company_2["Google LLC"]
+    risk_2("content moderation risks")
+    amount_2[/"$30 billion"/]
 
     %% Relationships
     company_1 -->|HAS_RISK| risk_1
-    company_1 -->|HAS_RISK| risk_2
-    company_1 -->|HAS_RISK| risk_3
     company_1 -->|REPORTS_AMOUNT| amount_1
     company_1 -->|OWNS| company_2
+    company_1 -->|HAS_RISK| risk_2

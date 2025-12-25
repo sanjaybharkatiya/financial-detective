@@ -25,7 +25,7 @@ except (ImportError, AttributeError):
     render_graph = None  # type: ignore
 
 # Mermaid visualizer is always available (no external dependencies)
-from src.visualizer_mermaid import render_mermaid
+from src.visualizer_mermaid import render_mermaid, render_mermaid_html
 
 # Output path for the extracted Knowledge Graph JSON
 OUTPUT_JSON_PATH: Path = Path("data/graph_output.json")
@@ -86,8 +86,13 @@ def main() -> int:
                 print("      ℹ️  To enable PNG graph rendering, use Python 3.11–3.13")
                 print("         Mermaid diagrams remain fully available as an alternative")
 
-        render_mermaid(graph)
-        print("      Mermaid saved to visuals/graph.mmd")
+        mermaid_path = Path("visuals/graph.mmd")
+        render_mermaid(graph, mermaid_path)
+        print(f"      Mermaid saved to {mermaid_path}")
+
+        html_path = Path("visuals/graph.html")
+        render_mermaid_html(graph, html_path)
+        print(f"      HTML saved to {html_path} (open in browser to view)")
 
         print("\n✓ Pipeline completed successfully")
         return 0

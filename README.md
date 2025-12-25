@@ -353,6 +353,7 @@ python main.py
 [5/5] Rendering graph visualizations...
       PNG saved to visuals/graph.png
       Mermaid saved to visuals/graph.mmd
+      HTML saved to visuals/graph.html (open in browser to view)
 
 ✓ Pipeline completed successfully
 ```
@@ -364,12 +365,13 @@ python main.py
 | `data/graph_output.json` | Structured Knowledge Graph in JSON format |
 | `visuals/graph.png` | NetworkX graph visualization (PNG image) |
 | `visuals/graph.mmd` | Mermaid diagram for lightweight rendering |
+| `visuals/graph.html` | Interactive HTML page (open in browser to view) |
 
 ---
 
 ## Mermaid Visualization
 
-The pipeline generates a Mermaid flowchart diagram (`visuals/graph.mmd`) in addition to the PNG image. Mermaid diagrams are lightweight, text-based, and render natively on GitHub.
+The pipeline generates a Mermaid flowchart diagram (`visuals/graph.mmd`) and an interactive HTML viewer (`visuals/graph.html`). Mermaid diagrams are lightweight, text-based, and render natively on GitHub. The HTML file can be opened directly in any browser for immediate visualization.
 
 ### Node Shapes
 
@@ -499,7 +501,8 @@ financial-detective/
 │   └── test_visualizer.py    # Visualizer unit tests
 ├── visuals/
 │   ├── graph.png             # NetworkX visualization (if available)
-│   └── graph.mmd             # Mermaid diagram
+│   ├── graph.mmd             # Mermaid diagram
+│   └── graph.html            # Interactive HTML viewer
 ├── main.py                   # Pipeline orchestration
 ├── requirements.txt          # Python dependencies
 └── README.md                 # This file

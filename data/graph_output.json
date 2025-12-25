@@ -4,50 +4,38 @@
     {
       "id": "company_1",
       "type": "Company",
-      "name": "Acme Corporation"
+      "name": "Google Inc"
     },
     {
       "id": "risk_1",
       "type": "RiskFactor",
-      "name": "Market volatility in emerging economies"
-    },
-    {
-      "id": "risk_2",
-      "type": "RiskFactor",
-      "name": "Regulatory compliance challenges"
-    },
-    {
-      "id": "risk_3",
-      "type": "RiskFactor",
-      "name": "Supply chain disruptions"
+      "name": "cybersecurity risks"
     },
     {
       "id": "amount_1",
       "type": "DollarAmount",
-      "name": "$5.2 billion"
+      "name": "$300 billion"
     },
     {
       "id": "company_2",
       "type": "Company",
-      "name": "Beta Technologies"
+      "name": "Google LLC"
+    },
+    {
+      "id": "risk_2",
+      "type": "RiskFactor",
+      "name": "content moderation risks"
+    },
+    {
+      "id": "amount_2",
+      "type": "DollarAmount",
+      "name": "$30 billion"
     }
   ],
   "relationships": [
     {
       "source": "company_1",
       "target": "risk_1",
-      "relation": "HAS_RISK",
-      "confidence": null
-    },
-    {
-      "source": "company_1",
-      "target": "risk_2",
-      "relation": "HAS_RISK",
-      "confidence": null
-    },
-    {
-      "source": "company_1",
-      "target": "risk_3",
       "relation": "HAS_RISK",
       "confidence": null
     },
@@ -61,6 +49,12 @@
       "source": "company_1",
       "target": "company_2",
       "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "risk_2",
+      "relation": "HAS_RISK",
       "confidence": null
     }
   ]
