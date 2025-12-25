@@ -9,12 +9,12 @@
     {
       "id": "risk_1",
       "type": "RiskFactor",
-      "name": "cybersecurity risks"
+      "name": "antitrust investigations"
     },
     {
       "id": "amount_1",
       "type": "DollarAmount",
-      "name": "$300 billion"
+      "name": "$310 billion"
     },
     {
       "id": "company_2",
@@ -24,12 +24,72 @@
     {
       "id": "risk_2",
       "type": "RiskFactor",
-      "name": "content moderation risks"
+      "name": "regulatory risks related to content moderation, intellectual property enforcement, and digital media compliance obligations"
     },
     {
       "id": "amount_2",
       "type": "DollarAmount",
-      "name": "$30 billion"
+      "name": "$32 billion"
+    },
+    {
+      "id": "company_3",
+      "type": "Company",
+      "name": "Waymo LLC"
+    },
+    {
+      "id": "risk_3",
+      "type": "RiskFactor",
+      "name": "regulatory approval delays, safety incidents, or technological limitations may materially impair the value of these investments"
+    },
+    {
+      "id": "amount_3",
+      "type": "DollarAmount",
+      "name": "$15 billion"
+    },
+    {
+      "id": "company_4",
+      "type": "Company",
+      "name": "YouTube LLC"
+    },
+    {
+      "id": "risk_4",
+      "type": "RiskFactor",
+      "name": "regulatory risks related to content moderation, intellectual property enforcement, and digital media compliance obligations"
+    },
+    {
+      "id": "amount_4",
+      "type": "DollarAmount",
+      "name": "$45 billion"
+    },
+    {
+      "id": "company_5",
+      "type": "Company",
+      "name": "Google LLC (wholly owned subsidiary)"
+    },
+    {
+      "id": "risk_5",
+      "type": "RiskFactor",
+      "name": "cybersecurity risks including unauthorized access to user data, service interruptions, and infrastructure vulnerabilities"
+    },
+    {
+      "id": "amount_5",
+      "type": "DollarAmount",
+      "name": "$60 billion"
+    },
+    {
+      "id": "company_6",
+      "type": "Company",
+      "name": "Google Inc (parent company)"
+    },
+    {
+      "id": "risk_6",
+      "type": "RiskFactor",
+      "name": "regulatory compliance risks arising from antitrust investigations conducted by governmental authorities in the United States, European Union, United Kingdom, and other jurisdictions"
+    },
+    {
+      "id": "amount_6",
+      "type": "DollarAmount",
+      "name": "$10 billion"
     }
   ],
   "relationships": [
@@ -46,7 +106,7 @@
       "confidence": null
     },
     {
-      "source": "company_1",
+      "source": "company_6",
       "target": "company_2",
       "relation": "OWNS",
       "confidence": null
@@ -55,6 +115,66 @@
       "source": "company_1",
       "target": "risk_2",
       "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_4",
+      "target": "amount_2",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_3",
+      "target": "risk_3",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_3",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_6",
+      "target": "company_5",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_4",
+      "target": "risk_4",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_4",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_5",
+      "target": "risk_5",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_5",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_6",
+      "target": "risk_6",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_6",
+      "relation": "REPORTS_AMOUNT",
       "confidence": null
     }
   ]

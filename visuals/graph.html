@@ -10,27 +10,33 @@
             padding: 0;
             box-sizing: border-box;
         }
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
         header {
-            background-color: #1a1a2e;
+            background-color: rgba(0, 0, 0, 0.3);
             color: white;
-            padding: 1rem 2rem;
+            padding: 1.5rem 2rem;
             text-align: center;
+            backdrop-filter: blur(10px);
         }
         header h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
         }
         header p {
-            font-size: 0.875rem;
-            opacity: 0.8;
-            margin-top: 0.25rem;
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
         }
         main {
             flex: 1;
@@ -38,22 +44,51 @@
             justify-content: center;
             align-items: center;
             padding: 2rem;
+            min-height: 0;
+        }
+        .diagram-container {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            max-width: 95vw;
+            max-height: 80vh;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .mermaid {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 100%;
-            overflow: auto;
+            font-size: 18px !important;
+        }
+        .mermaid svg {
+            max-width: none !important;
+            height: auto !important;
         }
         footer {
-            background-color: #1a1a2e;
+            background-color: rgba(0, 0, 0, 0.3);
             color: white;
-            padding: 0.75rem 2rem;
+            padding: 1rem 2rem;
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.875rem;
+            backdrop-filter: blur(10px);
+        }
+        footer span {
             opacity: 0.8;
+        }
+        footer .version {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+        }
+        /* Make nodes larger and more readable */
+        .node rect, .node circle, .node ellipse, .node polygon {
+            stroke-width: 2px !important;
+        }
+        .edgeLabel {
+            font-size: 14px !important;
+            font-weight: 600 !important;
         }
     </style>
 </head>
@@ -63,26 +98,51 @@
         <p>Knowledge Graph Visualization</p>
     </header>
     <main>
-        <pre class="mermaid">
+        <div class="diagram-container">
+            <pre class="mermaid">
 flowchart TD
 
     %% Node definitions
     company_1["Google Inc"]
-    risk_1("cybersecurity risks")
-    amount_1[/"$300 billion"/]
+    risk_1("antitrust investigations")
+    amount_1[/"$310 billion"/]
     company_2["Google LLC"]
-    risk_2("content moderation risks")
-    amount_2[/"$30 billion"/]
+    risk_2("regulatory risks related to content moderation, intellectual property enforcement, and digital media compliance obligations")
+    amount_2[/"$32 billion"/]
+    company_3["Waymo LLC"]
+    risk_3("regulatory approval delays, safety incidents, or technological limitations may materially impair the value of these investments")
+    amount_3[/"$15 billion"/]
+    company_4["YouTube LLC"]
+    risk_4("regulatory risks related to content moderation, intellectual property enforcement, and digital media compliance obligations")
+    amount_4[/"$45 billion"/]
+    company_5["Google LLC (wholly owned subsidiary)"]
+    risk_5("cybersecurity risks including unauthorized access to user data, service interruptions, and infrastructure vulnerabilities")
+    amount_5[/"$60 billion"/]
+    company_6["Google Inc (parent company)"]
+    risk_6("regulatory compliance risks arising from antitrust investigations conducted by governmental authorities in the United States, European Union, United Kingdom, and other jurisdictions")
+    amount_6[/"$10 billion"/]
 
     %% Relationships
     company_1 -->|HAS_RISK| risk_1
     company_1 -->|REPORTS_AMOUNT| amount_1
-    company_1 -->|OWNS| company_2
+    company_6 -->|OWNS| company_2
     company_1 -->|HAS_RISK| risk_2
-        </pre>
+    company_4 -->|REPORTS_AMOUNT| amount_2
+    company_3 -->|HAS_RISK| risk_3
+    company_1 -->|REPORTS_AMOUNT| amount_3
+    company_6 -->|OWNS| company_5
+    company_4 -->|HAS_RISK| risk_4
+    company_1 -->|REPORTS_AMOUNT| amount_4
+    company_5 -->|HAS_RISK| risk_5
+    company_1 -->|REPORTS_AMOUNT| amount_5
+    company_6 -->|HAS_RISK| risk_6
+    company_1 -->|REPORTS_AMOUNT| amount_6
+            </pre>
+        </div>
     </main>
     <footer>
-        Generated by Financial Detective | Schema Version: 1.0.0
+        <span>Generated by Financial Detective</span>
+        <span class="version">Schema 1.0.0</span>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
@@ -90,9 +150,16 @@ flowchart TD
             startOnLoad: true,
             theme: 'default',
             flowchart: {
-                useMaxWidth: true,
+                useMaxWidth: false,
                 htmlLabels: true,
-                curve: 'basis'
+                curve: 'basis',
+                nodeSpacing: 80,
+                rankSpacing: 100,
+                padding: 20
+            },
+            themeVariables: {
+                fontSize: '18px',
+                fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif'
             }
         });
     </script>

@@ -9,6 +9,7 @@ This module coordinates the end-to-end workflow:
 """
 
 import sys
+import webbrowser
 from pathlib import Path
 
 from src.extractor import extract_knowledge_graph
@@ -92,9 +93,15 @@ def main() -> int:
 
         html_path = Path("visuals/graph.html")
         render_mermaid_html(graph, html_path)
-        print(f"      HTML saved to {html_path} (open in browser to view)")
+        print(f"      HTML saved to {html_path}")
 
         print("\n✓ Pipeline completed successfully")
+
+        # Open HTML visualization in default browser
+        html_absolute_path = html_path.resolve().as_uri()
+        webbrowser.open(html_absolute_path)
+        print(f"      📊 Opening visualization in browser...")
+
         return 0
 
     except FileNotFoundError as e:
