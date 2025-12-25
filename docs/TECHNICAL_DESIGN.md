@@ -151,7 +151,7 @@ Each module has a single responsibility:
 | `extractor/` | Raw string | KnowledgeGraph | LLM API call (provider-dependent) |
 | `validator.py` | KnowledgeGraph | None (or raises) | None |
 | `visualizer.py` | KnowledgeGraph | None | Writes PNG file (optional on Python 3.14) |
-| `visualizer_mermaid.py` | KnowledgeGraph | None | Writes .mmd file (always available) |
+| `visualizer_mermaid.py` | KnowledgeGraph | None | Writes .mmd and .html files (always available) |
 | `main.py` | None | Exit code | Orchestrates pipeline |
 
 This separation enables independent testing, clear error attribution, and future component replacement without system-wide changes.
@@ -511,7 +511,7 @@ This enables rapid debugging without inspecting intermediate state.
 
 ## 9. Visualization Strategy
 
-The system produces two visualization outputs: NetworkX PNG (optional) and Mermaid diagrams (always available).
+The system produces three visualization outputs: NetworkX PNG (optional), Mermaid diagrams, and interactive HTML (always available).
 
 ### Technology Selection
 
@@ -520,6 +520,7 @@ The system produces two visualization outputs: NetworkX PNG (optional) and Merma
 | **Graph Library** | NetworkX | Standard Python graph library with rich algorithms |
 | **PNG Rendering** | matplotlib | Ubiquitous, no external dependencies beyond Python |
 | **Mermaid Diagrams** | Native text output | Lightweight, CI-friendly, GitHub-renderable |
+| **HTML Viewer** | Mermaid.js CDN | Self-contained, browser-viewable, no build step |
 
 ### NetworkX PNG Visualization
 
@@ -550,9 +551,22 @@ Benefits of Mermaid:
 - **Lightweight** — No image rendering dependencies required
 - **Portable** — Can be embedded in Markdown, issues, and documentation
 
+### HTML Viewer
+
+The pipeline also generates a self-contained HTML file (`visuals/graph.html`) for immediate browser-based visualization:
+
+| Feature | Description |
+|---------|-------------|
+| **Self-Contained** | No local dependencies; Mermaid.js loaded from CDN |
+| **Browser-Viewable** | Open directly in any modern browser |
+| **Responsive Layout** | Clean header, centered diagram, schema version in footer |
+| **Default Theme** | Professional appearance using Mermaid's default theme |
+
+This provides the most accessible visualization option—simply open the file to view the Knowledge Graph.
+
 ### Purpose of Visualization
 
-Both visualization formats serve:
+All visualization formats serve:
 
 1. **Explainability** — Humans can verify extraction correctness visually
 2. **Proof of Work** — Demonstrates pipeline completed successfully
@@ -740,7 +754,7 @@ main.py
     ├── src/visualizer.py                 # NetworkX PNG (optional)
     │       └── src/schema.py
     │
-    └── src/visualizer_mermaid.py         # Mermaid diagrams (always available)
+    └── src/visualizer_mermaid.py         # Mermaid diagrams + HTML viewer (always available)
             └── src/schema.py
 ```
 
@@ -777,4 +791,4 @@ All modules depend on `schema.py` as the single source of truth for data structu
 | 1.1 | December 2024 | Architecture Team | Multi-provider LLM support (OpenAI, Gemini, Ollama); Mermaid visualization; optional confidence scores |
 | 1.2 | December 2024 | Architecture Team | Removed company-specific references; made documentation generic |
 | 1.3 | December 2024 | Architecture Team | Added automatic document chunking for large documents; simple merge strategy |
-| 1.3 | December 2024 | Architecture Team | Added large document chunking support with configurable chunk size and overlap |
+| 1.4 | December 2024 | Architecture Team | Added HTML viewer for browser-based Knowledge Graph visualization |
