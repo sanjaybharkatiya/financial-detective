@@ -356,8 +356,8 @@ def _generate_paginated_mermaid(graph: KnowledgeGraph, page_size: int = 50) -> l
 def render_mermaid_html(graph: KnowledgeGraph, output_path: Path) -> None:
     """Render a KnowledgeGraph as an HTML page with embedded Mermaid diagram.
 
-    For large graphs (>100 nodes), creates a paginated view.
-    For smaller graphs, renders the full diagram.
+    Creates a full horizontal scrollable view with zoom and pan controls.
+    Works for both small and large graphs.
 
     Args:
         graph: A validated KnowledgeGraph instance to visualize.
@@ -374,11 +374,9 @@ def render_mermaid_html(graph: KnowledgeGraph, output_path: Path) -> None:
     node_count = len(graph.nodes)
     rel_count = len(graph.relationships)
     
-    # For large graphs, use pagination
-    if node_count > 100:
-        pages = _generate_paginated_mermaid(graph, page_size=50)
-        _render_paginated_html(graph, pages, output_path)
-        return
+    # Use the full horizontal scrollable view for all graphs
+    _render_fullgraph_html(graph, output_path)
+    return
 
     # For smaller graphs, render full diagram
     mermaid_content = _generate_mermaid_content(graph)
@@ -672,22 +670,18 @@ def render_mermaid_html(graph: KnowledgeGraph, output_path: Path) -> None:
     output_path.write_text(html_template, encoding="utf-8")
 
 
-def _render_paginated_html(graph: KnowledgeGraph, pages: list[str], output_path: Path) -> None:
-    """Render a paginated HTML view for large graphs.
+def _render_fullgraph_html(graph: KnowledgeGraph, output_path: Path) -> None:
+    """Render the full graph as a horizontal scrollable HTML with zoom controls.
     
     Args:
-        graph: The full KnowledgeGraph for stats.
-        pages: List of Mermaid diagram strings, one per page.
+        graph: The full KnowledgeGraph.
         output_path: Path where the HTML file will be saved.
     """
-    import json as json_module
-    
     node_count = len(graph.nodes)
     rel_count = len(graph.relationships)
-    total_pages = len(pages)
     
-    # Escape pages for JavaScript
-    pages_json = json_module.dumps(pages)
+    # Generate the full Mermaid content with horizontal (LR) layout
+    mermaid_content = _generate_mermaid_content_horizontal(graph)
     
     html_template = f'''<!DOCTYPE html>
 <html lang="en">
@@ -697,29 +691,36 @@ def _render_paginated_html(graph: KnowledgeGraph, pages: list[str], output_path:
     <title>Financial Detective - Knowledge Graph ({node_count} nodes)</title>
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        html, body {{
+            height: 100%;
+            overflow: hidden;
+        }}
         body {{
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f0f2f5;
-            min-height: 100vh;
+            background: #1a1a2e;
+            display: flex;
+            flex-direction: column;
         }}
         
+        /* Fixed header */
         header {{
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: white;
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            flex-shrink: 0;
         }}
-        header h1 {{ font-size: 1.4rem; }}
+        header h1 {{ 
+            font-size: 1.3rem; 
+            font-weight: 700;
+        }}
         .stats {{
             display: flex;
             gap: 1rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }}
         .stat {{
             background: rgba(255,255,255,0.15);
@@ -728,71 +729,95 @@ def _render_paginated_html(graph: KnowledgeGraph, pages: list[str], output_path:
         }}
         .stat-value {{ font-weight: 700; }}
         
-        .pagination {{
-            background: white;
-            padding: 1rem 2rem;
+        /* Controls bar */
+        .controls {{
+            background: #f8f9fa;
+            padding: 0.6rem 2rem;
             display: flex;
-            justify-content: center;
+            gap: 0.8rem;
             align-items: center;
-            gap: 1rem;
-            border-bottom: 1px solid #ddd;
-            position: sticky;
-            top: 60px;
-            z-index: 999;
+            border-bottom: 1px solid #dee2e6;
+            flex-shrink: 0;
         }}
-        .pagination button {{
-            padding: 0.6rem 1.2rem;
+        .controls button {{
+            padding: 0.5rem 1rem;
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 500;
             transition: all 0.2s;
         }}
-        .pagination button:hover:not(:disabled) {{
+        .controls button:hover {{
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }}
-        .pagination button:disabled {{
-            opacity: 0.5;
-            cursor: not-allowed;
-        }}
-        .btn-nav {{
+        .btn-zoom {{
             background: #2563eb;
             color: white;
         }}
-        .page-info {{
-            font-weight: 600;
-            color: #374151;
-            min-width: 120px;
-            text-align: center;
+        .btn-zoom:hover {{
+            background: #1d4ed8;
         }}
-        .page-select {{
-            padding: 0.5rem;
-            border-radius: 6px;
-            border: 1px solid #ddd;
-            font-size: 0.9rem;
+        .btn-secondary {{
+            background: #e5e7eb;
+            color: #374151;
+        }}
+        .btn-secondary:hover {{
+            background: #d1d5db;
+        }}
+        .zoom-display {{
+            background: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-weight: 600;
+            min-width: 60px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }}
+        .separator {{
+            width: 1px;
+            height: 24px;
+            background: #dee2e6;
+            margin: 0 0.5rem;
+        }}
+        .hint {{
+            margin-left: auto;
+            color: #6b7280;
+            font-size: 0.8rem;
         }}
         
-        main {{
-            padding: 2rem;
-            max-width: 100%;
-            overflow-x: auto;
+        /* Main scrollable diagram area */
+        .diagram-wrapper {{
+            flex: 1;
+            overflow: auto;
+            background: #f0f2f5;
+            cursor: grab;
+        }}
+        .diagram-wrapper:active {{
+            cursor: grabbing;
         }}
         .diagram-container {{
+            display: inline-block;
+            padding: 2rem;
+            min-width: 100%;
+            min-height: 100%;
+            transform-origin: top left;
+            transition: transform 0.1s ease-out;
+        }}
+        .mermaid {{
             background: white;
             border-radius: 12px;
             padding: 2rem;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            min-height: 500px;
-            overflow: auto;
-        }}
-        .mermaid {{
-            min-width: max-content;
+            display: inline-block;
         }}
         .mermaid svg {{
             max-width: none !important;
+            height: auto !important;
         }}
         
+        /* Legend */
         .legend {{
             position: fixed;
             bottom: 20px;
@@ -800,54 +825,123 @@ def _render_paginated_html(graph: KnowledgeGraph, pages: list[str], output_path:
             background: white;
             padding: 1rem;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 0.8rem;
             z-index: 100;
         }}
-        .legend h3 {{ margin-bottom: 0.5rem; color: #666; font-size: 0.9rem; }}
-        .legend-item {{ display: flex; align-items: center; gap: 0.5rem; margin: 0.3rem 0; }}
-        .legend-shape {{ width: 20px; height: 14px; border: 2px solid #333; }}
+        .legend h3 {{ 
+            margin-bottom: 0.5rem; 
+            color: #374151; 
+            font-size: 0.85rem;
+            font-weight: 600;
+        }}
+        .legend-item {{ 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            margin: 0.25rem 0;
+            color: #4b5563;
+        }}
+        .legend-shape {{ 
+            width: 18px; 
+            height: 12px; 
+            border: 2px solid #374151; 
+        }}
         .shape-rect {{ border-radius: 2px; }}
-        .shape-rounded {{ border-radius: 7px; }}
-        .shape-parallelogram {{ transform: skewX(-10deg); width: 24px; }}
+        .shape-rounded {{ border-radius: 6px; }}
+        .shape-parallelogram {{ transform: skewX(-10deg); width: 22px; }}
         
+        /* Loading */
         .loading {{
-            text-align: center;
-            padding: 3rem;
-            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #6b7280;
             font-size: 1.2rem;
+        }}
+        .loading::after {{
+            content: '';
+            width: 24px;
+            height: 24px;
+            border: 3px solid #e5e7eb;
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            margin-left: 1rem;
+            animation: spin 1s linear infinite;
+        }}
+        @keyframes spin {{
+            to {{ transform: rotate(360deg); }}
+        }}
+        
+        /* Minimap */
+        .minimap {{
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 200px;
+            height: 150px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            z-index: 100;
+        }}
+        .minimap-header {{
+            background: #374151;
+            color: white;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }}
+        .minimap-content {{
+            width: 100%;
+            height: calc(100% - 24px);
+            position: relative;
+        }}
+        .minimap-viewport {{
+            position: absolute;
+            border: 2px solid #2563eb;
+            background: rgba(37, 99, 235, 0.1);
+            pointer-events: none;
         }}
     </style>
 </head>
 <body>
     <header>
-        <h1>📊 Financial Detective</h1>
+        <h1>📊 Financial Detective - Knowledge Graph</h1>
         <div class="stats">
             <div class="stat"><span class="stat-value">{node_count}</span> Nodes</div>
             <div class="stat"><span class="stat-value">{rel_count}</span> Relationships</div>
-            <div class="stat"><span class="stat-value">{total_pages}</span> Pages</div>
         </div>
     </header>
     
-    <div class="pagination">
-        <button class="btn-nav" onclick="firstPage()">⏮ First</button>
-        <button class="btn-nav" onclick="prevPage()">◀ Previous</button>
-        <span class="page-info">Page <span id="currentPage">1</span> of {total_pages}</span>
-        <select class="page-select" id="pageSelect" onchange="goToPage(this.value)">
-            {"".join(f'<option value="{i}">{i+1}</option>' for i in range(total_pages))}
-        </select>
-        <button class="btn-nav" onclick="nextPage()">Next ▶</button>
-        <button class="btn-nav" onclick="lastPage()">Last ⏭</button>
+    <div class="controls">
+        <button class="btn-zoom" onclick="zoomIn()">🔍+ Zoom In</button>
+        <button class="btn-zoom" onclick="zoomOut()">🔍- Zoom Out</button>
+        <span class="zoom-display" id="zoomLevel">100%</span>
+        <div class="separator"></div>
+        <button class="btn-secondary" onclick="resetZoom()">↺ Reset</button>
+        <button class="btn-secondary" onclick="fitToScreen()">⊡ Fit</button>
+        <div class="separator"></div>
+        <button class="btn-secondary" onclick="scrollTo('left')">← Left</button>
+        <button class="btn-secondary" onclick="scrollTo('right')">→ Right</button>
+        <button class="btn-secondary" onclick="scrollTo('top')">↑ Top</button>
+        <button class="btn-secondary" onclick="scrollTo('bottom')">↓ Bottom</button>
+        <span class="hint">🖱️ Drag to pan • Scroll to move • Ctrl+Scroll to zoom</span>
     </div>
     
-    <main>
-        <div class="diagram-container">
-            <div id="diagram-content" class="loading">Loading diagram...</div>
+    <div class="diagram-wrapper" id="wrapper">
+        <div class="diagram-container" id="container">
+            <div class="loading" id="loading">Rendering graph...</div>
+            <pre class="mermaid" id="diagram" style="display:none;">
+{mermaid_content}
+            </pre>
         </div>
-    </main>
+    </div>
     
     <div class="legend">
-        <h3>Legend</h3>
+        <h3>Node Types</h3>
         <div class="legend-item"><div class="legend-shape shape-rect"></div><span>Company</span></div>
         <div class="legend-item"><div class="legend-shape shape-rounded"></div><span>Risk Factor</span></div>
         <div class="legend-item"><div class="legend-shape shape-parallelogram"></div><span>Dollar Amount</span></div>
@@ -855,73 +949,193 @@ def _render_paginated_html(graph: KnowledgeGraph, pages: list[str], output_path:
 
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-        const pages = {pages_json};
-        let currentPageIndex = 0;
-        const totalPages = {total_pages};
+        let zoom = 1;
+        const minZoom = 0.1;
+        const maxZoom = 3;
+        const zoomStep = 0.1;
         
+        const wrapper = document.getElementById('wrapper');
+        const container = document.getElementById('container');
+        const loading = document.getElementById('loading');
+        const diagram = document.getElementById('diagram');
+        
+        // Initialize Mermaid
         mermaid.initialize({{
             startOnLoad: false,
             theme: 'default',
-            maxTextSize: 100000,
+            maxTextSize: 1000000,
+            maxEdges: 10000,
             flowchart: {{
                 useMaxWidth: false,
                 htmlLabels: true,
                 curve: 'basis',
-                nodeSpacing: 50,
-                rankSpacing: 70
+                nodeSpacing: 30,
+                rankSpacing: 50,
+                padding: 20
+            }},
+            themeVariables: {{
+                fontSize: '12px'
             }}
         }});
         
-        async function renderPage(index) {{
-            const container = document.getElementById('diagram-content');
-            container.innerHTML = '<div class="loading">Rendering page ' + (index + 1) + '...</div>';
-            
+        // Render the diagram
+        async function renderDiagram() {{
             try {{
-                const {{ svg }} = await mermaid.render('mermaid-' + index, pages[index]);
-                container.innerHTML = svg;
+                const content = diagram.textContent.trim();
+                const {{ svg }} = await mermaid.render('rendered-graph', content);
+                diagram.innerHTML = svg;
+                diagram.style.display = 'block';
+                loading.style.display = 'none';
+                
+                // Auto-fit after render
+                setTimeout(fitToScreen, 100);
             }} catch (e) {{
-                container.innerHTML = '<div class="loading">Error rendering diagram: ' + e.message + '</div>';
+                loading.innerHTML = 'Error rendering: ' + e.message;
             }}
+        }}
+        
+        // Zoom functions
+        function updateZoom() {{
+            container.style.transform = `scale(${{zoom}})`;
+            document.getElementById('zoomLevel').textContent = Math.round(zoom * 100) + '%';
+        }}
+        
+        function zoomIn() {{
+            zoom = Math.min(zoom + zoomStep, maxZoom);
+            updateZoom();
+        }}
+        
+        function zoomOut() {{
+            zoom = Math.max(zoom - zoomStep, minZoom);
+            updateZoom();
+        }}
+        
+        function resetZoom() {{
+            zoom = 1;
+            updateZoom();
+            wrapper.scrollTo(0, 0);
+        }}
+        
+        function fitToScreen() {{
+            const svg = diagram.querySelector('svg');
+            if (!svg) return;
             
-            document.getElementById('currentPage').textContent = index + 1;
-            document.getElementById('pageSelect').value = index;
+            const svgWidth = svg.getBoundingClientRect().width / zoom;
+            const svgHeight = svg.getBoundingClientRect().height / zoom;
+            const wrapperWidth = wrapper.clientWidth - 64;
+            const wrapperHeight = wrapper.clientHeight - 64;
+            
+            const scaleX = wrapperWidth / svgWidth;
+            const scaleY = wrapperHeight / svgHeight;
+            zoom = Math.min(scaleX, scaleY, 1);
+            zoom = Math.max(zoom, minZoom);
+            
+            updateZoom();
+            wrapper.scrollTo(0, 0);
         }}
         
-        function nextPage() {{
-            if (currentPageIndex < totalPages - 1) {{
-                currentPageIndex++;
-                renderPage(currentPageIndex);
+        // Scroll navigation
+        function scrollTo(direction) {{
+            const amount = 300;
+            switch(direction) {{
+                case 'left': wrapper.scrollBy(-amount, 0); break;
+                case 'right': wrapper.scrollBy(amount, 0); break;
+                case 'top': wrapper.scrollBy(0, -amount); break;
+                case 'bottom': wrapper.scrollBy(0, amount); break;
             }}
         }}
         
-        function prevPage() {{
-            if (currentPageIndex > 0) {{
-                currentPageIndex--;
-                renderPage(currentPageIndex);
+        // Mouse wheel zoom (with Ctrl)
+        wrapper.addEventListener('wheel', (e) => {{
+            if (e.ctrlKey) {{
+                e.preventDefault();
+                if (e.deltaY < 0) zoomIn();
+                else zoomOut();
             }}
-        }}
+        }}, {{ passive: false }});
         
-        function firstPage() {{
-            currentPageIndex = 0;
-            renderPage(currentPageIndex);
-        }}
+        // Drag to pan
+        let isDragging = false;
+        let startX, startY, scrollLeft, scrollTop;
         
-        function lastPage() {{
-            currentPageIndex = totalPages - 1;
-            renderPage(currentPageIndex);
-        }}
+        wrapper.addEventListener('mousedown', (e) => {{
+            isDragging = true;
+            startX = e.pageX - wrapper.offsetLeft;
+            startY = e.pageY - wrapper.offsetTop;
+            scrollLeft = wrapper.scrollLeft;
+            scrollTop = wrapper.scrollTop;
+            wrapper.style.cursor = 'grabbing';
+        }});
         
-        function goToPage(index) {{
-            currentPageIndex = parseInt(index);
-            renderPage(currentPageIndex);
-        }}
+        wrapper.addEventListener('mouseleave', () => {{
+            isDragging = false;
+            wrapper.style.cursor = 'grab';
+        }});
         
-        // Initial render
-        renderPage(0);
+        wrapper.addEventListener('mouseup', () => {{
+            isDragging = false;
+            wrapper.style.cursor = 'grab';
+        }});
+        
+        wrapper.addEventListener('mousemove', (e) => {{
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - wrapper.offsetLeft;
+            const y = e.pageY - wrapper.offsetTop;
+            wrapper.scrollLeft = scrollLeft - (x - startX);
+            wrapper.scrollTop = scrollTop - (y - startY);
+        }});
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {{
+            switch(e.key) {{
+                case '+': case '=': zoomIn(); break;
+                case '-': zoomOut(); break;
+                case '0': resetZoom(); break;
+                case 'ArrowLeft': wrapper.scrollBy(-50, 0); break;
+                case 'ArrowRight': wrapper.scrollBy(50, 0); break;
+                case 'ArrowUp': wrapper.scrollBy(0, -50); break;
+                case 'ArrowDown': wrapper.scrollBy(0, 50); break;
+            }}
+        }});
+        
+        // Start rendering
+        renderDiagram();
     </script>
 </body>
 </html>
 '''
     
     output_path.write_text(html_template, encoding="utf-8")
+
+
+def _generate_mermaid_content_horizontal(graph: KnowledgeGraph) -> str:
+    """Generate Mermaid diagram content with horizontal (LR) layout.
+
+    Args:
+        graph: A validated KnowledgeGraph instance.
+
+    Returns:
+        Mermaid diagram content as a string with left-to-right layout.
+    """
+    lines: list[str] = []
+
+    # Mermaid flowchart header - Left to Right for horizontal scrolling
+    lines.append("flowchart LR")
+    lines.append("")
+
+    # Add node definitions
+    lines.append("    %% Node definitions")
+    for node in graph.nodes:
+        node_syntax = _get_node_shape(node)
+        lines.append(f"    {node_syntax}")
+
+    lines.append("")
+
+    # Add relationship edges
+    lines.append("    %% Relationships")
+    for rel in graph.relationships:
+        lines.append(f"    {rel.source} -->|{rel.relation}| {rel.target}")
+
+    return "\n".join(lines)
 
