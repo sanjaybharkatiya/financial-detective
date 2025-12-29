@@ -10,9 +10,9 @@ The Financial Detective reads raw financial text (e.g., SEC filings, earnings re
 
 - **Companies** — Organizations mentioned in the document
 - **Risk Factors** — Business risks and uncertainties disclosed
-- **Dollar Amounts** — Monetary figures reported
+- **Dollar Amounts** — Monetary figures reported with contextual meaning
 
-The system features a provider-agnostic architecture supporting OpenAI GPT-4o, Google Gemini, and local Ollama models for intelligent entity and relationship extraction, then validates the output against a strict schema before rendering a visual graph. All extracted entities and relationships must be explicitly present in the source text.
+The system features a provider-agnostic architecture supporting OpenAI GPT-4o, Google Gemini, and local Ollama models for intelligent entity and relationship extraction. Outputs are validated against a strict Pydantic schema before rendering as JSON, Mermaid diagrams, and interactive HTML visualizations. All extracted entities and relationships must be explicitly present in the source text.
 
 ---
 
@@ -34,11 +34,15 @@ Manually extracting this information is time-consuming and error-prone. Traditio
 
 - **Provider-Agnostic LLM Architecture** — Swap between OpenAI, Google Gemini, and Ollama via environment variables with no code changes
 - **Factory Pattern for Extractor Selection** — Clean separation between configuration and implementation
-- **Automatic Document Chunking** — Large documents automatically split into manageable chunks with intelligent merging
+- **Automatic Document Chunking** — Large documents automatically split into manageable chunks with intelligent merging and deduplication
+- **Iterative Extraction with Live Updates** — Results saved after each chunk; browser auto-opens for real-time progress viewing
 - **Strict Schema Enforcement** — Pydantic v2 models with `extra="forbid"` reject unexpected fields
 - **No-Regex, LLM-Only Extraction** — All entity and relationship extraction performed through LLM reasoning
+- **Auto-Repair Invalid Relationships** — Automatically removes relationships that violate type constraints
+- **Orphan Node Cleanup** — Removes nodes with no connections or meaningless content
 - **Fail-Fast Validation** — Errors surface immediately with descriptive messages; no silent failures
-- **Optional Confidence Scores** — Relationships may include confidence values for future UI, analytics, or human review (currently optional and model-dependent)
+- **Optional Confidence Scores** — Relationships may include confidence values for future UI, analytics, or human review
+- **Paginated HTML Visualization** — Large graphs rendered as navigable multi-page HTML with zoom controls
 
 ---
 
@@ -75,8 +79,9 @@ Manually extracting this information is time-consuming and error-prone. Traditio
                        ┌──────────────────────────────────────┐
                        │         extractor package            │
                        │  ┌────────────────────────────────┐  │
-                       │  │  extractor factory + providers │  │
+                       │  │  factory + chunker + merger    │  │
                        │  │   (temperature=0, JSON mode)   │  │
+                       │  │  OpenAI | Gemini | Ollama      │  │
                        │  └────────────────────────────────┘  │
                        └──────────────────┬───────────────────┘
                                           │
@@ -89,41 +94,51 @@ Manually extracting this information is time-consuming and error-prone. Traditio
                                           ▼
                        ┌──────────────────────────────────────┐
                        │           validator.py               │
+                       │  • Auto-repair invalid relationships │
+                       │  • Remove orphan/meaningless nodes   │
                        │  • Unique node IDs                   │
                        │  • Valid relationship references     │
-                       │  • At least one node                 │
                        └──────────────────┬───────────────────┘
                                           │
                         ┌─────────────────┴─────────────────┐
                         │                                   │
                         ▼                                   ▼
               ┌─────────────────┐                 ┌─────────────────┐
-              │  graph_output   │                 │   visualizer    │
-              │     .json       │                 │    (NetworkX)   │
-              │                 │                 │                 │
-              └─────────────────┘                 └────────┬────────┘
-                                                          │
-                                                          ▼
-                                                 ┌─────────────────┐
-                                                 │   graph.png     │
-                                                 │  (matplotlib)   │
-                                                 └─────────────────┘
+              │  graph_output   │                 │   visualizers   │
+              │     .json       │                 │                 │
+              │                 │                 └────────┬────────┘
+              └─────────────────┘                          │
+                                          ┌────────────────┼────────────────┐
+                                          │                │                │
+                                          ▼                ▼                ▼
+                               ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+                               │ visualizer   │  │ visualizer   │  │ visualizer   │
+                               │   .py        │  │ _mermaid.py  │  │ _mermaid.py  │
+                               │ (NetworkX)   │  │ (Mermaid)    │  │ (HTML)       │
+                               └──────┬───────┘  └──────┬───────┘  └──────┬───────┘
+                                      │                 │                 │
+                                      ▼                 ▼                 ▼
+                               ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+                               │  graph.png   │  │  graph.mmd   │  │  graph.html  │
+                               │ (matplotlib) │  │  (text)      │  │  (browser)   │
+                               └──────────────┘  └──────────────┘  └──────────────┘
 ```
 
 ### Module Responsibilities
 
 | Module | Responsibility |
 |--------|----------------|
-| `src/schema.py` | Pydantic models for Node, Relationship, KnowledgeGraph |
+| `src/schema.py` | Pydantic models for Node (with context), Relationship, KnowledgeGraph |
 | `src/input_loader.py` | Load raw text from file (no parsing) |
 | `src/config.py` | Configuration management via environment variables |
 | `src/chunker.py` | Text chunking for large documents |
-| `src/graph_merger.py` | Merge multiple KnowledgeGraph instances |
-| `src/extractor/` | LLM extractor package (factory, base interface, OpenAI & Ollama implementations) |
-| `src/validator.py` | Schema validation and integrity checks |
+| `src/graph_merger.py` | Merge and deduplicate multiple KnowledgeGraph instances |
+| `src/extractor/` | LLM extractor package (factory, base interface, OpenAI, Gemini, Ollama) |
+| `src/validator.py` | Schema validation, auto-repair, and orphan node removal |
 | `src/visualizer.py` | NetworkX graph construction and PNG rendering (optional) |
-| `src/visualizer_mermaid.py` | Mermaid flowchart generation (always available) |
-| `main.py` | Pipeline orchestration |
+| `src/visualizer_mermaid.py` | Mermaid diagrams and paginated HTML viewer (always available) |
+| `main.py` | Pipeline orchestration with iterative progress updates |
+| `clean_graph.py` | Utility to clean existing graphs (remove meaningless/orphan nodes) |
 
 ---
 
@@ -136,8 +151,8 @@ The Financial Detective supports multiple LLM providers, allowing you to choose 
 | Provider | Model | Use Case |
 |----------|-------|----------|
 | **OpenAI** | GPT-4o | Production-grade accuracy, cloud-based |
-| **Google Gemini** | gemini-2.0-flash, gemini-1.5-pro, etc. (configurable via `GEMINI_MODEL`) | High-quality cloud-based extraction (Google ecosystem) |
-| **Ollama** | Llama 3, Mistral, etc. | Local inference, offline capable |
+| **Google Gemini** | gemini-2.0-flash, gemini-1.5-pro, etc. (configurable via `GEMINI_MODEL`) | High-quality cloud-based extraction with large context windows |
+| **Ollama** | Llama 3, Mistral, etc. | Local inference, offline capable, no API costs |
 
 ### Environment Variables
 
@@ -145,6 +160,7 @@ The Financial Detective supports multiple LLM providers, allowing you to choose 
 |----------|-------------|---------|
 | `LLM_PROVIDER` | Provider selection: `openai`, `gemini`, or `ollama` | `openai` |
 | `OPENAI_API_KEY` | OpenAI API key (required for OpenAI provider) | — |
+| `OPENAI_MODEL` | OpenAI model name | `gpt-4o` |
 | `GEMINI_API_KEY` | Google Gemini API key (required for Gemini provider) | — |
 | `GEMINI_MODEL` | Gemini model name | `gemini-2.0-flash` |
 | `OLLAMA_MODEL` | Ollama model name | `llama3:latest` |
@@ -195,7 +211,7 @@ export GEMINI_MODEL="gemini-2.0-flash"
 python main.py
 ```
 
-> **Tip:** Ollama runs entirely on your local machine, avoiding OpenAI API quota limits and rate throttling. This makes it ideal for iterative development, testing, and processing large document batches without incurring costs.
+> **Tip:** Ollama runs entirely on your local machine, avoiding API quota limits and rate throttling. This makes it ideal for iterative development, testing, and processing large document batches without incurring costs.
 
 ### Design Benefits
 
@@ -205,7 +221,22 @@ This provider-agnostic design enables:
 - **Offline Fallback** — Run extractions without internet connectivity using Ollama
 - **Model Experimentation** — Swap models without code changes to compare extraction quality
 - **Privacy** — Keep sensitive financial documents on-premises with local inference
-- **Large Context Windows** — Gemini offers strong reasoning and large context windows; models like `gemini-2.0-flash` or `gemini-1.5-flash` can be swapped via `GEMINI_MODEL`
+- **Large Context Windows** — Gemini offers strong reasoning and large context windows; models like `gemini-2.0-flash` or `gemini-1.5-pro` can be swapped via `GEMINI_MODEL`
+
+---
+
+## Relationship Types
+
+The system supports 18 relationship types for comprehensive financial graph modeling:
+
+| Category | Relationship Types |
+|----------|-------------------|
+| **Financial** | `REPORTS_AMOUNT`, `RAISED_CAPITAL`, `INVESTED_IN`, `COMMITTED_CAPEX` |
+| **Ownership** | `OWNS`, `OPERATES` |
+| **Partnerships** | `PARTNERED_WITH`, `JOINT_VENTURE_WITH` |
+| **Risk** | `HAS_RISK`, `IMPACTED_BY`, `DECLINED_DUE_TO`, `SUPPORTED_BY` |
+| **Strategy** | `TARGETS`, `PLANS_TO`, `ON_TRACK_TO`, `COMMITTED_TO` |
+| **Compliance** | `COMPLIES_WITH`, `SUBJECT_TO` |
 
 ---
 
@@ -219,7 +250,8 @@ When chunking is enabled and a document exceeds the configured size:
 
 1. **Text Splitting** — Document is split into overlapping chunks at natural boundaries (paragraphs, sentences)
 2. **Parallel Extraction** — Each chunk is processed independently by the LLM
-3. **Graph Merging** — All extracted graphs are combined into a single unified Knowledge Graph
+3. **Graph Merging** — All extracted graphs are combined with node deduplication
+4. **Live Updates** — Results saved after each chunk; browser updates in real-time
 
 ### Configuration
 
@@ -248,10 +280,11 @@ python main.py
 
 ### Design Decisions
 
-- **Simple Merge Strategy** — All nodes and relationships from chunks are concatenated (no deduplication)
+- **Node Deduplication** — Duplicate entities across chunks are merged by name and type
+- **ID Renumbering** — Unique IDs assigned globally to prevent collisions
 - **Semantic Boundaries** — Text is split at paragraph/sentence boundaries to preserve context
 - **Overlap Preservation** — Chunks overlap to maintain continuity across boundaries
-- **Fail-Fast** — If any chunk extraction fails, the entire process fails immediately
+- **Continue on Error** — If a chunk extraction fails, processing continues with remaining chunks
 
 ---
 
@@ -345,17 +378,29 @@ python main.py
 [1/5] Loading raw financial text...
       Loaded 1234 characters
 [2/5] Extracting Knowledge Graph via LLM...
-      Extracted 5 nodes and 3 relationships
-[3/5] Validating Knowledge Graph...
-      Validation passed
-[4/5] Saving graph to data/graph_output.json...
+      🤖 Provider: Ollama (local) | Model: llama3:latest
+      ℹ️  Results are saved after each chunk - refresh browser to view progress
+      📊 Browser opened - refresh to see live updates
+      Splitting into 3 chunks (size=4000 tokens, overlap=200 tokens)
+      Processing chunk 1/3... (15 nodes, 12 relationships)
+      📁 Saved: 15 nodes, 12 relationships (chunk 1/3)
+      Processing chunk 2/3... (22 nodes, 18 relationships)
+      📁 Saved: 35 nodes, 28 relationships (chunk 2/3)
+      Processing chunk 3/3... (18 nodes, 14 relationships)
+      📁 Saved: 48 nodes, 40 relationships (chunk 3/3)
+      ✓ Extraction complete: 48 nodes, 40 relationships
+[3/5] Validating and repairing Knowledge Graph...
+      ⚠️  Removed 2 invalid relationships
+      Validation passed: 48 nodes, 38 relationships
+[4/5] Saving final graph to data/graph_output.json...
       Graph saved successfully
-[5/5] Rendering graph visualizations...
+[5/5] Rendering final visualizations...
       PNG saved to visuals/graph.png
       Mermaid saved to visuals/graph.mmd
-      HTML saved to visuals/graph.html (open in browser to view)
+      HTML saved to visuals/graph.html
 
 ✓ Pipeline completed successfully
+      📊 Refresh browser to see final visualization
 ```
 
 ### Output Files
@@ -363,9 +408,49 @@ python main.py
 | File | Description |
 |------|-------------|
 | `data/graph_output.json` | Structured Knowledge Graph in JSON format |
-| `visuals/graph.png` | NetworkX graph visualization (PNG image) |
+| `visuals/graph.png` | NetworkX graph visualization (PNG image, optional) |
 | `visuals/graph.mmd` | Mermaid diagram for lightweight rendering |
-| `visuals/graph.html` | Interactive HTML page (open in browser to view) |
+| `visuals/graph.html` | Interactive paginated HTML viewer (open in browser) |
+
+---
+
+## Cleaning Existing Graphs
+
+Use `clean_graph.py` to remove meaningless or orphan nodes from an existing graph:
+
+```bash
+python clean_graph.py
+```
+
+This utility:
+- Removes nodes with meaningless names (just numbers, codes like "H 10")
+- Removes DollarAmount nodes without currency symbols or context
+- Removes orphan nodes (no relationships)
+- Updates JSON, Mermaid, and HTML files
+
+---
+
+## NetworkX Visualization
+
+The pipeline generates a PNG graph visualization using NetworkX and matplotlib (`visuals/graph.png`). This provides a static image representation of the Knowledge Graph.
+
+### Node Colors
+
+| Entity Type | Color |
+|-------------|-------|
+| Company | Blue |
+| RiskFactor | Red |
+| DollarAmount | Green |
+
+### Layout
+
+- Uses spring layout algorithm with fixed seed (42) for reproducibility
+- Directed edges show relationship labels
+- Node labels display entity names
+
+### Python Version Note
+
+> **Important:** NetworkX visualization requires Python 3.11–3.13. On Python 3.14, NetworkX has an upstream compatibility issue and PNG rendering is automatically skipped. Mermaid and HTML visualizations remain fully available on all Python versions.
 
 ---
 
@@ -381,6 +466,14 @@ The pipeline generates a Mermaid flowchart diagram (`visuals/graph.mmd`) and an 
 | RiskFactor | Rounded `("label")` |
 | DollarAmount | Parallelogram `[/"label"/]` |
 
+### Large Graph Handling
+
+For graphs with more than 100 nodes, the HTML viewer automatically paginates:
+- **50 nodes per page** with navigation controls
+- **First/Previous/Next/Last** buttons and page selector
+- **Zoom controls** for adjusting diagram size
+- **Fixed legend** showing node type shapes
+
 ### Example Output
 
 ```mermaid
@@ -388,7 +481,7 @@ flowchart TD
     company_1["Parent Corporation"]
     company_2["Subsidiary Holdings"]
     risk_1("Regulatory compliance challenges")
-    amount_1[/"$9.5 billion"/]
+    amount_1[/"Revenue: $9.5 billion"/]
 
     company_1 -->|OWNS| company_2
     company_1 -->|HAS_RISK| risk_1
@@ -419,6 +512,9 @@ pytest tests/ -v
 pytest tests/test_validator.py -v    # Validator tests
 pytest tests/test_extractor.py -v    # Extractor tests (mocked factory; provider-agnostic)
 pytest tests/test_visualizer.py -v   # Visualizer tests
+pytest tests/test_chunker.py -v      # Chunker tests
+pytest tests/test_graph_merger.py -v # Graph merger tests
+pytest tests/test_factory.py -v      # Factory tests
 ```
 
 ### Test Coverage
@@ -443,7 +539,7 @@ pytest tests/ --cov=src --cov-report=term-missing
 
 4. **Schema Conformance** — Extracted entities must fit into three categories: Company, RiskFactor, or DollarAmount.
 
-5. **Relationship Types** — Only three relationship types are supported: OWNS, HAS_RISK, REPORTS_AMOUNT.
+5. **Relationship Types** — 18 relationship types are supported for comprehensive financial graph modeling.
 
 ### Limitations
 
@@ -453,13 +549,13 @@ pytest tests/ --cov=src --cov-report=term-missing
 
 3. **No Incremental Updates** — Each run extracts a fresh graph; no merge with previous extractions.
 
-4. **No Entity Resolution** — Similar entity names with slight variations may be treated as separate entities.
+4. **No Entity Resolution** — Similar entity names with slight variations may be treated as separate entities within a single chunk.
 
 5. **Cost** — Cloud providers (OpenAI, Gemini) incur API costs proportional to document length. Ollama runs locally without API cost.
 
 6. **No Real-Time Processing** — Batch processing only; not suitable for streaming input.
 
-7. **OpenAI API Quota Dependency** — OpenAI provider is subject to rate limits and quota restrictions. Ollama provides a local fallback that avoids these constraints.
+7. **OpenAI/Gemini Quota Dependency** — Cloud providers are subject to rate limits and quota restrictions. Ollama provides a local fallback that avoids these constraints.
 
 8. **Python 3.14 Visualization** — NetworkX has an upstream compatibility issue with Python 3.14. Graph visualization is automatically skipped on this version; use Python 3.11–3.13 for full functionality.
 
@@ -478,13 +574,14 @@ financial-detective/
 │   ├── raw_report.txt        # Input: Raw financial text
 │   └── graph_output.json     # Output: Extracted Knowledge Graph
 ├── src/
-│   ├── schema.py             # Pydantic data models
+│   ├── schema.py             # Pydantic data models (Node with context, 18 relations)
 │   ├── input_loader.py       # Raw text loading
 │   ├── config.py             # Environment-based configuration
 │   ├── chunker.py            # Text chunking for large documents
-│   ├── graph_merger.py       # Merge multiple KnowledgeGraphs
-│   ├── validator.py          # Graph validation
-│   ├── visualizer.py         # Graph rendering
+│   ├── graph_merger.py       # Merge and deduplicate KnowledgeGraphs
+│   ├── validator.py          # Graph validation and auto-repair
+│   ├── visualizer.py         # NetworkX PNG rendering (optional)
+│   ├── visualizer_mermaid.py # Mermaid diagrams and paginated HTML
 │   └── extractor/            # LLM extractor package
 │       ├── __init__.py       # Package entry point (with chunking orchestration)
 │       ├── base.py           # Abstract LLMExtractor interface
@@ -502,8 +599,12 @@ financial-detective/
 ├── visuals/
 │   ├── graph.png             # NetworkX visualization (if available)
 │   ├── graph.mmd             # Mermaid diagram
-│   └── graph.html            # Interactive HTML viewer
-├── main.py                   # Pipeline orchestration
+│   └── graph.html            # Interactive paginated HTML viewer
+├── docs/
+│   ├── TECHNICAL_DESIGN.md   # Technical design document
+│   └── BUILD_PROMPTS.md      # Build prompts used to create the project
+├── main.py                   # Pipeline orchestration with live updates
+├── clean_graph.py            # Utility to clean existing graphs
 ├── requirements.txt          # Python dependencies
 └── README.md                 # This file
 ```

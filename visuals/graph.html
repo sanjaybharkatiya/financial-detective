@@ -3,107 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Detective - Knowledge Graph (27 nodes)</title>
+    <title>Financial Detective - Knowledge Graph (689 nodes)</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            background: #f0f2f5;
+            min-height: 100vh;
         }
         
-        /* Fixed header */
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: white;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-        header h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
+        header h1 { font-size: 1.4rem; }
         .stats {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             font-size: 0.9rem;
         }
         .stat {
             background: rgba(255,255,255,0.15);
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 6px;
         }
-        .stat-value {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
+        .stat-value { font-weight: 700; }
         
-        /* Controls bar */
-        .controls {
-            position: fixed;
-            top: 70px;
-            left: 0;
-            right: 0;
-            z-index: 999;
+        .pagination {
             background: white;
-            padding: 0.75rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
-            gap: 1rem;
+            justify-content: center;
             align-items: center;
+            gap: 1rem;
             border-bottom: 1px solid #ddd;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 60px;
+            z-index: 999;
         }
-        .controls button {
-            padding: 0.5rem 1rem;
+        .pagination button {
+            padding: 0.6rem 1.2rem;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.9rem;
             transition: all 0.2s;
         }
-        .controls button:hover {
+        .pagination button:hover:not(:disabled) {
             transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-        .btn-primary {
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn-nav {
             background: #2563eb;
             color: white;
         }
-        .btn-secondary {
-            background: #e5e7eb;
+        .page-info {
+            font-weight: 600;
             color: #374151;
+            min-width: 120px;
+            text-align: center;
         }
-        .zoom-info {
-            margin-left: auto;
-            color: #666;
-            font-size: 0.85rem;
+        .page-select {
+            padding: 0.5rem;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
         }
         
-        /* Main diagram area - scrollable */
         main {
-            margin-top: 130px;
             padding: 2rem;
-            min-height: calc(100vh - 130px);
+            max-width: 100%;
+            overflow-x: auto;
         }
-        .diagram-wrapper {
+        .diagram-container {
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            min-height: 500px;
             overflow: auto;
         }
         .mermaid {
@@ -111,25 +100,8 @@
         }
         .mermaid svg {
             max-width: none !important;
-            height: auto !important;
         }
         
-        /* Node styling */
-        .node rect {
-            stroke-width: 2px !important;
-        }
-        .node .label {
-            font-size: 14px !important;
-        }
-        .edgeLabel {
-            font-size: 12px !important;
-            font-weight: 600 !important;
-            background: white !important;
-            padding: 2px 6px !important;
-            border-radius: 4px !important;
-        }
-        
-        /* Legend */
         .legend {
             position: fixed;
             bottom: 20px;
@@ -141,35 +113,18 @@
             font-size: 0.85rem;
             z-index: 100;
         }
-        .legend h3 {
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 0.3rem 0;
-        }
-        .legend-shape {
-            width: 20px;
-            height: 14px;
-            border: 2px solid #333;
-        }
+        .legend h3 { margin-bottom: 0.5rem; color: #666; font-size: 0.9rem; }
+        .legend-item { display: flex; align-items: center; gap: 0.5rem; margin: 0.3rem 0; }
+        .legend-shape { width: 20px; height: 14px; border: 2px solid #333; }
         .shape-rect { border-radius: 2px; }
         .shape-rounded { border-radius: 7px; }
-        .shape-parallelogram { 
-            transform: skewX(-10deg);
-            width: 24px;
-        }
+        .shape-parallelogram { transform: skewX(-10deg); width: 24px; }
         
-        /* Scroll indicator */
-        .scroll-hint {
+        .loading {
             text-align: center;
-            padding: 1rem;
+            padding: 3rem;
             color: #666;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
         }
     </style>
 </head>
@@ -177,148 +132,101 @@
     <header>
         <h1>📊 Financial Detective</h1>
         <div class="stats">
-            <div class="stat">
-                <span class="stat-value">27</span> Nodes
-            </div>
-            <div class="stat">
-                <span class="stat-value">14</span> Relationships
-            </div>
+            <div class="stat"><span class="stat-value">689</span> Nodes</div>
+            <div class="stat"><span class="stat-value">753</span> Relationships</div>
+            <div class="stat"><span class="stat-value">14</span> Pages</div>
         </div>
     </header>
     
-    <div class="controls">
-        <button class="btn-primary" onclick="zoomIn()">🔍 Zoom In</button>
-        <button class="btn-primary" onclick="zoomOut()">🔍 Zoom Out</button>
-        <button class="btn-secondary" onclick="resetZoom()">↺ Reset</button>
-        <button class="btn-secondary" onclick="scrollToTop()">⬆ Top</button>
-        <button class="btn-secondary" onclick="scrollToBottom()">⬇ Bottom</button>
-        <span class="zoom-info">Scroll to navigate • Use zoom buttons to resize</span>
+    <div class="pagination">
+        <button class="btn-nav" onclick="firstPage()">⏮ First</button>
+        <button class="btn-nav" onclick="prevPage()">◀ Previous</button>
+        <span class="page-info">Page <span id="currentPage">1</span> of 14</span>
+        <select class="page-select" id="pageSelect" onchange="goToPage(this.value)">
+            <option value="0">1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option><option value="4">5</option><option value="5">6</option><option value="6">7</option><option value="7">8</option><option value="8">9</option><option value="9">10</option><option value="10">11</option><option value="11">12</option><option value="12">13</option><option value="13">14</option>
+        </select>
+        <button class="btn-nav" onclick="nextPage()">Next ▶</button>
+        <button class="btn-nav" onclick="lastPage()">Last ⏭</button>
     </div>
     
     <main>
-        <div class="scroll-hint">⬇ Scroll down to explore the full graph ⬇</div>
-        <div class="diagram-wrapper" id="diagram">
-            <pre class="mermaid" id="mermaid-diagram">
-flowchart TD
-
-    %% Node definitions
-    amount_1[/"$3 billion"/]
-    company_1["Reliance Retail"]
-    amount_2[/"~1.4 Billion"/]
-    amount_3[/"$1 billion"/]
-    company_2["RIL"]
-    risk_1("volatility")
-    company_3["SandP"]
-    company_4["Moody’s"]
-    company_5["CRISIL"]
-    company_6["CARE"]
-    company_7["ICRA"]
-    company_8["India Ratings"]
-    amount_4[/"' 190 lakh crore"/]
-    company_9["Boston Consulting Group"]
-    company_10["Retailers Association of India"]
-    company_11["KG D6"]
-    company_12["Coal Bed Methane"]
-    amount_5[/"25,211"/]
-    amount_6[/"24,439"/]
-    amount_7[/"21,188"/]
-    amount_8[/"20,191"/]
-    company_13["bp"]
-    amount_9[/"~240 BCF"/]
-    company_14["Reliance Gas Pipeline Limited"]
-    risk_2("Liquidity Risk")
-    company_15["Reliance Industries Limited"]
-    risk_3("counterparties’ credit risk")
-
-    %% Relationships
-    company_2 -->|REPORTS_AMOUNT| amount_1
-    company_2 -->|OWNS| company_1
-    company_2 -->|REPORTS_AMOUNT| amount_3
-    company_2 -->|HAS_RISK| risk_1
-    company_2 -->|OWNS| company_14
-    company_3 -->|SUPPORTED_BY| company_2
-    company_4 -->|SUPPORTED_BY| company_2
-    company_5 -->|SUPPORTED_BY| company_2
-    company_6 -->|SUPPORTED_BY| company_2
-    company_7 -->|SUPPORTED_BY| company_2
-    company_8 -->|SUPPORTED_BY| company_2
-    company_2 -->|PARTNERED_WITH| company_13
-    company_15 -->|HAS_RISK| risk_2
-    company_15 -->|HAS_RISK| risk_3
-            </pre>
+        <div class="diagram-container">
+            <div id="diagram-content" class="loading">Loading diagram...</div>
         </div>
-        <div class="scroll-hint">⬆ Scroll up to return to the top ⬆</div>
     </main>
     
     <div class="legend">
         <h3>Legend</h3>
-        <div class="legend-item">
-            <div class="legend-shape shape-rect"></div>
-            <span>Company</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-shape shape-rounded"></div>
-            <span>Risk Factor</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-shape shape-parallelogram"></div>
-            <span>Dollar Amount</span>
-        </div>
+        <div class="legend-item"><div class="legend-shape shape-rect"></div><span>Company</span></div>
+        <div class="legend-item"><div class="legend-shape shape-rounded"></div><span>Risk Factor</span></div>
+        <div class="legend-item"><div class="legend-shape shape-parallelogram"></div><span>Dollar Amount</span></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-        let currentZoom = 1;
+        const pages = ["flowchart TD\n\n    %% Node definitions\n    amount_1[/\"$3 billion\"/]\n    company_1[\"Reliance Retail\"]\n    amount_3[/\"$1 billion\"/]\n    company_2[\"RIL\"]\n    risk_1(\"volatility\")\n    company_3[\"SandP\"]\n    company_4[\"Moody\u2019s\"]\n    company_5[\"CRISIL\"]\n    company_6[\"CARE\"]\n    company_7[\"ICRA\"]\n    company_8[\"India Ratings\"]\n    company_14[\"Reliance Gas Pipeline Limited\"]\n    risk_2(\"Liquidity Risk\")\n    company_15[\"Reliance Industries Limited\"]\n    risk_3(\"counterparties\u2019 credit risk\")\n    risk_4(\"market volatility\")\n    risk_5(\"liquidity risk\")\n    risk_6(\"Commodity Price Risk\")\n    amount_41[/\"J10,71,174 crore\"/]\n    amount_42[/\"US$ 125.3 billion\"/]\n    amount_43[/\"J10,00,122 crore\"/]\n    amount_44[/\"J1,83,422 crore\"/]\n    amount_45[/\"US$ 21.5 billion\"/]\n    amount_46[/\"J1,78,290 crore\"/]\n    amount_47[/\"J1,46,917 crore\"/]\n    amount_48[/\"J1,41,969 crore\"/]\n    amount_49[/\"J 3,47,530 crore\"/]\n    amount_50[/\"US$ 40.7 billion\"/]\n    amount_51[/\"J 1,17,083 crore\"/]\n    amount_52[/\"US$ 13.7 billion\"/]\n    amount_53[/\"J 1,31,107 crore\"/]\n    amount_54[/\"US$ 15.3 billion\"/]\n    amount_55[/\"J 1,31,769 crore\"/]\n    amount_56[/\"J81,309 crore\"/]\n    amount_57[/\"US$ 9.5 billion\"/]\n    amount_58[/\"J 5,57,163 crore\"/]\n    amount_59[/\"US$ 65.2 billion\"/]\n    amount_61[/\"J 74,163 crore\"/]\n    amount_62[/\"US$ 8.7 billion\"/]\n    amount_63[/\"J 86,393 crore\"/]\n    amount_64[/\"J 35,262 crore\"/]\n    amount_65[/\"US$ 4.1 billion\"/]\n    amount_66[/\"J 42,042 crore\"/]\n    risk_8(\"global volatility\")\n    risk_9(\"geopolitical tension\")\n    risk_10(\"policy uncertainties\")\n    risk_11(\"trade tariffs\")\n    risk_12(\"narrower margins\")\n    risk_13(\"supply additions\")\n    risk_14(\"unfavourable global demand-supply\")\n\n    %% Relationships\n    company_2 -->|REPORTS_AMOUNT| amount_1\n    company_2 -->|OWNS| company_1\n    company_2 -->|REPORTS_AMOUNT| amount_3\n    company_2 -->|HAS_RISK| risk_1\n    company_2 -->|OWNS| company_14\n    company_3 -->|SUPPORTED_BY| company_2\n    company_4 -->|SUPPORTED_BY| company_2\n    company_5 -->|SUPPORTED_BY| company_2\n    company_6 -->|SUPPORTED_BY| company_2\n    company_7 -->|SUPPORTED_BY| company_2\n    company_8 -->|SUPPORTED_BY| company_2\n    company_15 -->|HAS_RISK| risk_2\n    company_15 -->|HAS_RISK| risk_3\n    risk_6 -->|IMPACTED_BY| risk_4\n    company_15 -->|REPORTS_AMOUNT| amount_41\n    company_15 -->|REPORTS_AMOUNT| amount_42\n    company_15 -->|REPORTS_AMOUNT| amount_43\n    company_15 -->|REPORTS_AMOUNT| amount_44\n    company_15 -->|REPORTS_AMOUNT| amount_45\n    company_15 -->|REPORTS_AMOUNT| amount_46\n    company_15 -->|REPORTS_AMOUNT| amount_47\n    company_15 -->|REPORTS_AMOUNT| amount_48\n    company_15 -->|REPORTS_AMOUNT| amount_49\n    company_15 -->|REPORTS_AMOUNT| amount_50\n    company_15 -->|REPORTS_AMOUNT| amount_51\n    company_15 -->|REPORTS_AMOUNT| amount_52\n    company_15 -->|REPORTS_AMOUNT| amount_53\n    company_15 -->|REPORTS_AMOUNT| amount_54\n    company_15 -->|REPORTS_AMOUNT| amount_55\n    company_15 -->|REPORTS_AMOUNT| amount_56\n    company_15 -->|REPORTS_AMOUNT| amount_57\n    company_15 -->|REPORTS_AMOUNT| amount_58\n    company_15 -->|REPORTS_AMOUNT| amount_59\n    company_15 -->|REPORTS_AMOUNT| amount_61\n    company_15 -->|REPORTS_AMOUNT| amount_62\n    company_15 -->|REPORTS_AMOUNT| amount_63\n    company_15 -->|REPORTS_AMOUNT| amount_64\n    company_15 -->|REPORTS_AMOUNT| amount_65\n    company_15 -->|REPORTS_AMOUNT| amount_66\n    company_15 -->|HAS_RISK| risk_8\n    company_15 -->|HAS_RISK| risk_9\n    company_15 -->|HAS_RISK| risk_10\n    company_15 -->|HAS_RISK| risk_11\n    company_15 -->|HAS_RISK| risk_1\n    company_15 -->|HAS_RISK| risk_12\n    company_15 -->|HAS_RISK| risk_13\n    company_15 -->|HAS_RISK| risk_14\n    company_2 -->|COMMITTED_TO| company_2\n    company_15 -->|HAS_RISK| risk_4\n    company_15 -->|HAS_RISK| risk_5\n    company_2 -->|HAS_RISK| risk_4", "flowchart TD\n\n    %% Node definitions\n    company_21[\"Dhirubhai Ambani Green Energy Giga Complex\"]\n    company_22[\"Nel ASA\"]\n    risk_25(\"climate-related changes\")\n    risk_26(\"Transition risks\")\n    risk_29(\"technological advancements\")\n    risk_30(\"geopolitical volatility in the Middle East\")\n    risk_31(\"redirection of shipping routes\")\n    risk_32(\"OPEC+ and non-OPEC production decisions\")\n    risk_33(\"regional capacity additions\")\n    risk_34(\"downstream supply-demand realignments\")\n    risk_35(\"evolving sanctions and trade tariff regimes\")\n    risk_36(\"rate of recovery of Chinese economy\")\n    risk_37(\"New refining capacity in Nigeria and China\")\n    risk_38(\"Red Sea blockage\")\n    risk_39(\"Downstream chemical product prices and margins\")\n    risk_41(\"digital risk environment\")\n    company_24[\"Reliance\"]\n    risk_43(\"Foreign Exchange Risk\")\n    risk_45(\"Climate Change\")\n    risk_46(\"Environmental Impacts\")\n    risk_47(\"Energy Efficiency of Operations\")\n    risk_48(\"Water and Effluent Management\")\n    risk_49(\"Raw Material Security\")\n    risk_50(\"Ecosystem and Biodiversity\")\n    risk_51(\"Innovation and Technology\")\n    risk_52(\"Waste Management and Circular Economy\")\n    risk_53(\"Sustainable Supply Chain Management\")\n    risk_54(\"Disaster Preparedness and Management\")\n    risk_55(\"Health, Safety and Employee Well-being\")\n    risk_56(\"Diversity and Inclusion\")\n    risk_57(\"Customer Satisfaction\")\n    risk_58(\"Data Privacy and Cybersecurity\")\n    risk_59(\"Security and Asset Management\")\n    risk_60(\"Talent Management\")\n    risk_61(\"Community Development\")\n    risk_62(\"Labour Management\")\n    risk_63(\"Human Rights\")\n    risk_64(\"Business Ethics, Integrity and Transparency\")\n    risk_65(\"Regulatory Issues and Compliance\")\n    risk_66(\"Anti-competitive Behaviour\")\n    risk_67(\"climate challenges\")\n    amount_76[/\"150 billion\"/]\n    company_25[\"Jio-bp\"]\n    company_26[\"Nel Hydrogen Electrolyser AS\"]\n    company_27[\"Jio\"]\n    company_28[\"Reliance O2C\"]\n    company_29[\"Reliance EandP\"]\n    risk_68(\"ESG risks\")\n    company_33[\"Reliance Industries\"]\n    company_34[\"Jio Infocomm Limited (RJIL)\"]\n\n    %% Relationships\n    company_24 -->|HAS_RISK| risk_41\n    company_24 -->|HAS_RISK| risk_67\n    company_24 -->|COMMITTED_TO| company_24\n    company_24 -->|TARGETS| amount_76\n    company_25 -->|COMMITTED_TO| company_25\n    company_26 -->|COMMITTED_TO| company_26\n    company_24 -->|PARTNERED_WITH| company_26\n    company_24 -->|OWNS| company_27\n    company_24 -->|OWNS| company_28\n    company_24 -->|OWNS| company_29\n    company_24 -->|HAS_RISK| risk_68\n    company_33 -->|OWNS| company_34\n    company_24 -->|PARTNERED_WITH| company_27", "flowchart TD\n\n    %% Node definitions\n    company_35[\"Reliance Retail Limited (RRL)\"]\n    company_36[\"Reliance Projects and Property Management Services Limite...\"]\n    company_37[\"Recron (Malaysia) Sdn. Bhd\"]\n    company_38[\"RP Chemicals (Malaysia) Sdn. Bhd\"]\n    company_39[\"Reliance BP Mobility Limited (RBML)\"]\n    company_40[\"Reliance Petro Marketing Limited\"]\n    company_41[\"Reliance Corporate IT Park Services Limited\"]\n    company_42[\"Reliance Petroleum\"]\n    amount_85[/\"C 31.08 crore\"/]\n    risk_69(\"price volatility\")\n    risk_70(\"Margin Risk\")\n    company_43[\"Jio Platforms Limited\"]\n    company_44[\"Reliance Retail Limited\"]\n    amount_102[/\"Rs. 40,000 crore\"/]\n    risk_71(\"compliance\")\n    risk_72(\"fraudulent\")\n    risk_73(\"illegal\")\n    risk_74(\"misleading\")\n    risk_75(\"regulatory\")\n    company_45[\"Reliance Retail Ventures Limited\"]\n    company_46[\"Reliance Global Energy Services (Singapore) Pte. Limited\"]\n    company_47[\"Reliance Jio Infocomm Limited\"]\n    risk_76(\"Cybersecurity\")\n    risk_77(\"Safety\")\n    risk_78(\"Operations\")\n    risk_79(\"Compliance\")\n    risk_80(\"Control\")\n    risk_81(\"Financial risks\")\n    company_48[\"Star Television Productions Limited\"]\n    company_49[\"Studio 18 Media Private Limited\"]\n    company_50[\"Viacom 18 Media Private Limited\"]\n    company_51[\"Viacom 18 Media (UK) Limited\"]\n    company_52[\"Viacom 18 US Inc.\"]\n    company_53[\"Reldel Apparel Private Limited\"]\n    company_54[\"Jio Digital Fibre Private Limited\"]\n    amount_109[/\"C 78,339 crore\"/]\n    risk_84(\"expected pattern of future benefits of the tangible asset...\")\n    company_55[\"BG Exploration and Production India Limited\"]\n    company_56[\"GOI\"]\n    company_57[\"NTPC\"]\n    company_58[\"Gail (India) Limited\"]\n    company_59[\"Reliance Petroleum Limited\"]\n    risk_86(\"difference in interpretation of certain PSC provisions\")\n    risk_87(\"complexity of issues\")\n    amount_110[/\"$ 165 million\"/]\n    amount_111[/\"C 1,407 crore\"/]\n    amount_112[/\"$ 247 million\"/]\n    amount_113[/\"C 2,111 crore\"/]\n    amount_114[/\"H 387 crore\"/]\n    amount_115[/\"H 447 crore\"/]\n\n    %% Relationships\n    company_43 -->|HAS_RISK| risk_71\n    company_43 -->|HAS_RISK| risk_72\n    company_43 -->|HAS_RISK| risk_73\n    company_43 -->|HAS_RISK| risk_74\n    company_43 -->|HAS_RISK| risk_75\n    company_43 -->|REPORTS_AMOUNT| amount_102\n    company_50 -->|PARTNERED_WITH| company_49\n    company_50 -->|OWNS| company_52\n    company_50 -->|OWNS| company_51\n    company_54 -->|REPORTS_AMOUNT| amount_109\n    company_54 -->|HAS_RISK| risk_84\n    company_56 -->|REPORTS_AMOUNT| amount_110\n    company_56 -->|REPORTS_AMOUNT| amount_112\n    company_45 -->|OWNS| company_44\n    company_49 -->|PARTNERED_WITH| company_50\n    company_43 -->|OWNS| company_47\n    company_55 -->|PARTNERED_WITH| company_56", "flowchart TD\n\n    %% Node definitions\n    amount_116[/\"H 250 crore\"/]\n    amount_117[/\"H 25 crore\"/]\n    company_60[\"Parent\"]\n    risk_88(\"complexity of those IT systems\")\n    risk_89(\"high volumes of data processed by the IT systems\")\n    risk_90(\"risk of revenue being recognised inappropriately\")\n    company_61[\"Star India Private Limited\"]\n    risk_91(\"significant management judgement\")\n    risk_92(\"Identification of intangible assets acquired through busi...\")\n    risk_93(\"Determination of the fair value of consideration transferred\")\n    risk_94(\"Allocation of the purchase price to identifiable assets a...\")\n    risk_95(\"increasing challenge to protect the integrity of the Pare...\")\n    risk_96(\"cyber security\")\n    company_62[\"Group\"]\n    company_63[\"subsidiary companies\"]\n    company_64[\"associate companies\"]\n    company_65[\"joint venture companies\"]\n    amount_123[/\"C 165 crore\"/]\n    amount_124[/\"C 2 crore\"/]\n    risk_97(\"pending litigations\")\n    risk_98(\"frauds\")\n    risk_99(\"irregularities\")\n    risk_100(\"override of internal control\")\n    company_66[\"Securities Appellate Tribunal\"]\n    company_67[\"SEBI\"]\n    company_68[\"Hathway Cable and Datacom Limited\"]\n    company_69[\"DOT\"]\n    amount_125[/\"H 3,202 crore\"/]\n    company_70[\"Den Networks Limited\"]\n    amount_126[/\"H 628 crore\"/]\n    company_71[\"Den Broadband Limited\"]\n    amount_127[/\"H 2,157 crore\"/]\n    company_72[\"TDSAT\"]\n    company_75[\"Gujarat Industrial Development Corporation\"]\n    amount_137[/\"3,300 crore\"/]\n    company_76[\"Alok Industries Limited\"]\n    amount_138[/\"63 crore\"/]\n    company_77[\"BAM DLR Chennai Private Limited\"]\n    amount_139[/\"17 crore\"/]\n    company_78[\"Summit Digitel Infrastructure Limited\"]\n    amount_140[/\"100 crore\"/]\n    company_79[\"Mahan Energen Limited\"]\n    amount_143[/\"16 crore\"/]\n    company_80[\"Reliance Industrial Infrastructure Limited\"]\n    amount_144[/\"54,900 crore\"/]\n    company_81[\"Jio Limited\"]\n    company_82[\"Lakadia B Power Transmission Limited\"]\n    company_83[\"MSKVY Nineteenth Solar SPV Limited\"]\n    company_84[\"MSKVY Twenty Second Solar SPV Limited\"]\n    company_85[\"Navi Mumbai IIA Private Limited\"]\n\n    %% Relationships\n    company_60 -->|OWNS| company_61\n    company_61 -->|HAS_RISK| risk_91\n    company_61 -->|HAS_RISK| risk_92\n    company_61 -->|HAS_RISK| risk_93\n    company_61 -->|HAS_RISK| risk_94\n    company_60 -->|HAS_RISK| risk_95\n    company_60 -->|HAS_RISK| risk_96\n    company_62 -->|OWNS| company_63\n    company_62 -->|PARTNERED_WITH| company_64\n    company_62 -->|JOINT_VENTURE_WITH| company_65\n    company_62 -->|REPORTS_AMOUNT| amount_123\n    company_62 -->|HAS_RISK| risk_97\n    company_62 -->|HAS_RISK| risk_98\n    company_62 -->|HAS_RISK| risk_99\n    company_60 -->|OWNS| company_63\n    company_60 -->|PARTNERED_WITH| company_64\n    company_60 -->|JOINT_VENTURE_WITH| company_65\n    company_60 -->|REPORTS_AMOUNT| amount_124\n    company_60 -->|HAS_RISK| risk_100\n    company_68 -->|IMPACTED_BY| company_69\n    company_70 -->|IMPACTED_BY| company_69\n    company_71 -->|OWNS| company_70\n    company_71 -->|IMPACTED_BY| company_69\n    company_70 -->|IMPACTED_BY| company_72\n    company_68 -->|REPORTS_AMOUNT| amount_125\n    company_70 -->|REPORTS_AMOUNT| amount_126\n    company_71 -->|REPORTS_AMOUNT| amount_127\n    company_75 -->|OWNS| company_75\n    company_76 -->|REPORTS_AMOUNT| amount_137\n    company_77 -->|REPORTS_AMOUNT| amount_138\n    company_78 -->|REPORTS_AMOUNT| amount_139\n    company_79 -->|REPORTS_AMOUNT| amount_140\n    company_80 -->|REPORTS_AMOUNT| amount_143\n    company_68 -->|OWNS| company_68\n    company_71 -->|OWNS| company_71", "flowchart TD\n\n    %% Node definitions\n    company_87[\"Reliance 4IR Realty Development Limited\"]\n    company_90[\"Reliance Chemicals and Materials Limited\"]\n    company_92[\"Reliance Content Distribution Limited\"]\n    company_95[\"Reliance Ethane Pipeline Limited\"]\n    company_96[\"Indiawin Sports Private Limited\"]\n    company_97[\"Gujarat Chemical Port Limited\"]\n    company_99[\"Reliance Europe Limited\"]\n    company_100[\"Vadodara Enviro Channel Limited\"]\n    company_102[\"Dronagiri Bokadvira East Infra Limited\"]\n    company_103[\"Dronagiri Navghar South Second Infra Limited\"]\n    company_104[\"Dronagiri Bokadvira North Infra Limited\"]\n    company_105[\"Dronagiri Navghar West Infra Limited\"]\n    company_106[\"Dronagiri Bokadvira South Infra Limited\"]\n    company_107[\"Dronagiri Pagote East Infra Limited\"]\n    company_108[\"Dronagiri Bokadvira West Infra Limited\"]\n    company_109[\"Dronagiri Pagote North First Infra Limited\"]\n    company_110[\"Dronagiri Dongri East Infra Limited\"]\n    company_111[\"Dronagiri Pagote North Infra Limited\"]\n    company_112[\"Dronagiri Dongri North Infra Limited\"]\n    company_113[\"Dronagiri Pagote North Second Infra Limited\"]\n    company_114[\"Dronagiri Dongri South Infra Limited\"]\n    company_115[\"Dronagiri Pagote South First Infra Limited\"]\n    company_116[\"Dronagiri Dongri West Infra Limited\"]\n    company_117[\"Dronagiri Pagote South Infra Limited\"]\n    company_118[\"Dronagiri Funde East Infra Limited\"]\n    company_119[\"Dronagiri Pagote West Infra Limited\"]\n    company_120[\"Dronagiri Funde North Infra Limited\"]\n    company_121[\"Dronagiri Panje East Infra Limited\"]\n    company_122[\"Dronagiri Funde South Infra Limited\"]\n    company_123[\"Dronagiri Panje North Infra Limited\"]\n    company_124[\"Dronagiri Funde West Infra Limited\"]\n    company_125[\"Dronagiri Panje South Infra Limited\"]\n    company_126[\"Dronagiri Navghar East Infra Limited\"]\n    company_127[\"Dronagiri Panje West Infra Limited\"]\n    company_128[\"Dronagiri Navghar North First Infra Limited\"]\n    company_129[\"Kalamboli East Infra Limited\"]\n    company_130[\"Dronagiri Navghar North Infra Limited\"]\n    company_131[\"Kalamboli North First Infra Limited\"]\n    company_132[\"Dronagiri Navghar North Second Infra Limited\"]\n    company_133[\"Kalamboli North Infra Limited\"]\n    company_134[\"Dronagiri Navghar South First Infra Limited\"]\n    company_135[\"Kalamboli North Second Infra Limited\"]\n    company_136[\"Dronagiri Navghar South Infra Limited\"]\n    company_137[\"Kalamboli North Third Infra Limited\"]\n    company_138[\"GML India Fashion Private Limited\"]\n    company_139[\"Hamleys (Franchising) Limited\"]\n    company_140[\"Hamleys Asia Limited\"]\n    company_141[\"Hamleys of London Limited\"]\n    company_142[\"Hathway Digital Limited\"]\n    company_143[\"Hathway VCN Cablenet Private Limited\"]\n\n    %% Relationships\n    company_87 -->|OWNS| company_102\n    company_87 -->|OWNS| company_103\n    company_87 -->|OWNS| company_104\n    company_87 -->|OWNS| company_105\n    company_87 -->|OWNS| company_106\n    company_87 -->|OWNS| company_107\n    company_87 -->|OWNS| company_108\n    company_87 -->|OWNS| company_109\n    company_87 -->|OWNS| company_110\n    company_87 -->|OWNS| company_111\n    company_87 -->|OWNS| company_112\n    company_87 -->|OWNS| company_113\n    company_87 -->|OWNS| company_114\n    company_87 -->|OWNS| company_115\n    company_87 -->|OWNS| company_116\n    company_87 -->|OWNS| company_117\n    company_87 -->|OWNS| company_118\n    company_87 -->|OWNS| company_119\n    company_87 -->|OWNS| company_120\n    company_87 -->|OWNS| company_121\n    company_87 -->|OWNS| company_122\n    company_87 -->|OWNS| company_123\n    company_87 -->|OWNS| company_124\n    company_87 -->|OWNS| company_125\n    company_87 -->|OWNS| company_126\n    company_87 -->|OWNS| company_127\n    company_87 -->|OWNS| company_128\n    company_87 -->|OWNS| company_129\n    company_87 -->|OWNS| company_130\n    company_87 -->|OWNS| company_131\n    company_87 -->|OWNS| company_132\n    company_87 -->|OWNS| company_133\n    company_87 -->|OWNS| company_134\n    company_87 -->|OWNS| company_135\n    company_87 -->|OWNS| company_136\n    company_87 -->|OWNS| company_137\n    company_138 -->|OWNS| company_138\n    company_139 -->|OWNS| company_139\n    company_140 -->|OWNS| company_140\n    company_141 -->|OWNS| company_141\n    company_142 -->|OWNS| company_142\n    company_143 -->|OWNS| company_143\n    company_110 -->|OWNS| company_110\n    company_112 -->|OWNS| company_112\n    company_114 -->|OWNS| company_114\n    company_116 -->|OWNS| company_116\n    company_118 -->|OWNS| company_118\n    company_120 -->|OWNS| company_120\n    company_122 -->|OWNS| company_122\n    company_124 -->|OWNS| company_124\n    company_126 -->|OWNS| company_126\n    company_128 -->|OWNS| company_128\n    company_130 -->|OWNS| company_130\n    company_132 -->|OWNS| company_132\n    company_134 -->|OWNS| company_134\n    company_136 -->|OWNS| company_136\n    company_103 -->|OWNS| company_103\n    company_105 -->|OWNS| company_105\n    company_107 -->|OWNS| company_107\n    company_109 -->|OWNS| company_109\n    company_111 -->|OWNS| company_111\n    company_113 -->|OWNS| company_113\n    company_115 -->|OWNS| company_115\n    company_117 -->|OWNS| company_117\n    company_119 -->|OWNS| company_119\n    company_121 -->|OWNS| company_121", "flowchart TD\n\n    %% Node definitions\n    company_144[\"7-India Convenience Retail Limited\"]\n    company_145[\"Cover Story Clothing UK Limited\"]\n    company_146[\"Aaidea Solutions Limited\"]\n    company_147[\"Accops Systems FZ-LLC\"]\n    company_148[\"Accops Systems Private Limited\"]\n    company_149[\"Actoserba Active Wholesale Limited\"]\n    company_150[\"Addverb Technologies B.V.\"]\n    company_151[\"Addverb Technologies Limited\"]\n    company_152[\"Addverb Technologies Pte. Ltd.\"]\n    company_153[\"Addverb Technologies Pty Limited\"]\n    company_154[\"Addverb Technologies USA Inc.\"]\n    company_155[\"Adventure Marketing Private Limited\"]\n    company_156[\"AETN18 Media Private Limited\"]\n    company_157[\"Crystalline Silica and Mining Limited\"]\n    company_158[\"C-Square Info-Solutions Limited\"]\n    company_159[\"Dadha Pharma Distribution Limited\"]\n    company_160[\"DEN Ambey Cable Networks Private Limited\"]\n    company_161[\"Den Budaun Cable Network Private Limited\"]\n    company_162[\"Den Discovery Digital Networks Private Limited\"]\n    company_163[\"Den Enjoy Cable Networks Private Limited\"]\n    company_164[\"Den Enjoy Navaratan Network Private Limited\"]\n    company_165[\"Den F K Cable TV Network Private Limited\"]\n    company_166[\"Global Asianet Limited\"]\n    company_167[\"Grab A Grub Services Limited\"]\n    company_168[\"Greycells18 Media Limited\"]\n    company_169[\"Hathway Bhawani Cabletel and Datacom Limited\"]\n    company_170[\"Hathway Mantra Cable and Datacom Limited\"]\n    company_171[\"Hathway Nashik Cable Network Private Limited\"]\n    company_172[\"ICD Columbus Centre Hotel LLC\"]\n    company_173[\"Independent Media Trust\"]\n    company_174[\"India Mumbai Indians (Pty) Ltd\"]\n    company_175[\"IndiaCast Media Distribution Private Limited\"]\n    company_176[\"IndiaCast UK Ltd\"]\n    company_177[\"IndiaCast US Ltd\"]\n    company_178[\"Indiavidual Learning Limited\"]\n    company_179[\"Indiawin Sports Middle East Limited\"]\n    company_180[\"Reliance Digital\"]\n    company_181[\"MyJio Stores\"]\n    company_183[\"Consumer Brands\"]\n    company_184[\"Campa\"]\n    company_185[\"Independence\"]\n    company_187[\"Deloitte Haskins and Sells LLP\"]\n    company_188[\"Chaturvedi and Shah LLP\"]\n    amount_171[/\"349 million\"/]\n    risk_104(\"Disruptive technological changes\")\n    risk_105(\"price competition\")\n    amount_186[/\"H 72 crore\"/]\n    risk_113(\"interest rate risk\")\n    company_189[\"Reliance International Limited (RINL)\"]\n    company_190[\"the Company\"]\n\n    %% Relationships\n    company_144 -->|OWNS| company_144\n    company_145 -->|OWNS| company_145\n    company_146 -->|OWNS| company_146\n    company_147 -->|OWNS| company_147\n    company_148 -->|OWNS| company_148\n    company_149 -->|OWNS| company_149\n    company_150 -->|OWNS| company_150\n    company_151 -->|OWNS| company_151\n    company_152 -->|OWNS| company_152\n    company_153 -->|OWNS| company_153\n    company_154 -->|OWNS| company_154\n    company_155 -->|OWNS| company_155\n    company_156 -->|OWNS| company_156\n    company_157 -->|OWNS| company_157\n    company_158 -->|OWNS| company_158\n    company_159 -->|OWNS| company_159\n    company_160 -->|OWNS| company_160\n    company_161 -->|OWNS| company_161\n    company_162 -->|OWNS| company_162\n    company_163 -->|OWNS| company_163\n    company_164 -->|OWNS| company_164\n    company_165 -->|OWNS| company_165\n    company_166 -->|OWNS| company_166\n    company_167 -->|OWNS| company_167\n    company_168 -->|OWNS| company_168\n    company_169 -->|OWNS| company_169\n    company_170 -->|OWNS| company_170\n    company_171 -->|OWNS| company_171\n    company_172 -->|OWNS| company_172\n    company_173 -->|OWNS| company_173\n    company_174 -->|OWNS| company_174\n    company_175 -->|OWNS| company_175\n    company_176 -->|OWNS| company_176\n    company_177 -->|OWNS| company_177\n    company_178 -->|OWNS| company_178\n    company_179 -->|OWNS| company_179\n    company_183 -->|OWNS| company_184\n    company_183 -->|OWNS| company_185\n    company_190 -->|OWNS| company_189\n    company_187 -->|PARTNERED_WITH| company_188", "flowchart TD\n\n    %% Node definitions\n    company_191[\"Reliance Foundation\"]\n    company_193[\"RF School\"]\n    company_197[\"Kasturba Vaidyakiya Rahat Mandal\"]\n    company_198[\"Nirmal Government Hospital\"]\n    company_199[\"Sher Singh Karki School\"]\n    company_200[\"Pilikula Zoological Park\"]\n    company_201[\"Pandit Deendayal Energy University\"]\n    company_202[\"PDEU\"]\n    company_204[\"BAM DLR Data Centre Services Private Limited\"]\n    company_205[\"BAM DLR Kolkata Private Limited\"]\n    company_206[\"BAM DLR Mumbai Private Limited\"]\n    company_207[\"BAM DLR Network Services Private Limited\"]\n    company_208[\"Football Sports Development Limited\"]\n    company_209[\"India Gas Solution Private Limited\"]\n    company_210[\"Pipeline Management Services Private Limited\"]\n    company_211[\"Sintex Industries Limited\"]\n    company_212[\"Reliance Exploration and Production DMCC\"]\n    company_213[\"Reliance Gas Pipelines Limited\"]\n    company_214[\"Reliance Global Energy Services (Singapore) Pte. Ltd.\"]\n    company_215[\"Reliance Global Energy Services Limited\"]\n    company_216[\"Reliance Industries (Middle East) DMCC\"]\n    company_217[\"Reliance International Limited\"]\n    amount_238[/\"USD 1\"/]\n    company_218[\"Reliance Mappedu Multi Modal Logistics Park Limited\"]\n    company_219[\"Reliance New Energy Limited\"]\n    company_220[\"Reliance New Energy Battery Limited\"]\n    company_221[\"Reliance Projects and Property Management Services Limited\"]\n    company_222[\"Reliance Sibur Elastomers Private Limited\"]\n    company_223[\"Reliance SOU Limited\"]\n    company_224[\"Reliance Strategic Business Ventures Limited\"]\n    company_225[\"Reliance Syngas Limited\"]\n    company_226[\"Reliance Ventures Limited\"]\n    company_227[\"Rise Worldwide Limited\"]\n    company_228[\"SenseHawk, Inc.\"]\n    amount_252[/\"USD 0.0001\"/]\n    company_229[\"Skymet Weather Services Private Limited\"]\n    company_237[\"Star Advertising Sales Limited\"]\n    company_239[\"Ulwe West Infra Limited\"]\n    company_241[\"Stoke Park Limited\"]\n    company_242[\"V - Retail Limited\"]\n    company_244[\"VasyERP Solutions Private Limited\"]\n    company_246[\"Vengara Retail Private Limited\"]\n    amount_340[/\"H 20,415 crore\"/]\n    amount_342[/\"H 1,000 crore\"/]\n    amount_348[/\"H 27 crore\"/]\n    amount_349[/\"H 22 crore\"/]\n    amount_355[/\"H 855 crore\"/]\n    amount_356[/\"H 691 crore\"/]\n    amount_357[/\"H 85 crore\"/]\n    amount_359[/\"H 188 crore\"/]\n\n    %% Relationships\n    company_191 -->|OWNS| company_193\n    company_191 -->|PARTNERED_WITH| company_197\n    company_191 -->|PARTNERED_WITH| company_198\n    company_191 -->|PARTNERED_WITH| company_199\n    company_191 -->|PARTNERED_WITH| company_200\n    company_191 -->|PARTNERED_WITH| company_201\n    company_191 -->|PARTNERED_WITH| company_202\n    company_217 -->|REPORTS_AMOUNT| amount_238\n    company_228 -->|REPORTS_AMOUNT| amount_252\n    company_191 -->|SUPPORTED_BY| amount_355\n    company_191 -->|SUPPORTED_BY| amount_356\n    company_224 -->|INVESTED_IN| company_241\n    company_224 -->|INVESTED_IN| company_229\n    company_224 -->|INVESTED_IN| company_244", "flowchart TD\n\n    %% Node definitions\n    amount_360[/\"H 170 crore\"/]\n    amount_361[/\"H 2 crore\"/]\n    amount_362[/\"H 105 crore\"/]\n    amount_363[/\"H 89 crore\"/]\n    amount_364[/\"H 58 crore\"/]\n    amount_366[/\"H 19 crore\"/]\n    amount_368[/\"H 6 crore\"/]\n    amount_369[/\"H 3 crore\"/]\n    amount_370[/\"H 272 crore\"/]\n    amount_371[/\"H 64 crore\"/]\n    company_256[\"Reliance Foundation Hospital Trust\"]\n    company_257[\"Jamnaben Hirachand Ambani Foundation\"]\n    company_258[\"Reliance Foundation Institution of Education and Research\"]\n    company_259[\"Reliance Foundation Youth Sports\"]\n    company_260[\"Sir Hurkisondas Nurrotumdas Hospital and Research Centre\"]\n    company_261[\"Dhirubhai Ambani Foundation\"]\n    company_262[\"Hirachand Govardhandas Ambani Public Charitable Trust\"]\n    company_263[\"Vividh Kridakhel Foundation\"]\n    company_264[\"Vividh Hunarvikas Foundation\"]\n    company_267[\"GTPL Hathway Limited\"]\n    company_273[\"Jio Finance Limited\"]\n    company_274[\"Jio Financial Services Limited Group\"]\n    company_275[\"Jio Finance Platform and Service Limited\"]\n    company_281[\"DEN ADN Network Private Limited\"]\n    company_284[\"Reliance Bally India Private Limited\"]\n    company_286[\"Diesel Fashion India Reliance Private Limited\"]\n    company_289[\"Reliance International Leasing IFSC Private Limited\"]\n    company_296[\"Ryohin-Keikaku Reliance India Private Limited\"]\n    company_299[\"Jio Satellite Communications Limited\"]\n    company_301[\"Jio Things Limited\"]\n    company_302[\"Just Dial Limited\"]\n    company_303[\"Kalamboli South First Infra Limited\"]\n    company_304[\"Reliance-Vision Express Private Limited\"]\n    company_305[\"Sosyo Hajoori Beverages Private Limited\"]\n    company_306[\"TCO Reliance India Private Limited\"]\n    company_307[\"Zegna South Asia Private Limited\"]\n    company_315[\"Ethane Coral LLC\"]\n    company_316[\"Ethane Diamond LLC\"]\n    company_317[\"Ethane Jade LLC\"]\n    company_318[\"Foodhall Franchises Limited\"]\n    company_321[\"Reliance Carbon Fibre Cylinder Limited\"]\n    company_322[\"Reliance Hydrogen Electrolysis Limited\"]\n    company_323[\"Reliance Hydrogen Fuel Cell Limited\"]\n    company_324[\"Reliance New Energy Carbon Fibre Cylinder Limited\"]\n    company_325[\"Reliance New Energy Hydrogen Electrolysis Limited\"]\n    company_326[\"Reliance New Energy Hydrogen Fuel Cell Limited\"]\n    amount_472[/\"\u20b9 10,71,174 crore\"/]\n    amount_474[/\"\u20b9 1,83,422 crore\"/]\n    amount_475[/\"\u20b9 81,309 crore\"/]\n    risk_123(\"external volatility\")\n\n    %% Relationships\n    company_274 -->|OWNS| company_273\n    company_274 -->|OWNS| company_275\n    company_257 -->|SUPPORTED_BY| amount_360\n    company_258 -->|SUPPORTED_BY| amount_361\n    company_258 -->|SUPPORTED_BY| amount_362\n    company_259 -->|SUPPORTED_BY| amount_363\n    company_259 -->|SUPPORTED_BY| amount_364\n    company_261 -->|SUPPORTED_BY| amount_366\n    company_262 -->|SUPPORTED_BY| amount_368\n    company_262 -->|SUPPORTED_BY| amount_369\n    company_263 -->|SUPPORTED_BY| amount_370\n    company_264 -->|SUPPORTED_BY| amount_371", "flowchart TD\n\n    %% Node definitions\n    risk_124(\"geopolitical turbulence\")\n    risk_125(\"global uncertainties\")\n    amount_477[/\"18 million\"/]\n    company_333[\"SpaceX\"]\n    company_334[\"Starlink\"]\n    amount_479[/\"100 million\"/]\n    company_335[\"JioStar\"]\n    amount_480[/\"61.2 million\"/]\n    amount_481[/\"652 million\"/]\n    company_342[\"Network18\"]\n    company_346[\"Moneycontrol\"]\n    amount_489[/\"280 million\"/]\n    company_347[\"Jio Studios\"]\n    amount_490[/\"\u20b9 1,000 crores\"/]\n    amount_499[/\"$6.9/bbl\"/]\n    amount_500[/\"$11.6/bbl\"/]\n    amount_501[/\"$14.4/bbl\"/]\n    amount_502[/\"$23.0/bbl\"/]\n    amount_503[/\"$13.6/bbl\"/]\n    amount_504[/\"$21.2/bbl\"/]\n    risk_126(\"market complexities\")\n    risk_127(\"recessionary concerns\")\n    risk_128(\"climate-related risks\")\n    risk_129(\"regulatory shifts\")\n    risk_130(\"market fluctuations\")\n    risk_131(\"reputational concerns\")\n    risk_132(\"legal\")\n    risk_133(\"ethical\")\n    company_361[\"Jio Financial Services Limited\"]\n    risk_134(\"Risk Management\")\n    risk_135(\"Compliance exposures\")\n    company_372[\"Risk Management Committee\"]\n    company_374[\"BSE Limited\"]\n    company_375[\"National Stock Exchange of India Limited\"]\n    risk_136(\"Commodity Price Risks\")\n    company_381[\"Luxembourg Stock Exchange\"]\n    amount_522[/\"C 25 crore\"/]\n    company_382[\"SAT\"]\n    company_383[\"BNP and Associates\"]\n    company_384[\"Shome and Banerjee\"]\n    company_385[\"Kiran J. Mehta and Co.\"]\n    company_386[\"Diwanji and Co.\"]\n    company_387[\"K.G. Goyal and Associates\"]\n    company_388[\"V.J. Talati and Co.\"]\n    company_389[\"Suresh Damodar Shenoy\"]\n    company_390[\"Dilip M Malkar and Co.\"]\n    company_391[\"V. Kumar and Associates\"]\n    company_392[\"Balwinder and Associates\"]\n    company_396[\"Gates Foundation\"]\n    amount_526[/\"Rs. 15000,00,00,000/-\"/]\n\n    %% Relationships\n    company_333 -->|PARTNERED_WITH| company_334\n    company_335 -->|REPORTS_AMOUNT| amount_480\n    company_335 -->|REPORTS_AMOUNT| amount_481\n    company_346 -->|REPORTS_AMOUNT| amount_489\n    company_347 -->|REPORTS_AMOUNT| amount_490\n    company_383 -->|HAS_RISK| risk_132", "flowchart TD\n\n    %% Node definitions\n    amount_528[/\"Rs. 50000,00,00,000/-\"/]\n    company_397[\"Jamnagar Manufacturing Division (JMD)\"]\n    company_398[\"GAIL (India) Limited\"]\n    company_399[\"Government of India\"]\n    company_400[\"Oil and Natural Gas Corporation Limited\"]\n    company_401[\"BP Exploration (Alpha) Limited\"]\n    amount_540[/\"US$ 38.7 Billion\"/]\n    amount_541[/\"US$ 2.9 Billion\"/]\n    amount_550[/\"US$ 73.4 Billion\"/]\n    amount_551[/\"US$ 6.4 Billion\"/]\n    risk_140(\"significant increase in credit risk\")\n    amount_557[/\"US$ 2.5 Billion\"/]\n    amount_560[/\"Rs. 8050 crores\"/]\n    amount_561[/\"C 1,309 crore\"/]\n    risk_141(\"supply chain dynamics\")\n    risk_142(\"fluctuating commodity prices\")\n    risk_143(\"Global LNG oversupply\")\n    risk_144(\"shift towards renewables\")\n    company_418[\"Viacom18\"]\n    company_419[\"Star India\"]\n    company_420[\"TV18\"]\n    company_421[\"RINL\"]\n    company_422[\"Reliance Corporate IT Park Limited\"]\n    company_424[\"Kalamboli West Infra Limited\"]\n    company_425[\"Reliance Ambit Trade Private Limited\"]\n    company_426[\"Reliance Comtrade Private Limited\"]\n    company_427[\"Reliance Eminent Trading and Commercial Private Limited\"]\n    company_428[\"Reliance Progressive Traders Private Limited\"]\n    company_431[\"Reliance Universal Traders Private Limited\"]\n    amount_619[/\"H 13,532 crore\"/]\n    amount_620[/\"H 6,766 crore\"/]\n    amount_716[/\"295 crore\"/]\n    amount_732[/\"\u20b9 4,31,315\"/]\n    amount_738[/\"C 32,536 crore\"/]\n    amount_739[/\"C 75,734 crore\"/]\n    amount_740[/\"C 876 crore\"/]\n    amount_741[/\"H 71 crore\"/]\n    amount_742[/\"H 7,371 crore\"/]\n    amount_743[/\"H 5,798 crore\"/]\n    amount_762[/\"7,757 crore\"/]\n    amount_763[/\"6,591 crore\"/]\n    amount_764[/\"4,169 crore\"/]\n    amount_765[/\"3,283 crore\"/]\n    company_436[\"Amante Exports (Private) Limited\"]\n    company_437[\"Amante India Limited\"]\n    company_438[\"Amante Lanka (Private) Limited\"]\n    company_439[\"Asteria Aerospace Limited\"]\n    company_441[\"Columbus Centre Corporation\"]\n    company_443[\"Digital18 Media Private Limited\"]\n    amount_767[/\"H 11,500 crore\"/]\n\n    %% Relationships\n    company_397 -->|PARTNERED_WITH| company_398\n    company_400 -->|PARTNERED_WITH| company_401\n    company_418 -->|PARTNERED_WITH| company_419\n    company_427 -->|OWNS| company_422\n    company_428 -->|OWNS| company_422\n    company_431 -->|OWNS| company_422\n    company_398 -->|REPORTS_AMOUNT| amount_716", "flowchart TD\n\n    %% Node definitions\n    amount_768[/\"USD 35.30\"/]\n    company_444[\"Jaisuryas Retail Ventures Limited\"]\n    amount_769[/\"INR 13.74\"/]\n    amount_770[/\"INR 302.24\"/]\n    company_445[\"Jio Estonia O\u00dc\"]\n    amount_772[/\"INR 0.45\"/]\n    company_446[\"Jio Haptik Technologies Limited\"]\n    amount_773[/\"INR 49.13\"/]\n    company_448[\"Jio Infrastructure Management Services Limited\"]\n    amount_775[/\"INR 0.06\"/]\n    amount_776[/\"INR 107.86\"/]\n    company_449[\"Faradion UG\"]\n    amount_778[/\"INR 0.70\"/]\n    amount_779[/\"INR 2.29\"/]\n    amount_780[/\"INR 0.05\"/]\n    company_450[\"Jio Media Limited\"]\n    amount_781[/\"INR 5.00\"/]\n    amount_782[/\"INR 8,939.03\"/]\n    amount_783[/\"INR 109.20\"/]\n    amount_784[/\"INR 1.00\"/]\n    amount_785[/\"INR 85.04\"/]\n    company_452[\"NowFloats Technologies Limited\"]\n    amount_786[/\"INR 0.20\"/]\n    company_453[\"Radisys Canada Inc.\"]\n    amount_787[/\"USD 0.00\"/]\n    company_454[\"Radisys Cayman Limited\"]\n    company_455[\"Kalanikethan Silks Limited\"]\n    amount_788[/\"INR 16.00\"/]\n    company_456[\"Radisys Convedia (Ireland) Limited\"]\n    company_457[\"Karkinos Healthcare North East Private Limited\"]\n    amount_789[/\"INR 10.20\"/]\n    amount_790[/\"INR 0.00\"/]\n    company_458[\"Radisys Corporation\"]\n    amount_791[/\"USD 166.12\"/]\n    company_459[\"Karkinos Healthcare Private Limited\"]\n    amount_792[/\"INR 10.00\"/]\n    amount_793[/\"INR 1,422.32\"/]\n    company_460[\"Kutch New Energy Projects Limited\"]\n    amount_794[/\"INR 0.02\"/]\n    company_461[\"Radisys GmbH\"]\n    amount_796[/\"INR 0.24\"/]\n    company_462[\"Lithium Werks China Manufacturing Co., Ltd.\"]\n    amount_798[/\"INR 116.41\"/]\n    company_463[\"Radisys India Limited\"]\n    amount_799[/\"INR 0.21\"/]\n    company_464[\"Radisys International LLC\"]\n    amount_800[/\"USD 5.26\"/]\n    company_465[\"Mimosa Networks Bili\u015fim Teknolojileri Limited \u015eirketi\"]\n    company_467[\"Mimosa Networks, Inc.\"]\n    amount_803[/\"INR 4.01\"/]\n\n    %% Relationships\n    company_444 -->|REPORTS_AMOUNT| amount_769\n    company_444 -->|REPORTS_AMOUNT| amount_770\n    company_445 -->|REPORTS_AMOUNT| amount_772\n    company_446 -->|REPORTS_AMOUNT| amount_773\n    company_448 -->|REPORTS_AMOUNT| amount_775\n    company_448 -->|REPORTS_AMOUNT| amount_776\n    company_449 -->|REPORTS_AMOUNT| amount_778\n    company_450 -->|REPORTS_AMOUNT| amount_781\n    company_452 -->|REPORTS_AMOUNT| amount_786\n    company_453 -->|REPORTS_AMOUNT| amount_787\n    company_454 -->|REPORTS_AMOUNT| amount_787\n    company_455 -->|REPORTS_AMOUNT| amount_788\n    company_456 -->|REPORTS_AMOUNT| amount_787\n    company_457 -->|REPORTS_AMOUNT| amount_789\n    company_457 -->|REPORTS_AMOUNT| amount_790\n    company_458 -->|REPORTS_AMOUNT| amount_791\n    company_459 -->|REPORTS_AMOUNT| amount_792\n    company_459 -->|REPORTS_AMOUNT| amount_793\n    company_460 -->|REPORTS_AMOUNT| amount_794\n    company_461 -->|REPORTS_AMOUNT| amount_796\n    company_462 -->|REPORTS_AMOUNT| amount_798\n    company_463 -->|REPORTS_AMOUNT| amount_799\n    company_464 -->|REPORTS_AMOUNT| amount_800\n    company_465 -->|REPORTS_AMOUNT| amount_787\n    company_467 -->|REPORTS_AMOUNT| amount_787\n    company_467 -->|REPORTS_AMOUNT| amount_794", "flowchart TD\n\n    %% Node definitions\n    company_469[\"REC Americas LLC\"]\n    company_470[\"Nauyaan Shipyard Private Limited\"]\n    amount_804[/\"INR 0.01\"/]\n    company_472[\"Nauyaan Tradings Private Limited\"]\n    company_473[\"REC Solar EMEA GmbH\"]\n    amount_805[/\"INR 771.95\"/]\n    company_474[\"REC Solar Holdings AS\"]\n    amount_806[/\"USD 547.09\"/]\n    amount_807[/\"INR 4,684.15\"/]\n    company_475[\"Netmeds Healthcare Limited\"]\n    amount_808[/\"INR 9.29\"/]\n    company_476[\"REC Solar Pte. Ltd.\"]\n    amount_809[/\"USD 328.81\"/]\n    amount_810[/\"INR 2,815.25\"/]\n    company_477[\"New Emerging World of Journalism Limited\"]\n    amount_811[/\"INR 0.04\"/]\n    amount_815[/\"US$ 18.0 Billion\"/]\n    amount_817[/\"US$ 7.6 Billion\"/]\n    amount_819[/\"US$ 2.4 Billion\"/]\n    amount_821[/\"US$ 0.2 Billion\"/]\n    company_479[\"FICCI\"]\n    company_480[\"LyondellBasell\"]\n    company_481[\"Federation of Gujarat Industries Research\"]\n    company_482[\"Reliance Oxidation Catalyst Technology\"]\n    company_483[\"Clarivate\"]\n    company_484[\"IMexI\"]\n    company_485[\"The Asset Triple A Awards\"]\n    company_486[\"SACE Push\"]\n    company_487[\"IJ Global\"]\n    company_488[\"Jio Hotstar\"]\n    company_489[\"Global Water Tech Awards\"]\n    company_490[\"Federation of Indian Chambers of Commerce and Industry\"]\n    company_491[\"Institute of Directors\"]\n    company_493[\"ETHR World\"]\n    company_497[\"Reliance Jio Infocomm Ltd.\"]\n    company_503[\"Aegis Graham Bell Awards 2025\"]\n    company_504[\"Ministry of Electronics and Information Technology\"]\n    company_505[\"Radhe Krishna Temple Elephant Welfare Trust\"]\n    company_506[\"Vantara\"]\n    amount_826[/\"C 1,048 crore\"/]\n    amount_827[/\"C 1,48,298 crore\"/]\n    amount_828[/\"C 1,96,887 crore\"/]\n    amount_829[/\"C 8 crore\"/]\n    amount_830[/\"C1,048 crore\"/]\n    amount_831[/\"C 261 crore\"/]\n    amount_832[/\"K In crore\"/]\n    amount_835[/\"21.9 billion\"/]\n    company_513[\"Reliance New Energy Power Electronics Limited\"]\n    company_514[\"Reliance New Energy Storage Limited\"]\n    company_515[\"Reliance Petro Materials Limited\"]\n\n    %% Relationships\n    company_470 -->|REPORTS_AMOUNT| amount_804\n    company_474 -->|REPORTS_AMOUNT| amount_806\n    company_474 -->|REPORTS_AMOUNT| amount_807\n    company_475 -->|REPORTS_AMOUNT| amount_808\n    company_476 -->|REPORTS_AMOUNT| amount_809\n    company_476 -->|REPORTS_AMOUNT| amount_810\n    company_477 -->|REPORTS_AMOUNT| amount_811\n    company_504 -->|SUPPORTED_BY| company_503\n    company_505 -->|PARTNERED_WITH| company_506", "flowchart TD\n\n    %% Node definitions\n    company_516[\"Enercent Technologies Private Limited\"]\n    company_517[\"India Mumbai Indians (Pty) Limited\"]\n    company_518[\"Indiawin Sports USA Inc.\"]\n    company_519[\"Reliance Polyester Limited\"]\n    amount_992[/\"H 9,587 crore\"/]\n    amount_994[/\"H 2,068 crore\"/]\n    amount_996[/\"H 1,721 crore\"/]\n    amount_998[/\"H 341 crore\"/]\n    amount_999[/\"H 231 crore\"/]\n    amount_1000[/\"H 121 crore\"/]\n    amount_1001[/\"H 526 crore\"/]\n    amount_1002[/\"H 442 crore\"/]\n    amount_1003[/\"H 205 crore\"/]\n    amount_1004[/\"C 66 crore\"/]\n    company_526[\"Rakshita Commercial Private Limited\"]\n    amount_1010[/\"24,415 crore\"/]\n    amount_1011[/\"50 crore\"/]\n    amount_1115[/\"C 50 lakh\"/]\n    company_527[\"REC Trading (Shanghai) Co., Ltd.\"]\n    company_528[\"Reliance Bio Energy Limited\"]\n    company_529[\"Reliance Brands Limited\"]\n    company_532[\"Sterling and Wilson Renewable Energy Limited\"]\n    company_533[\"Metro Cast Network India Private Limited\"]\n    company_534[\"BookmyShow Live Private Limited\"]\n    company_535[\"Burberry India Private Limited\"]\n    company_536[\"Canali India Private Limited\"]\n    company_537[\"Clarks Footwear Private Limited\"]\n    company_538[\"Nexwafe GmbH\"]\n    company_539[\"Reliance Realty Limited\"]\n    company_540[\"Den Fateh Marketing Private Limited\"]\n    company_541[\"Den Kashi Cable Network Limited\"]\n    company_542[\"Den Malayalam Telenet Private Limited\"]\n    company_543[\"Infomedia Press Limited\"]\n    company_544[\"Den Nashik City Cable Network Private Limited\"]\n    company_545[\"Eminent Cable Network Private Limited\"]\n    company_546[\"Intimi India Limited\"]\n    company_547[\"Genesis La Mode Private Limited\"]\n    company_548[\"GLB Body Care Private Limited\"]\n    company_549[\"Hathway Latur MCN Cable and Datacom Private Limited\"]\n    company_550[\"Hathway MCN Private Limited\"]\n    company_551[\"Hathway Sai Star Cable and Datacom Private Limited\"]\n    company_552[\"SRC Ecotex (India) Private Limited\"]\n    company_553[\"Hathway Sonali OM Crystal Cable Private Limited\"]\n    company_554[\"Hathway SS Cable and Datacom LLP\"]\n    company_555[\"Two Platforms Inc.\"]\n    company_556[\"Health Alliance Group Inc.\"]\n    company_557[\"Ubona Technologies Private Limited\"]\n    company_558[\"IBN Lokmat News Private Limited\"]\n    company_559[\"Wavetech Helium, Inc.\"]\n    company_560[\"Reliance-GrandOptical Private Limited\"]\n\n    %% Relationships\n    company_526 -->|REPORTS_AMOUNT| amount_1010\n    company_526 -->|REPORTS_AMOUNT| amount_1011", "flowchart TD\n\n    %% Node definitions\n    company_561[\"Reverie Language Technologies Limited\"]\n    company_562[\"Mindex 1 Limited\"]\n    company_563[\"RBML Solutions India Limited\"]\n    amount_1231[/\"INR 300.00\"/]\n    amount_1232[/\"INR 10.01\"/]\n    company_564[\"REC ScanModule Sweden AB\"]\n    amount_1235[/\"INR 3,877.30\"/]\n    amount_1236[/\"INR 32.24\"/]\n    company_565[\"Reliance Brands Eyewear Private Limited\"]\n    company_566[\"Reliance Brands Holding UK Limited\"]\n    amount_1238[/\"INR 105.38\"/]\n    amount_1239[/\"INR 1,770.44\"/]\n    company_567[\"Reliance Clothing India Limited\"]\n    amount_1240[/\"INR 45,000.00\"/]\n    amount_1241[/\"INR 1,107.92\"/]\n    company_568[\"Reliance Consumer Products Limited\"]\n    amount_1242[/\"INR 100.00\"/]\n    company_569[\"Reliance Jio Infocomm UK Limited\"]\n    amount_1244[/\"INR 64.49\"/]\n    amount_1245[/\"INR 42,179.35\"/]\n    amount_1246[/\"INR 2.69\"/]\n    company_570[\"Reliance New Energy Battery Storage\n        Limited\"]\n    amount_1247[/\"INR 99.14\"/]\n    amount_1248[/\"INR 25.69\"/]\n    company_571[\"Reliance New Energy Carbon Fibre\n        Cylinder Limited\"]\n    company_572[\"RISE Worldwide Limited\"]\n    amount_1249[/\"INR 106.72\"/]\n    company_573[\"Ritu Kumar ME (FZE)\"]\n    company_574[\"Urban Ladder Home D\u00e9cor Solutions\n    Limited\"]\n    amount_1251[/\"INR 25.07\"/]\n    amount_1252[/\"INR 14.00\"/]\n    amount_1253[/\"INR 0.63\"/]\n    company_575[\"Reliance Industrial\n     Infrastructure Limited\"]\n    company_576[\"Reliance Logistics and\n     Warehouse Holdings Limited\"]\n    company_577[\"Sanmina-SCI India Private\n     Limited\"]\n    company_578[\"Sanmina-SCI Technology India\n     Private Limited\"]\n    company_579[\"Vadodara Enviro Channel\n     Limited\"]\n    company_580[\"Balaji Telefilms Limited\"]\n    company_581[\"Jamnagar Utilities and Power\n     Private Limited\"]\n\n    %% Relationships\n    company_563 -->|REPORTS_AMOUNT| amount_1231\n    company_568 -->|REPORTS_AMOUNT| amount_1242\n    company_570 -->|REPORTS_AMOUNT| amount_1247\n    company_570 -->|REPORTS_AMOUNT| amount_1248\n    company_572 -->|REPORTS_AMOUNT| amount_1249\n    company_574 -->|REPORTS_AMOUNT| amount_1251"];
+        let currentPageIndex = 0;
+        const totalPages = 14;
         
         mermaid.initialize({
-            startOnLoad: true,
+            startOnLoad: false,
             theme: 'default',
-            maxTextSize: 500000,
-            maxEdges: 5000,
+            maxTextSize: 100000,
             flowchart: {
                 useMaxWidth: false,
                 htmlLabels: true,
                 curve: 'basis',
                 nodeSpacing: 50,
-                rankSpacing: 70,
-                padding: 15
-            },
-            themeVariables: {
-                fontSize: '14px',
-                fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif'
+                rankSpacing: 70
             }
         });
         
-        function zoomIn() {
-            currentZoom = Math.min(currentZoom + 0.2, 3);
-            applyZoom();
+        async function renderPage(index) {
+            const container = document.getElementById('diagram-content');
+            container.innerHTML = '<div class="loading">Rendering page ' + (index + 1) + '...</div>';
+            
+            try {
+                const { svg } = await mermaid.render('mermaid-' + index, pages[index]);
+                container.innerHTML = svg;
+            } catch (e) {
+                container.innerHTML = '<div class="loading">Error rendering diagram: ' + e.message + '</div>';
+            }
+            
+            document.getElementById('currentPage').textContent = index + 1;
+            document.getElementById('pageSelect').value = index;
         }
         
-        function zoomOut() {
-            currentZoom = Math.max(currentZoom - 0.2, 0.3);
-            applyZoom();
-        }
-        
-        function resetZoom() {
-            currentZoom = 1;
-            applyZoom();
-        }
-        
-        function applyZoom() {
-            const svg = document.querySelector('.mermaid svg');
-            if (svg) {
-                svg.style.transform = `scale(${currentZoom})`;
-                svg.style.transformOrigin = 'top left';
+        function nextPage() {
+            if (currentPageIndex < totalPages - 1) {
+                currentPageIndex++;
+                renderPage(currentPageIndex);
             }
         }
         
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function prevPage() {
+            if (currentPageIndex > 0) {
+                currentPageIndex--;
+                renderPage(currentPageIndex);
+            }
         }
         
-        function scrollToBottom() {
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        function firstPage() {
+            currentPageIndex = 0;
+            renderPage(currentPageIndex);
         }
+        
+        function lastPage() {
+            currentPageIndex = totalPages - 1;
+            renderPage(currentPageIndex);
+        }
+        
+        function goToPage(index) {
+            currentPageIndex = parseInt(index);
+            renderPage(currentPageIndex);
+        }
+        
+        // Initial render
+        renderPage(0);
     </script>
 </body>
 </html>

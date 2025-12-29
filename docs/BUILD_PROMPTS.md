@@ -401,8 +401,204 @@ Create/Update docs/TECHNICAL_DESIGN.md:
 
 ---
 
+## 23. Document Chunking for Large Documents
+
+```
+Implement chunking support for large documents:
+1. Create src/chunker.py with:
+   - estimate_tokens(text) using chars/4 approximation
+   - split_text(text, chunk_size, overlap) with paragraph-aware splitting
+2. Create src/graph_merger.py with:
+   - merge_graphs(graphs) to combine multiple KnowledgeGraphs
+3. Update src/extractor/__init__.py to:
+   - Check document size
+   - Split into chunks if needed
+   - Extract from each chunk
+   - Merge results
+4. Add configuration: CHUNK_ENABLED, CHUNK_SIZE_TOKENS, CHUNK_OVERLAP_TOKENS
+5. Update README and technical docs
+```
+
+---
+
+## 24. Node Context Field
+
+```
+Add optional context field to Node model:
+1. Update src/schema.py Node class:
+   - Add context: str | None = None
+   - Document purpose: explains what the node represents
+2. Update all LLM prompts to:
+   - Request context for every node
+   - Example: "Revenue for FY 2024" for DollarAmount
+3. Update Mermaid visualizer to include context in labels
+```
+
+---
+
+## 25. Graph Merger Deduplication
+
+```
+Enhance graph merger to deduplicate nodes:
+1. Update src/graph_merger.py:
+   - Deduplicate nodes by (name.lower(), type) key
+   - Renumber IDs globally (company_1, amount_1, etc.)
+   - Map old IDs to new IDs in relationships
+2. Ensure unique IDs across merged chunks
+3. Add tests for deduplication logic
+```
+
+---
+
+## 26. Auto-Repair Invalid Relationships
+
+```
+Add auto-repair for invalid relationships in validator:
+1. Create validate_and_repair_graph() in src/validator.py
+2. Remove (not fail on) relationships where:
+   - HAS_RISK target is not RiskFactor
+   - REPORTS_AMOUNT target is not DollarAmount
+   - OWNS involves non-Company nodes
+3. Update main.py to use validate_and_repair_graph()
+4. Print warning when relationships are removed
+```
+
+---
+
+## 27. Expanded Relationship Types
+
+```
+Expand relationship types from 3 to 18:
+Update src/schema.py Relationship.relation to include:
+- OWNS, HAS_RISK, REPORTS_AMOUNT, OPERATES (original + 1)
+- IMPACTED_BY, DECLINED_DUE_TO, SUPPORTED_BY
+- PARTNERED_WITH, JOINT_VENTURE_WITH
+- RAISED_CAPITAL, INVESTED_IN, COMMITTED_CAPEX
+- TARGETS, PLANS_TO, ON_TRACK_TO, COMMITTED_TO
+- COMPLIES_WITH, SUBJECT_TO
+
+Update all LLM prompts with new relation types and ownership rules.
+Add relation normalization to map invalid types to valid ones.
+```
+
+---
+
+## 28. Iterative Extraction with Live Updates
+
+```
+Implement iterative extraction with live progress updates:
+1. Update src/extractor/__init__.py:
+   - Accept on_chunk_complete callback
+   - After each chunk, call callback with merged graph so far
+2. Update main.py:
+   - Define save_intermediate_results() callback
+   - Save JSON, Mermaid, HTML after each chunk
+   - Open browser automatically at start
+   - Print progress summary after each chunk
+3. Users can refresh browser to see graph building up
+```
+
+---
+
+## 29. Paginated HTML Visualization
+
+```
+Implement paginated HTML for large graphs:
+1. Update src/visualizer_mermaid.py:
+   - If graph has >100 nodes, use pagination
+   - Split into 50 nodes per page
+   - Generate JavaScript for page navigation
+   - Add First/Previous/Next/Last buttons
+   - Add page selector dropdown
+   - Add zoom controls
+2. Keep full Mermaid .mmd file for all nodes
+3. HTML shows one page at a time with navigation
+```
+
+---
+
+## 30. Orphan Node Removal
+
+```
+Add orphan node removal to validator:
+1. After validation, remove nodes with no relationships
+2. Update main.py to show count of removed orphans
+3. Ensure JSON, Mermaid, HTML only contain connected nodes
+```
+
+---
+
+## 31. Clean Graph Utility
+
+```
+Create clean_graph.py utility script:
+1. Load existing graph from data/graph_output.json
+2. Remove meaningless nodes:
+   - Names that are just numbers (with commas/dots)
+   - Single letter + numbers (e.g., "H 10")
+   - Units without context (e.g., "500 GW")
+   - DollarAmount without currency symbols or context
+3. Remove relationships referencing removed nodes
+4. Remove remaining orphan nodes
+5. Regenerate Mermaid and HTML files
+6. Print before/after statistics
+```
+
+---
+
+## 32. LLM Provider Display
+
+```
+Update main.py to display which LLM provider and model are used:
+1. After loading config, print:
+   🤖 Provider: OpenAI | Model: gpt-4o
+   OR
+   🤖 Provider: Google Gemini | Model: gemini-2.0-flash
+   OR
+   🤖 Provider: Ollama (local) | Model: llama3:latest
+2. Include this in extraction step output
+```
+
+---
+
+## 33. JSON Repair and Relation Normalization
+
+```
+Add robust JSON repair to all LLM extractors:
+1. Create _repair_malformed_json() function:
+   - Fix missing colons
+   - Fix missing commas
+   - Fix incorrect key-value structures
+2. Create _normalize_relationships() function:
+   - Map invalid relation types to valid ones
+   - E.g., "SUBSIDIARY" → "OWNS"
+3. Add these to OpenAI, Gemini, and Ollama extractors
+4. Apply before Pydantic validation
+```
+
+---
+
+## 34. Unified Prompt Across Providers
+
+```
+Ensure all LLM providers use identical prompts:
+1. Create unified SYSTEM_PROMPT with:
+   - All 18 relation types
+   - Ownership direction rules
+   - Context requirement for every node
+   - JSON format example
+2. Copy exact prompt to:
+   - src/extractor/openai_llm.py
+   - src/extractor/gemini_llm.py
+   - src/extractor/ollama_llm.py
+3. Ensure consistent extraction behavior across providers
+```
+
+---
+
 ## Document Revision History
 
 | Version | Date | Description |
 |---------|------|-------------|
 | 1.0 | December 2024 | Initial project build prompts |
+| 2.0 | December 2024 | Added prompts 23-34: chunking, context field, deduplication, auto-repair, expanded relations, iterative extraction, pagination, orphan removal, clean utility, JSON repair, unified prompts |
