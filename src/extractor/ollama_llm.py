@@ -2,10 +2,16 @@
 
 This module implements the LLMExtractor interface using a local Ollama instance.
 All extraction is performed via LLM reasoning—no regex or pattern matching.
+
+Features:
+- Example-driven prompt for reliable JSON output
+- Automatic JSON repair for common LLM mistakes
+- Relation type normalization
 """
 
 import json
-from typing import Final
+import re
+from typing import Any, Final
 
 import httpx
 
@@ -16,225 +22,168 @@ from src.schema import KnowledgeGraph
 DEFAULT_BASE_URL: Final[str] = "http://localhost:11434"
 DEFAULT_MODEL: Final[str] = "llama3:latest"
 
-
-# System prompt optimized for Ollama models
-SYSTEM_PROMPT: Final[str] = """Extract a Knowledge Graph from the financial text.
-
-OUTPUT FORMAT - COPY THIS EXACT STRUCTURE:
-{
-  "schema_version": "1.0.0",
-  "nodes": [
-    {"id": "company_1", "type": "Company", "name": "..."},
-    {"id": "risk_1", "type": "RiskFactor", "name": "..."},
-    {"id": "amount_1", "type": "DollarAmount", "name": "..."}
-  ],
-  "relationships": [
-    {"source": "company_1", "target": "...", "relation": "..."}
-  ]
+# Valid relation types
+VALID_RELATIONS: Final[set[str]] = {
+    "OWNS", "HAS_RISK", "REPORTS_AMOUNT", "OPERATES", "IMPACTED_BY",
+    "DECLINED_DUE_TO", "SUPPORTED_BY", "PARTNERED_WITH", "JOINT_VENTURE_WITH",
+    "RAISED_CAPITAL", "INVESTED_IN", "COMMITTED_CAPEX", "TARGETS",
+    "PLANS_TO", "ON_TRACK_TO", "COMMITTED_TO", "COMPLIES_WITH", "SUBJECT_TO",
 }
 
-CRITICAL RULES:
-1. Output ONLY the JSON above - no wrapper, no nesting
-2. Top-level keys must be EXACTLY: schema_version, nodes, relationships
-3. Do NOT wrap in "knowledge_graph", "data", "result", or any other key
-4. Do NOT add "financials", "boardOfDirectors", "auditors", "entities"
-5. All nodes go in ONE flat "nodes" array
-6. All relationships go in ONE flat "relationships" array
+# Map common LLM mistakes to valid relation types
+RELATION_MAPPING: Final[dict[str, str]] = {
+    "SUBSIDIARY": "OWNS",
+    "SUBSIDIARY_OF": "OWNS",
+    "PART_OF": "OWNS",
+    "PART_OF_GROUP": "OWNS",
+    "BELONGS_TO": "OWNS",
+    "JOINT_VENTURE": "JOINT_VENTURE_WITH",
+    "JV": "JOINT_VENTURE_WITH",
+    "PARTNER": "PARTNERED_WITH",
+    "FACES_RISK": "HAS_RISK",
+    "REPORTED": "REPORTS_AMOUNT",
+    "REVENUE": "REPORTS_AMOUNT",
+}
 
-STRICT EXTRACTION RULES (MANDATORY):
+# Primary extraction prompt
+PROMPT: Final[str] = """You are an information extraction engine.
 
-1. Extract ONLY information explicitly stated in the text.
-2. DO NOT infer, assume, or hallucinate facts.
-3. DO NOT omit any explicitly stated companies, risks, amounts, or ownerships.
-4. Output ONLY valid JSON. No explanations. No markdown. No code blocks.
+TASK
+Extract a Knowledge Graph from the text below and return ONLY valid JSON.
 
-ENTITY TYPES:
-- Company
-- RiskFactor
-- DollarAmount
+ENTITIES:
+Company, RiskFactor, DollarAmount
 
-RELATIONSHIP TYPES:
-- OWNS
-- HAS_RISK
-- REPORTS_AMOUNT
+RELATIONS:
+REPORTS_AMOUNT, HAS_RISK, OWNS, OPERATES,
+PARTNERED_WITH, JOINT_VENTURE_WITH,
+IMPACTED_BY, DECLINED_DUE_TO, SUPPORTED_BY,
+RAISED_CAPITAL, INVESTED_IN, COMMITTED_CAPEX,
+TARGETS, PLANS_TO, ON_TRACK_TO, COMMITTED_TO,
+COMPLIES_WITH, SUBJECT_TO
 
-OWNERSHIP EXTRACTION RULES (MANDATORY):
-Create an OWNS relationship ONLY when the text explicitly states ownership or subsidiary language, including:
-- "subsidiary"
-- "owns"
-- "owned by"
-- "wholly owned"
-- "parent company"
-- "X owns Y"
-- "Y is a subsidiary of X"
+OWNERSHIP RULES:
+- Subsidiary or JV cannot own parent.
+- If A is subsidiary/JV of B, relation is B → A.
+- If unclear, use PARTNERED_WITH or JOINT_VENTURE_WITH.
 
-If the text states that Entity A is a subsidiary of Entity B:
-- source = Entity B
-- target = Entity A
+RULES:
+- Keep names exactly as written.
+- Extract all monetary values (₹, INR, USD, crore, billion, million).
+- Each amount is a separate DollarAmount node.
+- Extract risks when text mentions risk, volatility, regulatory,
+  geopolitical, legal, compliance, margin, slowdown.
+- Deduplicate companies by full legal name.
+- IDs: company_1, amount_1, risk_1, etc.
+- Every node must include a short context.
+- Output ONLY JSON. No text.
 
-If no explicit ownership language exists, DO NOT create OWNS.
-
-RELATIONSHIP TYPE CONSTRAINTS (MANDATORY):
-- HAS_RISK:
-  - source MUST be a Company
-  - target MUST be a RiskFactor
-  - NEVER link HAS_RISK to a Company
-- REPORTS_AMOUNT:
-  - source MUST be a Company
-  - target MUST be a DollarAmount
-- OWNS:
-  - source MUST be a Company
-  - target MUST be a Company
-
-EXTRACTION COMPLETENESS RULE (MANDATORY):
-If the text explicitly mentions:
-- risks → you MUST extract RiskFactor nodes and HAS_RISK relationships
-- monetary values → you MUST extract DollarAmount nodes and REPORTS_AMOUNT relationships
-- subsidiaries or ownership → you MUST extract OWNS relationships
-
-OUTPUT FORMAT:
-Return a single JSON object with this exact structure:
-
+EXAMPLE OUTPUT:
 {
   "schema_version": "1.0.0",
   "nodes": [
-    {"id": "company_1", "type": "Company", "name": "Company Name"},
-    {"id": "risk_1", "type": "RiskFactor", "name": "Risk description"},
-    {"id": "amount_1", "type": "DollarAmount", "name": "$X"}
+    {"id": "company_1", "type": "Company", "name": "Reliance Industries", "context": "Parent company"},
+    {"id": "company_2", "type": "Company", "name": "Reliance Retail", "context": "Subsidiary"},
+    {"id": "amount_1", "type": "DollarAmount", "name": "₹10,71,174 crore", "context": "Revenue FY2024"},
+    {"id": "risk_1", "type": "RiskFactor", "name": "market volatility", "context": "Impacts margins"}
   ],
   "relationships": [
-    {"source": "company_1", "target": "risk_1", "relation": "HAS_RISK"},
+    {"source": "company_1", "target": "company_2", "relation": "OWNS"},
     {"source": "company_1", "target": "amount_1", "relation": "REPORTS_AMOUNT"},
-    {"source": "company_1", "target": "company_2", "relation": "OWNS"}
+    {"source": "company_1", "target": "risk_1", "relation": "HAS_RISK"}
   ]
 }
 
-ID RULES:
-- Use incremental IDs: company_1, company_2, risk_1, amount_1, etc.
-- IDs must be unique.
-- Relationships MUST reference valid node IDs.
-
-OPTIONAL CONFIDENCE SCORE:
-- You MAY include a 'confidence' field (0.0–1.0) on relationships
-- Use higher confidence (≥0.9) only when the relationship is explicitly stated
-- Omit the confidence field if unsure
-- Absence of confidence is acceptable
-
-Respond with ONLY the JSON object."""
+TEXT:
+"""
 
 
-def _strip_markdown_fences(content: str) -> str:
-    """Remove markdown code fences from LLM response.
-
-    Args:
-        content: Raw LLM response that may contain markdown fences.
-
-    Returns:
-        Content with markdown fences removed.
-    """
+def _extract_json(content: str) -> str:
+    """Extract JSON from response, handling markdown fences."""
     content = content.strip()
-
-    if not content.startswith("```"):
-        return content
-
-    lines = content.split("\n")
-
-    # Remove opening fence (```json or ```)
-    if lines and lines[0].strip().startswith("```"):
-        lines = lines[1:]
-
-    # Remove closing fence (```)
-    if lines and lines[-1].strip() == "```":
-        lines = lines[:-1]
-
-    return "\n".join(lines).strip()
+    first = content.find("{")
+    last = content.rfind("}")
+    if first != -1 and last > first:
+        return content[first:last + 1]
+    return content
 
 
-def _extract_response_content(response_data: dict) -> str:
-    """Extract LLM content from Ollama response.
-
-    Args:
-        response_data: Parsed JSON response from Ollama API.
-
-    Returns:
-        The extracted content string.
-
-    Raises:
-        ValueError: If content cannot be extracted from response.
+def _fix_malformed_nodes(data: dict[str, Any]) -> dict[str, Any]:
+    """Fix common LLM JSON mistakes in nodes.
+    
+    Fixes patterns like:
+    - {"id: risk_1": "RiskFactor", ...} -> {"id": "risk_1", "type": "RiskFactor", ...}
     """
-    # Try response_data["response"] first (standard generate endpoint)
-    content = response_data.get("response")
-    if content:
-        return content
+    if "nodes" not in data:
+        return data
+    
+    fixed_nodes = []
+    for node in data["nodes"]:
+        if isinstance(node, dict):
+            # Check for malformed key like "id: risk_1"
+            fixed_node = {}
+            for key, value in node.items():
+                if ": " in key and key.startswith("id:"):
+                    # Extract the id value from key like "id: risk_1"
+                    id_value = key.split(": ", 1)[1].strip()
+                    fixed_node["id"] = id_value
+                    fixed_node["type"] = value  # The value is usually the type
+                else:
+                    fixed_node[key] = value
+            
+            # Ensure required fields exist
+            if "id" in fixed_node and "type" in fixed_node:
+                if "name" not in fixed_node:
+                    fixed_node["name"] = fixed_node.get("context", "Unknown")
+                if "context" not in fixed_node:
+                    fixed_node["context"] = ""
+                fixed_nodes.append(fixed_node)
+            elif "id" in node and "type" in node:
+                # Node is already valid
+                if "context" not in node:
+                    node["context"] = ""
+                fixed_nodes.append(node)
+    
+    data["nodes"] = fixed_nodes
+    return data
 
-    # Try response_data["message"]["content"] (chat endpoint format)
-    message = response_data.get("message")
-    if isinstance(message, dict):
-        content = message.get("content")
-        if content:
-            return content
 
-    # Neither format found - raise with full payload for debugging
-    raise ValueError(
-        f"Unable to extract content from Ollama response. "
-        f"Expected 'response' or 'message.content' key. "
-        f"Full response: {json.dumps(response_data)[:1000]}"
-    )
+def _normalize_relations(data: dict[str, Any]) -> dict[str, Any]:
+    """Normalize relation types to valid values."""
+    if "relationships" not in data:
+        return data
+    
+    valid_rels = []
+    for rel in data["relationships"]:
+        if isinstance(rel, dict) and "relation" in rel:
+            relation = rel["relation"].upper().replace(" ", "_")
+            
+            # Map to valid relation
+            if relation in VALID_RELATIONS:
+                rel["relation"] = relation
+                valid_rels.append(rel)
+            elif relation in RELATION_MAPPING:
+                rel["relation"] = RELATION_MAPPING[relation]
+                valid_rels.append(rel)
+            # Skip invalid relations
+    
+    data["relationships"] = valid_rels
+    return data
 
 
 class OllamaExtractor(LLMExtractor):
-    """Ollama-based Knowledge Graph extractor.
-
-    This extractor uses a local Ollama instance to extract structured
-    Knowledge Graph data from raw financial text. It enforces strict
-    JSON-only output with anti-hallucination instructions.
-
-    Attributes:
-        base_url: The Ollama API base URL.
-        model: The Ollama model name to use.
-
-    Example:
-        >>> extractor = OllamaExtractor(model="llama3")
-        >>> graph = extractor.extract("Acme Corp reported $1.2 billion revenue.")
-    """
+    """Ollama-based Knowledge Graph extractor."""
 
     def __init__(
         self,
         model: str = DEFAULT_MODEL,
         base_url: str = DEFAULT_BASE_URL,
     ) -> None:
-        """Initialize the Ollama extractor.
-
-        Args:
-            model: The Ollama model name to use. Defaults to "llama3".
-            base_url: The Ollama API base URL.
-                Defaults to "http://localhost:11434".
-        """
         self.model = model
         self.base_url = base_url.rstrip("/")
 
-    def extract(self, text: str) -> KnowledgeGraph:
-        """Extract a Knowledge Graph from raw text using Ollama.
-
-        Sends the input text to a local Ollama instance with a strict
-        system prompt that enforces JSON-only output conforming to the
-        KnowledgeGraph schema. No post-processing or cleanup is applied.
-
-        Args:
-            text: Raw financial text to extract entities and relationships from.
-
-        Returns:
-            A validated KnowledgeGraph instance containing the extracted
-            nodes and relationships.
-
-        Raises:
-            ValueError: If Ollama is not running, returns empty response,
-                or returns invalid JSON.
-            httpx.ConnectError: If the Ollama server is unreachable.
-            json.JSONDecodeError: If the LLM response is not valid JSON.
-        """
-        prompt = f"{SYSTEM_PROMPT}\n\n---\n\nDocument to analyze:\n\n{text}\n\n---\n\nExtracted JSON:"
-
+    def _call_ollama(self, prompt: str) -> str:
+        """Call Ollama API."""
         try:
             response = httpx.post(
                 f"{self.base_url}/api/generate",
@@ -242,41 +191,45 @@ class OllamaExtractor(LLMExtractor):
                     "model": self.model,
                     "prompt": prompt,
                     "stream": False,
-                    "options": {
-                        "temperature": 0,
-                    },
+                    "format": "json",
+                    "options": {"temperature": 0},
                 },
-                timeout=120.0,
+                timeout=600.0,
             )
             response.raise_for_status()
         except httpx.ConnectError as e:
-            raise ValueError(
-                f"Ollama is not running at {self.base_url}. "
-                "Please start Ollama with 'ollama serve'."
-            ) from e
+            raise ValueError(f"Ollama not running at {self.base_url}") from e
         except httpx.HTTPStatusError as e:
-            raise ValueError(
-                f"Ollama API error: {e.response.status_code} - {e.response.text}"
-            ) from e
+            raise ValueError(f"Ollama error: {e.response.status_code}") from e
 
-        try:
-            response_data = response.json()
-        except json.JSONDecodeError as e:
-            raise ValueError(f"Ollama returned invalid JSON response: {e}") from e
-
-        content = _extract_response_content(response_data)
-
+        data = response.json()
+        content = data.get("response") or ""
         if not content.strip():
-            raise ValueError("Ollama returned empty response")
+            raise ValueError("Empty response from Ollama")
+        return content
 
-        # Strip markdown code fences if present
-        content = _strip_markdown_fences(content)
-
+    def extract(self, text: str) -> KnowledgeGraph:
+        """Extract Knowledge Graph from text."""
+        full_prompt = f"{PROMPT}{text}"
+        
+        content = self._call_ollama(full_prompt)
+        json_str = _extract_json(content)
+        
         try:
-            parsed = json.loads(content)
+            data = json.loads(json_str)
         except json.JSONDecodeError as e:
-            raise ValueError(
-                f"LLM response is not valid JSON: {content[:500]}"
-            ) from e
-
-        return KnowledgeGraph.model_validate(parsed)
+            raise ValueError(f"Invalid JSON: {json_str[:200]}") from e
+        
+        # Ensure required top-level keys
+        if "schema_version" not in data:
+            data["schema_version"] = "1.0.0"
+        if "nodes" not in data:
+            data["nodes"] = []
+        if "relationships" not in data:
+            data["relationships"] = []
+        
+        # Fix common LLM mistakes
+        data = _fix_malformed_nodes(data)
+        data = _normalize_relations(data)
+        
+        return KnowledgeGraph.model_validate(data)

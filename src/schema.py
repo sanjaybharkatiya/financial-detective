@@ -19,6 +19,10 @@ class Node(BaseModel):
         type: The category of the node. Must be one of:
             "Company", "RiskFactor", or "DollarAmount".
         name: Human-readable name or label for the node.
+        context: Optional description providing context for the node.
+            For DollarAmount: what the amount represents (e.g., "Revenue", "EBITDA", "Profit").
+            For RiskFactor: additional details about the risk.
+            For Company: business description or sector.
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -26,6 +30,7 @@ class Node(BaseModel):
     id: str
     type: Literal["Company", "RiskFactor", "DollarAmount"]
     name: str
+    context: str | None = None
 
 
 class Relationship(BaseModel):
@@ -35,7 +40,8 @@ class Relationship(BaseModel):
         source: The id of the source node.
         target: The id of the target node.
         relation: The type of relationship. Must be one of:
-            "OWNS", "HAS_RISK", or "REPORTS_AMOUNT".
+            "OWNS", "HAS_RISK", "REPORTS_AMOUNT", "OPERATES",
+            "IMPACTED_BY", "DECLINED_DUE_TO", "SUPPORTED_BY", "PARTNERED_WITH".
         confidence: Optional confidence score (0.0 to 1.0) for the relationship.
             Higher values indicate stronger evidence in the source text.
     """
@@ -44,7 +50,26 @@ class Relationship(BaseModel):
 
     source: str
     target: str
-    relation: Literal["OWNS", "HAS_RISK", "REPORTS_AMOUNT"]
+    relation: Literal[
+        "OWNS",
+        "HAS_RISK",
+        "REPORTS_AMOUNT",
+        "OPERATES",
+        "IMPACTED_BY",
+        "DECLINED_DUE_TO",
+        "SUPPORTED_BY",
+        "PARTNERED_WITH",
+        "JOINT_VENTURE_WITH",
+        "RAISED_CAPITAL",
+        "INVESTED_IN",
+        "COMMITTED_CAPEX",
+        "TARGETS",
+        "PLANS_TO",
+        "ON_TRACK_TO",
+        "COMMITTED_TO",
+        "COMPLIES_WITH",
+        "SUBJECT_TO",
+    ]
     confidence: float | None = None
 
 

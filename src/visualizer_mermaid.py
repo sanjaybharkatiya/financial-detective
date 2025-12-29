@@ -12,6 +12,33 @@ from src.schema import KnowledgeGraph, Node
 OUTPUT_PATH: Path = Path("visuals/graph.mmd")
 
 
+def _escape_mermaid_label(text: str) -> str:
+    """Escape special characters in text for Mermaid compatibility.
+    
+    Args:
+        text: Raw text that may contain special characters.
+        
+    Returns:
+        Escaped text safe for use in Mermaid labels.
+    """
+    # Replace characters that break Mermaid syntax
+    text = text.replace('"', "'")
+    text = text.replace('`', "'")
+    text = text.replace('#', "")
+    text = text.replace('&', "and")
+    text = text.replace('<', "")
+    text = text.replace('>', "")
+    text = text.replace('[', "(")
+    text = text.replace(']', ")")
+    text = text.replace('{', "(")
+    text = text.replace('}', ")")
+    text = text.replace('|', "-")
+    # Truncate very long labels
+    if len(text) > 60:
+        text = text[:57] + "..."
+    return text
+
+
 def _get_node_shape(node: Node) -> str:
     """Get the Mermaid shape syntax for a node based on its type.
 
@@ -23,19 +50,37 @@ def _get_node_shape(node: Node) -> str:
         - Company: rectangle ["label"]
         - RiskFactor: rounded ("label")
         - DollarAmount: parallelogram [/"label"/]
+        
+    If context is available, it's included in the label for clarity.
     """
-    # Escape quotes in node name for Mermaid compatibility
-    escaped_name = node.name.replace('"', "'")
+    # Escape special characters in node name
+    escaped_name = _escape_mermaid_label(node.name)
+    
+    # Include context if available to show what the value represents
+    if node.context:
+        escaped_context = _escape_mermaid_label(node.context)
+        # For amounts, show context first (e.g., "Revenue: $38.7B")
+        if node.type == "DollarAmount":
+            label = f"{escaped_context}: {escaped_name}"
+        else:
+            # For others, show name with context in parentheses
+            label = f"{escaped_name} ({escaped_context})"
+    else:
+        label = escaped_name
+    
+    # Final truncation for very long combined labels
+    if len(label) > 80:
+        label = label[:77] + "..."
 
     if node.type == "Company":
-        return f'{node.id}["{escaped_name}"]'
+        return f'{node.id}["{label}"]'
     elif node.type == "RiskFactor":
-        return f'{node.id}("{escaped_name}")'
+        return f'{node.id}("{label}")'
     elif node.type == "DollarAmount":
-        return f'{node.id}[/"{escaped_name}"/]'
+        return f'{node.id}[/"{label}"/]'
     else:
         # Fallback to rectangle
-        return f'{node.id}["{escaped_name}"]'
+        return f'{node.id}["{label}"]'
 
 
 def render_mermaid(graph: KnowledgeGraph, output_path: Path = OUTPUT_PATH) -> None:
