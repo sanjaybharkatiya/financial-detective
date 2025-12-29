@@ -162,8 +162,95 @@ def _generate_mermaid_content(graph: KnowledgeGraph) -> str:
     return "\n".join(lines)
 
 
+def _group_connected_nodes(graph: KnowledgeGraph, page_size: int = 50) -> list[list[str]]:
+    """Group connected nodes together to minimize cross-page orphans.
+    
+    Uses BFS-based clustering to keep related nodes on the same page.
+    Small clusters are consolidated into larger pages.
+    
+    Args:
+        graph: The KnowledgeGraph to group.
+        page_size: Maximum nodes per page.
+        
+    Returns:
+        List of lists, each containing node IDs for a page.
+    """
+    from collections import defaultdict, deque
+    
+    # Build adjacency list
+    adjacency: dict[str, set[str]] = defaultdict(set)
+    for rel in graph.relationships:
+        adjacency[rel.source].add(rel.target)
+        adjacency[rel.target].add(rel.source)
+    
+    # Find connected components using BFS
+    all_node_ids = {n.id for n in graph.nodes}
+    assigned: set[str] = set()
+    clusters: list[list[str]] = []
+    
+    # Sort nodes by connection count for seeding
+    sorted_nodes = sorted(all_node_ids, key=lambda nid: len(adjacency.get(nid, set())), reverse=True)
+    
+    for seed_id in sorted_nodes:
+        if seed_id in assigned:
+            continue
+        
+        # BFS to find all connected nodes
+        cluster: list[str] = []
+        queue: deque[str] = deque([seed_id])
+        
+        while queue:
+            node_id = queue.popleft()
+            if node_id in assigned:
+                continue
+            
+            cluster.append(node_id)
+            assigned.add(node_id)
+            
+            for neighbor in adjacency.get(node_id, set()):
+                if neighbor not in assigned:
+                    queue.append(neighbor)
+        
+        if cluster:
+            clusters.append(cluster)
+    
+    # Sort clusters by size (largest first)
+    clusters.sort(key=len, reverse=True)
+    
+    # Now pack clusters into pages
+    pages: list[list[str]] = []
+    current_page: list[str] = []
+    
+    for cluster in clusters:
+        if len(cluster) > page_size:
+            # Large cluster: split into multiple pages
+            if current_page:
+                pages.append(current_page)
+                current_page = []
+            
+            for i in range(0, len(cluster), page_size):
+                pages.append(cluster[i:i + page_size])
+        elif len(current_page) + len(cluster) <= page_size:
+            # Cluster fits in current page
+            current_page.extend(cluster)
+        else:
+            # Start new page
+            if current_page:
+                pages.append(current_page)
+            current_page = cluster.copy()
+    
+    if current_page:
+        pages.append(current_page)
+    
+    return pages
+
+
 def _generate_paginated_mermaid(graph: KnowledgeGraph, page_size: int = 50) -> list[str]:
     """Generate paginated Mermaid diagrams for large graphs.
+    
+    Uses smart grouping to keep connected nodes on the same page.
+    Shows all relationships between nodes on the page, plus limited
+    cross-page connections with ghost nodes to ensure no node appears orphaned.
     
     Args:
         graph: The KnowledgeGraph to paginate.
@@ -172,30 +259,94 @@ def _generate_paginated_mermaid(graph: KnowledgeGraph, page_size: int = 50) -> l
     Returns:
         List of Mermaid diagram strings, one per page.
     """
-    pages = []
-    nodes = list(graph.nodes)
-    total_nodes = len(nodes)
+    from collections import defaultdict
     
-    for start in range(0, total_nodes, page_size):
-        end = min(start + page_size, total_nodes)
-        page_nodes = nodes[start:end]
-        page_node_ids = {n.id for n in page_nodes}
+    # Group connected nodes together
+    page_groups = _group_connected_nodes(graph, page_size)
+    
+    # Build node map for quick lookup
+    node_map = {n.id: n for n in graph.nodes}
+    
+    # Build adjacency for checking orphans
+    adjacency: dict[str, set[str]] = defaultdict(set)
+    for rel in graph.relationships:
+        adjacency[rel.source].add(rel.target)
+        adjacency[rel.target].add(rel.source)
+    
+    pages = []
+    for page_node_ids in page_groups:
+        page_id_set = set(page_node_ids)
         
         # Get relationships where both source and target are in this page
         page_rels = [
             r for r in graph.relationships
-            if r.source in page_node_ids and r.target in page_node_ids
+            if r.source in page_id_set and r.target in page_id_set
         ]
         
+        # Find nodes that would appear orphaned (have connections but none on this page)
+        orphan_nodes = []
+        for node_id in page_node_ids:
+            connections = adjacency.get(node_id, set())
+            same_page = connections & page_id_set
+            if connections and not same_page:
+                orphan_nodes.append(node_id)
+        
+        # For orphaned nodes, add ONE ghost connection to show they're connected
+        ghost_nodes: set[str] = set()
+        ghost_rels = []
+        max_ghosts = min(15, len(orphan_nodes))  # Limit ghost nodes per page
+        
+        for node_id in orphan_nodes[:max_ghosts]:
+            # Get first connection to a node not on this page
+            for rel in graph.relationships:
+                if rel.source == node_id and rel.target not in page_id_set:
+                    ghost_nodes.add(rel.target)
+                    ghost_rels.append(rel)
+                    break
+                elif rel.target == node_id and rel.source not in page_id_set:
+                    ghost_nodes.add(rel.source)
+                    ghost_rels.append(rel)
+                    break
+        
         lines = ["flowchart TD", ""]
+        
+        # Add style for ghost nodes
+        if ghost_nodes:
+            lines.append("    %% Style for nodes from other pages")
+            lines.append("    classDef ghost fill:#e8e8e8,stroke:#999,stroke-dasharray: 5 5")
+        
+        lines.append("")
         lines.append("    %% Node definitions")
-        for node in page_nodes:
-            lines.append(f"    {_get_node_shape(node)}")
+        for node_id in page_node_ids:
+            if node_id in node_map:
+                lines.append(f"    {_get_node_shape(node_map[node_id])}")
+        
+        # Add ghost nodes
+        for ghost_id in ghost_nodes:
+            if ghost_id in node_map:
+                ghost_node = node_map[ghost_id]
+                name = _escape_mermaid_label(ghost_node.name)
+                if len(name) > 25:
+                    name = name[:22] + "..."
+                lines.append(f'    {ghost_id}["{name} (other page)"]:::ghost')
         
         lines.append("")
         lines.append("    %% Relationships")
         for rel in page_rels:
             lines.append(f"    {rel.source} -->|{rel.relation}| {rel.target}")
+        
+        # Add ghost relationships
+        if ghost_rels:
+            lines.append("")
+            lines.append("    %% Cross-page connections")
+            for rel in ghost_rels:
+                lines.append(f"    {rel.source} -.->|{rel.relation}| {rel.target}")
+        
+        # Add note if there are more orphans than shown
+        if len(orphan_nodes) > max_ghosts:
+            remaining = len(orphan_nodes) - max_ghosts
+            lines.append("")
+            lines.append(f"    %% Note: {remaining} more nodes have cross-page connections")
         
         pages.append("\n".join(lines))
     
