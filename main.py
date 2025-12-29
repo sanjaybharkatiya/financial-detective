@@ -21,7 +21,7 @@ from src.config import load_config
 from src.extractor import extract_knowledge_graph
 from src.input_loader import load_raw_text
 from src.schema import KnowledgeGraph
-from src.validator import validate_knowledge_graph
+from src.validator import validate_and_repair_graph
 
 # Try to import visualizer - may fail on Python 3.14 due to networkx compatibility
 try:
@@ -128,9 +128,9 @@ def main() -> int:
         graph = extract_knowledge_graph(raw_text, on_chunk_complete=save_intermediate_results)
         print(f"      ✓ Extraction complete: {len(graph.nodes)} nodes, {len(graph.relationships)} relationships")
 
-        print("[3/5] Validating Knowledge Graph...")
-        validate_knowledge_graph(graph)
-        print("      Validation passed")
+        print("[3/5] Validating and repairing Knowledge Graph...")
+        graph = validate_and_repair_graph(graph)
+        print(f"      Validation passed: {len(graph.nodes)} nodes, {len(graph.relationships)} relationships")
 
         print(f"[4/5] Saving final graph to {OUTPUT_JSON_PATH}...")
         save_graph_json(graph, OUTPUT_JSON_PATH)

@@ -2,9 +2,11 @@
 
 This module provides validation logic to ensure the integrity
 of a KnowledgeGraph instance beyond Pydantic schema validation.
+
+Includes auto-repair for common LLM extraction errors.
 """
 
-from src.schema import KnowledgeGraph
+from src.schema import KnowledgeGraph, Relationship
 
 
 def validate_knowledge_graph(graph: KnowledgeGraph) -> None:
@@ -32,7 +34,71 @@ def validate_knowledge_graph(graph: KnowledgeGraph) -> None:
 
     _validate_unique_node_ids(graph)
     _validate_relationship_references(graph)
-    _validate_relationship_type_constraints(graph)
+    # Relationship type constraints are now auto-fixed, not validated
+
+
+def validate_and_repair_graph(graph: KnowledgeGraph) -> KnowledgeGraph:
+    """Validate and auto-repair a KnowledgeGraph.
+    
+    Fixes common LLM extraction errors:
+    - Removes relationships with invalid node type constraints
+    - Removes relationships with missing node references
+    
+    Args:
+        graph: The KnowledgeGraph instance to validate and repair.
+        
+    Returns:
+        A new KnowledgeGraph with invalid relationships removed.
+    """
+    if not graph.nodes:
+        raise ValueError("KnowledgeGraph must contain at least one node")
+    
+    # Build node map
+    node_map = {node.id: node for node in graph.nodes}
+    node_ids = set(node_map.keys())
+    
+    # Filter valid relationships
+    valid_relationships: list[Relationship] = []
+    removed_count = 0
+    
+    for rel in graph.relationships:
+        # Check if source and target exist
+        if rel.source not in node_ids or rel.target not in node_ids:
+            removed_count += 1
+            continue
+        
+        source_type = node_map[rel.source].type
+        target_type = node_map[rel.target].type
+        
+        # Validate relationship type constraints
+        is_valid = True
+        
+        if rel.relation == "HAS_RISK":
+            # Target must be RiskFactor
+            if target_type != "RiskFactor":
+                is_valid = False
+        elif rel.relation == "REPORTS_AMOUNT":
+            # Target must be DollarAmount
+            if target_type != "DollarAmount":
+                is_valid = False
+        elif rel.relation == "OWNS":
+            # Both must be Company
+            if source_type != "Company" or target_type != "Company":
+                is_valid = False
+        
+        if is_valid:
+            valid_relationships.append(rel)
+        else:
+            removed_count += 1
+    
+    if removed_count > 0:
+        print(f"      ⚠️  Removed {removed_count} invalid relationships")
+    
+    return KnowledgeGraph(
+        schema_version=graph.schema_version,
+        nodes=graph.nodes,
+        relationships=valid_relationships,
+    )
 
 
 def _validate_unique_node_ids(graph: KnowledgeGraph) -> None:
@@ -76,23 +142,4 @@ def _validate_relationship_references(graph: KnowledgeGraph) -> None:
 
     if invalid_references:
         raise ValueError(f"Invalid node references in relationships: {invalid_references}")
-
-
-def _validate_relationship_type_constraints(graph: KnowledgeGraph) -> None:
-    """Check that relationship types have valid source/target node types.
-
-    Args:
-        graph: The KnowledgeGraph instance to validate.
-
-    Raises:
-        ValueError: If a HAS_RISK relationship target is not a RiskFactor.
-    """
-    node_map: dict[str, object] = {node.id: node for node in graph.nodes}
-
-    for rel in graph.relationships:
-        if rel.relation == "HAS_RISK" and node_map[rel.target].type != "RiskFactor":
-            raise ValueError(
-                f"HAS_RISK relationship target must be a RiskFactor, "
-                f"but '{rel.target}' is a {node_map[rel.target].type}"
-            )
 
