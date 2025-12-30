@@ -379,6 +379,61 @@ Place your financial document in `data/raw_report.txt`:
 echo "Sample Corp reported revenue of \$1.2 billion..." > data/raw_report.txt
 ```
 
+### Testing with Real Annual Reports (Large Documents)
+
+For testing with actual large-scale financial documents, you can download real annual reports from publicly traded companies:
+
+**Example Annual Reports:**
+- [Reliance Industries Annual Report 2024-25](https://www.ril.com/reports/RIL-Integrated-Annual-Report-2024-25.pdf)
+- [Adani Enterprises Annual Report FY25](https://www.adanienterprises.com/-/media/Project/Enterprises/Investors/Investor-Downloads/Annual-Report/AEL-FY25.pdf)
+
+**Convert PDF to Text (macOS):**
+
+First, install `poppler` for PDF text extraction:
+
+```bash
+brew install poppler
+```
+
+Then convert the PDF annual reports to raw text:
+
+```bash
+# Reliance Industries Annual Report
+pdftotext -layout -nopgbrk -enc UTF-8 RIL-Integrated-Annual-Report-2024-25.pdf data/raw_report.txt
+
+# OR Adani Enterprises Annual Report
+pdftotext -layout -nopgbrk -enc UTF-8 AEL-FY25.pdf data/raw_report.txt
+```
+
+**Convert PDF to Text (Linux/Ubuntu):**
+
+```bash
+sudo apt-get install poppler-utils
+pdftotext -layout -nopgbrk -enc UTF-8 your-annual-report.pdf data/raw_report.txt
+```
+
+**Convert PDF to Text (Windows):**
+
+Download poppler for Windows from [poppler releases](https://github.com/osber/pdf2text/releases) and add to PATH, then:
+
+```bash
+pdftotext -layout -nopgbrk -enc UTF-8 your-annual-report.pdf data/raw_report.txt
+```
+
+> **Note:** Real annual reports can be 200+ pages and contain 30,000+ lines of text. The Financial Detective handles large documents automatically through chunking. Expect extraction to take several minutes depending on your LLM provider.
+
+**Recommended Settings for Large Documents:**
+
+```bash
+export LLM_PROVIDER=ollama
+export OLLAMA_MODEL=qwen2.5:7b
+export CHUNK_ENABLED=true
+export CHUNK_SIZE_TOKENS=4000
+export CHUNK_OVERLAP_TOKENS=200
+
+python main.py
+```
+
 ### Run the Pipeline
 
 ```bash
