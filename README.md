@@ -42,7 +42,7 @@ Manually extracting this information is time-consuming and error-prone. Traditio
 - **Orphan Node Cleanup** — Removes nodes with no connections or meaningless content
 - **Fail-Fast Validation** — Errors surface immediately with descriptive messages; no silent failures
 - **Optional Confidence Scores** — Relationships may include confidence values for future UI, analytics, or human review
-- **Paginated HTML Visualization** — Large graphs rendered as navigable multi-page HTML with zoom controls
+- **Interactive HTML Visualization** — Dark-themed, full-screen HTML viewer with auto-fit, zoom slider, pan controls, and keyboard navigation
 
 ---
 
@@ -136,7 +136,7 @@ Manually extracting this information is time-consuming and error-prone. Traditio
 | `src/extractor/` | LLM extractor package (factory, base interface, OpenAI, Gemini, Ollama) |
 | `src/validator.py` | Schema validation, auto-repair, and orphan node removal |
 | `src/visualizer.py` | NetworkX graph construction and PNG rendering (optional) |
-| `src/visualizer_mermaid.py` | Mermaid diagrams and paginated HTML viewer (always available) |
+| `src/visualizer_mermaid.py` | Mermaid diagrams and interactive HTML viewer with dark theme (always available) |
 | `main.py` | Pipeline orchestration with iterative progress updates |
 | `clean_graph.py` | Utility to clean existing graphs (remove meaningless/orphan nodes) |
 
@@ -410,7 +410,7 @@ python main.py
 | `data/graph_output.json` | Structured Knowledge Graph in JSON format |
 | `visuals/graph.png` | NetworkX graph visualization (PNG image, optional) |
 | `visuals/graph.mmd` | Mermaid diagram for lightweight rendering |
-| `visuals/graph.html` | Interactive paginated HTML viewer (open in browser) |
+| `visuals/graph.html` | Interactive HTML viewer with dark theme, zoom, and pan controls |
 
 ---
 
@@ -466,13 +466,17 @@ The pipeline generates a Mermaid flowchart diagram (`visuals/graph.mmd`) and an 
 | RiskFactor | Rounded `("label")` |
 | DollarAmount | Parallelogram `[/"label"/]` |
 
-### Large Graph Handling
+### Interactive HTML Viewer
 
-For graphs with more than 100 nodes, the HTML viewer automatically paginates:
-- **50 nodes per page** with navigation controls
-- **First/Previous/Next/Last** buttons and page selector
-- **Zoom controls** for adjusting diagram size
-- **Fixed legend** showing node type shapes
+The HTML viewer provides a modern, interactive experience for exploring Knowledge Graphs:
+
+- **Dark Theme** — GitHub-inspired dark color scheme for reduced eye strain
+- **Auto-Fit on Load** — Graph automatically scales to fit your browser window
+- **Zoom Controls** — Slider (5%–200%), preset buttons (10%, 25%, 50%), and quick-zoom panel
+- **Pan Navigation** — Drag to pan, arrow keys to scroll, touch support for mobile
+- **Keyboard Shortcuts** — `+/-` for zoom, `F` to fit screen, `0` to reset, arrow keys to navigate
+- **Fixed Legend** — Always-visible node type reference
+- **Responsive Layout** — Works on various screen sizes and browsers
 
 ### Example Output
 
@@ -581,7 +585,7 @@ financial-detective/
 │   ├── graph_merger.py       # Merge and deduplicate KnowledgeGraphs
 │   ├── validator.py          # Graph validation and auto-repair
 │   ├── visualizer.py         # NetworkX PNG rendering (optional)
-│   ├── visualizer_mermaid.py # Mermaid diagrams and paginated HTML
+│   ├── visualizer_mermaid.py # Mermaid diagrams and interactive dark-themed HTML
 │   └── extractor/            # LLM extractor package
 │       ├── __init__.py       # Package entry point (with chunking orchestration)
 │       ├── base.py           # Abstract LLMExtractor interface
@@ -599,7 +603,7 @@ financial-detective/
 ├── visuals/
 │   ├── graph.png             # NetworkX visualization (if available)
 │   ├── graph.mmd             # Mermaid diagram
-│   └── graph.html            # Interactive paginated HTML viewer
+│   └── graph.html            # Interactive HTML viewer (dark theme with zoom/pan)
 ├── docs/
 │   ├── TECHNICAL_DESIGN.md   # Technical design document
 │   └── BUILD_PROMPTS.md      # Build prompts used to create the project

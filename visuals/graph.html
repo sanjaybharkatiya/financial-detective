@@ -3,222 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Detective - Knowledge Graph (689 nodes)</title>
+    <title>Financial Detective - Knowledge Graph (40 nodes)</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body {
             height: 100%;
+            width: 100%;
             overflow: hidden;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a2e;
+            background: #0d1117;
             display: flex;
             flex-direction: column;
         }
         
-        /* Fixed header */
+        /* Compact header */
         header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
             color: white;
-            padding: 0.8rem 2rem;
+            padding: 0.5rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
             flex-shrink: 0;
+            border-bottom: 1px solid #30363d;
         }
         header h1 { 
-            font-size: 1.3rem; 
-            font-weight: 700;
+            font-size: 1rem; 
+            font-weight: 600;
+            color: #58a6ff;
         }
         .stats {
             display: flex;
-            gap: 1rem;
-            font-size: 0.85rem;
+            gap: 0.75rem;
+            font-size: 0.75rem;
         }
         .stat {
-            background: rgba(255,255,255,0.15);
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
+            background: rgba(88,166,255,0.15);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(88,166,255,0.3);
         }
-        .stat-value { font-weight: 700; }
+        .stat-value { font-weight: 700; color: #58a6ff; }
         
-        /* Controls bar */
+        /* Controls bar - more compact */
         .controls {
-            background: #f8f9fa;
-            padding: 0.6rem 2rem;
+            background: #161b22;
+            padding: 0.4rem 1rem;
             display: flex;
-            gap: 0.8rem;
+            gap: 0.5rem;
             align-items: center;
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 1px solid #30363d;
             flex-shrink: 0;
+            flex-wrap: wrap;
         }
         .controls button {
-            padding: 0.5rem 1rem;
+            padding: 0.35rem 0.7rem;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 500;
-            transition: all 0.2s;
+            transition: all 0.15s;
         }
         .controls button:hover {
             transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         .btn-zoom {
-            background: #2563eb;
+            background: #238636;
             color: white;
         }
         .btn-zoom:hover {
-            background: #1d4ed8;
+            background: #2ea043;
         }
         .btn-secondary {
-            background: #e5e7eb;
-            color: #374151;
+            background: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
         }
         .btn-secondary:hover {
-            background: #d1d5db;
+            background: #30363d;
+        }
+        .btn-fit {
+            background: #1f6feb;
+            color: white;
+        }
+        .btn-fit:hover {
+            background: #388bfd;
         }
         .zoom-display {
-            background: white;
-            padding: 0.4rem 0.8rem;
+            background: #0d1117;
+            color: #58a6ff;
+            padding: 0.3rem 0.6rem;
             border-radius: 4px;
             font-weight: 600;
-            min-width: 60px;
+            font-size: 0.75rem;
+            min-width: 55px;
             text-align: center;
-            border: 1px solid #dee2e6;
+            border: 1px solid #30363d;
         }
         .separator {
             width: 1px;
-            height: 24px;
-            background: #dee2e6;
-            margin: 0 0.5rem;
+            height: 20px;
+            background: #30363d;
+            margin: 0 0.25rem;
         }
         .hint {
             margin-left: auto;
-            color: #6b7280;
-            font-size: 0.8rem;
+            color: #8b949e;
+            font-size: 0.7rem;
+        }
+        .zoom-slider {
+            width: 100px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: #30363d;
+            border-radius: 2px;
+            outline: none;
+        }
+        .zoom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            background: #58a6ff;
+            border-radius: 50%;
+            cursor: pointer;
         }
         
-        /* Main scrollable diagram area */
+        /* Main diagram area - full viewport */
         .diagram-wrapper {
             flex: 1;
             overflow: auto;
-            background: #f0f2f5;
+            background: #0d1117;
             cursor: grab;
+            position: relative;
         }
         .diagram-wrapper:active {
             cursor: grabbing;
         }
         .diagram-container {
             display: inline-block;
-            padding: 2rem;
+            padding: 1rem;
             min-width: 100%;
             min-height: 100%;
-            transform-origin: top left;
-            transition: transform 0.1s ease-out;
+            transform-origin: 0 0;
+            transition: transform 0.05s ease-out;
         }
         .mermaid {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: #161b22;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
             display: inline-block;
+            border: 1px solid #30363d;
         }
         .mermaid svg {
             max-width: none !important;
             height: auto !important;
         }
+        /* Style the SVG nodes for dark theme */
+        .mermaid .node rect, .mermaid .node polygon {
+            fill: #21262d !important;
+            stroke: #58a6ff !important;
+        }
+        .mermaid .node .label {
+            color: #c9d1d9 !important;
+        }
+        .mermaid .edgePath path {
+            stroke: #8b949e !important;
+        }
+        .mermaid .edgeLabel {
+            background-color: #161b22 !important;
+            color: #8b949e !important;
+        }
         
-        /* Legend */
+        /* Floating Legend - collapsible */
         .legend {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            font-size: 0.8rem;
+            bottom: 15px;
+            right: 15px;
+            background: #161b22;
+            padding: 0.6rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            font-size: 0.7rem;
             z-index: 100;
+            border: 1px solid #30363d;
+            max-width: 140px;
         }
         .legend h3 { 
-            margin-bottom: 0.5rem; 
-            color: #374151; 
-            font-size: 0.85rem;
+            margin-bottom: 0.4rem; 
+            color: #58a6ff; 
+            font-size: 0.75rem;
             font-weight: 600;
+            cursor: pointer;
         }
         .legend-item { 
             display: flex; 
             align-items: center; 
-            gap: 0.5rem; 
-            margin: 0.25rem 0;
-            color: #4b5563;
+            gap: 0.4rem; 
+            margin: 0.2rem 0;
+            color: #8b949e;
         }
         .legend-shape { 
-            width: 18px; 
-            height: 12px; 
-            border: 2px solid #374151; 
+            width: 14px; 
+            height: 10px; 
+            border: 1.5px solid #58a6ff; 
+            background: #21262d;
         }
         .shape-rect { border-radius: 2px; }
-        .shape-rounded { border-radius: 6px; }
-        .shape-parallelogram { transform: skewX(-10deg); width: 22px; }
+        .shape-rounded { border-radius: 4px; }
+        .shape-parallelogram { transform: skewX(-10deg); width: 18px; }
         
         /* Loading */
         .loading {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100%;
-            color: #6b7280;
-            font-size: 1.2rem;
+            color: #8b949e;
+            font-size: 1rem;
+            gap: 1rem;
         }
-        .loading::after {
-            content: '';
-            width: 24px;
-            height: 24px;
-            border: 3px solid #e5e7eb;
-            border-top-color: #2563eb;
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #30363d;
+            border-top-color: #58a6ff;
             border-radius: 50%;
-            margin-left: 1rem;
-            animation: spin 1s linear infinite;
+            animation: spin 0.8s linear infinite;
         }
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
         
-        /* Minimap */
-        .minimap {
+        /* Quick zoom panel */
+        .quick-zoom {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 200px;
-            height: 150px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            overflow: hidden;
+            left: 15px;
+            bottom: 15px;
+            background: #161b22;
+            padding: 0.5rem;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
             z-index: 100;
         }
-        .minimap-header {
-            background: #374151;
-            color: white;
-            padding: 0.3rem 0.6rem;
-            font-size: 0.7rem;
-            font-weight: 600;
+        .quick-zoom button {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #21262d;
+            color: #c9d1d9;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .minimap-content {
-            width: 100%;
-            height: calc(100% - 24px);
-            position: relative;
-        }
-        .minimap-viewport {
-            position: absolute;
-            border: 2px solid #2563eb;
-            background: rgba(37, 99, 235, 0.1);
-            pointer-events: none;
+        .quick-zoom button:hover {
+            background: #30363d;
         }
     </style>
 </head>
@@ -226,1486 +276,125 @@
     <header>
         <h1>📊 Financial Detective - Knowledge Graph</h1>
         <div class="stats">
-            <div class="stat"><span class="stat-value">689</span> Nodes</div>
-            <div class="stat"><span class="stat-value">753</span> Relationships</div>
+            <div class="stat"><span class="stat-value">40</span> Nodes</div>
+            <div class="stat"><span class="stat-value">40</span> Relationships</div>
         </div>
     </header>
     
     <div class="controls">
-        <button class="btn-zoom" onclick="zoomIn()">🔍+ Zoom In</button>
-        <button class="btn-zoom" onclick="zoomOut()">🔍- Zoom Out</button>
+        <button class="btn-zoom" onclick="zoomIn()">+ Zoom In</button>
+        <button class="btn-zoom" onclick="zoomOut()">− Zoom Out</button>
+        <input type="range" class="zoom-slider" id="zoomSlider" min="5" max="200" value="100" oninput="setZoomFromSlider(this.value)">
         <span class="zoom-display" id="zoomLevel">100%</span>
         <div class="separator"></div>
-        <button class="btn-secondary" onclick="resetZoom()">↺ Reset</button>
-        <button class="btn-secondary" onclick="fitToScreen()">⊡ Fit</button>
+        <button class="btn-fit" onclick="fitToScreen()">⊡ Fit to Screen</button>
+        <button class="btn-secondary" onclick="resetZoom()">↺ Reset 100%</button>
         <div class="separator"></div>
-        <button class="btn-secondary" onclick="scrollTo('left')">← Left</button>
-        <button class="btn-secondary" onclick="scrollTo('right')">→ Right</button>
-        <button class="btn-secondary" onclick="scrollTo('top')">↑ Top</button>
-        <button class="btn-secondary" onclick="scrollTo('bottom')">↓ Bottom</button>
-        <span class="hint">🖱️ Drag to pan • Scroll to move • Ctrl+Scroll to zoom</span>
+        <button class="btn-secondary" onclick="setZoom(0.1)">10%</button>
+        <button class="btn-secondary" onclick="setZoom(0.25)">25%</button>
+        <button class="btn-secondary" onclick="setZoom(0.5)">50%</button>
+        <span class="hint">Drag to pan • Ctrl+Scroll to zoom • Arrow keys to navigate</span>
+    </div>
+    
+    <div class="quick-zoom">
+        <button onclick="zoomIn()" title="Zoom In">+</button>
+        <button onclick="zoomOut()" title="Zoom Out">−</button>
+        <button onclick="fitToScreen()" title="Fit to Screen">⊡</button>
+        <button onclick="resetZoom()" title="Reset to 100%">↺</button>
     </div>
     
     <div class="diagram-wrapper" id="wrapper">
         <div class="diagram-container" id="container">
-            <div class="loading" id="loading">Rendering graph...</div>
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <div>Rendering 40 nodes...</div>
+            </div>
             <pre class="mermaid" id="diagram" style="display:none;">
 flowchart LR
 
     %% Node definitions
-    amount_1[/"$3 billion"/]
-    company_1["Reliance Retail"]
-    amount_3[/"$1 billion"/]
-    company_2["RIL"]
-    risk_1("volatility")
-    company_3["SandP"]
-    company_4["Moody’s"]
-    company_5["CRISIL"]
-    company_6["CARE"]
-    company_7["ICRA"]
-    company_8["India Ratings"]
-    company_14["Reliance Gas Pipeline Limited"]
-    risk_2("Liquidity Risk")
-    company_15["Reliance Industries Limited"]
-    risk_3("counterparties’ credit risk")
-    risk_4("market volatility")
-    risk_5("liquidity risk")
-    risk_6("Commodity Price Risk")
-    amount_41[/"J10,71,174 crore"/]
-    amount_42[/"US$ 125.3 billion"/]
-    amount_43[/"J10,00,122 crore"/]
-    amount_44[/"J1,83,422 crore"/]
-    amount_45[/"US$ 21.5 billion"/]
-    amount_46[/"J1,78,290 crore"/]
-    amount_47[/"J1,46,917 crore"/]
-    amount_48[/"J1,41,969 crore"/]
-    amount_49[/"J 3,47,530 crore"/]
-    amount_50[/"US$ 40.7 billion"/]
-    amount_51[/"J 1,17,083 crore"/]
-    amount_52[/"US$ 13.7 billion"/]
-    amount_53[/"J 1,31,107 crore"/]
-    amount_54[/"US$ 15.3 billion"/]
-    amount_55[/"J 1,31,769 crore"/]
-    amount_56[/"J81,309 crore"/]
-    amount_57[/"US$ 9.5 billion"/]
-    amount_58[/"J 5,57,163 crore"/]
-    amount_59[/"US$ 65.2 billion"/]
-    amount_61[/"J 74,163 crore"/]
-    amount_62[/"US$ 8.7 billion"/]
-    amount_63[/"J 86,393 crore"/]
-    amount_64[/"J 35,262 crore"/]
-    amount_65[/"US$ 4.1 billion"/]
-    amount_66[/"J 42,042 crore"/]
-    risk_8("global volatility")
-    risk_9("geopolitical tension")
-    risk_10("policy uncertainties")
-    risk_11("trade tariffs")
-    risk_12("narrower margins")
-    risk_13("supply additions")
-    risk_14("unfavourable global demand-supply")
-    company_21["Dhirubhai Ambani Green Energy Giga Complex"]
-    company_22["Nel ASA"]
-    risk_25("climate-related changes")
-    risk_26("Transition risks")
-    risk_29("technological advancements")
-    risk_30("geopolitical volatility in the Middle East")
-    risk_31("redirection of shipping routes")
-    risk_32("OPEC+ and non-OPEC production decisions")
-    risk_33("regional capacity additions")
-    risk_34("downstream supply-demand realignments")
-    risk_35("evolving sanctions and trade tariff regimes")
-    risk_36("rate of recovery of Chinese economy")
-    risk_37("New refining capacity in Nigeria and China")
-    risk_38("Red Sea blockage")
-    risk_39("Downstream chemical product prices and margins")
-    risk_41("digital risk environment")
-    company_24["Reliance"]
-    risk_43("Foreign Exchange Risk")
-    risk_45("Climate Change")
-    risk_46("Environmental Impacts")
-    risk_47("Energy Efficiency of Operations")
-    risk_48("Water and Effluent Management")
-    risk_49("Raw Material Security")
-    risk_50("Ecosystem and Biodiversity")
-    risk_51("Innovation and Technology")
-    risk_52("Waste Management and Circular Economy")
-    risk_53("Sustainable Supply Chain Management")
-    risk_54("Disaster Preparedness and Management")
-    risk_55("Health, Safety and Employee Well-being")
-    risk_56("Diversity and Inclusion")
-    risk_57("Customer Satisfaction")
-    risk_58("Data Privacy and Cybersecurity")
-    risk_59("Security and Asset Management")
-    risk_60("Talent Management")
-    risk_61("Community Development")
-    risk_62("Labour Management")
-    risk_63("Human Rights")
-    risk_64("Business Ethics, Integrity and Transparency")
-    risk_65("Regulatory Issues and Compliance")
-    risk_66("Anti-competitive Behaviour")
-    risk_67("climate challenges")
-    amount_76[/"150 billion"/]
-    company_25["Jio-bp"]
-    company_26["Nel Hydrogen Electrolyser AS"]
-    company_27["Jio"]
-    company_28["Reliance O2C"]
-    company_29["Reliance EandP"]
-    risk_68("ESG risks")
-    company_33["Reliance Industries"]
-    company_34["Jio Infocomm Limited (RJIL)"]
-    company_35["Reliance Retail Limited (RRL)"]
-    company_36["Reliance Projects and Property Management Services Limite..."]
-    company_37["Recron (Malaysia) Sdn. Bhd"]
-    company_38["RP Chemicals (Malaysia) Sdn. Bhd"]
-    company_39["Reliance BP Mobility Limited (RBML)"]
-    company_40["Reliance Petro Marketing Limited"]
-    company_41["Reliance Corporate IT Park Services Limited"]
-    company_42["Reliance Petroleum"]
-    amount_85[/"C 31.08 crore"/]
-    risk_69("price volatility")
-    risk_70("Margin Risk")
-    company_43["Jio Platforms Limited"]
-    company_44["Reliance Retail Limited"]
-    amount_102[/"Rs. 40,000 crore"/]
-    risk_71("compliance")
-    risk_72("fraudulent")
-    risk_73("illegal")
-    risk_74("misleading")
-    risk_75("regulatory")
-    company_45["Reliance Retail Ventures Limited"]
-    company_46["Reliance Global Energy Services (Singapore) Pte. Limited"]
-    company_47["Reliance Jio Infocomm Limited"]
-    risk_76("Cybersecurity")
-    risk_77("Safety")
-    risk_78("Operations")
-    risk_79("Compliance")
-    risk_80("Control")
-    risk_81("Financial risks")
-    company_48["Star Television Productions Limited"]
-    company_49["Studio 18 Media Private Limited"]
-    company_50["Viacom 18 Media Private Limited"]
-    company_51["Viacom 18 Media (UK) Limited"]
-    company_52["Viacom 18 US Inc."]
-    company_53["Reldel Apparel Private Limited"]
-    company_54["Jio Digital Fibre Private Limited"]
-    amount_109[/"C 78,339 crore"/]
-    risk_84("expected pattern of future benefits of the tangible asset...")
-    company_55["BG Exploration and Production India Limited"]
-    company_56["GOI"]
-    company_57["NTPC"]
-    company_58["Gail (India) Limited"]
-    company_59["Reliance Petroleum Limited"]
-    risk_86("difference in interpretation of certain PSC provisions")
-    risk_87("complexity of issues")
-    amount_110[/"$ 165 million"/]
-    amount_111[/"C 1,407 crore"/]
-    amount_112[/"$ 247 million"/]
-    amount_113[/"C 2,111 crore"/]
-    amount_114[/"H 387 crore"/]
-    amount_115[/"H 447 crore"/]
-    amount_116[/"H 250 crore"/]
-    amount_117[/"H 25 crore"/]
-    company_60["Parent"]
-    risk_88("complexity of those IT systems")
-    risk_89("high volumes of data processed by the IT systems")
-    risk_90("risk of revenue being recognised inappropriately")
-    company_61["Star India Private Limited"]
-    risk_91("significant management judgement")
-    risk_92("Identification of intangible assets acquired through busi...")
-    risk_93("Determination of the fair value of consideration transferred")
-    risk_94("Allocation of the purchase price to identifiable assets a...")
-    risk_95("increasing challenge to protect the integrity of the Pare...")
-    risk_96("cyber security")
-    company_62["Group"]
-    company_63["subsidiary companies"]
-    company_64["associate companies"]
-    company_65["joint venture companies"]
-    amount_123[/"C 165 crore"/]
-    amount_124[/"C 2 crore"/]
-    risk_97("pending litigations")
-    risk_98("frauds")
-    risk_99("irregularities")
-    risk_100("override of internal control")
-    company_66["Securities Appellate Tribunal"]
-    company_67["SEBI"]
-    company_68["Hathway Cable and Datacom Limited"]
-    company_69["DOT"]
-    amount_125[/"H 3,202 crore"/]
-    company_70["Den Networks Limited"]
-    amount_126[/"H 628 crore"/]
-    company_71["Den Broadband Limited"]
-    amount_127[/"H 2,157 crore"/]
-    company_72["TDSAT"]
-    company_75["Gujarat Industrial Development Corporation"]
-    amount_137[/"3,300 crore"/]
-    company_76["Alok Industries Limited"]
-    amount_138[/"63 crore"/]
-    company_77["BAM DLR Chennai Private Limited"]
-    amount_139[/"17 crore"/]
-    company_78["Summit Digitel Infrastructure Limited"]
-    amount_140[/"100 crore"/]
-    company_79["Mahan Energen Limited"]
-    amount_143[/"16 crore"/]
-    company_80["Reliance Industrial Infrastructure Limited"]
-    amount_144[/"54,900 crore"/]
-    company_81["Jio Limited"]
-    company_82["Lakadia B Power Transmission Limited"]
-    company_83["MSKVY Nineteenth Solar SPV Limited"]
-    company_84["MSKVY Twenty Second Solar SPV Limited"]
-    company_85["Navi Mumbai IIA Private Limited"]
-    company_87["Reliance 4IR Realty Development Limited"]
-    company_90["Reliance Chemicals and Materials Limited"]
-    company_92["Reliance Content Distribution Limited"]
-    company_95["Reliance Ethane Pipeline Limited"]
-    company_96["Indiawin Sports Private Limited"]
-    company_97["Gujarat Chemical Port Limited"]
-    company_99["Reliance Europe Limited"]
-    company_100["Vadodara Enviro Channel Limited"]
-    company_102["Dronagiri Bokadvira East Infra Limited"]
-    company_103["Dronagiri Navghar South Second Infra Limited"]
-    company_104["Dronagiri Bokadvira North Infra Limited"]
-    company_105["Dronagiri Navghar West Infra Limited"]
-    company_106["Dronagiri Bokadvira South Infra Limited"]
-    company_107["Dronagiri Pagote East Infra Limited"]
-    company_108["Dronagiri Bokadvira West Infra Limited"]
-    company_109["Dronagiri Pagote North First Infra Limited"]
-    company_110["Dronagiri Dongri East Infra Limited"]
-    company_111["Dronagiri Pagote North Infra Limited"]
-    company_112["Dronagiri Dongri North Infra Limited"]
-    company_113["Dronagiri Pagote North Second Infra Limited"]
-    company_114["Dronagiri Dongri South Infra Limited"]
-    company_115["Dronagiri Pagote South First Infra Limited"]
-    company_116["Dronagiri Dongri West Infra Limited"]
-    company_117["Dronagiri Pagote South Infra Limited"]
-    company_118["Dronagiri Funde East Infra Limited"]
-    company_119["Dronagiri Pagote West Infra Limited"]
-    company_120["Dronagiri Funde North Infra Limited"]
-    company_121["Dronagiri Panje East Infra Limited"]
-    company_122["Dronagiri Funde South Infra Limited"]
-    company_123["Dronagiri Panje North Infra Limited"]
-    company_124["Dronagiri Funde West Infra Limited"]
-    company_125["Dronagiri Panje South Infra Limited"]
-    company_126["Dronagiri Navghar East Infra Limited"]
-    company_127["Dronagiri Panje West Infra Limited"]
-    company_128["Dronagiri Navghar North First Infra Limited"]
-    company_129["Kalamboli East Infra Limited"]
-    company_130["Dronagiri Navghar North Infra Limited"]
-    company_131["Kalamboli North First Infra Limited"]
-    company_132["Dronagiri Navghar North Second Infra Limited"]
-    company_133["Kalamboli North Infra Limited"]
-    company_134["Dronagiri Navghar South First Infra Limited"]
-    company_135["Kalamboli North Second Infra Limited"]
-    company_136["Dronagiri Navghar South Infra Limited"]
-    company_137["Kalamboli North Third Infra Limited"]
-    company_138["GML India Fashion Private Limited"]
-    company_139["Hamleys (Franchising) Limited"]
-    company_140["Hamleys Asia Limited"]
-    company_141["Hamleys of London Limited"]
-    company_142["Hathway Digital Limited"]
-    company_143["Hathway VCN Cablenet Private Limited"]
-    company_144["7-India Convenience Retail Limited"]
-    company_145["Cover Story Clothing UK Limited"]
-    company_146["Aaidea Solutions Limited"]
-    company_147["Accops Systems FZ-LLC"]
-    company_148["Accops Systems Private Limited"]
-    company_149["Actoserba Active Wholesale Limited"]
-    company_150["Addverb Technologies B.V."]
-    company_151["Addverb Technologies Limited"]
-    company_152["Addverb Technologies Pte. Ltd."]
-    company_153["Addverb Technologies Pty Limited"]
-    company_154["Addverb Technologies USA Inc."]
-    company_155["Adventure Marketing Private Limited"]
-    company_156["AETN18 Media Private Limited"]
-    company_157["Crystalline Silica and Mining Limited"]
-    company_158["C-Square Info-Solutions Limited"]
-    company_159["Dadha Pharma Distribution Limited"]
-    company_160["DEN Ambey Cable Networks Private Limited"]
-    company_161["Den Budaun Cable Network Private Limited"]
-    company_162["Den Discovery Digital Networks Private Limited"]
-    company_163["Den Enjoy Cable Networks Private Limited"]
-    company_164["Den Enjoy Navaratan Network Private Limited"]
-    company_165["Den F K Cable TV Network Private Limited"]
-    company_166["Global Asianet Limited"]
-    company_167["Grab A Grub Services Limited"]
-    company_168["Greycells18 Media Limited"]
-    company_169["Hathway Bhawani Cabletel and Datacom Limited"]
-    company_170["Hathway Mantra Cable and Datacom Limited"]
-    company_171["Hathway Nashik Cable Network Private Limited"]
-    company_172["ICD Columbus Centre Hotel LLC"]
-    company_173["Independent Media Trust"]
-    company_174["India Mumbai Indians (Pty) Ltd"]
-    company_175["IndiaCast Media Distribution Private Limited"]
-    company_176["IndiaCast UK Ltd"]
-    company_177["IndiaCast US Ltd"]
-    company_178["Indiavidual Learning Limited"]
-    company_179["Indiawin Sports Middle East Limited"]
-    company_180["Reliance Digital"]
-    company_181["MyJio Stores"]
-    company_183["Consumer Brands"]
-    company_184["Campa"]
-    company_185["Independence"]
-    company_187["Deloitte Haskins and Sells LLP"]
-    company_188["Chaturvedi and Shah LLP"]
-    amount_171[/"349 million"/]
-    risk_104("Disruptive technological changes")
-    risk_105("price competition")
-    amount_186[/"H 72 crore"/]
-    risk_113("interest rate risk")
-    company_189["Reliance International Limited (RINL)"]
-    company_190["the Company"]
-    company_191["Reliance Foundation"]
-    company_193["RF School"]
-    company_197["Kasturba Vaidyakiya Rahat Mandal"]
-    company_198["Nirmal Government Hospital"]
-    company_199["Sher Singh Karki School"]
-    company_200["Pilikula Zoological Park"]
-    company_201["Pandit Deendayal Energy University"]
-    company_202["PDEU"]
-    company_204["BAM DLR Data Centre Services Private Limited"]
-    company_205["BAM DLR Kolkata Private Limited"]
-    company_206["BAM DLR Mumbai Private Limited"]
-    company_207["BAM DLR Network Services Private Limited"]
-    company_208["Football Sports Development Limited"]
-    company_209["India Gas Solution Private Limited"]
-    company_210["Pipeline Management Services Private Limited"]
-    company_211["Sintex Industries Limited"]
-    company_212["Reliance Exploration and Production DMCC"]
-    company_213["Reliance Gas Pipelines Limited"]
-    company_214["Reliance Global Energy Services (Singapore) Pte. Ltd."]
-    company_215["Reliance Global Energy Services Limited"]
-    company_216["Reliance Industries (Middle East) DMCC"]
-    company_217["Reliance International Limited"]
-    amount_238[/"USD 1"/]
-    company_218["Reliance Mappedu Multi Modal Logistics Park Limited"]
-    company_219["Reliance New Energy Limited"]
-    company_220["Reliance New Energy Battery Limited"]
-    company_221["Reliance Projects and Property Management Services Limited"]
-    company_222["Reliance Sibur Elastomers Private Limited"]
-    company_223["Reliance SOU Limited"]
-    company_224["Reliance Strategic Business Ventures Limited"]
-    company_225["Reliance Syngas Limited"]
-    company_226["Reliance Ventures Limited"]
-    company_227["Rise Worldwide Limited"]
-    company_228["SenseHawk, Inc."]
-    amount_252[/"USD 0.0001"/]
-    company_229["Skymet Weather Services Private Limited"]
-    company_237["Star Advertising Sales Limited"]
-    company_239["Ulwe West Infra Limited"]
-    company_241["Stoke Park Limited"]
-    company_242["V - Retail Limited"]
-    company_244["VasyERP Solutions Private Limited"]
-    company_246["Vengara Retail Private Limited"]
-    amount_340[/"H 20,415 crore"/]
-    amount_342[/"H 1,000 crore"/]
-    amount_348[/"H 27 crore"/]
-    amount_349[/"H 22 crore"/]
-    amount_355[/"H 855 crore"/]
-    amount_356[/"H 691 crore"/]
-    amount_357[/"H 85 crore"/]
-    amount_359[/"H 188 crore"/]
-    amount_360[/"H 170 crore"/]
-    amount_361[/"H 2 crore"/]
-    amount_362[/"H 105 crore"/]
-    amount_363[/"H 89 crore"/]
-    amount_364[/"H 58 crore"/]
-    amount_366[/"H 19 crore"/]
-    amount_368[/"H 6 crore"/]
-    amount_369[/"H 3 crore"/]
-    amount_370[/"H 272 crore"/]
-    amount_371[/"H 64 crore"/]
-    company_256["Reliance Foundation Hospital Trust"]
-    company_257["Jamnaben Hirachand Ambani Foundation"]
-    company_258["Reliance Foundation Institution of Education and Research"]
-    company_259["Reliance Foundation Youth Sports"]
-    company_260["Sir Hurkisondas Nurrotumdas Hospital and Research Centre"]
-    company_261["Dhirubhai Ambani Foundation"]
-    company_262["Hirachand Govardhandas Ambani Public Charitable Trust"]
-    company_263["Vividh Kridakhel Foundation"]
-    company_264["Vividh Hunarvikas Foundation"]
-    company_267["GTPL Hathway Limited"]
-    company_273["Jio Finance Limited"]
-    company_274["Jio Financial Services Limited Group"]
-    company_275["Jio Finance Platform and Service Limited"]
-    company_281["DEN ADN Network Private Limited"]
-    company_284["Reliance Bally India Private Limited"]
-    company_286["Diesel Fashion India Reliance Private Limited"]
-    company_289["Reliance International Leasing IFSC Private Limited"]
-    company_296["Ryohin-Keikaku Reliance India Private Limited"]
-    company_299["Jio Satellite Communications Limited"]
-    company_301["Jio Things Limited"]
-    company_302["Just Dial Limited"]
-    company_303["Kalamboli South First Infra Limited"]
-    company_304["Reliance-Vision Express Private Limited"]
-    company_305["Sosyo Hajoori Beverages Private Limited"]
-    company_306["TCO Reliance India Private Limited"]
-    company_307["Zegna South Asia Private Limited"]
-    company_315["Ethane Coral LLC"]
-    company_316["Ethane Diamond LLC"]
-    company_317["Ethane Jade LLC"]
-    company_318["Foodhall Franchises Limited"]
-    company_321["Reliance Carbon Fibre Cylinder Limited"]
-    company_322["Reliance Hydrogen Electrolysis Limited"]
-    company_323["Reliance Hydrogen Fuel Cell Limited"]
-    company_324["Reliance New Energy Carbon Fibre Cylinder Limited"]
-    company_325["Reliance New Energy Hydrogen Electrolysis Limited"]
-    company_326["Reliance New Energy Hydrogen Fuel Cell Limited"]
-    amount_472[/"₹ 10,71,174 crore"/]
-    amount_474[/"₹ 1,83,422 crore"/]
-    amount_475[/"₹ 81,309 crore"/]
-    risk_123("external volatility")
-    risk_124("geopolitical turbulence")
-    risk_125("global uncertainties")
-    amount_477[/"18 million"/]
-    company_333["SpaceX"]
-    company_334["Starlink"]
-    amount_479[/"100 million"/]
-    company_335["JioStar"]
-    amount_480[/"61.2 million"/]
-    amount_481[/"652 million"/]
-    company_342["Network18"]
-    company_346["Moneycontrol"]
-    amount_489[/"280 million"/]
-    company_347["Jio Studios"]
-    amount_490[/"₹ 1,000 crores"/]
-    amount_499[/"$6.9/bbl"/]
-    amount_500[/"$11.6/bbl"/]
-    amount_501[/"$14.4/bbl"/]
-    amount_502[/"$23.0/bbl"/]
-    amount_503[/"$13.6/bbl"/]
-    amount_504[/"$21.2/bbl"/]
-    risk_126("market complexities")
-    risk_127("recessionary concerns")
-    risk_128("climate-related risks")
-    risk_129("regulatory shifts")
-    risk_130("market fluctuations")
-    risk_131("reputational concerns")
-    risk_132("legal")
-    risk_133("ethical")
-    company_361["Jio Financial Services Limited"]
-    risk_134("Risk Management")
-    risk_135("Compliance exposures")
-    company_372["Risk Management Committee"]
-    company_374["BSE Limited"]
-    company_375["National Stock Exchange of India Limited"]
-    risk_136("Commodity Price Risks")
-    company_381["Luxembourg Stock Exchange"]
-    amount_522[/"C 25 crore"/]
-    company_382["SAT"]
-    company_383["BNP and Associates"]
-    company_384["Shome and Banerjee"]
-    company_385["Kiran J. Mehta and Co."]
-    company_386["Diwanji and Co."]
-    company_387["K.G. Goyal and Associates"]
-    company_388["V.J. Talati and Co."]
-    company_389["Suresh Damodar Shenoy"]
-    company_390["Dilip M Malkar and Co."]
-    company_391["V. Kumar and Associates"]
-    company_392["Balwinder and Associates"]
-    company_396["Gates Foundation"]
-    amount_526[/"Rs. 15000,00,00,000/-"/]
-    amount_528[/"Rs. 50000,00,00,000/-"/]
-    company_397["Jamnagar Manufacturing Division (JMD)"]
-    company_398["GAIL (India) Limited"]
-    company_399["Government of India"]
-    company_400["Oil and Natural Gas Corporation Limited"]
-    company_401["BP Exploration (Alpha) Limited"]
-    amount_540[/"US$ 38.7 Billion"/]
-    amount_541[/"US$ 2.9 Billion"/]
-    amount_550[/"US$ 73.4 Billion"/]
-    amount_551[/"US$ 6.4 Billion"/]
-    risk_140("significant increase in credit risk")
-    amount_557[/"US$ 2.5 Billion"/]
-    amount_560[/"Rs. 8050 crores"/]
-    amount_561[/"C 1,309 crore"/]
-    risk_141("supply chain dynamics")
-    risk_142("fluctuating commodity prices")
-    risk_143("Global LNG oversupply")
-    risk_144("shift towards renewables")
-    company_418["Viacom18"]
-    company_419["Star India"]
-    company_420["TV18"]
-    company_421["RINL"]
-    company_422["Reliance Corporate IT Park Limited"]
-    company_424["Kalamboli West Infra Limited"]
-    company_425["Reliance Ambit Trade Private Limited"]
-    company_426["Reliance Comtrade Private Limited"]
-    company_427["Reliance Eminent Trading and Commercial Private Limited"]
-    company_428["Reliance Progressive Traders Private Limited"]
-    company_431["Reliance Universal Traders Private Limited"]
-    amount_619[/"H 13,532 crore"/]
-    amount_620[/"H 6,766 crore"/]
-    amount_716[/"295 crore"/]
-    amount_732[/"₹ 4,31,315"/]
-    amount_738[/"C 32,536 crore"/]
-    amount_739[/"C 75,734 crore"/]
-    amount_740[/"C 876 crore"/]
-    amount_741[/"H 71 crore"/]
-    amount_742[/"H 7,371 crore"/]
-    amount_743[/"H 5,798 crore"/]
-    amount_762[/"7,757 crore"/]
-    amount_763[/"6,591 crore"/]
-    amount_764[/"4,169 crore"/]
-    amount_765[/"3,283 crore"/]
-    company_436["Amante Exports (Private) Limited"]
-    company_437["Amante India Limited"]
-    company_438["Amante Lanka (Private) Limited"]
-    company_439["Asteria Aerospace Limited"]
-    company_441["Columbus Centre Corporation"]
-    company_443["Digital18 Media Private Limited"]
-    amount_767[/"H 11,500 crore"/]
-    amount_768[/"USD 35.30"/]
-    company_444["Jaisuryas Retail Ventures Limited"]
-    amount_769[/"INR 13.74"/]
-    amount_770[/"INR 302.24"/]
-    company_445["Jio Estonia OÜ"]
-    amount_772[/"INR 0.45"/]
-    company_446["Jio Haptik Technologies Limited"]
-    amount_773[/"INR 49.13"/]
-    company_448["Jio Infrastructure Management Services Limited"]
-    amount_775[/"INR 0.06"/]
-    amount_776[/"INR 107.86"/]
-    company_449["Faradion UG"]
-    amount_778[/"INR 0.70"/]
-    amount_779[/"INR 2.29"/]
-    amount_780[/"INR 0.05"/]
-    company_450["Jio Media Limited"]
-    amount_781[/"INR 5.00"/]
-    amount_782[/"INR 8,939.03"/]
-    amount_783[/"INR 109.20"/]
-    amount_784[/"INR 1.00"/]
-    amount_785[/"INR 85.04"/]
-    company_452["NowFloats Technologies Limited"]
-    amount_786[/"INR 0.20"/]
-    company_453["Radisys Canada Inc."]
-    amount_787[/"USD 0.00"/]
-    company_454["Radisys Cayman Limited"]
-    company_455["Kalanikethan Silks Limited"]
-    amount_788[/"INR 16.00"/]
-    company_456["Radisys Convedia (Ireland) Limited"]
-    company_457["Karkinos Healthcare North East Private Limited"]
-    amount_789[/"INR 10.20"/]
-    amount_790[/"INR 0.00"/]
-    company_458["Radisys Corporation"]
-    amount_791[/"USD 166.12"/]
-    company_459["Karkinos Healthcare Private Limited"]
-    amount_792[/"INR 10.00"/]
-    amount_793[/"INR 1,422.32"/]
-    company_460["Kutch New Energy Projects Limited"]
-    amount_794[/"INR 0.02"/]
-    company_461["Radisys GmbH"]
-    amount_796[/"INR 0.24"/]
-    company_462["Lithium Werks China Manufacturing Co., Ltd."]
-    amount_798[/"INR 116.41"/]
-    company_463["Radisys India Limited"]
-    amount_799[/"INR 0.21"/]
-    company_464["Radisys International LLC"]
-    amount_800[/"USD 5.26"/]
-    company_465["Mimosa Networks Bilişim Teknolojileri Limited Şirketi"]
-    company_467["Mimosa Networks, Inc."]
-    amount_803[/"INR 4.01"/]
-    company_469["REC Americas LLC"]
-    company_470["Nauyaan Shipyard Private Limited"]
-    amount_804[/"INR 0.01"/]
-    company_472["Nauyaan Tradings Private Limited"]
-    company_473["REC Solar EMEA GmbH"]
-    amount_805[/"INR 771.95"/]
-    company_474["REC Solar Holdings AS"]
-    amount_806[/"USD 547.09"/]
-    amount_807[/"INR 4,684.15"/]
-    company_475["Netmeds Healthcare Limited"]
-    amount_808[/"INR 9.29"/]
-    company_476["REC Solar Pte. Ltd."]
-    amount_809[/"USD 328.81"/]
-    amount_810[/"INR 2,815.25"/]
-    company_477["New Emerging World of Journalism Limited"]
-    amount_811[/"INR 0.04"/]
-    amount_815[/"US$ 18.0 Billion"/]
-    amount_817[/"US$ 7.6 Billion"/]
-    amount_819[/"US$ 2.4 Billion"/]
-    amount_821[/"US$ 0.2 Billion"/]
-    company_479["FICCI"]
-    company_480["LyondellBasell"]
-    company_481["Federation of Gujarat Industries Research"]
-    company_482["Reliance Oxidation Catalyst Technology"]
-    company_483["Clarivate"]
-    company_484["IMexI"]
-    company_485["The Asset Triple A Awards"]
-    company_486["SACE Push"]
-    company_487["IJ Global"]
-    company_488["Jio Hotstar"]
-    company_489["Global Water Tech Awards"]
-    company_490["Federation of Indian Chambers of Commerce and Industry"]
-    company_491["Institute of Directors"]
-    company_493["ETHR World"]
-    company_497["Reliance Jio Infocomm Ltd."]
-    company_503["Aegis Graham Bell Awards 2025"]
-    company_504["Ministry of Electronics and Information Technology"]
-    company_505["Radhe Krishna Temple Elephant Welfare Trust"]
-    company_506["Vantara"]
-    amount_826[/"C 1,048 crore"/]
-    amount_827[/"C 1,48,298 crore"/]
-    amount_828[/"C 1,96,887 crore"/]
-    amount_829[/"C 8 crore"/]
-    amount_830[/"C1,048 crore"/]
-    amount_831[/"C 261 crore"/]
-    amount_832[/"K In crore"/]
-    amount_835[/"21.9 billion"/]
-    company_513["Reliance New Energy Power Electronics Limited"]
-    company_514["Reliance New Energy Storage Limited"]
-    company_515["Reliance Petro Materials Limited"]
-    company_516["Enercent Technologies Private Limited"]
-    company_517["India Mumbai Indians (Pty) Limited"]
-    company_518["Indiawin Sports USA Inc."]
-    company_519["Reliance Polyester Limited"]
-    amount_992[/"H 9,587 crore"/]
-    amount_994[/"H 2,068 crore"/]
-    amount_996[/"H 1,721 crore"/]
-    amount_998[/"H 341 crore"/]
-    amount_999[/"H 231 crore"/]
-    amount_1000[/"H 121 crore"/]
-    amount_1001[/"H 526 crore"/]
-    amount_1002[/"H 442 crore"/]
-    amount_1003[/"H 205 crore"/]
-    amount_1004[/"C 66 crore"/]
-    company_526["Rakshita Commercial Private Limited"]
-    amount_1010[/"24,415 crore"/]
-    amount_1011[/"50 crore"/]
-    amount_1115[/"C 50 lakh"/]
-    company_527["REC Trading (Shanghai) Co., Ltd."]
-    company_528["Reliance Bio Energy Limited"]
-    company_529["Reliance Brands Limited"]
-    company_532["Sterling and Wilson Renewable Energy Limited"]
-    company_533["Metro Cast Network India Private Limited"]
-    company_534["BookmyShow Live Private Limited"]
-    company_535["Burberry India Private Limited"]
-    company_536["Canali India Private Limited"]
-    company_537["Clarks Footwear Private Limited"]
-    company_538["Nexwafe GmbH"]
-    company_539["Reliance Realty Limited"]
-    company_540["Den Fateh Marketing Private Limited"]
-    company_541["Den Kashi Cable Network Limited"]
-    company_542["Den Malayalam Telenet Private Limited"]
-    company_543["Infomedia Press Limited"]
-    company_544["Den Nashik City Cable Network Private Limited"]
-    company_545["Eminent Cable Network Private Limited"]
-    company_546["Intimi India Limited"]
-    company_547["Genesis La Mode Private Limited"]
-    company_548["GLB Body Care Private Limited"]
-    company_549["Hathway Latur MCN Cable and Datacom Private Limited"]
-    company_550["Hathway MCN Private Limited"]
-    company_551["Hathway Sai Star Cable and Datacom Private Limited"]
-    company_552["SRC Ecotex (India) Private Limited"]
-    company_553["Hathway Sonali OM Crystal Cable Private Limited"]
-    company_554["Hathway SS Cable and Datacom LLP"]
-    company_555["Two Platforms Inc."]
-    company_556["Health Alliance Group Inc."]
-    company_557["Ubona Technologies Private Limited"]
-    company_558["IBN Lokmat News Private Limited"]
-    company_559["Wavetech Helium, Inc."]
-    company_560["Reliance-GrandOptical Private Limited"]
-    company_561["Reverie Language Technologies Limited"]
-    company_562["Mindex 1 Limited"]
-    company_563["RBML Solutions India Limited"]
-    amount_1231[/"INR 300.00"/]
-    amount_1232[/"INR 10.01"/]
-    company_564["REC ScanModule Sweden AB"]
-    amount_1235[/"INR 3,877.30"/]
-    amount_1236[/"INR 32.24"/]
-    company_565["Reliance Brands Eyewear Private Limited"]
-    company_566["Reliance Brands Holding UK Limited"]
-    amount_1238[/"INR 105.38"/]
-    amount_1239[/"INR 1,770.44"/]
-    company_567["Reliance Clothing India Limited"]
-    amount_1240[/"INR 45,000.00"/]
-    amount_1241[/"INR 1,107.92"/]
-    company_568["Reliance Consumer Products Limited"]
-    amount_1242[/"INR 100.00"/]
-    company_569["Reliance Jio Infocomm UK Limited"]
-    amount_1244[/"INR 64.49"/]
-    amount_1245[/"INR 42,179.35"/]
-    amount_1246[/"INR 2.69"/]
-    company_570["Reliance New Energy Battery Storage
-        Limited"]
-    amount_1247[/"INR 99.14"/]
-    amount_1248[/"INR 25.69"/]
-    company_571["Reliance New Energy Carbon Fibre
-        Cylinder Limited"]
-    company_572["RISE Worldwide Limited"]
-    amount_1249[/"INR 106.72"/]
-    company_573["Ritu Kumar ME (FZE)"]
-    company_574["Urban Ladder Home Décor Solutions
-    Limited"]
-    amount_1251[/"INR 25.07"/]
-    amount_1252[/"INR 14.00"/]
-    amount_1253[/"INR 0.63"/]
-    company_575["Reliance Industrial
-     Infrastructure Limited"]
-    company_576["Reliance Logistics and
-     Warehouse Holdings Limited"]
-    company_577["Sanmina-SCI India Private
-     Limited"]
-    company_578["Sanmina-SCI Technology India
-     Private Limited"]
-    company_579["Vadodara Enviro Channel
-     Limited"]
-    company_580["Balaji Telefilms Limited"]
-    company_581["Jamnagar Utilities and Power
-     Private Limited"]
+    company_1["Reliance Industries Limited (Parent holding company of the Reliance Group)"]
+    company_2["Reliance Retail Limited (Subsidiary of Reliance Industries Limited)"]
+    company_3["Jio Platforms Limited (Subsidiary of Reliance Industries Limited)"]
+    company_4["Network18 Media and Investments Limited (Majority-owned subsidiary of Relianc..."]
+    company_5["Viacom18 Media Pvt. Ltd. (Subsidiary of Reliance Industries Limited)"]
+    company_6["Jio-bp (Fuel retail and mobility joint venture between Reliance I...)"]
+    company_7["bp (Partner of Reliance Industries Limited)"]
+    amount_1[/"Consolidated revenue FY 2024-25: ₹10,71,174 crore"/]
+    amount_2[/"Consolidated revenue FY 2024-25: US$125.3 billion"/]
+    amount_3[/"EBITDA for the year: ₹1,83,422 crore"/]
+    amount_4[/"Net profit attributable to shareholders: ₹81,309 crore"/]
+    amount_5[/"Capital expenditure during FY 2024-25: ₹1,31,000 crore"/]
+    amount_6[/"Digital Services segment revenue in FY 2024-25: ₹1,54,119 crore"/]
+    amount_7[/"Digital Services segment revenue in FY 2024-25: US$18.0 billion"/]
+    amount_8[/"Digital Services segment EBITDA in FY 2024-25: ₹65,001 crore"/]
+    amount_9[/"Digital Services segment EBITDA in FY 2024-25: US$7.6 billion"/]
+    amount_10[/"Reliance Retail Limited gross revenue in FY 2024-25: ₹3,30,870 crore"/]
+    amount_11[/"Reliance Retail Limited EBITDA in FY 2024-25: ₹25,094 crore"/]
+    amount_12[/"Media and Entertainment segment revenue in FY 2024-25: ₹20,696 crore"/]
+    amount_13[/"Media and Entertainment segment EBITDA in FY 2024-25: ₹1,833 crore"/]
+    amount_14[/"Oil to Chemicals segment revenue in FY 2024-25: ₹6,26,921 crore"/]
+    amount_15[/"Oil to Chemicals segment EBITDA in FY 2024-25: ₹54,988 crore"/]
+    amount_16[/"Capital expenditure toward Digital Services, Retail expan...: ₹1,31,107 crore"/]
+    risk_1("consumer demand volatility (Impacts Reliance Retail Limited)")
+    risk_2("competitive intensity (Impacts Reliance Retail Limited)")
+    risk_3("real estate costs (Impacts Reliance Retail Limited)")
+    risk_4("macroeconomic conditions (Impacts Reliance Retail Limited)")
+    risk_5("content cost inflation (Impacts Media and Entertainment segment)")
+    risk_6("advertising cyclicality (Impacts Media and Entertainment segment)")
+    risk_7("competition from global streaming platforms (Impacts Media and Entertainment ...")
+    risk_8("crude oil price volatility (Impacts Oil to Chemicals segment)")
+    risk_9("refining margin fluctuations (Impacts Oil to Chemicals segment)")
+    risk_10("geopolitical risks (Impacts Oil to Chemicals segment)")
+    risk_11("emissions regulations (Impacts Oil to Chemicals segment)")
+    risk_12("market volatility (May impact operations, financial performance, and strateg...)")
+    risk_13("geopolitical uncertainties (May impact operations, financial performance, and...")
+    risk_14("regulatory and policy changes (May impact operations, financial performance, ...")
+    risk_15("competitive intensity (May impact operations, financial performance, and stra...")
+    risk_16("execution risks (Related to large-scale capital expenditure projects and t...)")
+    risk_17("regulatory oversight (Across telecommunications, energy, retail, media, and e...")
 
     %% Relationships
-    company_2 -->|REPORTS_AMOUNT| amount_1
-    company_2 -->|OWNS| company_1
-    company_2 -->|REPORTS_AMOUNT| amount_3
+    company_1 -->|OWNS| company_2
+    company_1 -->|OWNS| company_3
+    company_1 -->|OWNS| company_4
+    company_1 -->|OWNS| company_5
+    company_1 -->|REPORTS_AMOUNT| amount_1
+    company_1 -->|REPORTS_AMOUNT| amount_2
+    company_1 -->|REPORTS_AMOUNT| amount_3
+    company_1 -->|REPORTS_AMOUNT| amount_4
+    company_1 -->|COMMITTED_CAPEX| amount_5
+    company_1 -->|JOINT_VENTURE_WITH| company_6
+    company_1 -->|PARTNERED_WITH| company_7
+    company_3 -->|REPORTS_AMOUNT| amount_6
+    company_3 -->|REPORTS_AMOUNT| amount_7
+    company_3 -->|REPORTS_AMOUNT| amount_8
+    company_3 -->|REPORTS_AMOUNT| amount_9
+    company_2 -->|REPORTS_AMOUNT| amount_10
+    company_2 -->|REPORTS_AMOUNT| amount_11
     company_2 -->|HAS_RISK| risk_1
-    company_2 -->|OWNS| company_14
-    company_3 -->|SUPPORTED_BY| company_2
-    company_4 -->|SUPPORTED_BY| company_2
-    company_5 -->|SUPPORTED_BY| company_2
-    company_6 -->|SUPPORTED_BY| company_2
-    company_7 -->|SUPPORTED_BY| company_2
-    company_8 -->|SUPPORTED_BY| company_2
-    company_15 -->|HAS_RISK| risk_2
-    company_15 -->|HAS_RISK| risk_3
-    risk_6 -->|IMPACTED_BY| risk_4
-    company_15 -->|REPORTS_AMOUNT| amount_41
-    company_15 -->|REPORTS_AMOUNT| amount_42
-    company_15 -->|REPORTS_AMOUNT| amount_43
-    company_15 -->|REPORTS_AMOUNT| amount_44
-    company_15 -->|REPORTS_AMOUNT| amount_45
-    company_15 -->|REPORTS_AMOUNT| amount_46
-    company_15 -->|REPORTS_AMOUNT| amount_47
-    company_15 -->|REPORTS_AMOUNT| amount_48
-    company_15 -->|REPORTS_AMOUNT| amount_49
-    company_15 -->|REPORTS_AMOUNT| amount_50
-    company_15 -->|REPORTS_AMOUNT| amount_51
-    company_15 -->|REPORTS_AMOUNT| amount_52
-    company_15 -->|REPORTS_AMOUNT| amount_53
-    company_15 -->|REPORTS_AMOUNT| amount_54
-    company_15 -->|REPORTS_AMOUNT| amount_55
-    company_15 -->|REPORTS_AMOUNT| amount_56
-    company_15 -->|REPORTS_AMOUNT| amount_57
-    company_15 -->|REPORTS_AMOUNT| amount_58
-    company_15 -->|REPORTS_AMOUNT| amount_59
-    company_15 -->|REPORTS_AMOUNT| amount_61
-    company_15 -->|REPORTS_AMOUNT| amount_62
-    company_15 -->|REPORTS_AMOUNT| amount_63
-    company_15 -->|REPORTS_AMOUNT| amount_64
-    company_15 -->|REPORTS_AMOUNT| amount_65
-    company_15 -->|REPORTS_AMOUNT| amount_66
-    company_15 -->|HAS_RISK| risk_8
-    company_15 -->|HAS_RISK| risk_9
-    company_15 -->|HAS_RISK| risk_10
-    company_15 -->|HAS_RISK| risk_11
-    company_15 -->|HAS_RISK| risk_1
-    company_15 -->|HAS_RISK| risk_12
-    company_15 -->|HAS_RISK| risk_13
-    company_15 -->|HAS_RISK| risk_14
-    company_2 -->|HAS_RISK| risk_25
-    company_2 -->|HAS_RISK| risk_26
-    company_2 -->|PLANS_TO| company_21
-    company_2 -->|PARTNERED_WITH| company_22
-    company_2 -->|IMPACTED_BY| risk_30
-    company_2 -->|IMPACTED_BY| risk_31
-    company_2 -->|IMPACTED_BY| risk_32
-    company_2 -->|IMPACTED_BY| risk_33
-    company_2 -->|IMPACTED_BY| risk_34
-    company_2 -->|IMPACTED_BY| risk_35
-    company_2 -->|IMPACTED_BY| risk_36
-    company_2 -->|IMPACTED_BY| risk_37
-    company_2 -->|IMPACTED_BY| risk_38
-    company_2 -->|IMPACTED_BY| risk_39
-    company_24 -->|HAS_RISK| risk_41
-    company_15 -->|HAS_RISK| risk_45
-    company_15 -->|HAS_RISK| risk_46
-    company_15 -->|HAS_RISK| risk_47
-    company_15 -->|HAS_RISK| risk_48
-    company_15 -->|HAS_RISK| risk_49
-    company_15 -->|HAS_RISK| risk_50
-    company_15 -->|HAS_RISK| risk_51
-    company_15 -->|HAS_RISK| risk_52
-    company_15 -->|HAS_RISK| risk_53
-    company_15 -->|HAS_RISK| risk_54
-    company_15 -->|HAS_RISK| risk_55
-    company_15 -->|HAS_RISK| risk_56
-    company_15 -->|HAS_RISK| risk_57
-    company_15 -->|HAS_RISK| risk_58
-    company_15 -->|HAS_RISK| risk_59
-    company_15 -->|HAS_RISK| risk_60
-    company_15 -->|HAS_RISK| risk_61
-    company_15 -->|HAS_RISK| risk_62
-    company_15 -->|HAS_RISK| risk_63
-    company_15 -->|HAS_RISK| risk_64
-    company_15 -->|HAS_RISK| risk_65
-    company_15 -->|HAS_RISK| risk_66
-    company_24 -->|HAS_RISK| risk_67
-    company_24 -->|COMMITTED_TO| company_24
-    company_24 -->|TARGETS| amount_76
-    company_2 -->|COMMITTED_TO| company_2
-    company_25 -->|COMMITTED_TO| company_25
-    company_26 -->|COMMITTED_TO| company_26
-    company_24 -->|PARTNERED_WITH| company_26
-    company_24 -->|OWNS| company_27
-    company_24 -->|OWNS| company_1
-    company_24 -->|OWNS| company_28
-    company_24 -->|OWNS| company_29
-    company_24 -->|HAS_RISK| risk_68
-    company_33 -->|OWNS| company_34
-    company_33 -->|OWNS| company_35
-    company_33 -->|OWNS| company_36
-    company_33 -->|OWNS| company_37
-    company_33 -->|OWNS| company_38
-    company_33 -->|OWNS| company_39
-    company_33 -->|OWNS| company_40
-    company_33 -->|OWNS| company_41
-    company_33 -->|REPORTS_AMOUNT| amount_85
-    company_33 -->|HAS_RISK| risk_69
-    company_33 -->|HAS_RISK| risk_70
-    company_33 -->|OWNS| company_42
-    company_43 -->|HAS_RISK| risk_71
-    company_43 -->|HAS_RISK| risk_72
-    company_43 -->|HAS_RISK| risk_73
-    company_43 -->|HAS_RISK| risk_74
-    company_43 -->|HAS_RISK| risk_75
-    company_15 -->|OWNS| company_43
-    company_15 -->|OWNS| company_44
-    company_43 -->|REPORTS_AMOUNT| amount_102
-    company_33 -->|OWNS| company_45
-    company_33 -->|OWNS| company_44
-    company_33 -->|OWNS| company_46
-    company_33 -->|OWNS| company_43
-    company_33 -->|OWNS| company_47
-    company_33 -->|HAS_RISK| risk_76
-    company_33 -->|HAS_RISK| risk_77
-    company_33 -->|HAS_RISK| risk_78
-    company_33 -->|HAS_RISK| risk_79
-    company_33 -->|HAS_RISK| risk_80
-    company_33 -->|HAS_RISK| risk_81
-    company_50 -->|PARTNERED_WITH| company_49
-    company_50 -->|OWNS| company_52
-    company_50 -->|OWNS| company_51
-    company_54 -->|REPORTS_AMOUNT| amount_109
-    company_54 -->|HAS_RISK| risk_84
-    company_55 -->|PARTNERED_WITH| company_15
-    company_15 -->|IMPACTED_BY| company_56
-    company_15 -->|IMPACTED_BY| company_57
-    company_15 -->|PARTNERED_WITH| company_58
-    company_15 -->|OWNS| company_59
-    company_15 -->|HAS_RISK| risk_86
-    company_15 -->|HAS_RISK| risk_87
-    company_15 -->|HAS_RISK| risk_4
-    company_15 -->|HAS_RISK| risk_5
-    company_15 -->|IMPACTED_BY| amount_110
-    company_15 -->|IMPACTED_BY| amount_111
-    company_15 -->|IMPACTED_BY| amount_112
-    company_15 -->|IMPACTED_BY| amount_113
-    company_15 -->|IMPACTED_BY| amount_114
-    company_15 -->|IMPACTED_BY| amount_115
-    company_15 -->|IMPACTED_BY| amount_116
-    company_15 -->|IMPACTED_BY| amount_117
-    company_15 -->|INVESTED_IN| amount_109
-    company_15 -->|INVESTED_IN| company_54
-    company_56 -->|REPORTS_AMOUNT| amount_110
-    company_56 -->|REPORTS_AMOUNT| amount_112
-    company_60 -->|OWNS| company_47
-    company_47 -->|HAS_RISK| risk_88
-    company_47 -->|HAS_RISK| risk_89
-    company_60 -->|OWNS| company_45
-    company_45 -->|OWNS| company_44
-    company_44 -->|HAS_RISK| risk_90
-    company_60 -->|OWNS| company_61
-    company_61 -->|HAS_RISK| risk_91
-    company_61 -->|HAS_RISK| risk_92
-    company_61 -->|HAS_RISK| risk_93
-    company_61 -->|HAS_RISK| risk_94
-    company_60 -->|HAS_RISK| risk_95
-    company_60 -->|HAS_RISK| risk_96
-    company_62 -->|OWNS| company_63
-    company_62 -->|PARTNERED_WITH| company_64
-    company_62 -->|JOINT_VENTURE_WITH| company_65
-    company_62 -->|REPORTS_AMOUNT| amount_123
-    company_62 -->|HAS_RISK| risk_97
-    company_62 -->|HAS_RISK| risk_98
-    company_62 -->|HAS_RISK| risk_99
-    company_60 -->|OWNS| company_63
-    company_60 -->|PARTNERED_WITH| company_64
-    company_60 -->|JOINT_VENTURE_WITH| company_65
-    company_60 -->|REPORTS_AMOUNT| amount_124
-    company_60 -->|HAS_RISK| risk_100
-    company_2 -->|IMPACTED_BY| company_66
-    company_2 -->|IMPACTED_BY| company_67
-    company_68 -->|IMPACTED_BY| company_69
-    company_70 -->|IMPACTED_BY| company_69
-    company_71 -->|OWNS| company_70
-    company_71 -->|IMPACTED_BY| company_69
-    company_70 -->|IMPACTED_BY| company_72
-    company_2 -->|REPORTS_AMOUNT| amount_116
-    company_2 -->|REPORTS_AMOUNT| amount_117
-    company_68 -->|REPORTS_AMOUNT| amount_125
-    company_70 -->|REPORTS_AMOUNT| amount_126
-    company_71 -->|REPORTS_AMOUNT| amount_127
-    company_75 -->|OWNS| company_75
-    company_76 -->|REPORTS_AMOUNT| amount_137
-    company_77 -->|REPORTS_AMOUNT| amount_138
-    company_78 -->|REPORTS_AMOUNT| amount_139
-    company_79 -->|REPORTS_AMOUNT| amount_140
-    company_80 -->|REPORTS_AMOUNT| amount_143
-    company_43 -->|REPORTS_AMOUNT| amount_144
-    company_87 -->|OWNS| company_102
-    company_87 -->|OWNS| company_103
-    company_87 -->|OWNS| company_104
-    company_87 -->|OWNS| company_105
-    company_87 -->|OWNS| company_106
-    company_87 -->|OWNS| company_107
-    company_87 -->|OWNS| company_108
-    company_87 -->|OWNS| company_109
-    company_87 -->|OWNS| company_110
-    company_87 -->|OWNS| company_111
-    company_87 -->|OWNS| company_112
-    company_87 -->|OWNS| company_113
-    company_87 -->|OWNS| company_114
-    company_87 -->|OWNS| company_115
-    company_87 -->|OWNS| company_116
-    company_87 -->|OWNS| company_117
-    company_87 -->|OWNS| company_118
-    company_87 -->|OWNS| company_119
-    company_87 -->|OWNS| company_120
-    company_87 -->|OWNS| company_121
-    company_87 -->|OWNS| company_122
-    company_87 -->|OWNS| company_123
-    company_87 -->|OWNS| company_124
-    company_87 -->|OWNS| company_125
-    company_87 -->|OWNS| company_126
-    company_87 -->|OWNS| company_127
-    company_87 -->|OWNS| company_128
-    company_87 -->|OWNS| company_129
-    company_87 -->|OWNS| company_130
-    company_87 -->|OWNS| company_131
-    company_87 -->|OWNS| company_132
-    company_87 -->|OWNS| company_133
-    company_87 -->|OWNS| company_134
-    company_87 -->|OWNS| company_135
-    company_87 -->|OWNS| company_136
-    company_87 -->|OWNS| company_137
-    company_138 -->|OWNS| company_138
-    company_139 -->|OWNS| company_139
-    company_140 -->|OWNS| company_140
-    company_141 -->|OWNS| company_141
-    company_68 -->|OWNS| company_68
-    company_142 -->|OWNS| company_142
-    company_143 -->|OWNS| company_143
-    company_144 -->|OWNS| company_144
-    company_145 -->|OWNS| company_145
-    company_146 -->|OWNS| company_146
-    company_147 -->|OWNS| company_147
-    company_148 -->|OWNS| company_148
-    company_149 -->|OWNS| company_149
-    company_150 -->|OWNS| company_150
-    company_151 -->|OWNS| company_151
-    company_152 -->|OWNS| company_152
-    company_153 -->|OWNS| company_153
-    company_154 -->|OWNS| company_154
-    company_155 -->|OWNS| company_155
-    company_156 -->|OWNS| company_156
-    company_157 -->|OWNS| company_157
-    company_158 -->|OWNS| company_158
-    company_159 -->|OWNS| company_159
-    company_160 -->|OWNS| company_160
-    company_71 -->|OWNS| company_71
-    company_161 -->|OWNS| company_161
-    company_162 -->|OWNS| company_162
-    company_163 -->|OWNS| company_163
-    company_164 -->|OWNS| company_164
-    company_165 -->|OWNS| company_165
-    company_110 -->|OWNS| company_110
-    company_112 -->|OWNS| company_112
-    company_114 -->|OWNS| company_114
-    company_116 -->|OWNS| company_116
-    company_118 -->|OWNS| company_118
-    company_120 -->|OWNS| company_120
-    company_122 -->|OWNS| company_122
-    company_124 -->|OWNS| company_124
-    company_126 -->|OWNS| company_126
-    company_128 -->|OWNS| company_128
-    company_130 -->|OWNS| company_130
-    company_132 -->|OWNS| company_132
-    company_134 -->|OWNS| company_134
-    company_136 -->|OWNS| company_136
-    company_103 -->|OWNS| company_103
-    company_105 -->|OWNS| company_105
-    company_107 -->|OWNS| company_107
-    company_109 -->|OWNS| company_109
-    company_111 -->|OWNS| company_111
-    company_113 -->|OWNS| company_113
-    company_115 -->|OWNS| company_115
-    company_117 -->|OWNS| company_117
-    company_119 -->|OWNS| company_119
-    company_121 -->|OWNS| company_121
-    company_166 -->|OWNS| company_166
-    company_167 -->|OWNS| company_167
-    company_168 -->|OWNS| company_168
-    company_169 -->|OWNS| company_169
-    company_170 -->|OWNS| company_170
-    company_171 -->|OWNS| company_171
-    company_172 -->|OWNS| company_172
-    company_173 -->|OWNS| company_173
-    company_174 -->|OWNS| company_174
-    company_175 -->|OWNS| company_175
-    company_176 -->|OWNS| company_176
-    company_177 -->|OWNS| company_177
-    company_178 -->|OWNS| company_178
-    company_179 -->|OWNS| company_179
-    company_1 -->|OPERATES| company_180
-    company_1 -->|OPERATES| company_181
-    company_1 -->|REPORTS_AMOUNT| amount_171
-    company_183 -->|OWNS| company_184
-    company_183 -->|OWNS| company_185
-    company_15 -->|PARTNERED_WITH| company_187
-    company_15 -->|PARTNERED_WITH| company_188
-    company_27 -->|HAS_RISK| risk_104
-    company_27 -->|HAS_RISK| risk_105
-    company_187 -->|SUBJECT_TO| company_15
-    company_188 -->|SUBJECT_TO| company_15
-    company_190 -->|OWNS| company_189
-    company_191 -->|OWNS| company_193
-    company_191 -->|PARTNERED_WITH| company_197
-    company_191 -->|PARTNERED_WITH| company_198
-    company_191 -->|PARTNERED_WITH| company_199
-    company_191 -->|PARTNERED_WITH| company_200
-    company_191 -->|PARTNERED_WITH| company_201
-    company_191 -->|PARTNERED_WITH| company_202
-    company_33 -->|OWNS| company_204
-    company_33 -->|OWNS| company_205
-    company_33 -->|OWNS| company_206
-    company_33 -->|OWNS| company_207
-    company_33 -->|OWNS| company_208
-    company_33 -->|OWNS| company_209
-    company_33 -->|OWNS| company_210
-    company_33 -->|OWNS| company_211
-    company_33 -->|JOINT_VENTURE_WITH| company_76
-    company_33 -->|JOINT_VENTURE_WITH| company_211
-    company_33 -->|OWNS| company_212
-    company_33 -->|OWNS| company_213
-    company_33 -->|OWNS| company_214
-    company_33 -->|OWNS| company_215
-    company_33 -->|OWNS| company_216
-    company_33 -->|OWNS| company_217
-    company_217 -->|REPORTS_AMOUNT| amount_238
-    company_33 -->|OWNS| company_218
-    company_33 -->|OWNS| company_219
-    company_33 -->|OWNS| company_220
-    company_33 -->|OWNS| company_221
-    company_33 -->|OWNS| company_222
-    company_33 -->|OWNS| company_223
-    company_33 -->|OWNS| company_224
-    company_33 -->|OWNS| company_225
-    company_33 -->|OWNS| company_226
-    company_33 -->|OWNS| company_227
-    company_33 -->|OWNS| company_228
-    company_228 -->|REPORTS_AMOUNT| amount_252
-    company_33 -->|OWNS| company_61
-    company_33 -->|OWNS| company_48
-    company_48 -->|REPORTS_AMOUNT| amount_238
-    company_33 -->|OWNS| company_49
-    company_49 -->|PARTNERED_WITH| company_50
-    company_274 -->|OWNS| company_273
-    company_274 -->|OWNS| company_275
-    company_191 -->|SUPPORTED_BY| amount_355
-    company_191 -->|SUPPORTED_BY| amount_356
-    company_256 -->|SUPPORTED_BY| amount_357
-    company_257 -->|SUPPORTED_BY| amount_359
-    company_257 -->|SUPPORTED_BY| amount_360
-    company_258 -->|SUPPORTED_BY| amount_361
-    company_258 -->|SUPPORTED_BY| amount_362
-    company_259 -->|SUPPORTED_BY| amount_363
-    company_259 -->|SUPPORTED_BY| amount_364
-    company_260 -->|SUPPORTED_BY| amount_349
-    company_261 -->|SUPPORTED_BY| amount_366
-    company_262 -->|SUPPORTED_BY| amount_368
-    company_262 -->|SUPPORTED_BY| amount_369
-    company_263 -->|SUPPORTED_BY| amount_370
-    company_264 -->|SUPPORTED_BY| amount_371
-    company_15 -->|REPORTS_AMOUNT| amount_472
-    company_15 -->|REPORTS_AMOUNT| amount_474
-    company_15 -->|REPORTS_AMOUNT| amount_475
-    company_15 -->|HAS_RISK| risk_123
-    company_15 -->|HAS_RISK| risk_124
-    company_15 -->|HAS_RISK| risk_125
-    company_333 -->|PARTNERED_WITH| company_334
-    company_27 -->|REPORTS_AMOUNT| amount_477
-    company_27 -->|PARTNERED_WITH| company_333
-    company_27 -->|PARTNERED_WITH| company_334
-    company_27 -->|TARGETS| amount_479
-    company_335 -->|REPORTS_AMOUNT| amount_480
-    company_335 -->|REPORTS_AMOUNT| amount_481
-    company_346 -->|REPORTS_AMOUNT| amount_489
-    company_347 -->|REPORTS_AMOUNT| amount_490
-    company_15 -->|REPORTS_AMOUNT| amount_499
-    company_15 -->|REPORTS_AMOUNT| amount_500
-    company_15 -->|REPORTS_AMOUNT| amount_501
-    company_15 -->|REPORTS_AMOUNT| amount_502
-    company_15 -->|REPORTS_AMOUNT| amount_503
-    company_15 -->|REPORTS_AMOUNT| amount_504
-    company_15 -->|HAS_RISK| risk_126
-    company_15 -->|HAS_RISK| risk_127
-    company_15 -->|HAS_RISK| risk_128
-    company_15 -->|HAS_RISK| risk_129
-    company_15 -->|HAS_RISK| risk_130
-    company_15 -->|HAS_RISK| risk_29
-    company_15 -->|HAS_RISK| risk_131
-    company_24 -->|HAS_RISK| risk_4
-    company_24 -->|PARTNERED_WITH| company_1
-    company_24 -->|PARTNERED_WITH| company_27
-    company_1 -->|PARTNERED_WITH| company_24
-    company_24 -->|HAS_RISK| risk_75
-    company_24 -->|HAS_RISK| risk_132
-    company_24 -->|HAS_RISK| risk_133
-    company_24 -->|HAS_RISK| risk_134
-    company_24 -->|HAS_RISK| risk_135
-    company_372 -->|HAS_RISK| risk_96
-    company_2 -->|HAS_RISK| risk_136
-    company_2 -->|HAS_RISK| risk_43
-    company_2 -->|OPERATES| company_381
-    company_2 -->|REPORTS_AMOUNT| amount_522
-    company_2 -->|IMPACTED_BY| company_382
-    company_43 -->|OWNS| company_47
-    company_383 -->|HAS_RISK| risk_75
-    company_383 -->|HAS_RISK| risk_132
-    company_383 -->|HAS_RISK| risk_71
-    company_187 -->|OPERATES| company_15
-    company_188 -->|OPERATES| company_15
-    company_385 -->|OPERATES| company_15
-    company_386 -->|OPERATES| company_15
-    company_387 -->|OPERATES| company_15
-    company_388 -->|OPERATES| company_15
-    company_389 -->|OPERATES| company_15
-    company_384 -->|OPERATES| company_15
-    company_390 -->|OPERATES| company_15
-    company_391 -->|OPERATES| company_15
-    company_392 -->|OPERATES| company_15
-    company_191 -->|PARTNERED_WITH| company_396
-    company_15 -->|REPORTS_AMOUNT| amount_526
-    company_15 -->|REPORTS_AMOUNT| amount_528
-    company_15 -->|HAS_RISK| risk_71
-    company_15 -->|PARTNERED_WITH| company_374
-    company_15 -->|PARTNERED_WITH| company_375
-    company_397 -->|PARTNERED_WITH| company_398
-    company_399 -->|HAS_RISK| risk_132
-    company_33 -->|REPORTS_AMOUNT| amount_540
-    company_33 -->|REPORTS_AMOUNT| amount_541
-    company_33 -->|REPORTS_AMOUNT| amount_550
-    company_33 -->|REPORTS_AMOUNT| amount_551
-    company_400 -->|PARTNERED_WITH| company_401
-    company_55 -->|PARTNERED_WITH| company_56
-    company_2 -->|HAS_RISK| risk_113
-    company_2 -->|HAS_RISK| risk_140
+    company_2 -->|HAS_RISK| risk_2
+    company_2 -->|HAS_RISK| risk_3
     company_2 -->|HAS_RISK| risk_4
-    company_33 -->|REPORTS_AMOUNT| amount_557
-    company_33 -->|REPORTS_AMOUNT| amount_560
-    company_33 -->|REPORTS_AMOUNT| amount_561
-    company_33 -->|HAS_RISK| risk_141
-    company_33 -->|HAS_RISK| risk_142
-    company_33 -->|HAS_RISK| risk_143
-    company_33 -->|HAS_RISK| risk_144
-    company_418 -->|PARTNERED_WITH| company_419
-    company_342 -->|PARTNERED_WITH| company_420
-    company_33 -->|PARTNERED_WITH| company_421
-    company_422 -->|OWNS| company_87
-    company_422 -->|OWNS| company_90
-    company_422 -->|OWNS| company_95
-    company_422 -->|OWNS| company_219
-    company_422 -->|OWNS| company_221
-    company_422 -->|OWNS| company_222
-    company_422 -->|OWNS| company_224
-    company_427 -->|OWNS| company_422
-    company_428 -->|OWNS| company_422
-    company_431 -->|OWNS| company_422
-    company_398 -->|REPORTS_AMOUNT| amount_716
-    company_15 -->|REPORTS_AMOUNT| amount_732
-    company_15 -->|REPORTS_AMOUNT| amount_619
-    company_15 -->|REPORTS_AMOUNT| amount_620
-    company_15 -->|REPORTS_AMOUNT| amount_738
-    company_15 -->|REPORTS_AMOUNT| amount_739
-    company_15 -->|REPORTS_AMOUNT| amount_740
-    company_15 -->|REPORTS_AMOUNT| amount_186
-    company_15 -->|REPORTS_AMOUNT| amount_741
-    company_15 -->|REPORTS_AMOUNT| amount_742
-    company_15 -->|REPORTS_AMOUNT| amount_743
-    company_15 -->|REPORTS_AMOUNT| amount_762
-    company_15 -->|REPORTS_AMOUNT| amount_763
-    company_15 -->|REPORTS_AMOUNT| amount_764
-    company_15 -->|REPORTS_AMOUNT| amount_765
-    company_50 -->|PARTNERED_WITH| company_443
-    company_50 -->|PARTNERED_WITH| company_61
-    company_61 -->|RAISED_CAPITAL| amount_767
-    company_316 -->|REPORTS_AMOUNT| amount_768
-    company_444 -->|REPORTS_AMOUNT| amount_769
-    company_444 -->|REPORTS_AMOUNT| amount_770
-    company_445 -->|REPORTS_AMOUNT| amount_772
-    company_317 -->|REPORTS_AMOUNT| amount_768
-    company_317 -->|REPORTS_AMOUNT| amount_770
-    company_446 -->|REPORTS_AMOUNT| amount_773
-    company_448 -->|REPORTS_AMOUNT| amount_775
-    company_448 -->|REPORTS_AMOUNT| amount_776
-    company_449 -->|REPORTS_AMOUNT| amount_778
-    company_318 -->|REPORTS_AMOUNT| amount_775
-    company_208 -->|REPORTS_AMOUNT| amount_779
-    company_81 -->|REPORTS_AMOUNT| amount_780
-    company_450 -->|REPORTS_AMOUNT| amount_781
-    company_43 -->|REPORTS_AMOUNT| amount_782
-    company_299 -->|REPORTS_AMOUNT| amount_783
-    company_301 -->|REPORTS_AMOUNT| amount_784
-    company_302 -->|REPORTS_AMOUNT| amount_785
-    company_131 -->|REPORTS_AMOUNT| amount_780
-    company_452 -->|REPORTS_AMOUNT| amount_786
-    company_303 -->|REPORTS_AMOUNT| amount_780
-    company_453 -->|REPORTS_AMOUNT| amount_787
-    company_424 -->|REPORTS_AMOUNT| amount_780
-    company_454 -->|REPORTS_AMOUNT| amount_787
-    company_455 -->|REPORTS_AMOUNT| amount_788
-    company_456 -->|REPORTS_AMOUNT| amount_787
-    company_457 -->|REPORTS_AMOUNT| amount_789
-    company_457 -->|REPORTS_AMOUNT| amount_790
-    company_458 -->|REPORTS_AMOUNT| amount_791
-    company_459 -->|REPORTS_AMOUNT| amount_792
-    company_459 -->|REPORTS_AMOUNT| amount_793
-    company_460 -->|REPORTS_AMOUNT| amount_794
-    company_461 -->|REPORTS_AMOUNT| amount_796
-    company_82 -->|REPORTS_AMOUNT| amount_780
-    company_462 -->|REPORTS_AMOUNT| amount_798
-    company_463 -->|REPORTS_AMOUNT| amount_799
-    company_464 -->|REPORTS_AMOUNT| amount_800
-    company_465 -->|REPORTS_AMOUNT| amount_787
-    company_467 -->|REPORTS_AMOUNT| amount_787
-    company_467 -->|REPORTS_AMOUNT| amount_794
-    company_84 -->|REPORTS_AMOUNT| amount_803
-    company_84 -->|REPORTS_AMOUNT| amount_780
-    company_469 -->|REPORTS_AMOUNT| amount_787
-    company_470 -->|REPORTS_AMOUNT| amount_804
-    company_473 -->|REPORTS_AMOUNT| amount_772
-    company_85 -->|REPORTS_AMOUNT| amount_805
-    company_474 -->|REPORTS_AMOUNT| amount_806
-    company_474 -->|REPORTS_AMOUNT| amount_807
-    company_475 -->|REPORTS_AMOUNT| amount_808
-    company_476 -->|REPORTS_AMOUNT| amount_809
-    company_476 -->|REPORTS_AMOUNT| amount_810
-    company_477 -->|REPORTS_AMOUNT| amount_811
-    company_2 -->|PARTNERED_WITH| company_191
-    company_2 -->|PARTNERED_WITH| company_43
-    company_2 -->|PARTNERED_WITH| company_497
-    company_2 -->|PARTNERED_WITH| company_493
-    company_2 -->|PARTNERED_WITH| company_491
-    company_2 -->|PARTNERED_WITH| company_490
-    company_2 -->|PARTNERED_WITH| company_489
-    company_2 -->|PARTNERED_WITH| company_488
-    company_2 -->|PARTNERED_WITH| company_487
-    company_2 -->|PARTNERED_WITH| company_486
-    company_2 -->|PARTNERED_WITH| company_485
-    company_2 -->|PARTNERED_WITH| company_484
-    company_2 -->|PARTNERED_WITH| company_483
-    company_2 -->|PARTNERED_WITH| company_482
-    company_2 -->|PARTNERED_WITH| company_481
-    company_2 -->|PARTNERED_WITH| company_480
-    company_2 -->|PARTNERED_WITH| company_479
-    company_2 -->|PARTNERED_WITH| company_25
-    company_2 -->|PARTNERED_WITH| company_347
-    company_24 -->|REPORTS_AMOUNT| amount_815
-    company_24 -->|REPORTS_AMOUNT| amount_817
-    company_24 -->|REPORTS_AMOUNT| amount_819
-    company_24 -->|REPORTS_AMOUNT| amount_821
-    company_504 -->|SUPPORTED_BY| company_503
-    company_505 -->|PARTNERED_WITH| company_506
-    company_33 -->|REPORTS_AMOUNT| amount_826
-    company_33 -->|REPORTS_AMOUNT| amount_827
-    company_33 -->|REPORTS_AMOUNT| amount_828
-    company_33 -->|REPORTS_AMOUNT| amount_829
-    company_191 -->|PARTNERED_WITH| company_33
-    company_33 -->|REPORTS_AMOUNT| amount_830
-    company_33 -->|REPORTS_AMOUNT| amount_831
-    company_33 -->|REPORTS_AMOUNT| amount_832
-    company_33 -->|REPORTS_AMOUNT| amount_835
-    company_187 -->|PARTNERED_WITH| company_188
-    company_224 -->|INVESTED_IN| company_460
-    company_224 -->|INVESTED_IN| company_325
-    company_224 -->|INVESTED_IN| company_321
-    company_224 -->|INVESTED_IN| company_326
-    company_224 -->|INVESTED_IN| company_322
-    company_224 -->|INVESTED_IN| company_513
-    company_224 -->|INVESTED_IN| company_323
-    company_224 -->|INVESTED_IN| company_514
-    company_224 -->|INVESTED_IN| company_324
-    company_224 -->|INVESTED_IN| company_515
-    company_224 -->|INVESTED_IN| company_441
-    company_224 -->|INVESTED_IN| company_516
-    company_224 -->|INVESTED_IN| company_517
-    company_224 -->|INVESTED_IN| company_179
-    company_224 -->|INVESTED_IN| company_518
-    company_224 -->|INVESTED_IN| company_448
-    company_224 -->|INVESTED_IN| company_459
-    company_224 -->|INVESTED_IN| company_472
-    company_224 -->|INVESTED_IN| company_519
-    company_224 -->|INVESTED_IN| company_241
-    company_224 -->|INVESTED_IN| company_229
-    company_224 -->|INVESTED_IN| company_244
-    company_190 -->|REPORTS_AMOUNT| amount_340
-    company_190 -->|REPORTS_AMOUNT| amount_342
-    company_190 -->|REPORTS_AMOUNT| amount_742
-    company_190 -->|REPORTS_AMOUNT| amount_992
-    company_190 -->|REPORTS_AMOUNT| amount_994
-    company_190 -->|REPORTS_AMOUNT| amount_996
-    company_190 -->|REPORTS_AMOUNT| amount_998
-    company_190 -->|REPORTS_AMOUNT| amount_999
-    company_190 -->|REPORTS_AMOUNT| amount_1000
-    company_190 -->|REPORTS_AMOUNT| amount_1001
-    company_190 -->|REPORTS_AMOUNT| amount_1002
-    company_190 -->|REPORTS_AMOUNT| amount_1003
-    company_190 -->|REPORTS_AMOUNT| amount_1004
-    company_190 -->|REPORTS_AMOUNT| amount_348
-    company_526 -->|REPORTS_AMOUNT| amount_1010
-    company_526 -->|REPORTS_AMOUNT| amount_1011
-    company_15 -->|REPORTS_AMOUNT| amount_1115
-    company_15 -->|OWNS| company_476
-    company_15 -->|OWNS| company_527
-    company_15 -->|OWNS| company_528
-    company_15 -->|OWNS| company_529
-    company_15 -->|OWNS| company_213
-    company_15 -->|OWNS| company_221
-    company_15 -->|OWNS| company_224
-    company_15 -->|OWNS| company_49
-    company_15 -->|INVESTED_IN| company_267
-    company_15 -->|INVESTED_IN| company_80
-    company_15 -->|INVESTED_IN| company_532
-    company_15 -->|INVESTED_IN| company_533
-    company_15 -->|INVESTED_IN| company_361
-    company_15 -->|INVESTED_IN| company_76
-    company_15 -->|INVESTED_IN| company_534
-    company_15 -->|INVESTED_IN| company_535
-    company_15 -->|INVESTED_IN| company_281
-    company_15 -->|INVESTED_IN| company_536
-    company_15 -->|INVESTED_IN| company_97
-    company_15 -->|INVESTED_IN| company_537
-    company_15 -->|INVESTED_IN| company_538
-    company_15 -->|INVESTED_IN| company_286
-    company_15 -->|INVESTED_IN| company_208
-    company_15 -->|INVESTED_IN| company_539
-    company_15 -->|INVESTED_IN| company_436
-    company_15 -->|INVESTED_IN| company_540
-    company_15 -->|INVESTED_IN| company_123
-    company_15 -->|INVESTED_IN| company_96
-    company_15 -->|INVESTED_IN| company_437
-    company_15 -->|INVESTED_IN| company_541
-    company_15 -->|INVESTED_IN| company_125
-    company_15 -->|INVESTED_IN| company_518
-    company_15 -->|INVESTED_IN| company_438
-    company_15 -->|INVESTED_IN| company_542
-    company_15 -->|INVESTED_IN| company_127
-    company_15 -->|INVESTED_IN| company_543
-    company_15 -->|INVESTED_IN| company_439
-    company_15 -->|INVESTED_IN| company_544
-    company_15 -->|INVESTED_IN| company_545
-    company_15 -->|INVESTED_IN| company_546
-    company_15 -->|INVESTED_IN| company_547
-    company_15 -->|INVESTED_IN| company_450
-    company_15 -->|INVESTED_IN| company_548
-    company_15 -->|INVESTED_IN| company_43
-    company_15 -->|INVESTED_IN| company_549
-    company_15 -->|INVESTED_IN| company_211
-    company_15 -->|INVESTED_IN| company_550
-    company_15 -->|INVESTED_IN| company_305
-    company_15 -->|INVESTED_IN| company_551
-    company_15 -->|INVESTED_IN| company_552
-    company_15 -->|INVESTED_IN| company_553
-    company_15 -->|INVESTED_IN| company_306
-    company_15 -->|INVESTED_IN| company_554
-    company_15 -->|INVESTED_IN| company_555
-    company_15 -->|INVESTED_IN| company_556
-    company_15 -->|INVESTED_IN| company_557
-    company_15 -->|INVESTED_IN| company_558
-    company_15 -->|INVESTED_IN| company_100
-    company_15 -->|INVESTED_IN| company_559
-    company_15 -->|INVESTED_IN| company_307
-    company_15 -->|INVESTED_IN| company_225
-    company_15 -->|INVESTED_IN| company_226
-    company_15 -->|INVESTED_IN| company_560
-    company_15 -->|INVESTED_IN| company_561
-    company_15 -->|INVESTED_IN| company_145
-    company_15 -->|INVESTED_IN| company_315
-    company_15 -->|INVESTED_IN| company_316
-    company_15 -->|OWNS| company_562
-    company_15 -->|OWNS| company_563
-    company_563 -->|REPORTS_AMOUNT| amount_1231
-    company_15 -->|OWNS| company_83
-    company_83 -->|REPORTS_AMOUNT| amount_1232
-    company_15 -->|OWNS| company_564
-    company_15 -->|REPORTS_AMOUNT| amount_1235
-    company_425 -->|REPORTS_AMOUNT| amount_784
-    company_15 -->|OWNS| company_425
-    company_425 -->|REPORTS_AMOUNT| amount_1236
-    company_15 -->|OWNS| company_565
-    company_565 -->|REPORTS_AMOUNT| amount_784
-    company_15 -->|OWNS| company_322
-    company_322 -->|REPORTS_AMOUNT| amount_794
-    company_15 -->|OWNS| company_566
-    company_15 -->|OWNS| company_323
-    company_323 -->|REPORTS_AMOUNT| amount_794
-    company_529 -->|REPORTS_AMOUNT| amount_1238
-    company_529 -->|REPORTS_AMOUNT| amount_1239
-    company_15 -->|OWNS| company_567
-    company_567 -->|REPORTS_AMOUNT| amount_780
-    company_15 -->|OWNS| company_47
-    company_47 -->|REPORTS_AMOUNT| amount_1240
-    company_15 -->|OWNS| company_426
-    company_426 -->|REPORTS_AMOUNT| amount_784
-    company_426 -->|REPORTS_AMOUNT| amount_1241
-    company_15 -->|OWNS| company_568
-    company_568 -->|REPORTS_AMOUNT| amount_1242
-    company_15 -->|OWNS| company_569
-    company_15 -->|OWNS| company_92
-    company_92 -->|REPORTS_AMOUNT| amount_780
-    company_92 -->|REPORTS_AMOUNT| amount_1244
-    company_15 -->|REPORTS_AMOUNT| amount_1245
-    company_15 -->|OWNS| company_226
-    company_226 -->|REPORTS_AMOUNT| amount_1246
-    company_15 -->|PARTNERED_WITH| company_561
-    company_561 -->|REPORTS_AMOUNT| amount_794
-    company_15 -->|OWNS| company_570
-    company_570 -->|REPORTS_AMOUNT| amount_1247
-    company_570 -->|REPORTS_AMOUNT| amount_1248
-    company_15 -->|OWNS| company_571
-    company_571 -->|REPORTS_AMOUNT| amount_794
-    company_15 -->|OWNS| company_572
-    company_572 -->|REPORTS_AMOUNT| amount_1249
-    company_15 -->|PARTNERED_WITH| company_573
-    company_15 -->|OWNS| company_239
-    company_239 -->|REPORTS_AMOUNT| amount_780
-    company_15 -->|OWNS| company_574
-    company_574 -->|REPORTS_AMOUNT| amount_1251
-    company_15 -->|OWNS| company_242
-    company_242 -->|REPORTS_AMOUNT| amount_1252
-    company_15 -->|OWNS| company_244
-    company_244 -->|REPORTS_AMOUNT| amount_1253
-    company_15 -->|OWNS| company_246
-    company_246 -->|REPORTS_AMOUNT| amount_804
-    company_15 -->|OWNS| company_51
-    company_15 -->|OWNS| company_99
-    company_15 -->|OWNS| company_575
-    company_15 -->|OWNS| company_576
-    company_15 -->|OWNS| company_577
-    company_15 -->|OWNS| company_578
-    company_15 -->|OWNS| company_211
-    company_15 -->|OWNS| company_579
-    company_15 -->|PARTNERED_WITH| company_580
-    company_15 -->|PARTNERED_WITH| company_581
-    company_15 -->|PARTNERED_WITH| company_237
-    company_15 -->|PARTNERED_WITH| company_210
-    company_15 -->|PARTNERED_WITH| company_53
-    company_15 -->|PARTNERED_WITH| company_284
-    company_15 -->|PARTNERED_WITH| company_289
-    company_15 -->|PARTNERED_WITH| company_48
-    company_15 -->|PARTNERED_WITH| company_241
-    company_15 -->|PARTNERED_WITH| company_52
-    company_15 -->|PARTNERED_WITH| company_304
-    company_15 -->|PARTNERED_WITH| company_296
-    company_15 -->|PARTNERED_WITH| company_306
+    company_1 -->|COMMITTED_CAPEX| amount_16
+    company_1 -->|HAS_RISK| risk_12
+    company_1 -->|HAS_RISK| risk_13
+    company_1 -->|HAS_RISK| risk_14
+    company_1 -->|HAS_RISK| risk_15
+    company_1 -->|HAS_RISK| risk_16
+    company_1 -->|HAS_RISK| risk_17
+    company_4 -->|REPORTS_AMOUNT| amount_12
+    company_4 -->|REPORTS_AMOUNT| amount_13
+    company_4 -->|HAS_RISK| risk_5
+    company_4 -->|HAS_RISK| risk_6
+    company_4 -->|HAS_RISK| risk_7
+    company_1 -->|REPORTS_AMOUNT| amount_14
+    company_1 -->|REPORTS_AMOUNT| amount_15
+    company_1 -->|HAS_RISK| risk_8
+    company_1 -->|HAS_RISK| risk_9
+    company_1 -->|HAS_RISK| risk_10
+    company_1 -->|HAS_RISK| risk_11
+    company_1 -->|OWNS| company_4
             </pre>
         </div>
     </div>
@@ -1720,31 +409,38 @@ flowchart LR
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
         let zoom = 1;
-        const minZoom = 0.1;
-        const maxZoom = 3;
-        const zoomStep = 0.1;
+        const minZoom = 0.05;
+        const maxZoom = 2;
+        const zoomStep = 0.05;
         
         const wrapper = document.getElementById('wrapper');
         const container = document.getElementById('container');
         const loading = document.getElementById('loading');
         const diagram = document.getElementById('diagram');
+        const zoomSlider = document.getElementById('zoomSlider');
         
-        // Initialize Mermaid
+        // Initialize Mermaid with dark theme
         mermaid.initialize({
             startOnLoad: false,
-            theme: 'default',
-            maxTextSize: 1000000,
-            maxEdges: 10000,
+            theme: 'dark',
+            maxTextSize: 2000000,
+            maxEdges: 20000,
             flowchart: {
                 useMaxWidth: false,
                 htmlLabels: true,
                 curve: 'basis',
-                nodeSpacing: 30,
-                rankSpacing: 50,
-                padding: 20
+                nodeSpacing: 20,
+                rankSpacing: 40,
+                padding: 15
             },
             themeVariables: {
-                fontSize: '12px'
+                fontSize: '10px',
+                primaryColor: '#21262d',
+                primaryTextColor: '#c9d1d9',
+                primaryBorderColor: '#58a6ff',
+                lineColor: '#8b949e',
+                secondaryColor: '#30363d',
+                tertiaryColor: '#161b22'
             }
         });
         
@@ -1757,27 +453,43 @@ flowchart LR
                 diagram.style.display = 'block';
                 loading.style.display = 'none';
                 
-                // Auto-fit after render
-                setTimeout(fitToScreen, 100);
+                // Auto-fit to screen after render with slight delay
+                setTimeout(() => {
+                    fitToScreen();
+                    wrapper.scrollTo(0, 0);
+                }, 200);
             } catch (e) {
-                loading.innerHTML = 'Error rendering: ' + e.message;
+                loading.innerHTML = '<div style="color:#f85149;">Error rendering: ' + e.message + '</div><div style="margin-top:1rem;font-size:0.8rem;color:#8b949e;">Try refreshing the page or use a different browser.</div>';
             }
         }
         
-        // Zoom functions
+        // Update zoom display and slider
         function updateZoom() {
             container.style.transform = `scale(${zoom})`;
-            document.getElementById('zoomLevel').textContent = Math.round(zoom * 100) + '%';
+            const percent = Math.round(zoom * 100);
+            document.getElementById('zoomLevel').textContent = percent + '%';
+            zoomSlider.value = percent;
+        }
+        
+        // Set zoom directly
+        function setZoom(newZoom) {
+            zoom = Math.max(minZoom, Math.min(maxZoom, newZoom));
+            updateZoom();
+        }
+        
+        // Set zoom from slider
+        function setZoomFromSlider(value) {
+            setZoom(value / 100);
         }
         
         function zoomIn() {
-            zoom = Math.min(zoom + zoomStep, maxZoom);
-            updateZoom();
+            const step = zoom < 0.2 ? 0.02 : (zoom < 0.5 ? 0.05 : 0.1);
+            setZoom(zoom + step);
         }
         
         function zoomOut() {
-            zoom = Math.max(zoom - zoomStep, minZoom);
-            updateZoom();
+            const step = zoom < 0.2 ? 0.02 : (zoom < 0.5 ? 0.05 : 0.1);
+            setZoom(zoom - step);
         }
         
         function resetZoom() {
@@ -1790,18 +502,27 @@ flowchart LR
             const svg = diagram.querySelector('svg');
             if (!svg) return;
             
-            const svgWidth = svg.getBoundingClientRect().width / zoom;
-            const svgHeight = svg.getBoundingClientRect().height / zoom;
-            const wrapperWidth = wrapper.clientWidth - 64;
-            const wrapperHeight = wrapper.clientHeight - 64;
+            const bbox = svg.getBBox ? svg.getBBox() : null;
+            const svgWidth = bbox ? bbox.width : (svg.viewBox?.baseVal?.width || svg.clientWidth);
+            const svgHeight = bbox ? bbox.height : (svg.viewBox?.baseVal?.height || svg.clientHeight);
+            
+            const wrapperWidth = wrapper.clientWidth - 40;
+            const wrapperHeight = wrapper.clientHeight - 40;
             
             const scaleX = wrapperWidth / svgWidth;
             const scaleY = wrapperHeight / svgHeight;
-            zoom = Math.min(scaleX, scaleY, 1);
-            zoom = Math.max(zoom, minZoom);
+            
+            zoom = Math.max(minZoom, Math.min(scaleX, scaleY, 1));
             
             updateZoom();
-            wrapper.scrollTo(0, 0);
+            
+            setTimeout(() => {
+                const containerWidth = container.scrollWidth * zoom;
+                const containerHeight = container.scrollHeight * zoom;
+                const scrollX = Math.max(0, (containerWidth - wrapperWidth) / 2);
+                const scrollY = Math.max(0, (containerHeight - wrapperHeight) / 2);
+                wrapper.scrollTo(scrollX, scrollY);
+            }, 50);
         }
         
         // Scroll navigation
@@ -1815,12 +536,13 @@ flowchart LR
             }
         }
         
-        // Mouse wheel zoom (with Ctrl)
+        // Mouse wheel zoom (with Ctrl or Meta key)
         wrapper.addEventListener('wheel', (e) => {
-            if (e.ctrlKey) {
+            if (e.ctrlKey || e.metaKey) {
                 e.preventDefault();
-                if (e.deltaY < 0) zoomIn();
-                else zoomOut();
+                const delta = e.deltaY > 0 ? -1 : 1;
+                const step = zoom < 0.2 ? 0.01 : (zoom < 0.5 ? 0.02 : 0.05);
+                setZoom(zoom + (delta * step));
             }
         }, { passive: false });
         
@@ -1858,16 +580,42 @@ flowchart LR
         
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT') return;
+            
+            const scrollAmount = e.shiftKey ? 200 : 50;
+            
             switch(e.key) {
-                case '+': case '=': zoomIn(); break;
-                case '-': zoomOut(); break;
-                case '0': resetZoom(); break;
-                case 'ArrowLeft': wrapper.scrollBy(-50, 0); break;
-                case 'ArrowRight': wrapper.scrollBy(50, 0); break;
-                case 'ArrowUp': wrapper.scrollBy(0, -50); break;
-                case 'ArrowDown': wrapper.scrollBy(0, 50); break;
+                case '+': case '=': zoomIn(); e.preventDefault(); break;
+                case '-': case '_': zoomOut(); e.preventDefault(); break;
+                case '0': resetZoom(); e.preventDefault(); break;
+                case 'f': case 'F': fitToScreen(); e.preventDefault(); break;
+                case 'ArrowLeft': wrapper.scrollBy(-scrollAmount, 0); e.preventDefault(); break;
+                case 'ArrowRight': wrapper.scrollBy(scrollAmount, 0); e.preventDefault(); break;
+                case 'ArrowUp': wrapper.scrollBy(0, -scrollAmount); e.preventDefault(); break;
+                case 'ArrowDown': wrapper.scrollBy(0, scrollAmount); e.preventDefault(); break;
+                case 'Home': wrapper.scrollTo(0, 0); e.preventDefault(); break;
+                case 'End': wrapper.scrollTo(wrapper.scrollWidth, wrapper.scrollHeight); e.preventDefault(); break;
             }
         });
+        
+        // Touch support for mobile
+        let touchStartX, touchStartY;
+        wrapper.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                touchStartX = e.touches[0].pageX;
+                touchStartY = e.touches[0].pageY;
+            }
+        }, { passive: true });
+        
+        wrapper.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1) {
+                const dx = touchStartX - e.touches[0].pageX;
+                const dy = touchStartY - e.touches[0].pageY;
+                wrapper.scrollBy(dx, dy);
+                touchStartX = e.touches[0].pageX;
+                touchStartY = e.touches[0].pageY;
+            }
+        }, { passive: true });
         
         // Start rendering
         renderDiagram();

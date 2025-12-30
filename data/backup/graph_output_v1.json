@@ -1,0 +1,8659 @@
+{
+  "schema_version": "1.0.0",
+  "nodes": [
+    {
+      "id": "amount_1",
+      "type": "DollarAmount",
+      "name": "$3 billion",
+      "context": null
+    },
+    {
+      "id": "company_1",
+      "type": "Company",
+      "name": "Reliance Retail",
+      "context": null
+    },
+    {
+      "id": "amount_3",
+      "type": "DollarAmount",
+      "name": "$1 billion",
+      "context": null
+    },
+    {
+      "id": "company_2",
+      "type": "Company",
+      "name": "RIL",
+      "context": null
+    },
+    {
+      "id": "risk_1",
+      "type": "RiskFactor",
+      "name": "volatility",
+      "context": null
+    },
+    {
+      "id": "company_3",
+      "type": "Company",
+      "name": "S&P",
+      "context": null
+    },
+    {
+      "id": "company_4",
+      "type": "Company",
+      "name": "Moody’s",
+      "context": null
+    },
+    {
+      "id": "company_5",
+      "type": "Company",
+      "name": "CRISIL",
+      "context": null
+    },
+    {
+      "id": "company_6",
+      "type": "Company",
+      "name": "CARE",
+      "context": null
+    },
+    {
+      "id": "company_7",
+      "type": "Company",
+      "name": "ICRA",
+      "context": null
+    },
+    {
+      "id": "company_8",
+      "type": "Company",
+      "name": "India Ratings",
+      "context": null
+    },
+    {
+      "id": "company_14",
+      "type": "Company",
+      "name": "Reliance Gas Pipeline Limited",
+      "context": null
+    },
+    {
+      "id": "risk_2",
+      "type": "RiskFactor",
+      "name": "Liquidity Risk",
+      "context": null
+    },
+    {
+      "id": "company_15",
+      "type": "Company",
+      "name": "Reliance Industries Limited",
+      "context": null
+    },
+    {
+      "id": "risk_3",
+      "type": "RiskFactor",
+      "name": "counterparties’ credit risk",
+      "context": null
+    },
+    {
+      "id": "risk_4",
+      "type": "RiskFactor",
+      "name": "market volatility",
+      "context": null
+    },
+    {
+      "id": "risk_5",
+      "type": "RiskFactor",
+      "name": "liquidity risk",
+      "context": null
+    },
+    {
+      "id": "risk_6",
+      "type": "RiskFactor",
+      "name": "Commodity Price Risk",
+      "context": null
+    },
+    {
+      "id": "amount_41",
+      "type": "DollarAmount",
+      "name": "J10,71,174 crore",
+      "context": null
+    },
+    {
+      "id": "amount_42",
+      "type": "DollarAmount",
+      "name": "US$ 125.3 billion",
+      "context": null
+    },
+    {
+      "id": "amount_43",
+      "type": "DollarAmount",
+      "name": "J10,00,122 crore",
+      "context": null
+    },
+    {
+      "id": "amount_44",
+      "type": "DollarAmount",
+      "name": "J1,83,422 crore",
+      "context": null
+    },
+    {
+      "id": "amount_45",
+      "type": "DollarAmount",
+      "name": "US$ 21.5 billion",
+      "context": null
+    },
+    {
+      "id": "amount_46",
+      "type": "DollarAmount",
+      "name": "J1,78,290 crore",
+      "context": null
+    },
+    {
+      "id": "amount_47",
+      "type": "DollarAmount",
+      "name": "J1,46,917 crore",
+      "context": null
+    },
+    {
+      "id": "amount_48",
+      "type": "DollarAmount",
+      "name": "J1,41,969 crore",
+      "context": null
+    },
+    {
+      "id": "amount_49",
+      "type": "DollarAmount",
+      "name": "J 3,47,530 crore",
+      "context": null
+    },
+    {
+      "id": "amount_50",
+      "type": "DollarAmount",
+      "name": "US$ 40.7 billion",
+      "context": null
+    },
+    {
+      "id": "amount_51",
+      "type": "DollarAmount",
+      "name": "J 1,17,083 crore",
+      "context": null
+    },
+    {
+      "id": "amount_52",
+      "type": "DollarAmount",
+      "name": "US$ 13.7 billion",
+      "context": null
+    },
+    {
+      "id": "amount_53",
+      "type": "DollarAmount",
+      "name": "J 1,31,107 crore",
+      "context": null
+    },
+    {
+      "id": "amount_54",
+      "type": "DollarAmount",
+      "name": "US$ 15.3 billion",
+      "context": null
+    },
+    {
+      "id": "amount_55",
+      "type": "DollarAmount",
+      "name": "J 1,31,769 crore",
+      "context": null
+    },
+    {
+      "id": "amount_56",
+      "type": "DollarAmount",
+      "name": "J81,309 crore",
+      "context": null
+    },
+    {
+      "id": "amount_57",
+      "type": "DollarAmount",
+      "name": "US$ 9.5 billion",
+      "context": null
+    },
+    {
+      "id": "amount_58",
+      "type": "DollarAmount",
+      "name": "J 5,57,163 crore",
+      "context": null
+    },
+    {
+      "id": "amount_59",
+      "type": "DollarAmount",
+      "name": "US$ 65.2 billion",
+      "context": null
+    },
+    {
+      "id": "amount_61",
+      "type": "DollarAmount",
+      "name": "J 74,163 crore",
+      "context": null
+    },
+    {
+      "id": "amount_62",
+      "type": "DollarAmount",
+      "name": "US$ 8.7 billion",
+      "context": null
+    },
+    {
+      "id": "amount_63",
+      "type": "DollarAmount",
+      "name": "J 86,393 crore",
+      "context": null
+    },
+    {
+      "id": "amount_64",
+      "type": "DollarAmount",
+      "name": "J 35,262 crore",
+      "context": null
+    },
+    {
+      "id": "amount_65",
+      "type": "DollarAmount",
+      "name": "US$ 4.1 billion",
+      "context": null
+    },
+    {
+      "id": "amount_66",
+      "type": "DollarAmount",
+      "name": "J 42,042 crore",
+      "context": null
+    },
+    {
+      "id": "risk_8",
+      "type": "RiskFactor",
+      "name": "global volatility",
+      "context": null
+    },
+    {
+      "id": "risk_9",
+      "type": "RiskFactor",
+      "name": "geopolitical tension",
+      "context": null
+    },
+    {
+      "id": "risk_10",
+      "type": "RiskFactor",
+      "name": "policy uncertainties",
+      "context": null
+    },
+    {
+      "id": "risk_11",
+      "type": "RiskFactor",
+      "name": "trade tariffs",
+      "context": null
+    },
+    {
+      "id": "risk_12",
+      "type": "RiskFactor",
+      "name": "narrower margins",
+      "context": null
+    },
+    {
+      "id": "risk_13",
+      "type": "RiskFactor",
+      "name": "supply additions",
+      "context": null
+    },
+    {
+      "id": "risk_14",
+      "type": "RiskFactor",
+      "name": "unfavourable global demand-supply",
+      "context": null
+    },
+    {
+      "id": "company_21",
+      "type": "Company",
+      "name": "Dhirubhai Ambani Green Energy Giga Complex",
+      "context": null
+    },
+    {
+      "id": "company_22",
+      "type": "Company",
+      "name": "Nel ASA",
+      "context": null
+    },
+    {
+      "id": "risk_25",
+      "type": "RiskFactor",
+      "name": "climate-related changes",
+      "context": null
+    },
+    {
+      "id": "risk_26",
+      "type": "RiskFactor",
+      "name": "Transition risks",
+      "context": null
+    },
+    {
+      "id": "risk_29",
+      "type": "RiskFactor",
+      "name": "technological advancements",
+      "context": null
+    },
+    {
+      "id": "risk_30",
+      "type": "RiskFactor",
+      "name": "geopolitical volatility in the Middle East",
+      "context": null
+    },
+    {
+      "id": "risk_31",
+      "type": "RiskFactor",
+      "name": "redirection of shipping routes",
+      "context": null
+    },
+    {
+      "id": "risk_32",
+      "type": "RiskFactor",
+      "name": "OPEC+ and non-OPEC production decisions",
+      "context": null
+    },
+    {
+      "id": "risk_33",
+      "type": "RiskFactor",
+      "name": "regional capacity additions",
+      "context": null
+    },
+    {
+      "id": "risk_34",
+      "type": "RiskFactor",
+      "name": "downstream supply-demand realignments",
+      "context": null
+    },
+    {
+      "id": "risk_35",
+      "type": "RiskFactor",
+      "name": "evolving sanctions and trade tariff regimes",
+      "context": null
+    },
+    {
+      "id": "risk_36",
+      "type": "RiskFactor",
+      "name": "rate of recovery of Chinese economy",
+      "context": null
+    },
+    {
+      "id": "risk_37",
+      "type": "RiskFactor",
+      "name": "New refining capacity in Nigeria & China",
+      "context": null
+    },
+    {
+      "id": "risk_38",
+      "type": "RiskFactor",
+      "name": "Red Sea blockage",
+      "context": null
+    },
+    {
+      "id": "risk_39",
+      "type": "RiskFactor",
+      "name": "Downstream chemical product prices and margins",
+      "context": null
+    },
+    {
+      "id": "risk_41",
+      "type": "RiskFactor",
+      "name": "digital risk environment",
+      "context": null
+    },
+    {
+      "id": "company_24",
+      "type": "Company",
+      "name": "Reliance",
+      "context": null
+    },
+    {
+      "id": "risk_43",
+      "type": "RiskFactor",
+      "name": "Foreign Exchange Risk",
+      "context": null
+    },
+    {
+      "id": "risk_45",
+      "type": "RiskFactor",
+      "name": "Climate Change",
+      "context": null
+    },
+    {
+      "id": "risk_46",
+      "type": "RiskFactor",
+      "name": "Environmental Impacts",
+      "context": null
+    },
+    {
+      "id": "risk_47",
+      "type": "RiskFactor",
+      "name": "Energy Efficiency of Operations",
+      "context": null
+    },
+    {
+      "id": "risk_48",
+      "type": "RiskFactor",
+      "name": "Water and Effluent Management",
+      "context": null
+    },
+    {
+      "id": "risk_49",
+      "type": "RiskFactor",
+      "name": "Raw Material Security",
+      "context": null
+    },
+    {
+      "id": "risk_50",
+      "type": "RiskFactor",
+      "name": "Ecosystem and Biodiversity",
+      "context": null
+    },
+    {
+      "id": "risk_51",
+      "type": "RiskFactor",
+      "name": "Innovation and Technology",
+      "context": null
+    },
+    {
+      "id": "risk_52",
+      "type": "RiskFactor",
+      "name": "Waste Management and Circular Economy",
+      "context": null
+    },
+    {
+      "id": "risk_53",
+      "type": "RiskFactor",
+      "name": "Sustainable Supply Chain Management",
+      "context": null
+    },
+    {
+      "id": "risk_54",
+      "type": "RiskFactor",
+      "name": "Disaster Preparedness and Management",
+      "context": null
+    },
+    {
+      "id": "risk_55",
+      "type": "RiskFactor",
+      "name": "Health, Safety and Employee Well-being",
+      "context": null
+    },
+    {
+      "id": "risk_56",
+      "type": "RiskFactor",
+      "name": "Diversity and Inclusion",
+      "context": null
+    },
+    {
+      "id": "risk_57",
+      "type": "RiskFactor",
+      "name": "Customer Satisfaction",
+      "context": null
+    },
+    {
+      "id": "risk_58",
+      "type": "RiskFactor",
+      "name": "Data Privacy and Cybersecurity",
+      "context": null
+    },
+    {
+      "id": "risk_59",
+      "type": "RiskFactor",
+      "name": "Security and Asset Management",
+      "context": null
+    },
+    {
+      "id": "risk_60",
+      "type": "RiskFactor",
+      "name": "Talent Management",
+      "context": null
+    },
+    {
+      "id": "risk_61",
+      "type": "RiskFactor",
+      "name": "Community Development",
+      "context": null
+    },
+    {
+      "id": "risk_62",
+      "type": "RiskFactor",
+      "name": "Labour Management",
+      "context": null
+    },
+    {
+      "id": "risk_63",
+      "type": "RiskFactor",
+      "name": "Human Rights",
+      "context": null
+    },
+    {
+      "id": "risk_64",
+      "type": "RiskFactor",
+      "name": "Business Ethics, Integrity and Transparency",
+      "context": null
+    },
+    {
+      "id": "risk_65",
+      "type": "RiskFactor",
+      "name": "Regulatory Issues and Compliance",
+      "context": null
+    },
+    {
+      "id": "risk_66",
+      "type": "RiskFactor",
+      "name": "Anti-competitive Behaviour",
+      "context": null
+    },
+    {
+      "id": "risk_67",
+      "type": "RiskFactor",
+      "name": "climate challenges",
+      "context": null
+    },
+    {
+      "id": "amount_76",
+      "type": "DollarAmount",
+      "name": "150 billion",
+      "context": null
+    },
+    {
+      "id": "company_25",
+      "type": "Company",
+      "name": "Jio-bp",
+      "context": null
+    },
+    {
+      "id": "company_26",
+      "type": "Company",
+      "name": "Nel Hydrogen Electrolyser AS",
+      "context": null
+    },
+    {
+      "id": "company_27",
+      "type": "Company",
+      "name": "Jio",
+      "context": null
+    },
+    {
+      "id": "company_28",
+      "type": "Company",
+      "name": "Reliance O2C",
+      "context": null
+    },
+    {
+      "id": "company_29",
+      "type": "Company",
+      "name": "Reliance E&P",
+      "context": null
+    },
+    {
+      "id": "risk_68",
+      "type": "RiskFactor",
+      "name": "ESG risks",
+      "context": null
+    },
+    {
+      "id": "company_33",
+      "type": "Company",
+      "name": "Reliance Industries",
+      "context": null
+    },
+    {
+      "id": "company_34",
+      "type": "Company",
+      "name": "Jio Infocomm Limited (RJIL)",
+      "context": null
+    },
+    {
+      "id": "company_35",
+      "type": "Company",
+      "name": "Reliance Retail Limited (RRL)",
+      "context": null
+    },
+    {
+      "id": "company_36",
+      "type": "Company",
+      "name": "Reliance Projects & Property Management Services Limited (RPPMSL)",
+      "context": null
+    },
+    {
+      "id": "company_37",
+      "type": "Company",
+      "name": "Recron (Malaysia) Sdn. Bhd",
+      "context": null
+    },
+    {
+      "id": "company_38",
+      "type": "Company",
+      "name": "RP Chemicals (Malaysia) Sdn. Bhd",
+      "context": null
+    },
+    {
+      "id": "company_39",
+      "type": "Company",
+      "name": "Reliance BP Mobility Limited (RBML)",
+      "context": null
+    },
+    {
+      "id": "company_40",
+      "type": "Company",
+      "name": "Reliance Petro Marketing Limited",
+      "context": null
+    },
+    {
+      "id": "company_41",
+      "type": "Company",
+      "name": "Reliance Corporate IT Park Services Limited",
+      "context": null
+    },
+    {
+      "id": "company_42",
+      "type": "Company",
+      "name": "Reliance Petroleum",
+      "context": null
+    },
+    {
+      "id": "amount_85",
+      "type": "DollarAmount",
+      "name": "C 31.08 crore",
+      "context": null
+    },
+    {
+      "id": "risk_69",
+      "type": "RiskFactor",
+      "name": "price volatility",
+      "context": null
+    },
+    {
+      "id": "risk_70",
+      "type": "RiskFactor",
+      "name": "Margin Risk",
+      "context": null
+    },
+    {
+      "id": "company_43",
+      "type": "Company",
+      "name": "Jio Platforms Limited",
+      "context": null
+    },
+    {
+      "id": "company_44",
+      "type": "Company",
+      "name": "Reliance Retail Limited",
+      "context": null
+    },
+    {
+      "id": "amount_102",
+      "type": "DollarAmount",
+      "name": "Rs. 40,000 crore",
+      "context": null
+    },
+    {
+      "id": "risk_71",
+      "type": "RiskFactor",
+      "name": "compliance",
+      "context": null
+    },
+    {
+      "id": "risk_72",
+      "type": "RiskFactor",
+      "name": "fraudulent",
+      "context": null
+    },
+    {
+      "id": "risk_73",
+      "type": "RiskFactor",
+      "name": "illegal",
+      "context": null
+    },
+    {
+      "id": "risk_74",
+      "type": "RiskFactor",
+      "name": "misleading",
+      "context": null
+    },
+    {
+      "id": "risk_75",
+      "type": "RiskFactor",
+      "name": "regulatory",
+      "context": null
+    },
+    {
+      "id": "company_45",
+      "type": "Company",
+      "name": "Reliance Retail Ventures Limited",
+      "context": null
+    },
+    {
+      "id": "company_46",
+      "type": "Company",
+      "name": "Reliance Global Energy Services (Singapore) Pte. Limited",
+      "context": null
+    },
+    {
+      "id": "company_47",
+      "type": "Company",
+      "name": "Reliance Jio Infocomm Limited",
+      "context": null
+    },
+    {
+      "id": "risk_76",
+      "type": "RiskFactor",
+      "name": "Cybersecurity",
+      "context": null
+    },
+    {
+      "id": "risk_77",
+      "type": "RiskFactor",
+      "name": "Safety",
+      "context": null
+    },
+    {
+      "id": "risk_78",
+      "type": "RiskFactor",
+      "name": "Operations",
+      "context": null
+    },
+    {
+      "id": "risk_79",
+      "type": "RiskFactor",
+      "name": "Compliance",
+      "context": null
+    },
+    {
+      "id": "risk_80",
+      "type": "RiskFactor",
+      "name": "Control",
+      "context": null
+    },
+    {
+      "id": "risk_81",
+      "type": "RiskFactor",
+      "name": "Financial risks",
+      "context": null
+    },
+    {
+      "id": "company_48",
+      "type": "Company",
+      "name": "Star Television Productions Limited",
+      "context": null
+    },
+    {
+      "id": "company_49",
+      "type": "Company",
+      "name": "Studio 18 Media Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_50",
+      "type": "Company",
+      "name": "Viacom 18 Media Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_51",
+      "type": "Company",
+      "name": "Viacom 18 Media (UK) Limited",
+      "context": null
+    },
+    {
+      "id": "company_52",
+      "type": "Company",
+      "name": "Viacom 18 US Inc.",
+      "context": null
+    },
+    {
+      "id": "company_53",
+      "type": "Company",
+      "name": "Reldel Apparel Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_54",
+      "type": "Company",
+      "name": "Jio Digital Fibre Private Limited",
+      "context": null
+    },
+    {
+      "id": "amount_109",
+      "type": "DollarAmount",
+      "name": "C 78,339 crore",
+      "context": null
+    },
+    {
+      "id": "risk_84",
+      "type": "RiskFactor",
+      "name": "expected pattern of future benefits of the tangible assets of JDFPL (fibre assets)",
+      "context": null
+    },
+    {
+      "id": "company_55",
+      "type": "Company",
+      "name": "BG Exploration and Production India Limited",
+      "context": null
+    },
+    {
+      "id": "company_56",
+      "type": "Company",
+      "name": "GOI",
+      "context": null
+    },
+    {
+      "id": "company_57",
+      "type": "Company",
+      "name": "NTPC",
+      "context": null
+    },
+    {
+      "id": "company_58",
+      "type": "Company",
+      "name": "Gail (India) Limited",
+      "context": null
+    },
+    {
+      "id": "company_59",
+      "type": "Company",
+      "name": "Reliance Petroleum Limited",
+      "context": null
+    },
+    {
+      "id": "risk_86",
+      "type": "RiskFactor",
+      "name": "difference in interpretation of certain PSC provisions",
+      "context": null
+    },
+    {
+      "id": "risk_87",
+      "type": "RiskFactor",
+      "name": "complexity of issues",
+      "context": null
+    },
+    {
+      "id": "amount_110",
+      "type": "DollarAmount",
+      "name": "$ 165 million",
+      "context": null
+    },
+    {
+      "id": "amount_111",
+      "type": "DollarAmount",
+      "name": "C 1,407 crore",
+      "context": null
+    },
+    {
+      "id": "amount_112",
+      "type": "DollarAmount",
+      "name": "$ 247 million",
+      "context": null
+    },
+    {
+      "id": "amount_113",
+      "type": "DollarAmount",
+      "name": "C 2,111 crore",
+      "context": null
+    },
+    {
+      "id": "amount_114",
+      "type": "DollarAmount",
+      "name": "H 387 crore",
+      "context": null
+    },
+    {
+      "id": "amount_115",
+      "type": "DollarAmount",
+      "name": "H 447 crore",
+      "context": null
+    },
+    {
+      "id": "amount_116",
+      "type": "DollarAmount",
+      "name": "H 250 crore",
+      "context": null
+    },
+    {
+      "id": "amount_117",
+      "type": "DollarAmount",
+      "name": "H 25 crore",
+      "context": null
+    },
+    {
+      "id": "company_60",
+      "type": "Company",
+      "name": "Parent",
+      "context": null
+    },
+    {
+      "id": "risk_88",
+      "type": "RiskFactor",
+      "name": "complexity of those IT systems",
+      "context": null
+    },
+    {
+      "id": "risk_89",
+      "type": "RiskFactor",
+      "name": "high volumes of data processed by the IT systems",
+      "context": null
+    },
+    {
+      "id": "risk_90",
+      "type": "RiskFactor",
+      "name": "risk of revenue being recognised inappropriately",
+      "context": null
+    },
+    {
+      "id": "company_61",
+      "type": "Company",
+      "name": "Star India Private Limited",
+      "context": null
+    },
+    {
+      "id": "risk_91",
+      "type": "RiskFactor",
+      "name": "significant management judgement",
+      "context": null
+    },
+    {
+      "id": "risk_92",
+      "type": "RiskFactor",
+      "name": "Identification of intangible assets acquired through business combination",
+      "context": null
+    },
+    {
+      "id": "risk_93",
+      "type": "RiskFactor",
+      "name": "Determination of the fair value of consideration transferred",
+      "context": null
+    },
+    {
+      "id": "risk_94",
+      "type": "RiskFactor",
+      "name": "Allocation of the purchase price to identifiable assets and liabilities",
+      "context": null
+    },
+    {
+      "id": "risk_95",
+      "type": "RiskFactor",
+      "name": "increasing challenge to protect the integrity of the Parent’s systems and data",
+      "context": null
+    },
+    {
+      "id": "risk_96",
+      "type": "RiskFactor",
+      "name": "cyber security",
+      "context": null
+    },
+    {
+      "id": "company_62",
+      "type": "Company",
+      "name": "Group",
+      "context": null
+    },
+    {
+      "id": "company_63",
+      "type": "Company",
+      "name": "subsidiary companies",
+      "context": null
+    },
+    {
+      "id": "company_64",
+      "type": "Company",
+      "name": "associate companies",
+      "context": null
+    },
+    {
+      "id": "company_65",
+      "type": "Company",
+      "name": "joint venture companies",
+      "context": null
+    },
+    {
+      "id": "amount_123",
+      "type": "DollarAmount",
+      "name": "C 165 crore",
+      "context": null
+    },
+    {
+      "id": "amount_124",
+      "type": "DollarAmount",
+      "name": "C 2 crore",
+      "context": null
+    },
+    {
+      "id": "risk_97",
+      "type": "RiskFactor",
+      "name": "pending litigations",
+      "context": null
+    },
+    {
+      "id": "risk_98",
+      "type": "RiskFactor",
+      "name": "frauds",
+      "context": null
+    },
+    {
+      "id": "risk_99",
+      "type": "RiskFactor",
+      "name": "irregularities",
+      "context": null
+    },
+    {
+      "id": "risk_100",
+      "type": "RiskFactor",
+      "name": "override of internal control",
+      "context": null
+    },
+    {
+      "id": "company_66",
+      "type": "Company",
+      "name": "Securities Appellate Tribunal",
+      "context": null
+    },
+    {
+      "id": "company_67",
+      "type": "Company",
+      "name": "SEBI",
+      "context": null
+    },
+    {
+      "id": "company_68",
+      "type": "Company",
+      "name": "Hathway Cable and Datacom Limited",
+      "context": null
+    },
+    {
+      "id": "company_69",
+      "type": "Company",
+      "name": "DOT",
+      "context": null
+    },
+    {
+      "id": "amount_125",
+      "type": "DollarAmount",
+      "name": "H 3,202 crore",
+      "context": null
+    },
+    {
+      "id": "company_70",
+      "type": "Company",
+      "name": "Den Networks Limited",
+      "context": null
+    },
+    {
+      "id": "amount_126",
+      "type": "DollarAmount",
+      "name": "H 628 crore",
+      "context": null
+    },
+    {
+      "id": "company_71",
+      "type": "Company",
+      "name": "Den Broadband Limited",
+      "context": null
+    },
+    {
+      "id": "amount_127",
+      "type": "DollarAmount",
+      "name": "H 2,157 crore",
+      "context": null
+    },
+    {
+      "id": "company_72",
+      "type": "Company",
+      "name": "TDSAT",
+      "context": null
+    },
+    {
+      "id": "company_75",
+      "type": "Company",
+      "name": "Gujarat Industrial Development Corporation",
+      "context": null
+    },
+    {
+      "id": "amount_137",
+      "type": "DollarAmount",
+      "name": "3,300 crore",
+      "context": null
+    },
+    {
+      "id": "company_76",
+      "type": "Company",
+      "name": "Alok Industries Limited",
+      "context": null
+    },
+    {
+      "id": "amount_138",
+      "type": "DollarAmount",
+      "name": "63 crore",
+      "context": null
+    },
+    {
+      "id": "company_77",
+      "type": "Company",
+      "name": "BAM DLR Chennai Private Limited",
+      "context": null
+    },
+    {
+      "id": "amount_139",
+      "type": "DollarAmount",
+      "name": "17 crore",
+      "context": null
+    },
+    {
+      "id": "company_78",
+      "type": "Company",
+      "name": "Summit Digitel Infrastructure Limited",
+      "context": null
+    },
+    {
+      "id": "amount_140",
+      "type": "DollarAmount",
+      "name": "100 crore",
+      "context": null
+    },
+    {
+      "id": "company_79",
+      "type": "Company",
+      "name": "Mahan Energen Limited",
+      "context": null
+    },
+    {
+      "id": "amount_143",
+      "type": "DollarAmount",
+      "name": "16 crore",
+      "context": null
+    },
+    {
+      "id": "company_80",
+      "type": "Company",
+      "name": "Reliance Industrial Infrastructure Limited",
+      "context": null
+    },
+    {
+      "id": "amount_144",
+      "type": "DollarAmount",
+      "name": "54,900 crore",
+      "context": null
+    },
+    {
+      "id": "company_81",
+      "type": "Company",
+      "name": "Jio Limited",
+      "context": null
+    },
+    {
+      "id": "company_82",
+      "type": "Company",
+      "name": "Lakadia B Power Transmission Limited",
+      "context": null
+    },
+    {
+      "id": "company_83",
+      "type": "Company",
+      "name": "MSKVY Nineteenth Solar SPV Limited",
+      "context": null
+    },
+    {
+      "id": "company_84",
+      "type": "Company",
+      "name": "MSKVY Twenty Second Solar SPV Limited",
+      "context": null
+    },
+    {
+      "id": "company_85",
+      "type": "Company",
+      "name": "Navi Mumbai IIA Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_87",
+      "type": "Company",
+      "name": "Reliance 4IR Realty Development Limited",
+      "context": null
+    },
+    {
+      "id": "company_90",
+      "type": "Company",
+      "name": "Reliance Chemicals and Materials Limited",
+      "context": null
+    },
+    {
+      "id": "company_92",
+      "type": "Company",
+      "name": "Reliance Content Distribution Limited",
+      "context": null
+    },
+    {
+      "id": "company_95",
+      "type": "Company",
+      "name": "Reliance Ethane Pipeline Limited",
+      "context": null
+    },
+    {
+      "id": "company_96",
+      "type": "Company",
+      "name": "Indiawin Sports Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_97",
+      "type": "Company",
+      "name": "Gujarat Chemical Port Limited",
+      "context": null
+    },
+    {
+      "id": "company_99",
+      "type": "Company",
+      "name": "Reliance Europe Limited",
+      "context": null
+    },
+    {
+      "id": "company_100",
+      "type": "Company",
+      "name": "Vadodara Enviro Channel Limited",
+      "context": null
+    },
+    {
+      "id": "company_102",
+      "type": "Company",
+      "name": "Dronagiri Bokadvira East Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_103",
+      "type": "Company",
+      "name": "Dronagiri Navghar South Second Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_104",
+      "type": "Company",
+      "name": "Dronagiri Bokadvira North Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_105",
+      "type": "Company",
+      "name": "Dronagiri Navghar West Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_106",
+      "type": "Company",
+      "name": "Dronagiri Bokadvira South Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_107",
+      "type": "Company",
+      "name": "Dronagiri Pagote East Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_108",
+      "type": "Company",
+      "name": "Dronagiri Bokadvira West Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_109",
+      "type": "Company",
+      "name": "Dronagiri Pagote North First Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_110",
+      "type": "Company",
+      "name": "Dronagiri Dongri East Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_111",
+      "type": "Company",
+      "name": "Dronagiri Pagote North Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_112",
+      "type": "Company",
+      "name": "Dronagiri Dongri North Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_113",
+      "type": "Company",
+      "name": "Dronagiri Pagote North Second Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_114",
+      "type": "Company",
+      "name": "Dronagiri Dongri South Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_115",
+      "type": "Company",
+      "name": "Dronagiri Pagote South First Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_116",
+      "type": "Company",
+      "name": "Dronagiri Dongri West Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_117",
+      "type": "Company",
+      "name": "Dronagiri Pagote South Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_118",
+      "type": "Company",
+      "name": "Dronagiri Funde East Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_119",
+      "type": "Company",
+      "name": "Dronagiri Pagote West Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_120",
+      "type": "Company",
+      "name": "Dronagiri Funde North Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_121",
+      "type": "Company",
+      "name": "Dronagiri Panje East Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_122",
+      "type": "Company",
+      "name": "Dronagiri Funde South Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_123",
+      "type": "Company",
+      "name": "Dronagiri Panje North Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_124",
+      "type": "Company",
+      "name": "Dronagiri Funde West Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_125",
+      "type": "Company",
+      "name": "Dronagiri Panje South Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_126",
+      "type": "Company",
+      "name": "Dronagiri Navghar East Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_127",
+      "type": "Company",
+      "name": "Dronagiri Panje West Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_128",
+      "type": "Company",
+      "name": "Dronagiri Navghar North First Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_129",
+      "type": "Company",
+      "name": "Kalamboli East Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_130",
+      "type": "Company",
+      "name": "Dronagiri Navghar North Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_131",
+      "type": "Company",
+      "name": "Kalamboli North First Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_132",
+      "type": "Company",
+      "name": "Dronagiri Navghar North Second Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_133",
+      "type": "Company",
+      "name": "Kalamboli North Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_134",
+      "type": "Company",
+      "name": "Dronagiri Navghar South First Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_135",
+      "type": "Company",
+      "name": "Kalamboli North Second Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_136",
+      "type": "Company",
+      "name": "Dronagiri Navghar South Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_137",
+      "type": "Company",
+      "name": "Kalamboli North Third Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_138",
+      "type": "Company",
+      "name": "GML India Fashion Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_139",
+      "type": "Company",
+      "name": "Hamleys (Franchising) Limited",
+      "context": null
+    },
+    {
+      "id": "company_140",
+      "type": "Company",
+      "name": "Hamleys Asia Limited",
+      "context": null
+    },
+    {
+      "id": "company_141",
+      "type": "Company",
+      "name": "Hamleys of London Limited",
+      "context": null
+    },
+    {
+      "id": "company_142",
+      "type": "Company",
+      "name": "Hathway Digital Limited",
+      "context": null
+    },
+    {
+      "id": "company_143",
+      "type": "Company",
+      "name": "Hathway VCN Cablenet Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_144",
+      "type": "Company",
+      "name": "7-India Convenience Retail Limited",
+      "context": null
+    },
+    {
+      "id": "company_145",
+      "type": "Company",
+      "name": "Cover Story Clothing UK Limited",
+      "context": null
+    },
+    {
+      "id": "company_146",
+      "type": "Company",
+      "name": "Aaidea Solutions Limited",
+      "context": null
+    },
+    {
+      "id": "company_147",
+      "type": "Company",
+      "name": "Accops Systems FZ-LLC",
+      "context": null
+    },
+    {
+      "id": "company_148",
+      "type": "Company",
+      "name": "Accops Systems Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_149",
+      "type": "Company",
+      "name": "Actoserba Active Wholesale Limited",
+      "context": null
+    },
+    {
+      "id": "company_150",
+      "type": "Company",
+      "name": "Addverb Technologies B.V.",
+      "context": null
+    },
+    {
+      "id": "company_151",
+      "type": "Company",
+      "name": "Addverb Technologies Limited",
+      "context": null
+    },
+    {
+      "id": "company_152",
+      "type": "Company",
+      "name": "Addverb Technologies Pte. Ltd.",
+      "context": null
+    },
+    {
+      "id": "company_153",
+      "type": "Company",
+      "name": "Addverb Technologies Pty Limited",
+      "context": null
+    },
+    {
+      "id": "company_154",
+      "type": "Company",
+      "name": "Addverb Technologies USA Inc.",
+      "context": null
+    },
+    {
+      "id": "company_155",
+      "type": "Company",
+      "name": "Adventure Marketing Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_156",
+      "type": "Company",
+      "name": "AETN18 Media Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_157",
+      "type": "Company",
+      "name": "Crystalline Silica and Mining Limited",
+      "context": null
+    },
+    {
+      "id": "company_158",
+      "type": "Company",
+      "name": "C-Square Info-Solutions Limited",
+      "context": null
+    },
+    {
+      "id": "company_159",
+      "type": "Company",
+      "name": "Dadha Pharma Distribution Limited",
+      "context": null
+    },
+    {
+      "id": "company_160",
+      "type": "Company",
+      "name": "DEN Ambey Cable Networks Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_161",
+      "type": "Company",
+      "name": "Den Budaun Cable Network Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_162",
+      "type": "Company",
+      "name": "Den Discovery Digital Networks Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_163",
+      "type": "Company",
+      "name": "Den Enjoy Cable Networks Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_164",
+      "type": "Company",
+      "name": "Den Enjoy Navaratan Network Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_165",
+      "type": "Company",
+      "name": "Den F K Cable TV Network Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_166",
+      "type": "Company",
+      "name": "Global Asianet Limited",
+      "context": null
+    },
+    {
+      "id": "company_167",
+      "type": "Company",
+      "name": "Grab A Grub Services Limited",
+      "context": null
+    },
+    {
+      "id": "company_168",
+      "type": "Company",
+      "name": "Greycells18 Media Limited",
+      "context": null
+    },
+    {
+      "id": "company_169",
+      "type": "Company",
+      "name": "Hathway Bhawani Cabletel & Datacom Limited",
+      "context": null
+    },
+    {
+      "id": "company_170",
+      "type": "Company",
+      "name": "Hathway Mantra Cable & Datacom Limited",
+      "context": null
+    },
+    {
+      "id": "company_171",
+      "type": "Company",
+      "name": "Hathway Nashik Cable Network Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_172",
+      "type": "Company",
+      "name": "ICD Columbus Centre Hotel LLC",
+      "context": null
+    },
+    {
+      "id": "company_173",
+      "type": "Company",
+      "name": "Independent Media Trust",
+      "context": null
+    },
+    {
+      "id": "company_174",
+      "type": "Company",
+      "name": "India Mumbai Indians (Pty) Ltd",
+      "context": null
+    },
+    {
+      "id": "company_175",
+      "type": "Company",
+      "name": "IndiaCast Media Distribution Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_176",
+      "type": "Company",
+      "name": "IndiaCast UK Ltd",
+      "context": null
+    },
+    {
+      "id": "company_177",
+      "type": "Company",
+      "name": "IndiaCast US Ltd",
+      "context": null
+    },
+    {
+      "id": "company_178",
+      "type": "Company",
+      "name": "Indiavidual Learning Limited",
+      "context": null
+    },
+    {
+      "id": "company_179",
+      "type": "Company",
+      "name": "Indiawin Sports Middle East Limited",
+      "context": null
+    },
+    {
+      "id": "company_180",
+      "type": "Company",
+      "name": "Reliance Digital",
+      "context": null
+    },
+    {
+      "id": "company_181",
+      "type": "Company",
+      "name": "MyJio Stores",
+      "context": null
+    },
+    {
+      "id": "company_183",
+      "type": "Company",
+      "name": "Consumer Brands",
+      "context": null
+    },
+    {
+      "id": "company_184",
+      "type": "Company",
+      "name": "Campa",
+      "context": null
+    },
+    {
+      "id": "company_185",
+      "type": "Company",
+      "name": "Independence",
+      "context": null
+    },
+    {
+      "id": "company_187",
+      "type": "Company",
+      "name": "Deloitte Haskins & Sells LLP",
+      "context": null
+    },
+    {
+      "id": "company_188",
+      "type": "Company",
+      "name": "Chaturvedi & Shah LLP",
+      "context": null
+    },
+    {
+      "id": "amount_171",
+      "type": "DollarAmount",
+      "name": "349 million",
+      "context": null
+    },
+    {
+      "id": "risk_104",
+      "type": "RiskFactor",
+      "name": "Disruptive technological changes",
+      "context": null
+    },
+    {
+      "id": "risk_105",
+      "type": "RiskFactor",
+      "name": "price competition",
+      "context": null
+    },
+    {
+      "id": "amount_186",
+      "type": "DollarAmount",
+      "name": "H 72 crore",
+      "context": null
+    },
+    {
+      "id": "risk_113",
+      "type": "RiskFactor",
+      "name": "interest rate risk",
+      "context": null
+    },
+    {
+      "id": "company_189",
+      "type": "Company",
+      "name": "Reliance International Limited (RINL)",
+      "context": null
+    },
+    {
+      "id": "company_190",
+      "type": "Company",
+      "name": "the Company",
+      "context": null
+    },
+    {
+      "id": "company_191",
+      "type": "Company",
+      "name": "Reliance Foundation",
+      "context": null
+    },
+    {
+      "id": "company_193",
+      "type": "Company",
+      "name": "RF School",
+      "context": null
+    },
+    {
+      "id": "company_197",
+      "type": "Company",
+      "name": "Kasturba Vaidyakiya Rahat Mandal",
+      "context": null
+    },
+    {
+      "id": "company_198",
+      "type": "Company",
+      "name": "Nirmal Government Hospital",
+      "context": null
+    },
+    {
+      "id": "company_199",
+      "type": "Company",
+      "name": "Sher Singh Karki School",
+      "context": null
+    },
+    {
+      "id": "company_200",
+      "type": "Company",
+      "name": "Pilikula Zoological Park",
+      "context": null
+    },
+    {
+      "id": "company_201",
+      "type": "Company",
+      "name": "Pandit Deendayal Energy University",
+      "context": null
+    },
+    {
+      "id": "company_202",
+      "type": "Company",
+      "name": "PDEU",
+      "context": null
+    },
+    {
+      "id": "company_204",
+      "type": "Company",
+      "name": "BAM DLR Data Centre Services Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_205",
+      "type": "Company",
+      "name": "BAM DLR Kolkata Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_206",
+      "type": "Company",
+      "name": "BAM DLR Mumbai Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_207",
+      "type": "Company",
+      "name": "BAM DLR Network Services Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_208",
+      "type": "Company",
+      "name": "Football Sports Development Limited",
+      "context": null
+    },
+    {
+      "id": "company_209",
+      "type": "Company",
+      "name": "India Gas Solution Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_210",
+      "type": "Company",
+      "name": "Pipeline Management Services Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_211",
+      "type": "Company",
+      "name": "Sintex Industries Limited",
+      "context": null
+    },
+    {
+      "id": "company_212",
+      "type": "Company",
+      "name": "Reliance Exploration & Production DMCC",
+      "context": null
+    },
+    {
+      "id": "company_213",
+      "type": "Company",
+      "name": "Reliance Gas Pipelines Limited",
+      "context": null
+    },
+    {
+      "id": "company_214",
+      "type": "Company",
+      "name": "Reliance Global Energy Services (Singapore) Pte. Ltd.",
+      "context": null
+    },
+    {
+      "id": "company_215",
+      "type": "Company",
+      "name": "Reliance Global Energy Services Limited",
+      "context": null
+    },
+    {
+      "id": "company_216",
+      "type": "Company",
+      "name": "Reliance Industries (Middle East) DMCC",
+      "context": null
+    },
+    {
+      "id": "company_217",
+      "type": "Company",
+      "name": "Reliance International Limited",
+      "context": null
+    },
+    {
+      "id": "amount_238",
+      "type": "DollarAmount",
+      "name": "USD 1",
+      "context": null
+    },
+    {
+      "id": "company_218",
+      "type": "Company",
+      "name": "Reliance Mappedu Multi Modal Logistics Park Limited",
+      "context": null
+    },
+    {
+      "id": "company_219",
+      "type": "Company",
+      "name": "Reliance New Energy Limited",
+      "context": null
+    },
+    {
+      "id": "company_220",
+      "type": "Company",
+      "name": "Reliance New Energy Battery Limited",
+      "context": null
+    },
+    {
+      "id": "company_221",
+      "type": "Company",
+      "name": "Reliance Projects & Property Management Services Limited",
+      "context": null
+    },
+    {
+      "id": "company_222",
+      "type": "Company",
+      "name": "Reliance Sibur Elastomers Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_223",
+      "type": "Company",
+      "name": "Reliance SOU Limited",
+      "context": null
+    },
+    {
+      "id": "company_224",
+      "type": "Company",
+      "name": "Reliance Strategic Business Ventures Limited",
+      "context": null
+    },
+    {
+      "id": "company_225",
+      "type": "Company",
+      "name": "Reliance Syngas Limited",
+      "context": null
+    },
+    {
+      "id": "company_226",
+      "type": "Company",
+      "name": "Reliance Ventures Limited",
+      "context": null
+    },
+    {
+      "id": "company_227",
+      "type": "Company",
+      "name": "Rise Worldwide Limited",
+      "context": null
+    },
+    {
+      "id": "company_228",
+      "type": "Company",
+      "name": "SenseHawk, Inc.",
+      "context": null
+    },
+    {
+      "id": "amount_252",
+      "type": "DollarAmount",
+      "name": "USD 0.0001",
+      "context": null
+    },
+    {
+      "id": "company_229",
+      "type": "Company",
+      "name": "Skymet Weather Services Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_237",
+      "type": "Company",
+      "name": "Star Advertising Sales Limited",
+      "context": null
+    },
+    {
+      "id": "company_239",
+      "type": "Company",
+      "name": "Ulwe West Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_241",
+      "type": "Company",
+      "name": "Stoke Park Limited",
+      "context": null
+    },
+    {
+      "id": "company_242",
+      "type": "Company",
+      "name": "V - Retail Limited",
+      "context": null
+    },
+    {
+      "id": "company_244",
+      "type": "Company",
+      "name": "VasyERP Solutions Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_246",
+      "type": "Company",
+      "name": "Vengara Retail Private Limited",
+      "context": null
+    },
+    {
+      "id": "amount_340",
+      "type": "DollarAmount",
+      "name": "H 20,415 crore",
+      "context": null
+    },
+    {
+      "id": "amount_342",
+      "type": "DollarAmount",
+      "name": "H 1,000 crore",
+      "context": null
+    },
+    {
+      "id": "amount_348",
+      "type": "DollarAmount",
+      "name": "H 27 crore",
+      "context": null
+    },
+    {
+      "id": "amount_349",
+      "type": "DollarAmount",
+      "name": "H 22 crore",
+      "context": null
+    },
+    {
+      "id": "amount_355",
+      "type": "DollarAmount",
+      "name": "H 855 crore",
+      "context": null
+    },
+    {
+      "id": "amount_356",
+      "type": "DollarAmount",
+      "name": "H 691 crore",
+      "context": null
+    },
+    {
+      "id": "amount_357",
+      "type": "DollarAmount",
+      "name": "H 85 crore",
+      "context": null
+    },
+    {
+      "id": "amount_359",
+      "type": "DollarAmount",
+      "name": "H 188 crore",
+      "context": null
+    },
+    {
+      "id": "amount_360",
+      "type": "DollarAmount",
+      "name": "H 170 crore",
+      "context": null
+    },
+    {
+      "id": "amount_361",
+      "type": "DollarAmount",
+      "name": "H 2 crore",
+      "context": null
+    },
+    {
+      "id": "amount_362",
+      "type": "DollarAmount",
+      "name": "H 105 crore",
+      "context": null
+    },
+    {
+      "id": "amount_363",
+      "type": "DollarAmount",
+      "name": "H 89 crore",
+      "context": null
+    },
+    {
+      "id": "amount_364",
+      "type": "DollarAmount",
+      "name": "H 58 crore",
+      "context": null
+    },
+    {
+      "id": "amount_366",
+      "type": "DollarAmount",
+      "name": "H 19 crore",
+      "context": null
+    },
+    {
+      "id": "amount_368",
+      "type": "DollarAmount",
+      "name": "H 6 crore",
+      "context": null
+    },
+    {
+      "id": "amount_369",
+      "type": "DollarAmount",
+      "name": "H 3 crore",
+      "context": null
+    },
+    {
+      "id": "amount_370",
+      "type": "DollarAmount",
+      "name": "H 272 crore",
+      "context": null
+    },
+    {
+      "id": "amount_371",
+      "type": "DollarAmount",
+      "name": "H 64 crore",
+      "context": null
+    },
+    {
+      "id": "company_256",
+      "type": "Company",
+      "name": "Reliance Foundation Hospital Trust",
+      "context": null
+    },
+    {
+      "id": "company_257",
+      "type": "Company",
+      "name": "Jamnaben Hirachand Ambani Foundation",
+      "context": null
+    },
+    {
+      "id": "company_258",
+      "type": "Company",
+      "name": "Reliance Foundation Institution of Education and Research",
+      "context": null
+    },
+    {
+      "id": "company_259",
+      "type": "Company",
+      "name": "Reliance Foundation Youth Sports",
+      "context": null
+    },
+    {
+      "id": "company_260",
+      "type": "Company",
+      "name": "Sir Hurkisondas Nurrotumdas Hospital & Research Centre",
+      "context": null
+    },
+    {
+      "id": "company_261",
+      "type": "Company",
+      "name": "Dhirubhai Ambani Foundation",
+      "context": null
+    },
+    {
+      "id": "company_262",
+      "type": "Company",
+      "name": "Hirachand Govardhandas Ambani Public Charitable Trust",
+      "context": null
+    },
+    {
+      "id": "company_263",
+      "type": "Company",
+      "name": "Vividh Kridakhel Foundation",
+      "context": null
+    },
+    {
+      "id": "company_264",
+      "type": "Company",
+      "name": "Vividh Hunarvikas Foundation",
+      "context": null
+    },
+    {
+      "id": "company_267",
+      "type": "Company",
+      "name": "GTPL Hathway Limited",
+      "context": null
+    },
+    {
+      "id": "company_273",
+      "type": "Company",
+      "name": "Jio Finance Limited",
+      "context": null
+    },
+    {
+      "id": "company_274",
+      "type": "Company",
+      "name": "Jio Financial Services Limited Group",
+      "context": null
+    },
+    {
+      "id": "company_275",
+      "type": "Company",
+      "name": "Jio Finance Platform and Service Limited",
+      "context": null
+    },
+    {
+      "id": "company_281",
+      "type": "Company",
+      "name": "DEN ADN Network Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_284",
+      "type": "Company",
+      "name": "Reliance Bally India Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_286",
+      "type": "Company",
+      "name": "Diesel Fashion India Reliance Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_289",
+      "type": "Company",
+      "name": "Reliance International Leasing IFSC Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_296",
+      "type": "Company",
+      "name": "Ryohin-Keikaku Reliance India Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_299",
+      "type": "Company",
+      "name": "Jio Satellite Communications Limited",
+      "context": null
+    },
+    {
+      "id": "company_301",
+      "type": "Company",
+      "name": "Jio Things Limited",
+      "context": null
+    },
+    {
+      "id": "company_302",
+      "type": "Company",
+      "name": "Just Dial Limited",
+      "context": null
+    },
+    {
+      "id": "company_303",
+      "type": "Company",
+      "name": "Kalamboli South First Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_304",
+      "type": "Company",
+      "name": "Reliance-Vision Express Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_305",
+      "type": "Company",
+      "name": "Sosyo Hajoori Beverages Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_306",
+      "type": "Company",
+      "name": "TCO Reliance India Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_307",
+      "type": "Company",
+      "name": "Zegna South Asia Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_315",
+      "type": "Company",
+      "name": "Ethane Coral LLC",
+      "context": null
+    },
+    {
+      "id": "company_316",
+      "type": "Company",
+      "name": "Ethane Diamond LLC",
+      "context": null
+    },
+    {
+      "id": "company_317",
+      "type": "Company",
+      "name": "Ethane Jade LLC",
+      "context": null
+    },
+    {
+      "id": "company_318",
+      "type": "Company",
+      "name": "Foodhall Franchises Limited",
+      "context": null
+    },
+    {
+      "id": "company_321",
+      "type": "Company",
+      "name": "Reliance Carbon Fibre Cylinder Limited",
+      "context": null
+    },
+    {
+      "id": "company_322",
+      "type": "Company",
+      "name": "Reliance Hydrogen Electrolysis Limited",
+      "context": null
+    },
+    {
+      "id": "company_323",
+      "type": "Company",
+      "name": "Reliance Hydrogen Fuel Cell Limited",
+      "context": null
+    },
+    {
+      "id": "company_324",
+      "type": "Company",
+      "name": "Reliance New Energy Carbon Fibre Cylinder Limited",
+      "context": null
+    },
+    {
+      "id": "company_325",
+      "type": "Company",
+      "name": "Reliance New Energy Hydrogen Electrolysis Limited",
+      "context": null
+    },
+    {
+      "id": "company_326",
+      "type": "Company",
+      "name": "Reliance New Energy Hydrogen Fuel Cell Limited",
+      "context": null
+    },
+    {
+      "id": "amount_472",
+      "type": "DollarAmount",
+      "name": "₹ 10,71,174 crore",
+      "context": null
+    },
+    {
+      "id": "amount_474",
+      "type": "DollarAmount",
+      "name": "₹ 1,83,422 crore",
+      "context": null
+    },
+    {
+      "id": "amount_475",
+      "type": "DollarAmount",
+      "name": "₹ 81,309 crore",
+      "context": null
+    },
+    {
+      "id": "risk_123",
+      "type": "RiskFactor",
+      "name": "external volatility",
+      "context": null
+    },
+    {
+      "id": "risk_124",
+      "type": "RiskFactor",
+      "name": "geopolitical turbulence",
+      "context": null
+    },
+    {
+      "id": "risk_125",
+      "type": "RiskFactor",
+      "name": "global uncertainties",
+      "context": null
+    },
+    {
+      "id": "amount_477",
+      "type": "DollarAmount",
+      "name": "18 million",
+      "context": null
+    },
+    {
+      "id": "company_333",
+      "type": "Company",
+      "name": "SpaceX",
+      "context": null
+    },
+    {
+      "id": "company_334",
+      "type": "Company",
+      "name": "Starlink",
+      "context": null
+    },
+    {
+      "id": "amount_479",
+      "type": "DollarAmount",
+      "name": "100 million",
+      "context": null
+    },
+    {
+      "id": "company_335",
+      "type": "Company",
+      "name": "JioStar",
+      "context": null
+    },
+    {
+      "id": "amount_480",
+      "type": "DollarAmount",
+      "name": "61.2 million",
+      "context": null
+    },
+    {
+      "id": "amount_481",
+      "type": "DollarAmount",
+      "name": "652 million",
+      "context": null
+    },
+    {
+      "id": "company_342",
+      "type": "Company",
+      "name": "Network18",
+      "context": null
+    },
+    {
+      "id": "company_346",
+      "type": "Company",
+      "name": "Moneycontrol",
+      "context": null
+    },
+    {
+      "id": "amount_489",
+      "type": "DollarAmount",
+      "name": "280 million",
+      "context": null
+    },
+    {
+      "id": "company_347",
+      "type": "Company",
+      "name": "Jio Studios",
+      "context": null
+    },
+    {
+      "id": "amount_490",
+      "type": "DollarAmount",
+      "name": "₹ 1,000 crores",
+      "context": null
+    },
+    {
+      "id": "amount_499",
+      "type": "DollarAmount",
+      "name": "$6.9/bbl",
+      "context": null
+    },
+    {
+      "id": "amount_500",
+      "type": "DollarAmount",
+      "name": "$11.6/bbl",
+      "context": null
+    },
+    {
+      "id": "amount_501",
+      "type": "DollarAmount",
+      "name": "$14.4/bbl",
+      "context": null
+    },
+    {
+      "id": "amount_502",
+      "type": "DollarAmount",
+      "name": "$23.0/bbl",
+      "context": null
+    },
+    {
+      "id": "amount_503",
+      "type": "DollarAmount",
+      "name": "$13.6/bbl",
+      "context": null
+    },
+    {
+      "id": "amount_504",
+      "type": "DollarAmount",
+      "name": "$21.2/bbl",
+      "context": null
+    },
+    {
+      "id": "risk_126",
+      "type": "RiskFactor",
+      "name": "market complexities",
+      "context": null
+    },
+    {
+      "id": "risk_127",
+      "type": "RiskFactor",
+      "name": "recessionary concerns",
+      "context": null
+    },
+    {
+      "id": "risk_128",
+      "type": "RiskFactor",
+      "name": "climate-related risks",
+      "context": null
+    },
+    {
+      "id": "risk_129",
+      "type": "RiskFactor",
+      "name": "regulatory shifts",
+      "context": null
+    },
+    {
+      "id": "risk_130",
+      "type": "RiskFactor",
+      "name": "market fluctuations",
+      "context": null
+    },
+    {
+      "id": "risk_131",
+      "type": "RiskFactor",
+      "name": "reputational concerns",
+      "context": null
+    },
+    {
+      "id": "risk_132",
+      "type": "RiskFactor",
+      "name": "legal",
+      "context": null
+    },
+    {
+      "id": "risk_133",
+      "type": "RiskFactor",
+      "name": "ethical",
+      "context": null
+    },
+    {
+      "id": "company_361",
+      "type": "Company",
+      "name": "Jio Financial Services Limited",
+      "context": null
+    },
+    {
+      "id": "risk_134",
+      "type": "RiskFactor",
+      "name": "Risk Management",
+      "context": null
+    },
+    {
+      "id": "risk_135",
+      "type": "RiskFactor",
+      "name": "Compliance exposures",
+      "context": null
+    },
+    {
+      "id": "company_372",
+      "type": "Company",
+      "name": "Risk Management Committee",
+      "context": null
+    },
+    {
+      "id": "company_374",
+      "type": "Company",
+      "name": "BSE Limited",
+      "context": null
+    },
+    {
+      "id": "company_375",
+      "type": "Company",
+      "name": "National Stock Exchange of India Limited",
+      "context": null
+    },
+    {
+      "id": "risk_136",
+      "type": "RiskFactor",
+      "name": "Commodity Price Risks",
+      "context": null
+    },
+    {
+      "id": "company_381",
+      "type": "Company",
+      "name": "Luxembourg Stock Exchange",
+      "context": null
+    },
+    {
+      "id": "amount_522",
+      "type": "DollarAmount",
+      "name": "C 25 crore",
+      "context": null
+    },
+    {
+      "id": "company_382",
+      "type": "Company",
+      "name": "SAT",
+      "context": null
+    },
+    {
+      "id": "company_383",
+      "type": "Company",
+      "name": "BNP & Associates",
+      "context": null
+    },
+    {
+      "id": "company_384",
+      "type": "Company",
+      "name": "Shome & Banerjee",
+      "context": null
+    },
+    {
+      "id": "company_385",
+      "type": "Company",
+      "name": "Kiran J. Mehta & Co.",
+      "context": null
+    },
+    {
+      "id": "company_386",
+      "type": "Company",
+      "name": "Diwanji & Co.",
+      "context": null
+    },
+    {
+      "id": "company_387",
+      "type": "Company",
+      "name": "K.G. Goyal & Associates",
+      "context": null
+    },
+    {
+      "id": "company_388",
+      "type": "Company",
+      "name": "V.J. Talati & Co.",
+      "context": null
+    },
+    {
+      "id": "company_389",
+      "type": "Company",
+      "name": "Suresh Damodar Shenoy",
+      "context": null
+    },
+    {
+      "id": "company_390",
+      "type": "Company",
+      "name": "Dilip M Malkar & Co.",
+      "context": null
+    },
+    {
+      "id": "company_391",
+      "type": "Company",
+      "name": "V. Kumar & Associates",
+      "context": null
+    },
+    {
+      "id": "company_392",
+      "type": "Company",
+      "name": "Balwinder & Associates",
+      "context": null
+    },
+    {
+      "id": "company_396",
+      "type": "Company",
+      "name": "Gates Foundation",
+      "context": null
+    },
+    {
+      "id": "amount_526",
+      "type": "DollarAmount",
+      "name": "Rs. 15000,00,00,000/-",
+      "context": null
+    },
+    {
+      "id": "amount_528",
+      "type": "DollarAmount",
+      "name": "Rs. 50000,00,00,000/-",
+      "context": null
+    },
+    {
+      "id": "company_397",
+      "type": "Company",
+      "name": "Jamnagar Manufacturing Division (JMD)",
+      "context": null
+    },
+    {
+      "id": "company_398",
+      "type": "Company",
+      "name": "GAIL (India) Limited",
+      "context": null
+    },
+    {
+      "id": "company_399",
+      "type": "Company",
+      "name": "Government of India",
+      "context": null
+    },
+    {
+      "id": "company_400",
+      "type": "Company",
+      "name": "Oil and Natural Gas Corporation Limited",
+      "context": null
+    },
+    {
+      "id": "company_401",
+      "type": "Company",
+      "name": "BP Exploration (Alpha) Limited",
+      "context": null
+    },
+    {
+      "id": "amount_540",
+      "type": "DollarAmount",
+      "name": "US$ 38.7 Billion",
+      "context": null
+    },
+    {
+      "id": "amount_541",
+      "type": "DollarAmount",
+      "name": "US$ 2.9 Billion",
+      "context": null
+    },
+    {
+      "id": "amount_550",
+      "type": "DollarAmount",
+      "name": "US$ 73.4 Billion",
+      "context": null
+    },
+    {
+      "id": "amount_551",
+      "type": "DollarAmount",
+      "name": "US$ 6.4 Billion",
+      "context": null
+    },
+    {
+      "id": "risk_140",
+      "type": "RiskFactor",
+      "name": "significant increase in credit risk",
+      "context": null
+    },
+    {
+      "id": "amount_557",
+      "type": "DollarAmount",
+      "name": "US$ 2.5 Billion",
+      "context": null
+    },
+    {
+      "id": "amount_560",
+      "type": "DollarAmount",
+      "name": "Rs. 8050 crores",
+      "context": null
+    },
+    {
+      "id": "amount_561",
+      "type": "DollarAmount",
+      "name": "C 1,309 crore",
+      "context": null
+    },
+    {
+      "id": "risk_141",
+      "type": "RiskFactor",
+      "name": "supply chain dynamics",
+      "context": null
+    },
+    {
+      "id": "risk_142",
+      "type": "RiskFactor",
+      "name": "fluctuating commodity prices",
+      "context": null
+    },
+    {
+      "id": "risk_143",
+      "type": "RiskFactor",
+      "name": "Global LNG oversupply",
+      "context": null
+    },
+    {
+      "id": "risk_144",
+      "type": "RiskFactor",
+      "name": "shift towards renewables",
+      "context": null
+    },
+    {
+      "id": "company_418",
+      "type": "Company",
+      "name": "Viacom18",
+      "context": null
+    },
+    {
+      "id": "company_419",
+      "type": "Company",
+      "name": "Star India",
+      "context": null
+    },
+    {
+      "id": "company_420",
+      "type": "Company",
+      "name": "TV18",
+      "context": null
+    },
+    {
+      "id": "company_421",
+      "type": "Company",
+      "name": "RINL",
+      "context": null
+    },
+    {
+      "id": "company_422",
+      "type": "Company",
+      "name": "Reliance Corporate IT Park Limited",
+      "context": null
+    },
+    {
+      "id": "company_424",
+      "type": "Company",
+      "name": "Kalamboli West Infra Limited",
+      "context": null
+    },
+    {
+      "id": "company_425",
+      "type": "Company",
+      "name": "Reliance Ambit Trade Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_426",
+      "type": "Company",
+      "name": "Reliance Comtrade Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_427",
+      "type": "Company",
+      "name": "Reliance Eminent Trading & Commercial Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_428",
+      "type": "Company",
+      "name": "Reliance Progressive Traders Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_431",
+      "type": "Company",
+      "name": "Reliance Universal Traders Private Limited",
+      "context": null
+    },
+    {
+      "id": "amount_619",
+      "type": "DollarAmount",
+      "name": "H 13,532 crore",
+      "context": null
+    },
+    {
+      "id": "amount_620",
+      "type": "DollarAmount",
+      "name": "H 6,766 crore",
+      "context": null
+    },
+    {
+      "id": "amount_716",
+      "type": "DollarAmount",
+      "name": "295 crore",
+      "context": null
+    },
+    {
+      "id": "amount_732",
+      "type": "DollarAmount",
+      "name": "₹ 4,31,315",
+      "context": null
+    },
+    {
+      "id": "amount_738",
+      "type": "DollarAmount",
+      "name": "C 32,536 crore",
+      "context": null
+    },
+    {
+      "id": "amount_739",
+      "type": "DollarAmount",
+      "name": "C 75,734 crore",
+      "context": null
+    },
+    {
+      "id": "amount_740",
+      "type": "DollarAmount",
+      "name": "C 876 crore",
+      "context": null
+    },
+    {
+      "id": "amount_741",
+      "type": "DollarAmount",
+      "name": "H 71 crore",
+      "context": null
+    },
+    {
+      "id": "amount_742",
+      "type": "DollarAmount",
+      "name": "H 7,371 crore",
+      "context": null
+    },
+    {
+      "id": "amount_743",
+      "type": "DollarAmount",
+      "name": "H 5,798 crore",
+      "context": null
+    },
+    {
+      "id": "amount_762",
+      "type": "DollarAmount",
+      "name": "7,757 crore",
+      "context": null
+    },
+    {
+      "id": "amount_763",
+      "type": "DollarAmount",
+      "name": "6,591 crore",
+      "context": null
+    },
+    {
+      "id": "amount_764",
+      "type": "DollarAmount",
+      "name": "4,169 crore",
+      "context": null
+    },
+    {
+      "id": "amount_765",
+      "type": "DollarAmount",
+      "name": "3,283 crore",
+      "context": null
+    },
+    {
+      "id": "company_436",
+      "type": "Company",
+      "name": "Amante Exports (Private) Limited",
+      "context": null
+    },
+    {
+      "id": "company_437",
+      "type": "Company",
+      "name": "Amante India Limited",
+      "context": null
+    },
+    {
+      "id": "company_438",
+      "type": "Company",
+      "name": "Amante Lanka (Private) Limited",
+      "context": null
+    },
+    {
+      "id": "company_439",
+      "type": "Company",
+      "name": "Asteria Aerospace Limited",
+      "context": null
+    },
+    {
+      "id": "company_441",
+      "type": "Company",
+      "name": "Columbus Centre Corporation",
+      "context": null
+    },
+    {
+      "id": "company_443",
+      "type": "Company",
+      "name": "Digital18 Media Private Limited",
+      "context": null
+    },
+    {
+      "id": "amount_767",
+      "type": "DollarAmount",
+      "name": "H 11,500 crore",
+      "context": null
+    },
+    {
+      "id": "amount_768",
+      "type": "DollarAmount",
+      "name": "USD 35.30",
+      "context": null
+    },
+    {
+      "id": "company_444",
+      "type": "Company",
+      "name": "Jaisuryas Retail Ventures Limited",
+      "context": null
+    },
+    {
+      "id": "amount_769",
+      "type": "DollarAmount",
+      "name": "INR 13.74",
+      "context": null
+    },
+    {
+      "id": "amount_770",
+      "type": "DollarAmount",
+      "name": "INR 302.24",
+      "context": null
+    },
+    {
+      "id": "company_445",
+      "type": "Company",
+      "name": "Jio Estonia OÜ",
+      "context": null
+    },
+    {
+      "id": "amount_772",
+      "type": "DollarAmount",
+      "name": "INR 0.45",
+      "context": null
+    },
+    {
+      "id": "company_446",
+      "type": "Company",
+      "name": "Jio Haptik Technologies Limited",
+      "context": null
+    },
+    {
+      "id": "amount_773",
+      "type": "DollarAmount",
+      "name": "INR 49.13",
+      "context": null
+    },
+    {
+      "id": "company_448",
+      "type": "Company",
+      "name": "Jio Infrastructure Management Services Limited",
+      "context": null
+    },
+    {
+      "id": "amount_775",
+      "type": "DollarAmount",
+      "name": "INR 0.06",
+      "context": null
+    },
+    {
+      "id": "amount_776",
+      "type": "DollarAmount",
+      "name": "INR 107.86",
+      "context": null
+    },
+    {
+      "id": "company_449",
+      "type": "Company",
+      "name": "Faradion UG",
+      "context": null
+    },
+    {
+      "id": "amount_778",
+      "type": "DollarAmount",
+      "name": "INR 0.70",
+      "context": null
+    },
+    {
+      "id": "amount_779",
+      "type": "DollarAmount",
+      "name": "INR 2.29",
+      "context": null
+    },
+    {
+      "id": "amount_780",
+      "type": "DollarAmount",
+      "name": "INR 0.05",
+      "context": null
+    },
+    {
+      "id": "company_450",
+      "type": "Company",
+      "name": "Jio Media Limited",
+      "context": null
+    },
+    {
+      "id": "amount_781",
+      "type": "DollarAmount",
+      "name": "INR 5.00",
+      "context": null
+    },
+    {
+      "id": "amount_782",
+      "type": "DollarAmount",
+      "name": "INR 8,939.03",
+      "context": null
+    },
+    {
+      "id": "amount_783",
+      "type": "DollarAmount",
+      "name": "INR 109.20",
+      "context": null
+    },
+    {
+      "id": "amount_784",
+      "type": "DollarAmount",
+      "name": "INR 1.00",
+      "context": null
+    },
+    {
+      "id": "amount_785",
+      "type": "DollarAmount",
+      "name": "INR 85.04",
+      "context": null
+    },
+    {
+      "id": "company_452",
+      "type": "Company",
+      "name": "NowFloats Technologies Limited",
+      "context": null
+    },
+    {
+      "id": "amount_786",
+      "type": "DollarAmount",
+      "name": "INR 0.20",
+      "context": null
+    },
+    {
+      "id": "company_453",
+      "type": "Company",
+      "name": "Radisys Canada Inc.",
+      "context": null
+    },
+    {
+      "id": "amount_787",
+      "type": "DollarAmount",
+      "name": "USD 0.00",
+      "context": null
+    },
+    {
+      "id": "company_454",
+      "type": "Company",
+      "name": "Radisys Cayman Limited",
+      "context": null
+    },
+    {
+      "id": "company_455",
+      "type": "Company",
+      "name": "Kalanikethan Silks Limited",
+      "context": null
+    },
+    {
+      "id": "amount_788",
+      "type": "DollarAmount",
+      "name": "INR 16.00",
+      "context": null
+    },
+    {
+      "id": "company_456",
+      "type": "Company",
+      "name": "Radisys Convedia (Ireland) Limited",
+      "context": null
+    },
+    {
+      "id": "company_457",
+      "type": "Company",
+      "name": "Karkinos Healthcare North East Private Limited",
+      "context": null
+    },
+    {
+      "id": "amount_789",
+      "type": "DollarAmount",
+      "name": "INR 10.20",
+      "context": null
+    },
+    {
+      "id": "amount_790",
+      "type": "DollarAmount",
+      "name": "INR 0.00",
+      "context": null
+    },
+    {
+      "id": "company_458",
+      "type": "Company",
+      "name": "Radisys Corporation",
+      "context": null
+    },
+    {
+      "id": "amount_791",
+      "type": "DollarAmount",
+      "name": "USD 166.12",
+      "context": null
+    },
+    {
+      "id": "company_459",
+      "type": "Company",
+      "name": "Karkinos Healthcare Private Limited",
+      "context": null
+    },
+    {
+      "id": "amount_792",
+      "type": "DollarAmount",
+      "name": "INR 10.00",
+      "context": null
+    },
+    {
+      "id": "amount_793",
+      "type": "DollarAmount",
+      "name": "INR 1,422.32",
+      "context": null
+    },
+    {
+      "id": "company_460",
+      "type": "Company",
+      "name": "Kutch New Energy Projects Limited",
+      "context": null
+    },
+    {
+      "id": "amount_794",
+      "type": "DollarAmount",
+      "name": "INR 0.02",
+      "context": null
+    },
+    {
+      "id": "company_461",
+      "type": "Company",
+      "name": "Radisys GmbH",
+      "context": null
+    },
+    {
+      "id": "amount_796",
+      "type": "DollarAmount",
+      "name": "INR 0.24",
+      "context": null
+    },
+    {
+      "id": "company_462",
+      "type": "Company",
+      "name": "Lithium Werks China Manufacturing Co., Ltd.",
+      "context": null
+    },
+    {
+      "id": "amount_798",
+      "type": "DollarAmount",
+      "name": "INR 116.41",
+      "context": null
+    },
+    {
+      "id": "company_463",
+      "type": "Company",
+      "name": "Radisys India Limited",
+      "context": null
+    },
+    {
+      "id": "amount_799",
+      "type": "DollarAmount",
+      "name": "INR 0.21",
+      "context": null
+    },
+    {
+      "id": "company_464",
+      "type": "Company",
+      "name": "Radisys International LLC",
+      "context": null
+    },
+    {
+      "id": "amount_800",
+      "type": "DollarAmount",
+      "name": "USD 5.26",
+      "context": null
+    },
+    {
+      "id": "company_465",
+      "type": "Company",
+      "name": "Mimosa Networks Bilişim Teknolojileri Limited Şirketi",
+      "context": null
+    },
+    {
+      "id": "company_467",
+      "type": "Company",
+      "name": "Mimosa Networks, Inc.",
+      "context": null
+    },
+    {
+      "id": "amount_803",
+      "type": "DollarAmount",
+      "name": "INR 4.01",
+      "context": null
+    },
+    {
+      "id": "company_469",
+      "type": "Company",
+      "name": "REC Americas LLC",
+      "context": null
+    },
+    {
+      "id": "company_470",
+      "type": "Company",
+      "name": "Nauyaan Shipyard Private Limited",
+      "context": null
+    },
+    {
+      "id": "amount_804",
+      "type": "DollarAmount",
+      "name": "INR 0.01",
+      "context": null
+    },
+    {
+      "id": "company_472",
+      "type": "Company",
+      "name": "Nauyaan Tradings Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_473",
+      "type": "Company",
+      "name": "REC Solar EMEA GmbH",
+      "context": null
+    },
+    {
+      "id": "amount_805",
+      "type": "DollarAmount",
+      "name": "INR 771.95",
+      "context": null
+    },
+    {
+      "id": "company_474",
+      "type": "Company",
+      "name": "REC Solar Holdings AS",
+      "context": null
+    },
+    {
+      "id": "amount_806",
+      "type": "DollarAmount",
+      "name": "USD 547.09",
+      "context": null
+    },
+    {
+      "id": "amount_807",
+      "type": "DollarAmount",
+      "name": "INR 4,684.15",
+      "context": null
+    },
+    {
+      "id": "company_475",
+      "type": "Company",
+      "name": "Netmeds Healthcare Limited",
+      "context": null
+    },
+    {
+      "id": "amount_808",
+      "type": "DollarAmount",
+      "name": "INR 9.29",
+      "context": null
+    },
+    {
+      "id": "company_476",
+      "type": "Company",
+      "name": "REC Solar Pte. Ltd.",
+      "context": null
+    },
+    {
+      "id": "amount_809",
+      "type": "DollarAmount",
+      "name": "USD 328.81",
+      "context": null
+    },
+    {
+      "id": "amount_810",
+      "type": "DollarAmount",
+      "name": "INR 2,815.25",
+      "context": null
+    },
+    {
+      "id": "company_477",
+      "type": "Company",
+      "name": "New Emerging World of Journalism Limited",
+      "context": null
+    },
+    {
+      "id": "amount_811",
+      "type": "DollarAmount",
+      "name": "INR 0.04",
+      "context": null
+    },
+    {
+      "id": "amount_815",
+      "type": "DollarAmount",
+      "name": "US$ 18.0 Billion",
+      "context": null
+    },
+    {
+      "id": "amount_817",
+      "type": "DollarAmount",
+      "name": "US$ 7.6 Billion",
+      "context": null
+    },
+    {
+      "id": "amount_819",
+      "type": "DollarAmount",
+      "name": "US$ 2.4 Billion",
+      "context": null
+    },
+    {
+      "id": "amount_821",
+      "type": "DollarAmount",
+      "name": "US$ 0.2 Billion",
+      "context": null
+    },
+    {
+      "id": "company_479",
+      "type": "Company",
+      "name": "FICCI",
+      "context": null
+    },
+    {
+      "id": "company_480",
+      "type": "Company",
+      "name": "LyondellBasell",
+      "context": null
+    },
+    {
+      "id": "company_481",
+      "type": "Company",
+      "name": "Federation of Gujarat Industries Research",
+      "context": null
+    },
+    {
+      "id": "company_482",
+      "type": "Company",
+      "name": "Reliance Oxidation Catalyst Technology",
+      "context": null
+    },
+    {
+      "id": "company_483",
+      "type": "Company",
+      "name": "Clarivate",
+      "context": null
+    },
+    {
+      "id": "company_484",
+      "type": "Company",
+      "name": "IMexI",
+      "context": null
+    },
+    {
+      "id": "company_485",
+      "type": "Company",
+      "name": "The Asset Triple A Awards",
+      "context": null
+    },
+    {
+      "id": "company_486",
+      "type": "Company",
+      "name": "SACE Push",
+      "context": null
+    },
+    {
+      "id": "company_487",
+      "type": "Company",
+      "name": "IJ Global",
+      "context": null
+    },
+    {
+      "id": "company_488",
+      "type": "Company",
+      "name": "Jio Hotstar",
+      "context": null
+    },
+    {
+      "id": "company_489",
+      "type": "Company",
+      "name": "Global Water Tech Awards",
+      "context": null
+    },
+    {
+      "id": "company_490",
+      "type": "Company",
+      "name": "Federation of Indian Chambers of Commerce and Industry",
+      "context": null
+    },
+    {
+      "id": "company_491",
+      "type": "Company",
+      "name": "Institute of Directors",
+      "context": null
+    },
+    {
+      "id": "company_493",
+      "type": "Company",
+      "name": "ETHR World",
+      "context": null
+    },
+    {
+      "id": "company_497",
+      "type": "Company",
+      "name": "Reliance Jio Infocomm Ltd.",
+      "context": null
+    },
+    {
+      "id": "company_503",
+      "type": "Company",
+      "name": "Aegis Graham Bell Awards 2025",
+      "context": null
+    },
+    {
+      "id": "company_504",
+      "type": "Company",
+      "name": "Ministry of Electronics and Information Technology",
+      "context": null
+    },
+    {
+      "id": "company_505",
+      "type": "Company",
+      "name": "Radhe Krishna Temple Elephant Welfare Trust",
+      "context": null
+    },
+    {
+      "id": "company_506",
+      "type": "Company",
+      "name": "Vantara",
+      "context": null
+    },
+    {
+      "id": "amount_826",
+      "type": "DollarAmount",
+      "name": "C 1,048 crore",
+      "context": null
+    },
+    {
+      "id": "amount_827",
+      "type": "DollarAmount",
+      "name": "C 1,48,298 crore",
+      "context": null
+    },
+    {
+      "id": "amount_828",
+      "type": "DollarAmount",
+      "name": "C 1,96,887 crore",
+      "context": null
+    },
+    {
+      "id": "amount_829",
+      "type": "DollarAmount",
+      "name": "C 8 crore",
+      "context": null
+    },
+    {
+      "id": "amount_830",
+      "type": "DollarAmount",
+      "name": "C1,048 crore",
+      "context": null
+    },
+    {
+      "id": "amount_831",
+      "type": "DollarAmount",
+      "name": "C 261 crore",
+      "context": null
+    },
+    {
+      "id": "amount_832",
+      "type": "DollarAmount",
+      "name": "K In crore",
+      "context": null
+    },
+    {
+      "id": "amount_835",
+      "type": "DollarAmount",
+      "name": "21.9 billion",
+      "context": null
+    },
+    {
+      "id": "company_513",
+      "type": "Company",
+      "name": "Reliance New Energy Power Electronics Limited",
+      "context": null
+    },
+    {
+      "id": "company_514",
+      "type": "Company",
+      "name": "Reliance New Energy Storage Limited",
+      "context": null
+    },
+    {
+      "id": "company_515",
+      "type": "Company",
+      "name": "Reliance Petro Materials Limited",
+      "context": null
+    },
+    {
+      "id": "company_516",
+      "type": "Company",
+      "name": "Enercent Technologies Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_517",
+      "type": "Company",
+      "name": "India Mumbai Indians (Pty) Limited",
+      "context": null
+    },
+    {
+      "id": "company_518",
+      "type": "Company",
+      "name": "Indiawin Sports USA Inc.",
+      "context": null
+    },
+    {
+      "id": "company_519",
+      "type": "Company",
+      "name": "Reliance Polyester Limited",
+      "context": null
+    },
+    {
+      "id": "amount_992",
+      "type": "DollarAmount",
+      "name": "H 9,587 crore",
+      "context": null
+    },
+    {
+      "id": "amount_994",
+      "type": "DollarAmount",
+      "name": "H 2,068 crore",
+      "context": null
+    },
+    {
+      "id": "amount_996",
+      "type": "DollarAmount",
+      "name": "H 1,721 crore",
+      "context": null
+    },
+    {
+      "id": "amount_998",
+      "type": "DollarAmount",
+      "name": "H 341 crore",
+      "context": null
+    },
+    {
+      "id": "amount_999",
+      "type": "DollarAmount",
+      "name": "H 231 crore",
+      "context": null
+    },
+    {
+      "id": "amount_1000",
+      "type": "DollarAmount",
+      "name": "H 121 crore",
+      "context": null
+    },
+    {
+      "id": "amount_1001",
+      "type": "DollarAmount",
+      "name": "H 526 crore",
+      "context": null
+    },
+    {
+      "id": "amount_1002",
+      "type": "DollarAmount",
+      "name": "H 442 crore",
+      "context": null
+    },
+    {
+      "id": "amount_1003",
+      "type": "DollarAmount",
+      "name": "H 205 crore",
+      "context": null
+    },
+    {
+      "id": "amount_1004",
+      "type": "DollarAmount",
+      "name": "C 66 crore",
+      "context": null
+    },
+    {
+      "id": "company_526",
+      "type": "Company",
+      "name": "Rakshita Commercial Private Limited",
+      "context": null
+    },
+    {
+      "id": "amount_1010",
+      "type": "DollarAmount",
+      "name": "24,415 crore",
+      "context": null
+    },
+    {
+      "id": "amount_1011",
+      "type": "DollarAmount",
+      "name": "50 crore",
+      "context": null
+    },
+    {
+      "id": "amount_1115",
+      "type": "DollarAmount",
+      "name": "C 50 lakh",
+      "context": null
+    },
+    {
+      "id": "company_527",
+      "type": "Company",
+      "name": "REC Trading (Shanghai) Co., Ltd.",
+      "context": null
+    },
+    {
+      "id": "company_528",
+      "type": "Company",
+      "name": "Reliance Bio Energy Limited",
+      "context": null
+    },
+    {
+      "id": "company_529",
+      "type": "Company",
+      "name": "Reliance Brands Limited",
+      "context": null
+    },
+    {
+      "id": "company_532",
+      "type": "Company",
+      "name": "Sterling and Wilson Renewable Energy Limited",
+      "context": null
+    },
+    {
+      "id": "company_533",
+      "type": "Company",
+      "name": "Metro Cast Network India Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_534",
+      "type": "Company",
+      "name": "BookmyShow Live Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_535",
+      "type": "Company",
+      "name": "Burberry India Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_536",
+      "type": "Company",
+      "name": "Canali India Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_537",
+      "type": "Company",
+      "name": "Clarks Footwear Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_538",
+      "type": "Company",
+      "name": "Nexwafe GmbH",
+      "context": null
+    },
+    {
+      "id": "company_539",
+      "type": "Company",
+      "name": "Reliance Realty Limited",
+      "context": null
+    },
+    {
+      "id": "company_540",
+      "type": "Company",
+      "name": "Den Fateh Marketing Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_541",
+      "type": "Company",
+      "name": "Den Kashi Cable Network Limited",
+      "context": null
+    },
+    {
+      "id": "company_542",
+      "type": "Company",
+      "name": "Den Malayalam Telenet Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_543",
+      "type": "Company",
+      "name": "Infomedia Press Limited",
+      "context": null
+    },
+    {
+      "id": "company_544",
+      "type": "Company",
+      "name": "Den Nashik City Cable Network Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_545",
+      "type": "Company",
+      "name": "Eminent Cable Network Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_546",
+      "type": "Company",
+      "name": "Intimi India Limited",
+      "context": null
+    },
+    {
+      "id": "company_547",
+      "type": "Company",
+      "name": "Genesis La Mode Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_548",
+      "type": "Company",
+      "name": "GLB Body Care Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_549",
+      "type": "Company",
+      "name": "Hathway Latur MCN Cable & Datacom Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_550",
+      "type": "Company",
+      "name": "Hathway MCN Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_551",
+      "type": "Company",
+      "name": "Hathway Sai Star Cable & Datacom Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_552",
+      "type": "Company",
+      "name": "SRC Ecotex (India) Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_553",
+      "type": "Company",
+      "name": "Hathway Sonali OM Crystal Cable Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_554",
+      "type": "Company",
+      "name": "Hathway SS Cable & Datacom LLP",
+      "context": null
+    },
+    {
+      "id": "company_555",
+      "type": "Company",
+      "name": "Two Platforms Inc.",
+      "context": null
+    },
+    {
+      "id": "company_556",
+      "type": "Company",
+      "name": "Health Alliance Group Inc.",
+      "context": null
+    },
+    {
+      "id": "company_557",
+      "type": "Company",
+      "name": "Ubona Technologies Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_558",
+      "type": "Company",
+      "name": "IBN Lokmat News Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_559",
+      "type": "Company",
+      "name": "Wavetech Helium, Inc.",
+      "context": null
+    },
+    {
+      "id": "company_560",
+      "type": "Company",
+      "name": "Reliance-GrandOptical Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_561",
+      "type": "Company",
+      "name": "Reverie Language Technologies Limited",
+      "context": null
+    },
+    {
+      "id": "company_562",
+      "type": "Company",
+      "name": "Mindex 1 Limited",
+      "context": null
+    },
+    {
+      "id": "company_563",
+      "type": "Company",
+      "name": "RBML Solutions India Limited",
+      "context": null
+    },
+    {
+      "id": "amount_1231",
+      "type": "DollarAmount",
+      "name": "INR 300.00",
+      "context": null
+    },
+    {
+      "id": "amount_1232",
+      "type": "DollarAmount",
+      "name": "INR 10.01",
+      "context": null
+    },
+    {
+      "id": "company_564",
+      "type": "Company",
+      "name": "REC ScanModule Sweden AB",
+      "context": null
+    },
+    {
+      "id": "amount_1235",
+      "type": "DollarAmount",
+      "name": "INR 3,877.30",
+      "context": null
+    },
+    {
+      "id": "amount_1236",
+      "type": "DollarAmount",
+      "name": "INR 32.24",
+      "context": null
+    },
+    {
+      "id": "company_565",
+      "type": "Company",
+      "name": "Reliance Brands Eyewear Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_566",
+      "type": "Company",
+      "name": "Reliance Brands Holding UK Limited",
+      "context": null
+    },
+    {
+      "id": "amount_1238",
+      "type": "DollarAmount",
+      "name": "INR 105.38",
+      "context": null
+    },
+    {
+      "id": "amount_1239",
+      "type": "DollarAmount",
+      "name": "INR 1,770.44",
+      "context": null
+    },
+    {
+      "id": "company_567",
+      "type": "Company",
+      "name": "Reliance Clothing India Limited",
+      "context": null
+    },
+    {
+      "id": "amount_1240",
+      "type": "DollarAmount",
+      "name": "INR 45,000.00",
+      "context": null
+    },
+    {
+      "id": "amount_1241",
+      "type": "DollarAmount",
+      "name": "INR 1,107.92",
+      "context": null
+    },
+    {
+      "id": "company_568",
+      "type": "Company",
+      "name": "Reliance Consumer Products Limited",
+      "context": null
+    },
+    {
+      "id": "amount_1242",
+      "type": "DollarAmount",
+      "name": "INR 100.00",
+      "context": null
+    },
+    {
+      "id": "company_569",
+      "type": "Company",
+      "name": "Reliance Jio Infocomm UK Limited",
+      "context": null
+    },
+    {
+      "id": "amount_1244",
+      "type": "DollarAmount",
+      "name": "INR 64.49",
+      "context": null
+    },
+    {
+      "id": "amount_1245",
+      "type": "DollarAmount",
+      "name": "INR 42,179.35",
+      "context": null
+    },
+    {
+      "id": "amount_1246",
+      "type": "DollarAmount",
+      "name": "INR 2.69",
+      "context": null
+    },
+    {
+      "id": "company_570",
+      "type": "Company",
+      "name": "Reliance New Energy Battery Storage\n        Limited",
+      "context": null
+    },
+    {
+      "id": "amount_1247",
+      "type": "DollarAmount",
+      "name": "INR 99.14",
+      "context": null
+    },
+    {
+      "id": "amount_1248",
+      "type": "DollarAmount",
+      "name": "INR 25.69",
+      "context": null
+    },
+    {
+      "id": "company_571",
+      "type": "Company",
+      "name": "Reliance New Energy Carbon Fibre\n        Cylinder Limited",
+      "context": null
+    },
+    {
+      "id": "company_572",
+      "type": "Company",
+      "name": "RISE Worldwide Limited",
+      "context": null
+    },
+    {
+      "id": "amount_1249",
+      "type": "DollarAmount",
+      "name": "INR 106.72",
+      "context": null
+    },
+    {
+      "id": "company_573",
+      "type": "Company",
+      "name": "Ritu Kumar ME (FZE)",
+      "context": null
+    },
+    {
+      "id": "company_574",
+      "type": "Company",
+      "name": "Urban Ladder Home Décor Solutions\n    Limited",
+      "context": null
+    },
+    {
+      "id": "amount_1251",
+      "type": "DollarAmount",
+      "name": "INR 25.07",
+      "context": null
+    },
+    {
+      "id": "amount_1252",
+      "type": "DollarAmount",
+      "name": "INR 14.00",
+      "context": null
+    },
+    {
+      "id": "amount_1253",
+      "type": "DollarAmount",
+      "name": "INR 0.63",
+      "context": null
+    },
+    {
+      "id": "company_575",
+      "type": "Company",
+      "name": "Reliance Industrial\n     Infrastructure Limited",
+      "context": null
+    },
+    {
+      "id": "company_576",
+      "type": "Company",
+      "name": "Reliance Logistics and\n     Warehouse Holdings Limited",
+      "context": null
+    },
+    {
+      "id": "company_577",
+      "type": "Company",
+      "name": "Sanmina-SCI India Private\n     Limited",
+      "context": null
+    },
+    {
+      "id": "company_578",
+      "type": "Company",
+      "name": "Sanmina-SCI Technology India\n     Private Limited",
+      "context": null
+    },
+    {
+      "id": "company_579",
+      "type": "Company",
+      "name": "Vadodara Enviro Channel\n     Limited",
+      "context": null
+    },
+    {
+      "id": "company_580",
+      "type": "Company",
+      "name": "Balaji Telefilms Limited",
+      "context": null
+    },
+    {
+      "id": "company_581",
+      "type": "Company",
+      "name": "Jamnagar Utilities & Power\n     Private Limited",
+      "context": null
+    }
+  ],
+  "relationships": [
+    {
+      "source": "company_2",
+      "target": "amount_1",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_1",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "amount_3",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_1",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_14",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_3",
+      "target": "company_2",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_4",
+      "target": "company_2",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_5",
+      "target": "company_2",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_6",
+      "target": "company_2",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_7",
+      "target": "company_2",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_8",
+      "target": "company_2",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_2",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_3",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "risk_6",
+      "target": "risk_4",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_41",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_42",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_43",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_44",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_45",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_46",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_47",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_48",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_49",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_50",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_51",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_52",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_53",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_54",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_55",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_56",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_57",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_58",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_59",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_61",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_62",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_63",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_64",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_65",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_66",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_8",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_9",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_10",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_11",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_1",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_12",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_13",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_14",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_25",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_26",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_21",
+      "relation": "PLANS_TO",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_22",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_30",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_31",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_32",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_33",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_34",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_35",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_36",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_37",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_38",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_39",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "risk_41",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_45",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_46",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_47",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_48",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_49",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_50",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_51",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_52",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_53",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_54",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_55",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_56",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_57",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_58",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_59",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_60",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_61",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_62",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_63",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_64",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_65",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_66",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "risk_67",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "company_24",
+      "relation": "COMMITTED_TO",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "amount_76",
+      "relation": "TARGETS",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_2",
+      "relation": "COMMITTED_TO",
+      "confidence": null
+    },
+    {
+      "source": "company_25",
+      "target": "company_25",
+      "relation": "COMMITTED_TO",
+      "confidence": null
+    },
+    {
+      "source": "company_26",
+      "target": "company_26",
+      "relation": "COMMITTED_TO",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "company_26",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "company_27",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "company_1",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "company_28",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "company_29",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "risk_68",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_34",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_35",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_36",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_37",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_38",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_39",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_40",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_41",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_85",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_69",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_70",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_42",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_43",
+      "target": "risk_71",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_43",
+      "target": "risk_72",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_43",
+      "target": "risk_73",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_43",
+      "target": "risk_74",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_43",
+      "target": "risk_75",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_43",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_44",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_43",
+      "target": "amount_102",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_45",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_44",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_46",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_43",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_47",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_76",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_77",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_78",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_79",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_80",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_81",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_50",
+      "target": "company_49",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_50",
+      "target": "company_52",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_50",
+      "target": "company_51",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_54",
+      "target": "amount_109",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_54",
+      "target": "risk_84",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_55",
+      "target": "company_15",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_56",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_57",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_58",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_59",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_86",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_87",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_4",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_5",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_110",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_111",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_112",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_113",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_114",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_115",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_116",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_117",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_109",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_54",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_56",
+      "target": "amount_110",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_56",
+      "target": "amount_112",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_60",
+      "target": "company_47",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_47",
+      "target": "risk_88",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_47",
+      "target": "risk_89",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_60",
+      "target": "company_45",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_45",
+      "target": "company_44",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_44",
+      "target": "risk_90",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_60",
+      "target": "company_61",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_61",
+      "target": "risk_91",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_61",
+      "target": "risk_92",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_61",
+      "target": "risk_93",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_61",
+      "target": "risk_94",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_60",
+      "target": "risk_95",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_60",
+      "target": "risk_96",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_62",
+      "target": "company_63",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_62",
+      "target": "company_64",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_62",
+      "target": "company_65",
+      "relation": "JOINT_VENTURE_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_62",
+      "target": "amount_123",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_62",
+      "target": "risk_97",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_62",
+      "target": "risk_98",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_62",
+      "target": "risk_99",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_60",
+      "target": "company_63",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_60",
+      "target": "company_64",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_60",
+      "target": "company_65",
+      "relation": "JOINT_VENTURE_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_60",
+      "target": "amount_124",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_60",
+      "target": "risk_100",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_66",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_67",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_68",
+      "target": "company_69",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_70",
+      "target": "company_69",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_71",
+      "target": "company_70",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_71",
+      "target": "company_69",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_70",
+      "target": "company_72",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "amount_116",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "amount_117",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_68",
+      "target": "amount_125",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_70",
+      "target": "amount_126",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_71",
+      "target": "amount_127",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_75",
+      "target": "company_75",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_76",
+      "target": "amount_137",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_77",
+      "target": "amount_138",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_78",
+      "target": "amount_139",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_79",
+      "target": "amount_140",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_80",
+      "target": "amount_143",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_43",
+      "target": "amount_144",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_102",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_103",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_104",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_105",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_106",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_107",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_108",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_109",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_110",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_111",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_112",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_113",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_114",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_115",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_116",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_117",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_118",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_119",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_120",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_121",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_122",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_123",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_124",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_125",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_126",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_127",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_128",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_129",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_130",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_131",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_132",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_133",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_134",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_135",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_136",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_87",
+      "target": "company_137",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_138",
+      "target": "company_138",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_139",
+      "target": "company_139",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_140",
+      "target": "company_140",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_141",
+      "target": "company_141",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_68",
+      "target": "company_68",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_142",
+      "target": "company_142",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_143",
+      "target": "company_143",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_144",
+      "target": "company_144",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_145",
+      "target": "company_145",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_146",
+      "target": "company_146",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_147",
+      "target": "company_147",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_148",
+      "target": "company_148",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_149",
+      "target": "company_149",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_150",
+      "target": "company_150",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_151",
+      "target": "company_151",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_152",
+      "target": "company_152",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_153",
+      "target": "company_153",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_154",
+      "target": "company_154",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_155",
+      "target": "company_155",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_156",
+      "target": "company_156",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_157",
+      "target": "company_157",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_158",
+      "target": "company_158",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_159",
+      "target": "company_159",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_160",
+      "target": "company_160",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_71",
+      "target": "company_71",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_161",
+      "target": "company_161",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_162",
+      "target": "company_162",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_163",
+      "target": "company_163",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_164",
+      "target": "company_164",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_165",
+      "target": "company_165",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_110",
+      "target": "company_110",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_112",
+      "target": "company_112",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_114",
+      "target": "company_114",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_116",
+      "target": "company_116",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_118",
+      "target": "company_118",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_120",
+      "target": "company_120",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_122",
+      "target": "company_122",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_124",
+      "target": "company_124",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_126",
+      "target": "company_126",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_128",
+      "target": "company_128",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_130",
+      "target": "company_130",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_132",
+      "target": "company_132",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_134",
+      "target": "company_134",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_136",
+      "target": "company_136",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_103",
+      "target": "company_103",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_105",
+      "target": "company_105",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_107",
+      "target": "company_107",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_109",
+      "target": "company_109",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_111",
+      "target": "company_111",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_113",
+      "target": "company_113",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_115",
+      "target": "company_115",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_117",
+      "target": "company_117",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_119",
+      "target": "company_119",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_121",
+      "target": "company_121",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_166",
+      "target": "company_166",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_167",
+      "target": "company_167",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_168",
+      "target": "company_168",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_169",
+      "target": "company_169",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_170",
+      "target": "company_170",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_171",
+      "target": "company_171",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_172",
+      "target": "company_172",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_173",
+      "target": "company_173",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_174",
+      "target": "company_174",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_175",
+      "target": "company_175",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_176",
+      "target": "company_176",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_177",
+      "target": "company_177",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_178",
+      "target": "company_178",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_179",
+      "target": "company_179",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "company_180",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "company_181",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_171",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_183",
+      "target": "company_184",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_183",
+      "target": "company_185",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_187",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_188",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_27",
+      "target": "risk_104",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_27",
+      "target": "risk_105",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_187",
+      "target": "company_15",
+      "relation": "SUBJECT_TO",
+      "confidence": null
+    },
+    {
+      "source": "company_188",
+      "target": "company_15",
+      "relation": "SUBJECT_TO",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "company_189",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_191",
+      "target": "company_193",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_191",
+      "target": "company_197",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_191",
+      "target": "company_198",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_191",
+      "target": "company_199",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_191",
+      "target": "company_200",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_191",
+      "target": "company_201",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_191",
+      "target": "company_202",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_204",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_205",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_206",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_207",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_208",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_209",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_210",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_211",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_76",
+      "relation": "JOINT_VENTURE_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_211",
+      "relation": "JOINT_VENTURE_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_212",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_213",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_214",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_215",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_216",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_217",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_217",
+      "target": "amount_238",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_218",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_219",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_220",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_221",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_222",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_223",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_224",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_225",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_226",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_227",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_228",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_228",
+      "target": "amount_252",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_61",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_48",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_48",
+      "target": "amount_238",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_49",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_49",
+      "target": "company_50",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_274",
+      "target": "company_273",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_274",
+      "target": "company_275",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_191",
+      "target": "amount_355",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_191",
+      "target": "amount_356",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_256",
+      "target": "amount_357",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_257",
+      "target": "amount_359",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_257",
+      "target": "amount_360",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_258",
+      "target": "amount_361",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_258",
+      "target": "amount_362",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_259",
+      "target": "amount_363",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_259",
+      "target": "amount_364",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_260",
+      "target": "amount_349",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_261",
+      "target": "amount_366",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_262",
+      "target": "amount_368",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_262",
+      "target": "amount_369",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_263",
+      "target": "amount_370",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_264",
+      "target": "amount_371",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_472",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_474",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_475",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_123",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_124",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_125",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_333",
+      "target": "company_334",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_27",
+      "target": "amount_477",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_27",
+      "target": "company_333",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_27",
+      "target": "company_334",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_27",
+      "target": "amount_479",
+      "relation": "TARGETS",
+      "confidence": null
+    },
+    {
+      "source": "company_335",
+      "target": "amount_480",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_335",
+      "target": "amount_481",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_346",
+      "target": "amount_489",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_347",
+      "target": "amount_490",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_499",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_500",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_501",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_502",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_503",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_504",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_126",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_127",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_128",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_129",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_130",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_29",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_131",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "risk_4",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "company_1",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "company_27",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "company_24",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "risk_75",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "risk_132",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "risk_133",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "risk_134",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "risk_135",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_372",
+      "target": "risk_96",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_136",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_43",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_381",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "amount_522",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_382",
+      "relation": "IMPACTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_43",
+      "target": "company_47",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_383",
+      "target": "risk_75",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_383",
+      "target": "risk_132",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_383",
+      "target": "risk_71",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_187",
+      "target": "company_15",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_188",
+      "target": "company_15",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_385",
+      "target": "company_15",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_386",
+      "target": "company_15",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_387",
+      "target": "company_15",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_388",
+      "target": "company_15",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_389",
+      "target": "company_15",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_384",
+      "target": "company_15",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_390",
+      "target": "company_15",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_391",
+      "target": "company_15",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_392",
+      "target": "company_15",
+      "relation": "OPERATES",
+      "confidence": null
+    },
+    {
+      "source": "company_191",
+      "target": "company_396",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_526",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_528",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "risk_71",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_374",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_375",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_397",
+      "target": "company_398",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_399",
+      "target": "risk_132",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_540",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_541",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_550",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_551",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_400",
+      "target": "company_401",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_55",
+      "target": "company_56",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_113",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_140",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_4",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_557",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_560",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_561",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_141",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_142",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_143",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "risk_144",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_418",
+      "target": "company_419",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_342",
+      "target": "company_420",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "company_421",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_422",
+      "target": "company_87",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_422",
+      "target": "company_90",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_422",
+      "target": "company_95",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_422",
+      "target": "company_219",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_422",
+      "target": "company_221",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_422",
+      "target": "company_222",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_422",
+      "target": "company_224",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_427",
+      "target": "company_422",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_428",
+      "target": "company_422",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_431",
+      "target": "company_422",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_398",
+      "target": "amount_716",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_732",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_619",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_620",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_738",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_739",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_740",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_186",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_741",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_742",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_743",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_762",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_763",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_764",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_765",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_50",
+      "target": "company_443",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_50",
+      "target": "company_61",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_61",
+      "target": "amount_767",
+      "relation": "RAISED_CAPITAL",
+      "confidence": null
+    },
+    {
+      "source": "company_316",
+      "target": "amount_768",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_444",
+      "target": "amount_769",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_444",
+      "target": "amount_770",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_445",
+      "target": "amount_772",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_317",
+      "target": "amount_768",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_317",
+      "target": "amount_770",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_446",
+      "target": "amount_773",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_448",
+      "target": "amount_775",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_448",
+      "target": "amount_776",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_449",
+      "target": "amount_778",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_318",
+      "target": "amount_775",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_208",
+      "target": "amount_779",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_81",
+      "target": "amount_780",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_450",
+      "target": "amount_781",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_43",
+      "target": "amount_782",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_299",
+      "target": "amount_783",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_301",
+      "target": "amount_784",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_302",
+      "target": "amount_785",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_131",
+      "target": "amount_780",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_452",
+      "target": "amount_786",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_303",
+      "target": "amount_780",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_453",
+      "target": "amount_787",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_424",
+      "target": "amount_780",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_454",
+      "target": "amount_787",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_455",
+      "target": "amount_788",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_456",
+      "target": "amount_787",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_457",
+      "target": "amount_789",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_457",
+      "target": "amount_790",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_458",
+      "target": "amount_791",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_459",
+      "target": "amount_792",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_459",
+      "target": "amount_793",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_460",
+      "target": "amount_794",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_461",
+      "target": "amount_796",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_82",
+      "target": "amount_780",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_462",
+      "target": "amount_798",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_463",
+      "target": "amount_799",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_464",
+      "target": "amount_800",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_465",
+      "target": "amount_787",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_467",
+      "target": "amount_787",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_467",
+      "target": "amount_794",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_84",
+      "target": "amount_803",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_84",
+      "target": "amount_780",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_469",
+      "target": "amount_787",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_470",
+      "target": "amount_804",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_473",
+      "target": "amount_772",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_85",
+      "target": "amount_805",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_474",
+      "target": "amount_806",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_474",
+      "target": "amount_807",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_475",
+      "target": "amount_808",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_476",
+      "target": "amount_809",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_476",
+      "target": "amount_810",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_477",
+      "target": "amount_811",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_191",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_43",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_497",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_493",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_491",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_490",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_489",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_488",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_487",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_486",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_485",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_484",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_483",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_482",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_481",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_480",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_479",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_25",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "company_347",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "amount_815",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "amount_817",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "amount_819",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_24",
+      "target": "amount_821",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_504",
+      "target": "company_503",
+      "relation": "SUPPORTED_BY",
+      "confidence": null
+    },
+    {
+      "source": "company_505",
+      "target": "company_506",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_826",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_827",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_828",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_829",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_191",
+      "target": "company_33",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_830",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_831",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_832",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_33",
+      "target": "amount_835",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_187",
+      "target": "company_188",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_460",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_325",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_321",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_326",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_322",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_513",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_323",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_514",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_324",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_515",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_441",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_516",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_517",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_179",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_518",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_448",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_459",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_472",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_519",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_241",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_229",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_224",
+      "target": "company_244",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_340",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_342",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_742",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_992",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_994",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_996",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_998",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_999",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_1000",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_1001",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_1002",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_1003",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_1004",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_190",
+      "target": "amount_348",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_526",
+      "target": "amount_1010",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_526",
+      "target": "amount_1011",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_1115",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_476",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_527",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_528",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_529",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_213",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_221",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_224",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_49",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_267",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_80",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_532",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_533",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_361",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_76",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_534",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_535",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_281",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_536",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_97",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_537",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_538",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_286",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_208",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_539",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_436",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_540",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_123",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_96",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_437",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_541",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_125",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_518",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_438",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_542",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_127",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_543",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_439",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_544",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_545",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_546",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_547",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_450",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_548",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_43",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_549",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_211",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_550",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_305",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_551",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_552",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_553",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_306",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_554",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_555",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_556",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_557",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_558",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_100",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_559",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_307",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_225",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_226",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_560",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_561",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_145",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_315",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_316",
+      "relation": "INVESTED_IN",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_562",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_563",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_563",
+      "target": "amount_1231",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_83",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_83",
+      "target": "amount_1232",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_564",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_1235",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_425",
+      "target": "amount_784",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_425",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_425",
+      "target": "amount_1236",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_565",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_565",
+      "target": "amount_784",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_322",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_322",
+      "target": "amount_794",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_566",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_323",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_323",
+      "target": "amount_794",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_529",
+      "target": "amount_1238",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_529",
+      "target": "amount_1239",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_567",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_567",
+      "target": "amount_780",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_47",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_47",
+      "target": "amount_1240",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_426",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_426",
+      "target": "amount_784",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_426",
+      "target": "amount_1241",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_568",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_568",
+      "target": "amount_1242",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_569",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_92",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_92",
+      "target": "amount_780",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_92",
+      "target": "amount_1244",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "amount_1245",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_226",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_226",
+      "target": "amount_1246",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_561",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_561",
+      "target": "amount_794",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_570",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_570",
+      "target": "amount_1247",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_570",
+      "target": "amount_1248",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_571",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_571",
+      "target": "amount_794",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_572",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_572",
+      "target": "amount_1249",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_573",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_239",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_239",
+      "target": "amount_780",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_574",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_574",
+      "target": "amount_1251",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_242",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_242",
+      "target": "amount_1252",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_244",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_244",
+      "target": "amount_1253",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_246",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_246",
+      "target": "amount_804",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_51",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_99",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_575",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_576",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_577",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_578",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_211",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_579",
+      "relation": "OWNS",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_580",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_581",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_237",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_210",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_53",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_284",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_289",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_48",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_241",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_52",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_304",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_296",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_15",
+      "target": "company_306",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    }
+  ]
+}

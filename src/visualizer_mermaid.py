@@ -673,6 +673,9 @@ def render_mermaid_html(graph: KnowledgeGraph, output_path: Path) -> None:
 def _render_fullgraph_html(graph: KnowledgeGraph, output_path: Path) -> None:
     """Render the full graph as a horizontal scrollable HTML with zoom controls.
     
+    Uses a modern dark theme with enhanced zoom/pan controls, auto-fit on load,
+    and keyboard navigation support.
+    
     Args:
         graph: The full KnowledgeGraph.
         output_path: Path where the HTML file will be saved.
@@ -693,217 +696,267 @@ def _render_fullgraph_html(graph: KnowledgeGraph, output_path: Path) -> None:
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         html, body {{
             height: 100%;
+            width: 100%;
             overflow: hidden;
         }}
         body {{
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a2e;
+            background: #0d1117;
             display: flex;
             flex-direction: column;
         }}
         
-        /* Fixed header */
+        /* Compact header */
         header {{
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
             color: white;
-            padding: 0.8rem 2rem;
+            padding: 0.5rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
             flex-shrink: 0;
+            border-bottom: 1px solid #30363d;
         }}
         header h1 {{ 
-            font-size: 1.3rem; 
-            font-weight: 700;
+            font-size: 1rem; 
+            font-weight: 600;
+            color: #58a6ff;
         }}
         .stats {{
             display: flex;
-            gap: 1rem;
-            font-size: 0.85rem;
+            gap: 0.75rem;
+            font-size: 0.75rem;
         }}
         .stat {{
-            background: rgba(255,255,255,0.15);
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
+            background: rgba(88,166,255,0.15);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(88,166,255,0.3);
         }}
-        .stat-value {{ font-weight: 700; }}
+        .stat-value {{ font-weight: 700; color: #58a6ff; }}
         
-        /* Controls bar */
+        /* Controls bar - more compact */
         .controls {{
-            background: #f8f9fa;
-            padding: 0.6rem 2rem;
+            background: #161b22;
+            padding: 0.4rem 1rem;
             display: flex;
-            gap: 0.8rem;
+            gap: 0.5rem;
             align-items: center;
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 1px solid #30363d;
             flex-shrink: 0;
+            flex-wrap: wrap;
         }}
         .controls button {{
-            padding: 0.5rem 1rem;
+            padding: 0.35rem 0.7rem;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 500;
-            transition: all 0.2s;
+            transition: all 0.15s;
         }}
         .controls button:hover {{
             transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }}
         .btn-zoom {{
-            background: #2563eb;
+            background: #238636;
             color: white;
         }}
         .btn-zoom:hover {{
-            background: #1d4ed8;
+            background: #2ea043;
         }}
         .btn-secondary {{
-            background: #e5e7eb;
-            color: #374151;
+            background: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
         }}
         .btn-secondary:hover {{
-            background: #d1d5db;
+            background: #30363d;
+        }}
+        .btn-fit {{
+            background: #1f6feb;
+            color: white;
+        }}
+        .btn-fit:hover {{
+            background: #388bfd;
         }}
         .zoom-display {{
-            background: white;
-            padding: 0.4rem 0.8rem;
+            background: #0d1117;
+            color: #58a6ff;
+            padding: 0.3rem 0.6rem;
             border-radius: 4px;
             font-weight: 600;
-            min-width: 60px;
+            font-size: 0.75rem;
+            min-width: 55px;
             text-align: center;
-            border: 1px solid #dee2e6;
+            border: 1px solid #30363d;
         }}
         .separator {{
             width: 1px;
-            height: 24px;
-            background: #dee2e6;
-            margin: 0 0.5rem;
+            height: 20px;
+            background: #30363d;
+            margin: 0 0.25rem;
         }}
         .hint {{
             margin-left: auto;
-            color: #6b7280;
-            font-size: 0.8rem;
+            color: #8b949e;
+            font-size: 0.7rem;
+        }}
+        .zoom-slider {{
+            width: 100px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: #30363d;
+            border-radius: 2px;
+            outline: none;
+        }}
+        .zoom-slider::-webkit-slider-thumb {{
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            background: #58a6ff;
+            border-radius: 50%;
+            cursor: pointer;
         }}
         
-        /* Main scrollable diagram area */
+        /* Main diagram area - full viewport */
         .diagram-wrapper {{
             flex: 1;
             overflow: auto;
-            background: #f0f2f5;
+            background: #0d1117;
             cursor: grab;
+            position: relative;
         }}
         .diagram-wrapper:active {{
             cursor: grabbing;
         }}
         .diagram-container {{
             display: inline-block;
-            padding: 2rem;
+            padding: 1rem;
             min-width: 100%;
             min-height: 100%;
-            transform-origin: top left;
-            transition: transform 0.1s ease-out;
+            transform-origin: 0 0;
+            transition: transform 0.05s ease-out;
         }}
         .mermaid {{
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: #161b22;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
             display: inline-block;
+            border: 1px solid #30363d;
         }}
         .mermaid svg {{
             max-width: none !important;
             height: auto !important;
         }}
+        /* Style the SVG nodes for dark theme */
+        .mermaid .node rect, .mermaid .node polygon {{
+            fill: #21262d !important;
+            stroke: #58a6ff !important;
+        }}
+        .mermaid .node .label {{
+            color: #c9d1d9 !important;
+        }}
+        .mermaid .edgePath path {{
+            stroke: #8b949e !important;
+        }}
+        .mermaid .edgeLabel {{
+            background-color: #161b22 !important;
+            color: #8b949e !important;
+        }}
         
-        /* Legend */
+        /* Floating Legend - collapsible */
         .legend {{
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            font-size: 0.8rem;
+            bottom: 15px;
+            right: 15px;
+            background: #161b22;
+            padding: 0.6rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            font-size: 0.7rem;
             z-index: 100;
+            border: 1px solid #30363d;
+            max-width: 140px;
         }}
         .legend h3 {{ 
-            margin-bottom: 0.5rem; 
-            color: #374151; 
-            font-size: 0.85rem;
+            margin-bottom: 0.4rem; 
+            color: #58a6ff; 
+            font-size: 0.75rem;
             font-weight: 600;
+            cursor: pointer;
         }}
         .legend-item {{ 
             display: flex; 
             align-items: center; 
-            gap: 0.5rem; 
-            margin: 0.25rem 0;
-            color: #4b5563;
+            gap: 0.4rem; 
+            margin: 0.2rem 0;
+            color: #8b949e;
         }}
         .legend-shape {{ 
-            width: 18px; 
-            height: 12px; 
-            border: 2px solid #374151; 
+            width: 14px; 
+            height: 10px; 
+            border: 1.5px solid #58a6ff; 
+            background: #21262d;
         }}
         .shape-rect {{ border-radius: 2px; }}
-        .shape-rounded {{ border-radius: 6px; }}
-        .shape-parallelogram {{ transform: skewX(-10deg); width: 22px; }}
+        .shape-rounded {{ border-radius: 4px; }}
+        .shape-parallelogram {{ transform: skewX(-10deg); width: 18px; }}
         
         /* Loading */
         .loading {{
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100%;
-            color: #6b7280;
-            font-size: 1.2rem;
+            color: #8b949e;
+            font-size: 1rem;
+            gap: 1rem;
         }}
-        .loading::after {{
-            content: '';
-            width: 24px;
-            height: 24px;
-            border: 3px solid #e5e7eb;
-            border-top-color: #2563eb;
+        .loading-spinner {{
+            width: 40px;
+            height: 40px;
+            border: 3px solid #30363d;
+            border-top-color: #58a6ff;
             border-radius: 50%;
-            margin-left: 1rem;
-            animation: spin 1s linear infinite;
+            animation: spin 0.8s linear infinite;
         }}
         @keyframes spin {{
             to {{ transform: rotate(360deg); }}
         }}
         
-        /* Minimap */
-        .minimap {{
+        /* Quick zoom panel */
+        .quick-zoom {{
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 200px;
-            height: 150px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            overflow: hidden;
+            left: 15px;
+            bottom: 15px;
+            background: #161b22;
+            padding: 0.5rem;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
             z-index: 100;
         }}
-        .minimap-header {{
-            background: #374151;
-            color: white;
-            padding: 0.3rem 0.6rem;
-            font-size: 0.7rem;
-            font-weight: 600;
+        .quick-zoom button {{
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #21262d;
+            color: #c9d1d9;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }}
-        .minimap-content {{
-            width: 100%;
-            height: calc(100% - 24px);
-            position: relative;
-        }}
-        .minimap-viewport {{
-            position: absolute;
-            border: 2px solid #2563eb;
-            background: rgba(37, 99, 235, 0.1);
-            pointer-events: none;
+        .quick-zoom button:hover {{
+            background: #30363d;
         }}
     </style>
 </head>
@@ -917,23 +970,33 @@ def _render_fullgraph_html(graph: KnowledgeGraph, output_path: Path) -> None:
     </header>
     
     <div class="controls">
-        <button class="btn-zoom" onclick="zoomIn()">🔍+ Zoom In</button>
-        <button class="btn-zoom" onclick="zoomOut()">🔍- Zoom Out</button>
+        <button class="btn-zoom" onclick="zoomIn()">+ Zoom In</button>
+        <button class="btn-zoom" onclick="zoomOut()">− Zoom Out</button>
+        <input type="range" class="zoom-slider" id="zoomSlider" min="5" max="200" value="100" oninput="setZoomFromSlider(this.value)">
         <span class="zoom-display" id="zoomLevel">100%</span>
         <div class="separator"></div>
-        <button class="btn-secondary" onclick="resetZoom()">↺ Reset</button>
-        <button class="btn-secondary" onclick="fitToScreen()">⊡ Fit</button>
+        <button class="btn-fit" onclick="fitToScreen()">⊡ Fit to Screen</button>
+        <button class="btn-secondary" onclick="resetZoom()">↺ Reset 100%</button>
         <div class="separator"></div>
-        <button class="btn-secondary" onclick="scrollTo('left')">← Left</button>
-        <button class="btn-secondary" onclick="scrollTo('right')">→ Right</button>
-        <button class="btn-secondary" onclick="scrollTo('top')">↑ Top</button>
-        <button class="btn-secondary" onclick="scrollTo('bottom')">↓ Bottom</button>
-        <span class="hint">🖱️ Drag to pan • Scroll to move • Ctrl+Scroll to zoom</span>
+        <button class="btn-secondary" onclick="setZoom(0.1)">10%</button>
+        <button class="btn-secondary" onclick="setZoom(0.25)">25%</button>
+        <button class="btn-secondary" onclick="setZoom(0.5)">50%</button>
+        <span class="hint">Drag to pan • Ctrl+Scroll to zoom • Arrow keys to navigate</span>
+    </div>
+    
+    <div class="quick-zoom">
+        <button onclick="zoomIn()" title="Zoom In">+</button>
+        <button onclick="zoomOut()" title="Zoom Out">−</button>
+        <button onclick="fitToScreen()" title="Fit to Screen">⊡</button>
+        <button onclick="resetZoom()" title="Reset to 100%">↺</button>
     </div>
     
     <div class="diagram-wrapper" id="wrapper">
         <div class="diagram-container" id="container">
-            <div class="loading" id="loading">Rendering graph...</div>
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <div>Rendering {node_count} nodes...</div>
+            </div>
             <pre class="mermaid" id="diagram" style="display:none;">
 {mermaid_content}
             </pre>
@@ -950,31 +1013,38 @@ def _render_fullgraph_html(graph: KnowledgeGraph, output_path: Path) -> None:
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
         let zoom = 1;
-        const minZoom = 0.1;
-        const maxZoom = 3;
-        const zoomStep = 0.1;
+        const minZoom = 0.05;
+        const maxZoom = 2;
+        const zoomStep = 0.05;
         
         const wrapper = document.getElementById('wrapper');
         const container = document.getElementById('container');
         const loading = document.getElementById('loading');
         const diagram = document.getElementById('diagram');
+        const zoomSlider = document.getElementById('zoomSlider');
         
-        // Initialize Mermaid
+        // Initialize Mermaid with dark theme
         mermaid.initialize({{
             startOnLoad: false,
-            theme: 'default',
-            maxTextSize: 1000000,
-            maxEdges: 10000,
+            theme: 'dark',
+            maxTextSize: 2000000,
+            maxEdges: 20000,
             flowchart: {{
                 useMaxWidth: false,
                 htmlLabels: true,
                 curve: 'basis',
-                nodeSpacing: 30,
-                rankSpacing: 50,
-                padding: 20
+                nodeSpacing: 20,
+                rankSpacing: 40,
+                padding: 15
             }},
             themeVariables: {{
-                fontSize: '12px'
+                fontSize: '10px',
+                primaryColor: '#21262d',
+                primaryTextColor: '#c9d1d9',
+                primaryBorderColor: '#58a6ff',
+                lineColor: '#8b949e',
+                secondaryColor: '#30363d',
+                tertiaryColor: '#161b22'
             }}
         }});
         
@@ -987,27 +1057,43 @@ def _render_fullgraph_html(graph: KnowledgeGraph, output_path: Path) -> None:
                 diagram.style.display = 'block';
                 loading.style.display = 'none';
                 
-                // Auto-fit after render
-                setTimeout(fitToScreen, 100);
+                // Auto-fit to screen after render with slight delay
+                setTimeout(() => {{
+                    fitToScreen();
+                    wrapper.scrollTo(0, 0);
+                }}, 200);
             }} catch (e) {{
-                loading.innerHTML = 'Error rendering: ' + e.message;
+                loading.innerHTML = '<div style="color:#f85149;">Error rendering: ' + e.message + '</div><div style="margin-top:1rem;font-size:0.8rem;color:#8b949e;">Try refreshing the page or use a different browser.</div>';
             }}
         }}
         
-        // Zoom functions
+        // Update zoom display and slider
         function updateZoom() {{
             container.style.transform = `scale(${{zoom}})`;
-            document.getElementById('zoomLevel').textContent = Math.round(zoom * 100) + '%';
+            const percent = Math.round(zoom * 100);
+            document.getElementById('zoomLevel').textContent = percent + '%';
+            zoomSlider.value = percent;
+        }}
+        
+        // Set zoom directly
+        function setZoom(newZoom) {{
+            zoom = Math.max(minZoom, Math.min(maxZoom, newZoom));
+            updateZoom();
+        }}
+        
+        // Set zoom from slider
+        function setZoomFromSlider(value) {{
+            setZoom(value / 100);
         }}
         
         function zoomIn() {{
-            zoom = Math.min(zoom + zoomStep, maxZoom);
-            updateZoom();
+            const step = zoom < 0.2 ? 0.02 : (zoom < 0.5 ? 0.05 : 0.1);
+            setZoom(zoom + step);
         }}
         
         function zoomOut() {{
-            zoom = Math.max(zoom - zoomStep, minZoom);
-            updateZoom();
+            const step = zoom < 0.2 ? 0.02 : (zoom < 0.5 ? 0.05 : 0.1);
+            setZoom(zoom - step);
         }}
         
         function resetZoom() {{
@@ -1020,18 +1106,27 @@ def _render_fullgraph_html(graph: KnowledgeGraph, output_path: Path) -> None:
             const svg = diagram.querySelector('svg');
             if (!svg) return;
             
-            const svgWidth = svg.getBoundingClientRect().width / zoom;
-            const svgHeight = svg.getBoundingClientRect().height / zoom;
-            const wrapperWidth = wrapper.clientWidth - 64;
-            const wrapperHeight = wrapper.clientHeight - 64;
+            const bbox = svg.getBBox ? svg.getBBox() : null;
+            const svgWidth = bbox ? bbox.width : (svg.viewBox?.baseVal?.width || svg.clientWidth);
+            const svgHeight = bbox ? bbox.height : (svg.viewBox?.baseVal?.height || svg.clientHeight);
+            
+            const wrapperWidth = wrapper.clientWidth - 40;
+            const wrapperHeight = wrapper.clientHeight - 40;
             
             const scaleX = wrapperWidth / svgWidth;
             const scaleY = wrapperHeight / svgHeight;
-            zoom = Math.min(scaleX, scaleY, 1);
-            zoom = Math.max(zoom, minZoom);
+            
+            zoom = Math.max(minZoom, Math.min(scaleX, scaleY, 1));
             
             updateZoom();
-            wrapper.scrollTo(0, 0);
+            
+            setTimeout(() => {{
+                const containerWidth = container.scrollWidth * zoom;
+                const containerHeight = container.scrollHeight * zoom;
+                const scrollX = Math.max(0, (containerWidth - wrapperWidth) / 2);
+                const scrollY = Math.max(0, (containerHeight - wrapperHeight) / 2);
+                wrapper.scrollTo(scrollX, scrollY);
+            }}, 50);
         }}
         
         // Scroll navigation
@@ -1045,12 +1140,13 @@ def _render_fullgraph_html(graph: KnowledgeGraph, output_path: Path) -> None:
             }}
         }}
         
-        // Mouse wheel zoom (with Ctrl)
+        // Mouse wheel zoom (with Ctrl or Meta key)
         wrapper.addEventListener('wheel', (e) => {{
-            if (e.ctrlKey) {{
+            if (e.ctrlKey || e.metaKey) {{
                 e.preventDefault();
-                if (e.deltaY < 0) zoomIn();
-                else zoomOut();
+                const delta = e.deltaY > 0 ? -1 : 1;
+                const step = zoom < 0.2 ? 0.01 : (zoom < 0.5 ? 0.02 : 0.05);
+                setZoom(zoom + (delta * step));
             }}
         }}, {{ passive: false }});
         
@@ -1088,16 +1184,42 @@ def _render_fullgraph_html(graph: KnowledgeGraph, output_path: Path) -> None:
         
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {{
+            if (e.target.tagName === 'INPUT') return;
+            
+            const scrollAmount = e.shiftKey ? 200 : 50;
+            
             switch(e.key) {{
-                case '+': case '=': zoomIn(); break;
-                case '-': zoomOut(); break;
-                case '0': resetZoom(); break;
-                case 'ArrowLeft': wrapper.scrollBy(-50, 0); break;
-                case 'ArrowRight': wrapper.scrollBy(50, 0); break;
-                case 'ArrowUp': wrapper.scrollBy(0, -50); break;
-                case 'ArrowDown': wrapper.scrollBy(0, 50); break;
+                case '+': case '=': zoomIn(); e.preventDefault(); break;
+                case '-': case '_': zoomOut(); e.preventDefault(); break;
+                case '0': resetZoom(); e.preventDefault(); break;
+                case 'f': case 'F': fitToScreen(); e.preventDefault(); break;
+                case 'ArrowLeft': wrapper.scrollBy(-scrollAmount, 0); e.preventDefault(); break;
+                case 'ArrowRight': wrapper.scrollBy(scrollAmount, 0); e.preventDefault(); break;
+                case 'ArrowUp': wrapper.scrollBy(0, -scrollAmount); e.preventDefault(); break;
+                case 'ArrowDown': wrapper.scrollBy(0, scrollAmount); e.preventDefault(); break;
+                case 'Home': wrapper.scrollTo(0, 0); e.preventDefault(); break;
+                case 'End': wrapper.scrollTo(wrapper.scrollWidth, wrapper.scrollHeight); e.preventDefault(); break;
             }}
         }});
+        
+        // Touch support for mobile
+        let touchStartX, touchStartY;
+        wrapper.addEventListener('touchstart', (e) => {{
+            if (e.touches.length === 1) {{
+                touchStartX = e.touches[0].pageX;
+                touchStartY = e.touches[0].pageY;
+            }}
+        }}, {{ passive: true }});
+        
+        wrapper.addEventListener('touchmove', (e) => {{
+            if (e.touches.length === 1) {{
+                const dx = touchStartX - e.touches[0].pageX;
+                const dy = touchStartY - e.touches[0].pageY;
+                wrapper.scrollBy(dx, dy);
+                touchStartX = e.touches[0].pageX;
+                touchStartY = e.touches[0].pageY;
+            }}
+        }}, {{ passive: true }});
         
         // Start rendering
         renderDiagram();

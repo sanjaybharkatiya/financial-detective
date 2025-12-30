@@ -1,6 +1,6 @@
 # Technical Design Document: The Financial Detective
 
-**Version:** 2.0  
+**Version:** 2.1  
 **Date:** December 2024  
 **Author:** Architecture Team  
 **Status:** Final
@@ -135,8 +135,8 @@ The system follows a strict linear pipeline with clear separation of concerns:
   ┌───────────────────────┐             ┌───────────────────────┐
   │   graph_output.json   │             │  visualizer_mermaid   │
   │                       │             │  • Mermaid .mmd file  │
-  │  Serialized via       │             │  • Paginated HTML     │
-  │  model_dump_json()    │             │  • Zoom controls      │
+  │  Serialized via       │             │  • Interactive HTML   │
+  │  model_dump_json()    │             │  • Dark theme + zoom  │
   └───────────────────────┘             └───────────┬───────────┘
                                                     │
                                                     ▼
@@ -538,7 +538,7 @@ The system produces three visualization outputs: Mermaid diagrams with paginated
 | Component | Choice | Rationale |
 |-----------|--------|-----------|
 | **Mermaid Diagrams** | Native text output | Lightweight, CI-friendly, GitHub-renderable |
-| **HTML Viewer** | Mermaid.js CDN | Self-contained, browser-viewable, paginated for large graphs |
+| **HTML Viewer** | Mermaid.js CDN | Self-contained, dark-themed, interactive with zoom/pan controls |
 | **Graph Library** | NetworkX | Standard Python graph library with rich algorithms |
 | **PNG Rendering** | matplotlib | Ubiquitous, no external dependencies beyond Python |
 
@@ -558,19 +558,23 @@ Features:
 - Context included in node labels where available
 - Label truncation for very long text (60 char limit)
 
-### Paginated HTML Viewer
+### Interactive HTML Viewer
 
-For large graphs (>100 nodes), the HTML viewer implements pagination:
+The HTML viewer provides a modern, full-featured experience for exploring Knowledge Graphs of any size:
 
 | Feature | Description |
 |---------|-------------|
-| **50 nodes per page** | Prevents browser rendering issues |
-| **Navigation controls** | First, Previous, Next, Last buttons |
-| **Page selector dropdown** | Jump to any page |
-| **Fixed header** | Shows total nodes, relationships, and pages |
-| **Fixed legend** | Shows node type shapes |
-| **Zoom controls** | Zoom in/out/reset buttons |
-| **Responsive layout** | Works on various screen sizes |
+| **Dark Theme** | GitHub-inspired dark color scheme (`#0d1117`, `#161b22`) with blue accents |
+| **Auto-Fit on Load** | Graph automatically scales to fit browser viewport |
+| **Zoom Slider** | Continuous zoom control from 5% to 200% |
+| **Preset Zoom Buttons** | Quick access to 10%, 25%, 50% zoom levels |
+| **Quick-Zoom Panel** | Floating panel with +/−/Fit/Reset buttons |
+| **Pan Navigation** | Drag-to-pan, arrow keys, touch support for mobile |
+| **Keyboard Shortcuts** | `+/-` zoom, `F` fit, `0` reset, arrows scroll, `Home/End` jump |
+| **Fixed Header** | Shows total nodes and relationships count |
+| **Fixed Legend** | Always-visible node type shapes reference |
+| **Responsive Layout** | Works on various screen sizes and browsers |
+| **Mermaid Dark Theme** | Diagram rendered with dark theme variables for visual consistency |
 
 ### NetworkX PNG Visualization (Optional)
 
@@ -769,3 +773,4 @@ All modules depend on `schema.py` as the single source of truth for data structu
 | 1.3 | December 2024 | Architecture Team | Added automatic document chunking for large documents; simple merge strategy |
 | 1.4 | December 2024 | Architecture Team | Added HTML viewer for browser-based Knowledge Graph visualization |
 | 2.0 | December 2024 | Architecture Team | Major update: 18 relationship types; context field for nodes; node deduplication in merger; auto-repair for invalid relationships; orphan node removal; paginated HTML for large graphs; iterative extraction with live updates; clean_graph.py utility |
+| 2.1 | December 2024 | Architecture Team | Enhanced HTML visualization: dark theme, auto-fit on load, zoom slider (5%-200%), preset zoom buttons, keyboard shortcuts, pan navigation, touch support |
