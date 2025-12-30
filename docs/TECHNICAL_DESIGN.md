@@ -305,7 +305,7 @@ The system supports multiple LLM providers through a factory pattern, enabling e
 |----------|-------|----------|
 | **OpenAI** | GPT-4o | Production-grade cloud extraction with strong instruction following |
 | **Google Gemini** | gemini-2.0-flash | Cloud extraction with large context windows (1M+ tokens) |
-| **Ollama** | Llama 3, Mistral, etc. | Local inference, offline capable, no API costs |
+| **Ollama** | llama3:latest, qwen2.5:7b, Mistral, etc. | Local inference, offline capable, no API costs |
 
 ### OpenAI GPT-4o
 
@@ -337,6 +337,14 @@ Ollama enables fully local, offline extraction:
 | **Privacy** | Documents never leave the local machine |
 | **Cost** | No API fees; unlimited extractions |
 | **Latency** | Network-independent; suitable for air-gapped environments |
+
+**Recommended Ollama Models:**
+
+| Model | Strengths | Use Case |
+|-------|-----------|----------|
+| `llama3:latest` | Good general-purpose, fast inference | Default choice for most extractions |
+| `qwen2.5:7b` | Excellent structured JSON output, strong instruction following | Recommended for knowledge graph extraction |
+| `mistral` | Lightweight, fast | Quick testing and development |
 
 ### Shared Prompt Constraints
 

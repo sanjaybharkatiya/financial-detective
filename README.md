@@ -152,7 +152,7 @@ The Financial Detective supports multiple LLM providers, allowing you to choose 
 |----------|-------|----------|
 | **OpenAI** | GPT-4o | Production-grade accuracy, cloud-based |
 | **Google Gemini** | gemini-2.0-flash, gemini-1.5-pro, etc. (configurable via `GEMINI_MODEL`) | High-quality cloud-based extraction with large context windows |
-| **Ollama** | Llama 3, Mistral, etc. | Local inference, offline capable, no API costs |
+| **Ollama** | llama3:latest, qwen2.5:7b, Mistral, etc. (configurable via `OLLAMA_MODEL`) | Local inference, offline capable, no API costs |
 
 ### Environment Variables
 
@@ -194,7 +194,15 @@ export OLLAMA_MODEL="llama3:latest"
 python main.py
 ```
 
-**Using Ollama with a different model:**
+**Using Ollama with Qwen 2.5 (recommended for structured output):**
+
+```bash
+export LLM_PROVIDER="ollama"
+export OLLAMA_MODEL="qwen2.5:7b"
+python main.py
+```
+
+**Using Ollama with Mistral:**
 
 ```bash
 export LLM_PROVIDER="ollama"
@@ -212,6 +220,11 @@ python main.py
 ```
 
 > **Tip:** Ollama runs entirely on your local machine, avoiding API quota limits and rate throttling. This makes it ideal for iterative development, testing, and processing large document batches without incurring costs.
+
+> **Recommended Ollama Models:**
+> - `llama3:latest` — Good general-purpose extraction, fast
+> - `qwen2.5:7b` — Excellent structured JSON output, recommended for knowledge graph extraction
+> - `mistral` — Lightweight alternative for quick testing
 
 ### Design Benefits
 
