@@ -3,6 +3,7 @@
 Tests create_extractor function:
 - Returns OpenAIExtractor when LLM_PROVIDER=openai
 - Returns OllamaExtractor when LLM_PROVIDER=ollama
+- Returns GeminiExtractor when LLM_PROVIDER=gemini
 - Uses mocked environment variables (no real API keys or services required)
 """
 
@@ -11,6 +12,7 @@ from unittest.mock import patch
 import pytest
 
 from src.extractor.factory import create_extractor
+from src.extractor.gemini_llm import GeminiExtractor
 from src.extractor.ollama_llm import OllamaExtractor
 from src.extractor.openai_llm import OpenAIExtractor
 
@@ -42,6 +44,17 @@ class TestCreateExtractor:
 
     @patch.dict(
         "os.environ",
+        {"LLM_PROVIDER": "gemini", "GEMINI_API_KEY": "test-gemini-key"},
+        clear=True,
+    )
+    def test_gemini_provider_returns_gemini_extractor(self) -> None:
+        """LLM_PROVIDER=gemini should return a GeminiExtractor instance."""
+        extractor = create_extractor()
+
+        assert isinstance(extractor, GeminiExtractor)
+
+    @patch.dict(
+        "os.environ",
         {"LLM_PROVIDER": "ollama", "OLLAMA_MODEL": "mistral", "OLLAMA_BASE_URL": "http://custom:11434"},
         clear=True,
     )
@@ -67,6 +80,30 @@ class TestCreateExtractor:
 
     @patch.dict(
         "os.environ",
+        {"LLM_PROVIDER": "gemini", "GEMINI_API_KEY": "my-gemini-key"},
+        clear=True,
+    )
+    def test_gemini_extractor_uses_api_key(self) -> None:
+        """GeminiExtractor should be configured with the API key."""
+        extractor = create_extractor()
+
+        assert isinstance(extractor, GeminiExtractor)
+        assert extractor.api_key == "my-gemini-key"
+
+    @patch.dict(
+        "os.environ",
+        {"LLM_PROVIDER": "gemini", "GEMINI_API_KEY": "key", "GEMINI_MODEL": "gemini-2.0-flash"},
+        clear=True,
+    )
+    def test_gemini_extractor_uses_model_config(self) -> None:
+        """GeminiExtractor should use configured model."""
+        extractor = create_extractor()
+
+        assert isinstance(extractor, GeminiExtractor)
+        assert extractor.model == "gemini-2.0-flash"
+
+    @patch.dict(
+        "os.environ",
         {"OPENAI_API_KEY": "test-key"},
         clear=True,
     )
@@ -85,4 +122,38 @@ class TestCreateExtractor:
         """OpenAI provider without API key should raise ValueError."""
         with pytest.raises(ValueError, match="OPENAI_API_KEY"):
             create_extractor()
+
+    @patch.dict(
+        "os.environ",
+        {"LLM_PROVIDER": "gemini"},
+        clear=True,
+    )
+    def test_gemini_without_api_key_raises_error(self) -> None:
+        """Gemini provider without API key should raise ValueError."""
+        with pytest.raises(ValueError, match="GEMINI_API_KEY"):
+            create_extractor()
+
+    @patch.dict(
+        "os.environ",
+        {"LLM_PROVIDER": "ollama"},
+        clear=True,
+    )
+    def test_ollama_uses_default_model(self) -> None:
+        """Ollama without OLLAMA_MODEL should use default model."""
+        extractor = create_extractor()
+
+        assert isinstance(extractor, OllamaExtractor)
+        assert extractor.model == "llama3:latest"
+
+    @patch.dict(
+        "os.environ",
+        {"LLM_PROVIDER": "ollama"},
+        clear=True,
+    )
+    def test_ollama_uses_default_base_url(self) -> None:
+        """Ollama without OLLAMA_BASE_URL should use default URL."""
+        extractor = create_extractor()
+
+        assert isinstance(extractor, OllamaExtractor)
+        assert extractor.base_url == "http://localhost:11434"
 

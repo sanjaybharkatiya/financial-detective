@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Detective - Knowledge Graph (40 nodes)</title>
+    <title>Financial Detective - Knowledge Graph (12 nodes)</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body {
@@ -276,8 +276,8 @@
     <header>
         <h1>📊 Financial Detective - Knowledge Graph</h1>
         <div class="stats">
-            <div class="stat"><span class="stat-value">40</span> Nodes</div>
-            <div class="stat"><span class="stat-value">40</span> Relationships</div>
+            <div class="stat"><span class="stat-value">12</span> Nodes</div>
+            <div class="stat"><span class="stat-value">13</span> Relationships</div>
         </div>
     </header>
     
@@ -307,94 +307,39 @@
         <div class="diagram-container" id="container">
             <div class="loading" id="loading">
                 <div class="loading-spinner"></div>
-                <div>Rendering 40 nodes...</div>
+                <div>Rendering 12 nodes...</div>
             </div>
             <pre class="mermaid" id="diagram" style="display:none;">
 flowchart LR
 
     %% Node definitions
-    company_1["Reliance Industries Limited (Parent holding company of the Reliance Group)"]
-    company_2["Reliance Retail Limited (Subsidiary of Reliance Industries Limited)"]
-    company_3["Jio Platforms Limited (Subsidiary of Reliance Industries Limited)"]
-    company_4["Network18 Media and Investments Limited (Majority-owned subsidiary of Relianc..."]
-    company_5["Viacom18 Media Pvt. Ltd. (Subsidiary of Reliance Industries Limited)"]
-    company_6["Jio-bp (Fuel retail and mobility joint venture between Reliance I...)"]
-    company_7["bp (Partner of Reliance Industries Limited)"]
-    amount_1[/"Consolidated revenue FY 2024-25: ₹10,71,174 crore"/]
-    amount_2[/"Consolidated revenue FY 2024-25: US$125.3 billion"/]
-    amount_3[/"EBITDA for the year: ₹1,83,422 crore"/]
-    amount_4[/"Net profit attributable to shareholders: ₹81,309 crore"/]
-    amount_5[/"Capital expenditure during FY 2024-25: ₹1,31,000 crore"/]
-    amount_6[/"Digital Services segment revenue in FY 2024-25: ₹1,54,119 crore"/]
-    amount_7[/"Digital Services segment revenue in FY 2024-25: US$18.0 billion"/]
-    amount_8[/"Digital Services segment EBITDA in FY 2024-25: ₹65,001 crore"/]
-    amount_9[/"Digital Services segment EBITDA in FY 2024-25: US$7.6 billion"/]
-    amount_10[/"Reliance Retail Limited gross revenue in FY 2024-25: ₹3,30,870 crore"/]
-    amount_11[/"Reliance Retail Limited EBITDA in FY 2024-25: ₹25,094 crore"/]
-    amount_12[/"Media and Entertainment segment revenue in FY 2024-25: ₹20,696 crore"/]
-    amount_13[/"Media and Entertainment segment EBITDA in FY 2024-25: ₹1,833 crore"/]
-    amount_14[/"Oil to Chemicals segment revenue in FY 2024-25: ₹6,26,921 crore"/]
-    amount_15[/"Oil to Chemicals segment EBITDA in FY 2024-25: ₹54,988 crore"/]
-    amount_16[/"Capital expenditure toward Digital Services, Retail expan...: ₹1,31,107 crore"/]
-    risk_1("consumer demand volatility (Impacts Reliance Retail Limited)")
-    risk_2("competitive intensity (Impacts Reliance Retail Limited)")
-    risk_3("real estate costs (Impacts Reliance Retail Limited)")
-    risk_4("macroeconomic conditions (Impacts Reliance Retail Limited)")
-    risk_5("content cost inflation (Impacts Media and Entertainment segment)")
-    risk_6("advertising cyclicality (Impacts Media and Entertainment segment)")
-    risk_7("competition from global streaming platforms (Impacts Media and Entertainment ...")
-    risk_8("crude oil price volatility (Impacts Oil to Chemicals segment)")
-    risk_9("refining margin fluctuations (Impacts Oil to Chemicals segment)")
-    risk_10("geopolitical risks (Impacts Oil to Chemicals segment)")
-    risk_11("emissions regulations (Impacts Oil to Chemicals segment)")
-    risk_12("market volatility (May impact operations, financial performance, and strateg...)")
-    risk_13("geopolitical uncertainties (May impact operations, financial performance, and...")
-    risk_14("regulatory and policy changes (May impact operations, financial performance, ...")
-    risk_15("competitive intensity (May impact operations, financial performance, and stra...")
-    risk_16("execution risks (Related to large-scale capital expenditure projects and t...)")
-    risk_17("regulatory oversight (Across telecommunications, energy, retail, media, and e...")
+    company_1["Reliance Industries Limited (Parent company)"]
+    company_2["Reliance Retail Limited (Subsidiary)"]
+    company_3["Jio Platforms Limited (Subsidiary)"]
+    company_4["Network18 Media and Investments Limited (Majority-owned subsidiary)"]
+    company_5["Viacom18 Media Pvt. Ltd. (Subsidiary after stake increase)"]
+    company_6["Jio-bp (Joint venture with bp)"]
+    amount_1[/"Revenue FY2024-25: ₹10,71,174 crore"/]
+    risk_1("market volatility (Affects consumer demand and margins)")
+    risk_2("geopolitical uncertainties (Impact on global energy markets and supply chains)")
+    risk_3("regulatory and policy changes (Affect telecommunications, energy, and retail ...")
+    risk_4("competitive intensity (Impact pricing, margins, and market share in digital s...")
+    risk_5("execution risks (Affect timelines and returns of large-scale capital expen...)")
 
     %% Relationships
     company_1 -->|OWNS| company_2
     company_1 -->|OWNS| company_3
     company_1 -->|OWNS| company_4
-    company_1 -->|OWNS| company_5
-    company_1 -->|REPORTS_AMOUNT| amount_1
-    company_1 -->|REPORTS_AMOUNT| amount_2
-    company_1 -->|REPORTS_AMOUNT| amount_3
-    company_1 -->|REPORTS_AMOUNT| amount_4
-    company_1 -->|COMMITTED_CAPEX| amount_5
+    company_1 -->|PARTNERED_WITH| company_5
     company_1 -->|JOINT_VENTURE_WITH| company_6
-    company_1 -->|PARTNERED_WITH| company_7
-    company_3 -->|REPORTS_AMOUNT| amount_6
-    company_3 -->|REPORTS_AMOUNT| amount_7
-    company_3 -->|REPORTS_AMOUNT| amount_8
-    company_3 -->|REPORTS_AMOUNT| amount_9
-    company_2 -->|REPORTS_AMOUNT| amount_10
-    company_2 -->|REPORTS_AMOUNT| amount_11
-    company_2 -->|HAS_RISK| risk_1
-    company_2 -->|HAS_RISK| risk_2
-    company_2 -->|HAS_RISK| risk_3
-    company_2 -->|HAS_RISK| risk_4
-    company_1 -->|COMMITTED_CAPEX| amount_16
-    company_1 -->|HAS_RISK| risk_12
-    company_1 -->|HAS_RISK| risk_13
-    company_1 -->|HAS_RISK| risk_14
-    company_1 -->|HAS_RISK| risk_15
-    company_1 -->|HAS_RISK| risk_16
-    company_1 -->|HAS_RISK| risk_17
-    company_4 -->|REPORTS_AMOUNT| amount_12
-    company_4 -->|REPORTS_AMOUNT| amount_13
-    company_4 -->|HAS_RISK| risk_5
-    company_4 -->|HAS_RISK| risk_6
-    company_4 -->|HAS_RISK| risk_7
-    company_1 -->|REPORTS_AMOUNT| amount_14
-    company_1 -->|REPORTS_AMOUNT| amount_15
-    company_1 -->|HAS_RISK| risk_8
-    company_1 -->|HAS_RISK| risk_9
-    company_1 -->|HAS_RISK| risk_10
-    company_1 -->|HAS_RISK| risk_11
-    company_1 -->|OWNS| company_4
+    company_2 -->|REPORTS_AMOUNT| amount_1
+    company_3 -->|REPORTS_AMOUNT| amount_1
+    company_4 -->|REPORTS_AMOUNT| amount_1
+    risk_1 -->|IMPACTED_BY| company_1
+    risk_2 -->|IMPACTED_BY| company_1
+    risk_3 -->|IMPACTED_BY| company_1
+    risk_4 -->|IMPACTED_BY| company_1
+    risk_5 -->|IMPACTED_BY| company_1
             </pre>
         </div>
     </div>
