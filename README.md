@@ -581,12 +581,16 @@ pytest tests/ -v
 ### Run Specific Test Modules
 
 ```bash
-pytest tests/test_validator.py -v    # Validator tests
-pytest tests/test_extractor.py -v    # Extractor tests (mocked factory; provider-agnostic)
-pytest tests/test_visualizer.py -v   # Visualizer tests
-pytest tests/test_chunker.py -v      # Chunker tests
-pytest tests/test_graph_merger.py -v # Graph merger tests
-pytest tests/test_factory.py -v      # Factory tests
+pytest tests/test_validator.py -v         # Validator tests (with auto-repair)
+pytest tests/test_extractor.py -v         # Extractor tests (with chunking integration)
+pytest tests/test_visualizer.py -v        # NetworkX visualizer tests
+pytest tests/test_visualizer_mermaid.py -v # Mermaid diagram tests
+pytest tests/test_chunker.py -v           # Text chunking tests
+pytest tests/test_graph_merger.py -v      # Graph merging tests
+pytest tests/test_factory.py -v           # Factory tests (all providers)
+pytest tests/test_config.py -v            # Configuration tests
+pytest tests/test_input_loader.py -v      # Input loading tests
+pytest tests/test_schema.py -v            # Pydantic schema tests
 ```
 
 ### Test Coverage
@@ -595,7 +599,23 @@ pytest tests/test_factory.py -v      # Factory tests
 pytest tests/ --cov=src --cov-report=term-missing
 ```
 
-> **Note:** Unit tests mock the LLM factory to avoid API calls. For integration validation with Gemini or Ollama, run `python main.py` with the appropriate `LLM_PROVIDER` environment variable.
+### Test Coverage Report
+
+| Test File | Tests | Coverage |
+|-----------|-------|----------|
+| `test_chunker.py` | 16 | Text splitting, token estimation, edge cases |
+| `test_config.py` | 20 | Environment variables, defaults, boolean parsing |
+| `test_extractor.py` | 13 | Delegation, chunking integration, error handling |
+| `test_factory.py` | 12 | OpenAI, Gemini, Ollama provider creation |
+| `test_graph_merger.py` | 16 | ID renumbering, deduplication, relationship updates |
+| `test_input_loader.py` | 14 | File loading, UTF-8, error handling |
+| `test_schema.py` | 35 | Node, Relationship, KnowledgeGraph validation |
+| `test_validator.py` | 21 | Validation rules, auto-repair functionality |
+| `test_visualizer.py` | 4 | NetworkX PNG generation (skipped on Python 3.14) |
+| `test_visualizer_mermaid.py` | 24 | Mermaid diagrams, HTML generation, escaping |
+| **Total** | **185** | **Comprehensive coverage of all modules** |
+
+> **Note:** Unit tests mock the LLM factory to avoid API calls. For integration validation with Gemini or Ollama, run `python main.py` with the appropriate `LLM_PROVIDER` environment variable. NetworkX visualizer tests are automatically skipped on Python 3.14 due to upstream compatibility issues.
 
 ---
 
