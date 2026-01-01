@@ -1,7 +1,7 @@
 # Technical Design Document: The Financial Detective
 
-**Version:** 2.1  
-**Date:** December 2024  
+**Version:** 2.2  
+**Date:** January 2025  
 **Author:** Architecture Team  
 **Status:** Final
 
@@ -11,7 +11,7 @@
 
 The Financial Detective is an LLM-powered extraction pipeline that transforms unstructured financial text—such as excerpts from public company annual reports and enterprise financial disclosures—into a validated, structured Knowledge Graph. The system addresses the fundamental challenge of extracting entities (companies, risk factors, monetary amounts) and their relationships from natural language financial disclosures without relying on brittle regex or rule-based pattern matching.
 
-The solution leverages pluggable LLM providers (OpenAI GPT-4o, Google Gemini, and local Ollama models) with a carefully designed prompt that enforces JSON-only output conforming to a strict Pydantic schema. Provider selection is driven by environment variables and implemented via a factory pattern, enabling seamless switching between cloud and local inference without code changes. All extraction is performed through LLM reasoning; no post-processing, cleanup, or pattern matching is applied. The output is a validated JSON Knowledge Graph accompanied by visual graph representations (Mermaid diagrams with paginated HTML viewer, and optional NetworkX PNG) for human verification.
+The solution leverages pluggable LLM providers (OpenAI GPT-4o, Google Gemini, and local Ollama models) with a carefully designed prompt that enforces JSON-only output conforming to a strict Pydantic schema. Provider selection is driven by environment variables and implemented via a factory pattern, enabling seamless switching between cloud and local inference without code changes. All extraction is performed through LLM reasoning; no post-processing, cleanup, or pattern matching is applied. The output is a validated JSON Knowledge Graph accompanied by visual graph representations (Mermaid diagrams with interactive HTML viewer featuring dark theme, zoom/pan controls, and optional NetworkX PNG) for human verification.
 
 **Key Constraints:**
 - No regex or pattern-based extraction
@@ -539,7 +539,7 @@ The system surfaces critical errors immediately:
 
 ## 9. Visualization Strategy
 
-The system produces three visualization outputs: Mermaid diagrams with paginated HTML (always available), and optional NetworkX PNG.
+The system produces three visualization outputs: Mermaid diagrams with interactive HTML viewer (always available), and optional NetworkX PNG.
 
 ### Technology Selection
 
@@ -602,14 +602,19 @@ The HTML viewer provides a modern, full-featured experience for exploring Knowle
 
 ### Coverage Overview
 
-| Module | Test File | Focus Areas |
-|--------|-----------|-------------|
-| `validator.py` | `test_validator.py` | Valid graphs pass; duplicates/invalid refs fail |
-| `extractor/` | `test_extractor.py` | Mocked responses; JSON parsing; error cases |
-| `factory.py` | `test_factory.py` | Provider selection; configuration validation |
-| `chunker.py` | `test_chunker.py` | Text splitting; boundary detection; overlap |
-| `graph_merger.py` | `test_graph_merger.py` | Merge logic; deduplication; ID renumbering |
-| `visualizer.py` | `test_visualizer.py` | File creation; PNG validity; directory handling |
+| Module | Test File | Tests | Focus Areas |
+|--------|-----------|-------|-------------|
+| `validator.py` | `test_validator.py` | 21 | Validation rules; auto-repair functionality |
+| `extractor/` | `test_extractor.py` | 13 | Delegation; chunking integration; error handling |
+| `factory.py` | `test_factory.py` | 12 | OpenAI, Gemini, Ollama provider creation |
+| `chunker.py` | `test_chunker.py` | 16 | Text splitting; token estimation; edge cases |
+| `graph_merger.py` | `test_graph_merger.py` | 16 | ID renumbering; deduplication; relationship updates |
+| `visualizer.py` | `test_visualizer.py` | 4 | NetworkX PNG generation (skipped on Python 3.14) |
+| `visualizer_mermaid.py` | `test_visualizer_mermaid.py` | 24 | Mermaid diagrams; HTML generation; escaping |
+| `config.py` | `test_config.py` | 20 | Environment variables; defaults; boolean parsing |
+| `input_loader.py` | `test_input_loader.py` | 14 | File loading; UTF-8; error handling |
+| `schema.py` | `test_schema.py` | 35 | Node, Relationship, KnowledgeGraph validation |
+| **Total** | | **185** | **Comprehensive coverage of all modules** |
 
 ### Mocking External Calls
 
@@ -738,7 +743,7 @@ main.py
     ├── src/visualizer.py                 # NetworkX PNG (optional)
     │       └── src/schema.py
     │
-    └── src/visualizer_mermaid.py         # Mermaid diagrams + paginated HTML viewer
+    └── src/visualizer_mermaid.py         # Mermaid diagrams + interactive HTML viewer
             └── src/schema.py
 
 clean_graph.py                            # Utility for post-processing cleanup
@@ -747,6 +752,25 @@ clean_graph.py                            # Utility for post-processing cleanup
 ```
 
 All modules depend on `schema.py` as the single source of truth for data structures. Provider selection is driven by `config.py` which reads environment variables. Chunking is orchestrated in `extractor/__init__.py` and is transparent to callers.
+
+---
+
+## Appendix C: Example Output (Real Reliance Industries Annual Report)
+
+To demonstrate the pipeline's capabilities on real-world large documents, the repository includes backup files from processing the [Reliance Industries Annual Report 2024-25](https://www.ril.com/reports/RIL-Integrated-Annual-Report-2024-25.pdf):
+
+| Example File | Description | Size |
+|--------------|-------------|------|
+| `data/raw_report_ril.txt` | Raw text extracted from Reliance Annual Report PDF | 13,344 lines |
+| `data/backup/graph_output_v1.json` | Full Knowledge Graph (1,198 nodes, 694 relationships) | 8,659 lines |
+| `visuals/backup/graph_v1.mmd` | Mermaid diagram for the full graph | 1,457 lines |
+| `visuals/backup/graph_v1.html` | Interactive HTML visualization | 2,028 lines |
+
+These files demonstrate:
+- Processing of 200+ page financial documents
+- Automatic chunking and graph merging
+- Interactive HTML visualization with zoom/pan controls
+- Real-world entity and relationship extraction
 
 ---
 
@@ -782,3 +806,4 @@ All modules depend on `schema.py` as the single source of truth for data structu
 | 1.4 | December 2024 | Architecture Team | Added HTML viewer for browser-based Knowledge Graph visualization |
 | 2.0 | December 2024 | Architecture Team | Major update: 18 relationship types; context field for nodes; node deduplication in merger; auto-repair for invalid relationships; orphan node removal; paginated HTML for large graphs; iterative extraction with live updates; clean_graph.py utility |
 | 2.1 | December 2024 | Architecture Team | Enhanced HTML visualization: dark theme, auto-fit on load, zoom slider (5%-200%), preset zoom buttons, keyboard shortcuts, pan navigation, touch support |
+| 2.2 | January 2025 | Architecture Team | Comprehensive test coverage (185 tests across 10 modules); added example output files from Reliance Industries Annual Report; updated testing strategy documentation |
