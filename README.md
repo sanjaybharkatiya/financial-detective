@@ -480,6 +480,19 @@ python main.py
 | `visuals/graph.mmd` | Mermaid diagram for lightweight rendering |
 | `visuals/graph.html` | Interactive HTML viewer with dark theme, zoom, and pan controls |
 
+### Example Output (Real Reliance Industries Annual Report)
+
+To see the pipeline in action with a real-world large document, we've included backup files from processing the [Reliance Industries Annual Report 2024-25](https://www.ril.com/reports/RIL-Integrated-Annual-Report-2024-25.pdf):
+
+| Example File | Description | Size |
+|--------------|-------------|------|
+| [`data/raw_report_ril.txt`](data/raw_report_ril.txt) | Raw text extracted from Reliance Annual Report PDF | 13,344 lines |
+| [`data/backup/graph_output_v1.json`](data/backup/graph_output_v1.json) | Full Knowledge Graph (1,198 nodes, 694 relationships) | 8,659 lines |
+| [`visuals/backup/graph_v1.mmd`](visuals/backup/graph_v1.mmd) | Mermaid diagram for the full graph | 1,457 lines |
+| [`visuals/backup/graph_v1.html`](visuals/backup/graph_v1.html) | Interactive HTML visualization (scrollable, zoomable) | 2,028 lines |
+
+> **Try it yourself:** Open [`visuals/backup/graph_v1.html`](visuals/backup/graph_v1.html) in your browser to explore the full Knowledge Graph extracted from a real 200+ page annual report. Use zoom controls, pan navigation, and keyboard shortcuts to navigate the large graph.
+
 ---
 
 ## Cleaning Existing Graphs

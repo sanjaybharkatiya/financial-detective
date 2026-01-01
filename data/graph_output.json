@@ -5,73 +5,217 @@
       "id": "company_1",
       "type": "Company",
       "name": "Reliance Industries Limited",
-      "context": "Parent company"
+      "context": "Parent holding company of the Reliance Group"
     },
     {
       "id": "company_2",
       "type": "Company",
       "name": "Reliance Retail Limited",
-      "context": "Subsidiary"
+      "context": "Subsidiary of Reliance Industries Limited"
+    },
+    {
+      "id": "amount_1",
+      "type": "DollarAmount",
+      "name": "₹3,30,870 crore",
+      "context": "Gross revenue of Reliance Retail in FY 2024-25"
+    },
+    {
+      "id": "amount_2",
+      "type": "DollarAmount",
+      "name": "₹25,094 crore",
+      "context": "EBITDA of Reliance Retail in FY 2024-25"
     },
     {
       "id": "company_3",
       "type": "Company",
       "name": "Jio Platforms Limited",
-      "context": "Subsidiary"
+      "context": "Subsidiary of Reliance Industries Limited"
+    },
+    {
+      "id": "amount_3",
+      "type": "DollarAmount",
+      "name": "₹1,54,119 crore",
+      "context": "Revenue of Digital Services segment in FY 2024-25"
+    },
+    {
+      "id": "amount_4",
+      "type": "DollarAmount",
+      "name": "US$18.0 billion",
+      "context": "Revenue of Digital Services segment in FY 2024-25"
+    },
+    {
+      "id": "amount_5",
+      "type": "DollarAmount",
+      "name": "₹65,001 crore",
+      "context": "EBITDA of Digital Services segment in FY 2024-25"
+    },
+    {
+      "id": "amount_6",
+      "type": "DollarAmount",
+      "name": "US$7.6 billion",
+      "context": "EBITDA of Digital Services segment in FY 2024-25"
     },
     {
       "id": "company_4",
       "type": "Company",
       "name": "Network18 Media & Investments Limited",
-      "context": "Majority-owned subsidiary"
+      "context": "Majority-owned subsidiary of Reliance Industries Limited"
     },
     {
       "id": "company_5",
       "type": "Company",
       "name": "Viacom18 Media Pvt. Ltd.",
-      "context": "Subsidiary after stake increase"
+      "context": "Subsidiary of Reliance Industries Limited"
     },
     {
       "id": "company_6",
       "type": "Company",
-      "name": "Jio-bp",
-      "context": "Joint venture with bp"
+      "name": "bp",
+      "context": "Partner in Jio-bp joint venture"
     },
     {
-      "id": "amount_1",
+      "id": "company_7",
+      "type": "Company",
+      "name": "Jio-bp",
+      "context": "Fuel retail and mobility joint venture between Reliance Industries Limited and bp"
+    },
+    {
+      "id": "amount_7",
       "type": "DollarAmount",
       "name": "₹10,71,174 crore",
-      "context": "Revenue FY2024-25"
+      "context": "Consolidated revenue of Reliance Industries Limited in FY 2024-25"
+    },
+    {
+      "id": "amount_8",
+      "type": "DollarAmount",
+      "name": "US$ 125.3 billion",
+      "context": "Consolidated revenue of Reliance Industries Limited in FY 2024-25"
+    },
+    {
+      "id": "amount_9",
+      "type": "DollarAmount",
+      "name": "₹1,83,422 crore",
+      "context": "EBITDA of Reliance Industries Limited in FY 2024-25"
+    },
+    {
+      "id": "amount_10",
+      "type": "DollarAmount",
+      "name": "₹81,309 crore",
+      "context": "Net profit attributable to shareholders of Reliance Industries Limited in FY 2024-25"
+    },
+    {
+      "id": "amount_11",
+      "type": "DollarAmount",
+      "name": "₹1,31,000 crore",
+      "context": "Capital expenditure during FY 2024-25"
     },
     {
       "id": "risk_1",
       "type": "RiskFactor",
       "name": "market volatility",
-      "context": "Affects consumer demand and margins"
+      "context": "Affecting consumer demand and margins"
     },
     {
       "id": "risk_2",
       "type": "RiskFactor",
       "name": "geopolitical uncertainties",
-      "context": "Impact on global energy markets and supply chains"
+      "context": "Impacting global energy markets and supply chains"
     },
     {
       "id": "risk_3",
       "type": "RiskFactor",
       "name": "regulatory and policy changes",
-      "context": "Affect telecommunications, energy, and retail businesses"
+      "context": "Affecting telecommunications, energy, and retail businesses"
     },
     {
       "id": "risk_4",
       "type": "RiskFactor",
-      "name": "competitive intensity",
-      "context": "Impact pricing, margins, and market share in digital services, retail, and energy segments"
+      "name": "Competitive intensity",
+      "context": "Across digital services, retail, and energy segments"
     },
     {
       "id": "risk_5",
       "type": "RiskFactor",
-      "name": "execution risks",
-      "context": "Affect timelines and returns of large-scale capital expenditure projects"
+      "name": "Execution risks",
+      "context": "Related to large-scale capital expenditure projects"
+    },
+    {
+      "id": "risk_6",
+      "type": "RiskFactor",
+      "name": "macroeconomic risks",
+      "context": "Including global economic slowdown, geopolitical tensions"
+    },
+    {
+      "id": "amount_12",
+      "type": "DollarAmount",
+      "name": "₹3,30,943 crore",
+      "context": "Gross revenue of Reliance Retail Limited in FY 2024-25"
+    },
+    {
+      "id": "amount_13",
+      "type": "DollarAmount",
+      "name": "₹20,696 crore",
+      "context": "Revenue of Media and Entertainment segment in FY 2024-25"
+    },
+    {
+      "id": "amount_14",
+      "type": "DollarAmount",
+      "name": "₹1,833 crore",
+      "context": "EBITDA of Media and Entertainment segment in FY 2024-25"
+    },
+    {
+      "id": "risk_7",
+      "type": "RiskFactor",
+      "name": "content cost inflation",
+      "context": "Impacting Media and Entertainment segment"
+    },
+    {
+      "id": "risk_8",
+      "type": "RiskFactor",
+      "name": "advertising market cyclicality",
+      "context": "Impacting Media and Entertainment segment"
+    },
+    {
+      "id": "risk_9",
+      "type": "RiskFactor",
+      "name": "technological disruption",
+      "context": "Impacting Media and Entertainment segment"
+    },
+    {
+      "id": "amount_15",
+      "type": "DollarAmount",
+      "name": "₹6,26,921 crore",
+      "context": "Revenue of Oil to Chemicals segment in FY 2024-25"
+    },
+    {
+      "id": "amount_16",
+      "type": "DollarAmount",
+      "name": "₹54,988 crore",
+      "context": "EBITDA of Oil to Chemicals segment in FY 2024-25"
+    },
+    {
+      "id": "risk_10",
+      "type": "RiskFactor",
+      "name": "global crude price volatility",
+      "context": "Impacting Oil to Chemicals segment"
+    },
+    {
+      "id": "risk_11",
+      "type": "RiskFactor",
+      "name": "refining margin fluctuations",
+      "context": "Impacting Oil to Chemicals segment"
+    },
+    {
+      "id": "risk_12",
+      "type": "RiskFactor",
+      "name": "geopolitical risks",
+      "context": "Impacting Oil to Chemicals segment"
+    },
+    {
+      "id": "amount_17",
+      "type": "DollarAmount",
+      "name": "₹1,31,107 crore",
+      "context": "Capital expenditure committed during FY 2024-25"
     }
   ],
   "relationships": [
@@ -96,13 +240,85 @@
     {
       "source": "company_1",
       "target": "company_5",
-      "relation": "PARTNERED_WITH",
+      "relation": "OWNS",
       "confidence": null
     },
     {
       "source": "company_1",
-      "target": "company_6",
+      "target": "amount_7",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_8",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_9",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_10",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_11",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "risk_1",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "risk_2",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "risk_3",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "risk_4",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "risk_5",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "risk_6",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "company_7",
       "relation": "JOINT_VENTURE_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "amount_17",
+      "relation": "COMMITTED_CAPEX",
       "confidence": null
     },
     {
@@ -112,45 +328,117 @@
       "confidence": null
     },
     {
+      "source": "company_2",
+      "target": "amount_2",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "amount_12",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_2",
+      "target": "risk_6",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
       "source": "company_3",
-      "target": "amount_1",
+      "target": "amount_3",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_3",
+      "target": "amount_4",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_3",
+      "target": "amount_5",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_3",
+      "target": "amount_6",
+      "relation": "REPORTS_AMOUNT",
+      "confidence": null
+    },
+    {
+      "source": "company_7",
+      "target": "company_6",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_1",
+      "target": "company_6",
+      "relation": "PARTNERED_WITH",
+      "confidence": null
+    },
+    {
+      "source": "company_4",
+      "target": "risk_7",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_4",
+      "target": "risk_8",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_4",
+      "target": "risk_9",
+      "relation": "HAS_RISK",
+      "confidence": null
+    },
+    {
+      "source": "company_4",
+      "target": "amount_13",
       "relation": "REPORTS_AMOUNT",
       "confidence": null
     },
     {
       "source": "company_4",
-      "target": "amount_1",
+      "target": "amount_14",
       "relation": "REPORTS_AMOUNT",
       "confidence": null
     },
     {
-      "source": "risk_1",
-      "target": "company_1",
-      "relation": "IMPACTED_BY",
+      "source": "company_1",
+      "target": "risk_10",
+      "relation": "HAS_RISK",
       "confidence": null
     },
     {
-      "source": "risk_2",
-      "target": "company_1",
-      "relation": "IMPACTED_BY",
+      "source": "company_1",
+      "target": "risk_11",
+      "relation": "HAS_RISK",
       "confidence": null
     },
     {
-      "source": "risk_3",
-      "target": "company_1",
-      "relation": "IMPACTED_BY",
+      "source": "company_1",
+      "target": "risk_12",
+      "relation": "HAS_RISK",
       "confidence": null
     },
     {
-      "source": "risk_4",
-      "target": "company_1",
-      "relation": "IMPACTED_BY",
+      "source": "company_1",
+      "target": "amount_15",
+      "relation": "REPORTS_AMOUNT",
       "confidence": null
     },
     {
-      "source": "risk_5",
-      "target": "company_1",
-      "relation": "IMPACTED_BY",
+      "source": "company_1",
+      "target": "amount_16",
+      "relation": "REPORTS_AMOUNT",
       "confidence": null
     }
   ]
