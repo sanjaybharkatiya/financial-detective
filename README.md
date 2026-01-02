@@ -4,16 +4,6 @@ An LLM-powered Knowledge Graph extraction pipeline that transforms unstructured 
 
 ---
 
-## 🎥 Demo Video
-
-Watch the full project demo on YouTube:
-
-[![Financial Detective Demo](https://img.youtube.com/vi/UpOFCUES4Ik/maxresdefault.jpg)](https://youtu.be/UpOFCUES4Ik)
-
-**[▶️ Watch Demo on YouTube](https://youtu.be/UpOFCUES4Ik)**
-
----
-
 ## Overview
 
 The Financial Detective reads raw financial text (e.g., SEC filings, earnings reports, risk disclosures) and extracts a structured Knowledge Graph containing:
@@ -723,6 +713,16 @@ financial-detective/
 ├── requirements.txt          # Python dependencies
 └── README.md                 # This file
 ```
+
+---
+
+## 🎥 Demo Video
+
+Watch the full project demo on YouTube:
+
+[![Financial Detective Demo](https://img.youtube.com/vi/UpOFCUES4Ik/maxresdefault.jpg)](https://youtu.be/UpOFCUES4Ik)
+
+**[▶️ Watch Demo on YouTube](https://youtu.be/UpOFCUES4Ik)**
 
 ---
 
